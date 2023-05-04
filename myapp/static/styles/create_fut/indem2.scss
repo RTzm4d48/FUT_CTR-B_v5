@@ -1,0 +1,238 @@
+
+$main-color: #F44336;
+$secondary-color: blue;
+$main-color: red;
+$secondary-color: red;
+$width: 300px; // Change Me
+
+* {
+  box-sizing: border-box;
+}
+
+.group {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+//   background: forestgreen;
+  
+}
+
+label {
+  position: absolute;
+  top: $width/15;
+  color:rgba(0, 0, 0, 0.664);
+  font: 400 $width/15 Roboto;
+  font-size: 15px;
+  cursor: text;
+  margin: auto;
+  transition: .25s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding-top: $width/12;
+  padding-left: 20px;
+  border: none;
+  border-radius: 0; // For iOS
+  // border-bottom: solid $width/150 rgba(white, .5);
+  color: black;
+//   background: $main-color;
+  font-size: $width/15;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: .3s ease;
+  margin: auto;
+  font-size: 15px;
+  &:valid {
+    // border-bottom-color: rgba(white, .5);
+    ~label {
+      top: 0;
+      font: 700 $width/25 Roboto;
+      color: rgba(black, .5);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+  &:focus {
+    outline: none;
+    // border-bottom-color: $secondary-color;
+    ~label {
+      top: 0;
+      font: 700 $width/25 Roboto;
+      color: $secondary-color;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+      
+    ~ .bar:before {
+    transform: translateX(0);
+    }
+  }
+
+  // Stop Chrome's hideous pale yellow background on auto-fill
+  
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px $main-color inset;
+    -webkit-text-fill-color: white !important;
+    // border-bottom-color: rgba(white, .5);
+  }
+}
+
+//------------------------------------oooooooooooooooooooooo
+
+
+textarea{
+  display: block;
+  width: 100%;
+  padding-top: $width/15;
+  padding-left: 20px;
+  border: none;
+  //border-radius: 0; // For iOS
+  // border-bottom: solid $width/150 rgba(white, .5);
+  color: black;
+//   background: $main-color;
+  font-size: $width/15;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: .3s ease;
+  margin: auto;
+  font-size: 15px;
+  height: 95%;
+  &:valid {
+    // border-bottom-color: rgba(white, .5);
+    ~label {
+      top: 0;
+      font: 700 $width/25 Roboto;
+      color: rgba(black, .5);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+  &:focus {
+    outline: none;
+    // border-bottom-color: $secondary-color;
+    ~label {
+      top: 0;
+      font: 700 $width/25 Roboto;
+      color: $secondary-color;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+      
+    ~ .bar:before {
+    transform: translateX(0);
+    }
+  }
+
+  // Stop Chrome's hideous pale yellow background on auto-fill
+  
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px $main-color inset;
+    -webkit-text-fill-color: white !important;
+    // border-bottom-color: rgba(white, .5);
+  }
+}
+
+
+
+//------------------------------------oooooooooooooooooooooo
+
+
+.bar {
+  // background: $secondary-color;
+  background: rgba(blue, .5);
+  content: '';
+  width: 100%;
+  // height: $width/100;
+  height: $width/150;
+  // transform: translateX(-100%);
+  transition: .3s ease;
+  // margin-top: -2px;
+  //
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 150%;
+    background: $secondary-color;
+    transform: translateX(-100%);
+    
+  }
+}
+.number{
+    width: 70px;
+}
+.nomber_long{
+    width: 50%;
+}
+
+::selection {background: rgba($secondary-color, .3);}
+///------------------------------SELECT-------------------------------------------------------------------
+
+
+$height: 36;
+.labelInside {
+  position: relative;
+  display: inline-block;
+  //background: salmon;
+  width: 100%;
+  margin: 5px auto;
+  &:before {
+    content: '';
+    height: ($height - 5) + px;
+    position: absolute;
+    right: 7px;
+    top: 3px;
+    width: 22px;
+
+    //background: -webkit-linear-gradient(#fff, #f0f0f0);
+    //background: -moz-linear-gradient(#fff, #f0f0f0);
+    //background: linear-gradient(#f5f5f5, #e0e0e0);
+    //background: red; //for Firefox in Android
+
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    pointer-events: none;
+    display: block;
+  }
+  &:after {
+    content: " ";
+    position: absolute;
+    right: 15px;
+    top: 30%;
+    margin-top: -3px;
+    z-index: 2;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6.9px 4px 0 4px;
+    border-color: #aaa transparent transparent transparent;
+    pointer-events: none;
+    //background: blue;
+  }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    
+    padding: 0 30px 0 10px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    line-height: $height + px;
+    height: $height + px;
+    height: 50px;
+    //box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    background: #fff;
+
+    //min-width: 200px;
+    margin: 0 5px 5px 0;
+    margin: 0px;
+    color:rgba(0, 0, 0, 0.664);
+  }
+}
+//fix for ie 10 later
+select::-ms-expand {
+  display: none;
+}

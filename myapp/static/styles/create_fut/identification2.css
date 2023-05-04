@@ -1,0 +1,55 @@
+.bodyf{
+    width: 100%;
+    background: #ECF2F9;
+    padding: 10px 0px;
+}
+.content_form{
+    width: 90%;
+    height: 100%;
+    /* background: green; */
+    margin: auto;
+    display: block;
+}
+
+.form_block{
+    width: 100%;
+    height: 100px;
+    /* background: pink; */
+    margin: 40px 0px 0px 0px;
+    display: block;
+}
+
+.from_item{
+    width: 45%;
+    height: 100%;
+    /* background: skyblue; */
+    float: left;
+    display: grid;
+}
+
+.from_item label{
+    margin: auto 10px;
+}
+.from_item input{
+    border: none;
+    border-radius: 5px;
+}
+.from_item textarea{
+    border: none;
+    border-radius: 10px;
+}
+
+.from_item button{
+    border: none;
+    border-radius: 5px;
+    color:white;
+    background: red;
+    width: 90px;
+    height: 30px;
+    margin: auto 0px auto auto;
+}
+
+
+/* ------------------------------------------------- */
+
+

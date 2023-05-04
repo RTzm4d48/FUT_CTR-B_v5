@@ -1,0 +1,97 @@
+{% extends 'create_fut/base_form_new_fut.html' %}
+
+{% load static %}
+{% block linkstyle2 %}
+<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
+<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+{% endblock %}
+
+{% block contentf %}
+<div class="bodyf">
+    <form action="{% url 'n_end' %}" method="post">
+        {% csrf_token %}
+    <div class="content_form">
+        <div class="form_block" style="height: 60px; margin: 30px auto 0px auto;">
+            <div class="from_item" style="float: none; margin: auto;">
+                <div class="group" style="padding: auto; margin: 0px;">
+                    <input type="text" id="name1" name="gamil" value="defecto@gmail.com" required>
+                    <label for="name1">Correo:</label>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form_block">
+            <div class="from_item" style="float: none; margin: auto;">
+                <div class="group">
+                    <input type="text" id="name2" name="card" value="4545454545454545" required>
+                    <label for="name2">Numero de Tarjeta:</label>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form_block" style="height: 60px; margin: 30px auto 0px auto; display: block;">
+            <div class="from_item" style="float: none; margin: auto; display: flex;">
+                <div class="group" style="padding: auto; margin: 0px; width: 45%; float: left;">
+                    <input type="text" id="name3" name="mmyy" value="09/24" required>
+                    <label for="name3">MMYY:</label>
+                    <div class="bar"></div>
+                </div>
+                <div class="group" style="padding: auto; margin: autopx;width: 10%;float: right;">
+                </div>
+                <div class="group" style="padding: auto; margin: autopx;width: 45%;float: right;">
+                    <input type="text" id="name4" name="cvc" value="222" required>
+                    <label for="name4">CVC:</label>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form_block">
+            <div class="from_item" style="float:right">
+                <input type="hidden" name="name" value="{{Name}}">
+                <input type="hidden" name="program" value="{{Program}}">
+                <input type="hidden" name="dni" value="{{Dni}}">
+                <input type="hidden" name="phone" value="{{Phone}}">
+                <input type="hidden" name="cycle" value="{{Cycle}}">
+                <input type="hidden" name="email" value="{{Email}}">
+                <input type="hidden" name="myrequest" value="{{Myrequest}}">
+                <input type="hidden" name="order" value="{{Order}}">
+                <input type="hidden" name="reason" value="{{Reason}}">
+                <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}">
+
+                <button type="submit">Finalizar</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock %}
+
+
+<!-- ----- -->
+{% block check_1 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+
+<!-- ----- -->
+{% block check_2 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+<!-- ----- -->
+{% block navbaractivate_3 %}
+
+activate-f
+
+{% endblock %}
+<!-- ----- -->

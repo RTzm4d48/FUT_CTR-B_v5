@@ -1,0 +1,87 @@
+{% extends 'create_fut/base_form_new_fut.html' %}
+
+{% load static %}
+{% block linkstyle2 %}
+<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
+<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+{% endblock %}
+
+{% block contentf %}
+<div class="bodyf">
+    <form action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="content_form"> 
+        <div class="form_block">
+            <div class="from_item">
+                <div class="group">
+                    <input type="text" id="name1" name="myrequest" value="Solicitud por defecto" required>
+                    <label for="name1">Solicito:</label>
+                    <div class="bar"></div>
+                </div>
+            </div>
+            <div class="from_item" style="float:right">
+                <div class="labelInside">
+                    <select id="lang" name="order">
+                        <option selected disabled>Ordenar:</option>
+                        <option value="BUSQUEDA DE DOCUMENTOS">BUSQUEDA DE DOCUMENTOS</option>
+                        <option value="CAMBIO DE PROGRAMA PROFESIONAL TÉCNICO">CAMBIO DE PROGRAMA PROFESIONAL TÉCNICO</option>
+                        <option value="CAMBIO DE TURNO">CAMBIO DE TURNO</option>
+                        <option value="CARTA DE PRESENTACIÓN DE EXPERIENCIAS FORMATIVAS">CARTA DE PRESENTACIÓN DE EXPERIENCIAS FORMATIVAS</option>
+                        <option value="CERTIFICADO DE ESTUDIOS">CERTIFICADO DE ESTUDIOS</option>
+                        <option value="CERTIFICADO DE FORMACIÓN CONTINUA">CERTIFICADO DE FORMACIÓN CONTINUA</option>
+                        <option value="CERTIFICADO MODULAR POR AÑO">CERTIFICADO MODULAR POR AÑO</option>
+                        <option value="CERTIFICADO PROGRESIVO DE FORMACIÓN CONTINUA">CERTIFICADO PROGRESIVO DE FORMACIÓN CONTINUA</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form_block" style="display: flex; justify-content: space-between;">
+            <div class="from_item">
+
+                <div class="group">
+                    <textarea id="name" name="reason" cols="30" rows="10" required>Motivo por defecto</textarea>
+                    <label id="label_def" for="name">Que por motivos de:</label>
+                    <div class="bar"></div>
+                </div>
+            </div>
+            <div class="from_item">
+                <p>Subir archivo pdf (opcional)</p>
+                  <label for="pdf_file">Seleccionar archivo PDF:</label>
+                  <input type="file" id="pdf_file" name="pdf_file">
+            </div>
+        </div>
+        <div class="form_block">
+            <div class="from_item" style="float:right">
+                <input type="hidden" name="name" value="{{ Name }}">
+                <input type="hidden" name="program" value="{{ Program }}">
+                <input type="hidden" name="dni" value="{{ Dni }}">
+                <input type="hidden" name="cycle" value="{{ Cycle }}">
+                <input type="hidden" name="phone" value="{{ Phone }}">
+                <input type="hidden" name="email" value="{{ Email }}">
+
+                <button type="submit">Siguiente</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock %}
+
+
+<!-- ----- -->
+{% block check_1 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+<!-- ----- -->
+{% block navbaractivate_2 %}
+
+activate-f
+
+{% endblock %}
+<!-- ----- -->

@@ -1,0 +1,66 @@
+{% extends 'create_fut/base_form_new_fut.html' %}
+
+{% load static %}
+{% block linkstyle2 %}
+<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
+<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+{% endblock %}
+
+{% block contentf %}
+<div class="bodyf" style="text-align: center;">
+    <H1>FUT Creado exitosamente!</H1>
+
+    <h2>Datos del solicitante</h2>
+    <p>Nombre: {{Name}} </p>
+    <p>DNI: {{Dni}} </p>
+    <h3>{{Order}}</h3>
+    <hr>
+    <p>Expediente: {{Proceeding}} </p>
+    <p>Contraseña: {{Password}} </p>
+    <img src="{% static '/tmp/' %}{{Code}}qrcode.png" alt="" style="width: 200px; padding: 10px 20px;">
+    <br>
+    <a href="http://127.0.0.1:8000/my_fut/proceedings?code={{Code}}">ir al tramite</a>
+    <p>Toda la informacion necesaria para acceder al tramite se envio a: edgar@gmail.com</p>
+    <!-- PEDIR AYUDA A GPT -->
+</div>
+{% endblock %}
+
+
+<!-- ----- -->
+{% block check_1 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+
+<!-- ----- -->
+{% block check_2 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+<!-- ----- -->
+{% block check_3 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+<!-- ----- -->
+{% block navbaractivate_3 %}
+
+activate-f
+
+{% endblock %}
+<!-- ----- -->

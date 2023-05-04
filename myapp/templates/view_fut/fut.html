@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<h1>My Fut (Hola)</h1>
+
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, libero.</p>
+
+<hr>
+
+<h1>Hola</h1>
+
+<ul>
+  {% for i in some_list %}
+      <li>Iteración {{ i|add:5 }}</li>
+  {% endfor %}
+</ul>
+
+<h1>mi numero es: {{ var|add:5 }} </h1>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+.content-f{
+    width: 70%;
+    height: 500px;
+    margin: 0px auto;
+}
+
+.navbar-f{
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+.navbar-f-item{
+    width: 33.33%;
+    height: 100%;
+    background: red;
+}
+
+.item-f{
+    width: 100%;
+    height: 100%;
+    background: rgb(233, 233, 233);
+    display: flex;
+}
+.item-ftoo{
+    /* background: pink; */
+    margin: auto;
+    display: flex;
+}
+.item-ftoo p{
+    color: red;
+    margin: auto;
+
+}
+.activate-f{
+    height: 92%;
+}
+
+.activate-f p{
+    margin: auto;
+    font-size: 18px;
+}

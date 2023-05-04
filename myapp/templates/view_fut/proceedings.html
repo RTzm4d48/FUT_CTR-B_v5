@@ -1,0 +1,516 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block linkstyle %}
+<style>
+.locaso {
+    color:blue;
+}
+.mycontent{
+    background: #F0F1F5;
+    width: 100%;
+    display: flex;
+}
+.apart_L{
+    width: 75%;
+    /* background: red; */
+    height: 100%;
+}
+.apart_R{
+    width: 25%;
+    background: rgb(194, 188, 188);
+    height: 800px;
+    display: flex;
+    position: fixed;
+    right: 0px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.infocontect{
+    /* background: pink; */
+    margin: 50px 0px;
+    width: 60%;
+    position:relative;
+    left:250px;
+    border-radius: 10px;
+}
+.doccontent{
+    /* position: absolute; */
+    width: 400px;
+    height: 600px;
+    background: skyblue;
+    /* position:absolute; z-index:1; */
+    position:relative; z-index:1;
+    left:-200px; top:50px; opacity:1;
+    border-radius: 10px;
+}
+.text_doc{
+    background: rgb(206, 206, 206);
+    position:absolute; z-index:1;
+    left:0px; top:45%; opacity:1;
+    width: 100%;
+    padding: auto;
+    text-align: center;
+}
+.text_doc button{
+    background: red;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+.img_cocument{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.student_content{
+    width: 100%;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin: 10px 0px;
+}
+.content_route{
+    width: 100%;
+    height: 100px;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin: 10px 0px;
+    display: grid;
+}
+.route_tittle{
+    width: 100%;
+    height: 20px;
+    /* background: red; */
+
+}
+.route_tittle h6{
+    font-weight: bold;
+}
+.route{
+    width: 100%;
+    height: 50px;
+    /* background: skyblue; */
+    margin: auto;
+    display: flex;
+}
+.circle{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* La mitad del ancho y alto */
+}
+.ProgressBar{
+    width: 17%;
+    height: 3px;
+    /* background: rgb(255, 150, 89); */
+    margin: auto 0px;
+    display: flex;
+}
+.progre{
+    width: 10px;
+    height: 100%;
+    margin: 0px 5px;
+}
+.on{
+    background: rgb(37, 123, 252);
+}
+.off{
+    background: #acacac;
+}
+.tracking_content{
+    width: 100%;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin: 10px 0px;
+}
+.route_content{
+    width: 100%;
+    /* background: gold; */
+}
+.tracking{
+    width: 700px;
+    height: 100px;
+    /* background: green; */
+    display: flex;
+    border-radius: 20px;
+    border: 2px solid gray;
+    margin: 20px 0px 0px 0px;
+    position: relative;
+}
+.tra_info{
+    width: 80%;
+    /* background: red; */
+    font-size: 10px;
+    padding: 10px 20px;
+}
+.tra_info p{
+    margin: 0px;
+}
+.tra_info hr{
+    margin: 5px;
+}
+.tra_seal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    /* background: purple; */
+    color: green;
+}
+.tra_seal h6{
+    font-weight: bold;
+    font-size: 15px;
+}
+.arrow{
+    width: 20px;
+    height: 20px;
+    /* background: aqua; */
+    margin: 0px 0px 20px 20px;
+    position: relative;
+}
+/* ventana flotante */
+#login-form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: white;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 3;
+}
+.window_title{
+    width: 100%;
+    background: #f34040;
+    padding: 10px 0px;
+    color: white;
+    
+}
+.window_title h1{
+    font-size: 25px;
+    margin: 10px;
+}
+.window_title button{
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+    background: none;
+    border: none;
+}
+#mypass{
+    /* background: #acacac; */
+    display: grid;
+    width: 50%;
+    margin: 40px auto 0px auto;
+}
+#mypass .credent{
+    margin: 20px 20px 0px 20px;
+    font-size: small;
+    font-weight: bold;
+}
+#mypass input[type="password"]{
+    margin: 20px auto 0px auto;
+    font-size: small;
+    padding: 5px;
+    border-radius: 5px;
+    background: #cfcece;
+    border: 0px solid #a7a4a4;
+}
+#error2{
+    color: red;
+    margin: 0px auto 20px auto;
+    font-size: small;
+    font-weight: normal;
+}
+.mypassoptions{
+    /* background: #e79797; */
+    display: grid;
+    width: 50%;
+    margin: 0px auto 40px auto;
+}
+
+.mypassoptions a{
+    background: none;
+    border: none;
+    font-size: small;
+    color: #2984fc;
+    
+}
+.mypassoptions a:hover{
+    color: rgb(39, 58, 236);
+}
+#login-form-popup input[type="submit"]{
+    background: #f34040;
+    width: 50%;
+    height: 40px;
+    margin: 40px auto;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+#login-form-popup hr{       
+    width: 90%;
+    border: 2px solid rgb(145, 144, 144);
+    margin: 0px auto;
+}
+
+#Forgetp{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: white;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index:3;
+}
+#Forgetp [type="text"]{
+    margin: 40px 20px 0px 20px;
+    font-size: small;
+    padding: 5px;
+    border-radius: 5px;
+    background: #cfcece;
+    border: 0px solid #a7a4a4;
+}
+#Forgetp input[type="submit"]{
+    background: #f34040;
+    width: 50%;
+    height: 40px;
+    margin: 0px auto 40px auto;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+#Forgetp p{
+    color: red;
+    margin: 0px auto 40px auto;
+    font-size: small;
+}
+
+#Forgetp hr{
+    width: 90%;
+    border: none;
+    margin: 0px auto;
+}
+.uncontetforget{
+    display: block;
+}
+.uncontetforget img{
+    margin: 50px auto;
+    width: 100px;
+}
+.uncontetforget a{
+    display: block;
+    color: white;
+    width: 50%;
+    margin: 0px auto 40px auto;
+    background: #f34040;
+    padding: 10px 20px;
+    border-radius: 3px;
+    text-decoration:none;
+}
+/*  */
+</style>
+<!-- ----------------------------------------------------------------------------- -->
+{% endblock %}
+
+{% block content %}
+<div class="mycontent">
+    <div class="apart_L">
+        <div class="infocontect">
+            <p>N° DE EXPEDIENTE: {{Proceeding}}</p>
+            <h1>{{Order}}</h1>
+            <div class="student_content">
+                <p>Alumno: {{Name}}</p>
+                <p>DNI: {{Dni}}****</p>
+                <p>Programa: {{Program}}</p>
+                <p>Email: {{Email_code}} </p>
+            </div>
+            <h5>Palabras del director</h5>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum corrupti aperiam dolorem eos expedita pariatur temporibus a tempora architecto, minima soluta eaque nihil maxime corporis aspernatur tempore ex doloribus, totam velit eveniet fugiat, sapiente sequi placeat? Sint dignissimos autem maiores.</p>
+            <div class="content_route">
+                <div class="route_tittle"><h6>Ruta de Tramite</h6></div>
+                <div class="route">
+                    <div class="circle on">
+                    </div>
+                    <div class="ProgressBar">
+                        {% for i in Progressbar %}
+                        <div class="progre on"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="circle on">
+                    </div>
+                    <div class="ProgressBar">
+                        {% for i in Progressbar %}
+                        <div class="progre off"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="circle off">
+                    </div>
+                    <div class="ProgressBar">
+                        {% for i in Progressbar %}
+                        <div class="progre off"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="circle off">
+                    </div>
+                    <div class="ProgressBar">
+                        {% for i in Progressbar %}
+                        <div class="progre off"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="circle off"></div>
+                </div>
+            </div>
+            <div class="tracking_content">
+                <div class="route_tittle"><h6>Detalles de Seguimiento</h6></div>
+                <div class="route_content">
+                    {% for i in Details %}
+                        <div class="tracking" style="left: {{i}}px; width: calc(700px - {{i}}px);"> <!----'i' variables iteradas Details--->
+                            <div class="tra_info">
+                                <h6>MESA DE PARTES CENTRAL</h6>
+                                <p>INSTITUTO LATINOAMERICANO SIGLO XXI</p>
+                                <hr>
+                                <p>Recepción: 27/04/2023 08:31:59 a.m.</p>
+                                <p>Salida: 27/04/2023 09:31:59 a.m.</p>
+                            </div>
+                            <div class="tra_seal"><h6>PROCESADO</h6></div>
+                        </div>
+                        <div class="arrow" style="left: {{i|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 83.44 83.44"><defs><style>.cls-1{fill:#ef0033;}</style></defs><title>Captura de pantalla 2023-04-28 155958</title><path class="cls-1" d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"/></svg>
+                        </div>
+                        
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="apart_R">
+        <div class="doccontent">
+            <img class="img_cocument" src="{% static '/img/document.jpg' %}" alt="">
+            <div class="text_doc">
+                <h1>Documento</h1>
+                <button onclick="openLoginForm()">Descagar</button>
+            </div>
+        </div>
+    </div>
+    <!-- ventana flotanete -->
+    <div id="login-form-popup">
+        <div class="window_title"><h1>Descargar</h1><button onclick="closeForm()">X</button></div>
+        <form id="F_download" action="{% url 'n_img_dow' %}" method="post">
+            {% csrf_token %}
+            <div id="mypass">
+                <p class="credent">Expediente: {{Proceeding}}   </p>
+                <input id="passInput" type="password" name="password" placeholder="Contraseña" required>
+                <p id="error2"></p>
+            </div>
+            <div class="mypassoptions">
+                <a href="#" onclick="forgetpass()">¿Olvidasete tu contraseña?</a>
+            </div>
+            <hr>
+            <input type="submit" value="Descargar Documento">
+            <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
+        </form>
+    </div>
+    <!--  -->
+    <!-- FORGET PASS -->
+    <div id="Forgetp">
+        <div class="window_title"><h1>Enviar credenciales al tu correo</h1><button onclick="closeForm2()">X</button></div>
+        <form id="myForm" action="{% url 'n_send_email' %}" method="post">
+            {% csrf_token %}
+            <div class="uncontetforget" id="DivForget">
+                <input type="text" name="gmail" id="gmail" placeholder="@Correo" required>
+                <p id="error"></p>
+                <hr>
+                <input type="submit" value="Enviar">
+            </div>
+        </form>
+    </div>
+    <!--  -->
+</div>
+
+<script>
+    //variables
+    const form = document.getElementById('myForm');
+    const gmailinput = document.getElementById('gmail');
+    const errorPara = document.getElementById('error');
+    const div = document.getElementById('DivForget');
+    const formDownload = document.getElementById('F_download');
+    const passInput = document.getElementById('passInput')
+    const errorPass = document.getElementById('error2')
+
+
+    function openLoginForm() {
+        document.getElementById("login-form-popup").style.display = "block";
+    }
+
+    window.onclick = function(event) {
+    if (event.target == document.getElementById("login-form-popup")) {
+        document.getElementById("login-form-popup").style.display = "none";
+    }
+    }
+
+    function closeForm(){
+        document.getElementById("login-form-popup").style.display = "none";
+    }
+    //Descargar documento
+    formDownload.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if(passInput.value.trim() === '{{Password}}') {
+            formDownload.submit();
+            document.getElementById("login-form-popup").style.display = "none";
+        }else{
+            errorPass.textContent = 'contraseña incorrecta';
+            return;
+        }
+    });
+
+    //validar correo
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        if(gmailinput.value.trim() === '{{Email}}') {
+            //form.submit();
+            div.innerHTML = `<img src="{% static '/img/check.png' %}" alt=""><hr><a onclick="closeforget()" href="#">Cerrar</a>`
+            $.get('/send_email/', {'gmail': gmailinput.value.trim(), 'name': '{{Name}}', 'proceeding':'{{Proceeding}}', 'password': '{{Password}}'});
+        }else{
+            errorPara.textContent = 'Email invalido';
+            return;
+        }
+    });
+
+    function closeforget(){
+        document.getElementById("Forgetp").style.display = "none";
+    }
+
+    //Botton enviar al correo
+    function forgetpass(){
+        document.getElementById("login-form-popup").style.display = "none";
+        console.log()
+        document.getElementById("Forgetp").style.display = "block";
+    }
+
+
+
+    function closeForm2(){
+        document.getElementById("Forgetp").style.display = "none";
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block linkstyle %}
+<link rel="stylesheet" href="{% static '/styles/Home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="content-h">
+    <div class="subcontent">
+        <h1 class="fw-light">¡Hola!</h1>
+        <p class="fw-medium">Realice aqui tramites para titulos o certificados.</p>
+
+        <div class="mybuttons">
+            <a href="form_new_fut/identification">Realizar un Tramite</a>
+            <a href="my_fut">Consultar Tramites</a>
+        </div>
+    </div>
+</div>
+
+<div class="content2-h">
+    <div class="cuestions">
+        <h5>¿Por que hacer un tramite virtual?</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus sequi, nisi quaerat officia corporis atque! Porro molestias dicta quos expedita, ipsam fuga temporibus veniam, voluptate recusandae a eos eius iusto aliquam consequuntur sunt dolorem atque sequi quae iste earum!</p>
+    </div>
+    <div class="cuestions">
+        <h5>Ventajas</h5>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex incidunt, repellendus quis molestias vitae voluptates voluptas expedita facere nulla rerum impedit maiores quos eaque pariatur? Iure reprehenderit voluptas nihil!</p>
+    </div>
+    <div class="cuestions">
+        <h5>¿Que es el codigo QR?</h5>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex it voluptas nihil!</p>
+        <img src="{% static 'img/qr_code.png' %}" alt="">
+    </div>
+
+    <div class="cuestions">
+        <h5>¿Por que tener un certificado con QR?</h5>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex it voluptas nihil!</p>
+        <img src="{% static 'img/img_certificado.png' %}" alt="" width="600px">
+    </div>
+</div>
+
+{% endblock %}
