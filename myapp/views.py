@@ -272,9 +272,24 @@ def proceedings(request):
     details = []
   
     x = 20
-    for i in range(5):# aquí ponemos el numero de cuadros de detalles que habra en la interfaz
+    for i in range(4):# aquí ponemos el numero de cuadros de detalles que habra en la interfaz
         details.append(x)
         x += 20
+    # LO QUE VENDRA DE UNA BASE DE DATOS:
+    titulo = {'tittle1', 'tittle2', 'tittle3','tittle4'}
+    nombre = {'name1', 'name2', 'name3', 'name4'}
+    reception = {'recepción1', 'recepción2', 'recepción3', 'recepción4'}
+    exit = {'salida1', 'salida2', 'salida3', 'salida4'}
+
+    data1 = {'tittle': 'TRAMITE EN CURSO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 27/04/2023 08:31:59 a.m.', 'exit':'Salida: 27/04/2023 09:31:59 a.m.', 'num': 20}
+    data2 = {'tittle': 'TESORERIA', 'name': 'Laura Faviola Mamani Quispe', 'reception': 'Recepción: 27/04/2023 010:31:59 a.m.', 'exit':'Salida: 27/04/2023 010:31:59 a.m.', 'num': 40}
+    data3 = {'tittle': 'SECRETARIA', 'name': 'Jessica Rodríguez Sanchez', 'reception': 'Recepción: 28/04/2023 08:31:59 a.m.', 'exit':'Salida: 28/04/2023 09:31:59 a.m.', 'num': 60}
+    data4 = {'tittle': 'DIRECCIÓN', 'name': 'Roman Alvarez Martínez', 'reception': 'Recepción: 29/04/2023 08:31:59 a.m.', 'exit':'Salida: 29/04/2023 10:31:59 a.m.', 'num': 80}
+    data5 = {'tittle': 'TRAMITE REALIZADO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 30/04/2023 08:31:59 a.m.', 'exit':'Salida: 30/04/2023 09:31:59 a.m.', 'num': 100}
+
+    data = [data1, data2, data3, data4, data5]
+
+
 
     left = 20 # css left details picture
     return render(request, 'view_fut/proceedings.html', {
@@ -288,7 +303,8 @@ def proceedings(request):
         'Left': left,
         'Email_code': email_code,
         'Email': email,
-        'Password': object['password']
+        'Password': object['password'],
+        'Data': data
     })
 def send_email(request):
     send_email = request.GET.get('gmail')

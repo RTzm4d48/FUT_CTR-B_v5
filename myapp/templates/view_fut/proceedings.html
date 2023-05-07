@@ -370,29 +370,23 @@
                     </div>
                     <div class="circle off">
                     </div>
-                    <div class="ProgressBar">
-                        {% for i in Progressbar %}
-                        <div class="progre off"></div>
-                        {% endfor %}
-                    </div>
-                    <div class="circle off"></div>
                 </div>
             </div>
             <div class="tracking_content">
                 <div class="route_tittle"><h6>Detalles de Seguimiento</h6></div>
                 <div class="route_content">
-                    {% for i in Details %}
-                        <div class="tracking" style="left: {{i}}px; width: calc(700px - {{i}}px);"> <!----'i' variables iteradas Details--->
+                    {% for i in Data %}
+                        <div class="tracking" style="left: {{i.num}}px; width: calc(700px - {{i.num}}px);"> <!----'i' variables iteradas Details--->
                             <div class="tra_info">
-                                <h6>MESA DE PARTES CENTRAL</h6>
-                                <p>INSTITUTO LATINOAMERICANO SIGLO XXI</p>
+                                <h6> {{i.tittle}} </h6>
+                                <p> {{i.name}} </p>
                                 <hr>
-                                <p>Recepción: 27/04/2023 08:31:59 a.m.</p>
-                                <p>Salida: 27/04/2023 09:31:59 a.m.</p>
+                                <p>{{i.reception}}</p>
+                                <p>{{i.exit}}</p>
                             </div>
                             <div class="tra_seal"><h6>PROCESADO</h6></div>
                         </div>
-                        <div class="arrow" style="left: {{i|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
+                        <div class="arrow" style="left: {{i.num|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
                             <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 83.44 83.44"><defs><style>.cls-1{fill:#ef0033;}</style></defs><title>Captura de pantalla 2023-04-28 155958</title><path class="cls-1" d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"/></svg>
                         </div>
                         
