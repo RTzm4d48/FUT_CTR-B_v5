@@ -267,7 +267,7 @@ def proceedings(request):
     email_code = e+asterisk_Str+l+'@gmail.com'
 
     # My params for css
-    progressbar = list(range(6)) # for progress bar lines
+    progressbar = list(range(9)) # for progress bar lines
 
     details = []
   

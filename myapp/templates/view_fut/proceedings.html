@@ -124,7 +124,7 @@
 .tracking_content{
     width: 100%;
     background: white;
-    padding: 10px 20px;
+    padding: 20px 10px 30px 10px;
     border-radius: 15px;
     margin: 10px 0px;
 }
@@ -348,6 +348,7 @@
                 <div class="route_tittle"><h6>Ruta de Tramite</h6></div>
                 <div class="route">
                     <div class="circle on">
+                        <img width="100%" src="{% static 'img/process/P_01-on.png' %}" alt="">
                     </div>
                     <div class="ProgressBar">
                         {% for i in Progressbar %}
@@ -355,20 +356,31 @@
                         {% endfor %}
                     </div>
                     <div class="circle on">
+                        <img width="100%" src="{% static 'img/process/P_02-on.png' %}" alt="">
                     </div>
                     <div class="ProgressBar">
                         {% for i in Progressbar %}
-                        <div class="progre off"></div>
+                        <div class="progre on"></div>
                         {% endfor %}
                     </div>
                     <div class="circle off">
+                        <img width="100%" src="{% static 'img/process/P_03-on.png' %}" alt="">
                     </div>
                     <div class="ProgressBar">
                         {% for i in Progressbar %}
-                        <div class="progre off"></div>
+                        <div class="progre on"></div>
                         {% endfor %}
                     </div>
                     <div class="circle off">
+                        <img width="100%" src="{% static 'img/process/P_04-on.png' %}" alt="">
+                    </div>
+                    <div class="ProgressBar">
+                        {% for i in Progressbar %}
+                        <div class="progre on"></div>
+                        {% endfor %}
+                    </div>
+                    <div class="circle off">
+                        <img width="100%" src="{% static 'img/process/P_05-on.png' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -384,11 +396,13 @@
                                 <p>{{i.reception}}</p>
                                 <p>{{i.exit}}</p>
                             </div>
-                            <div class="tra_seal"><h6>PROCESADO</h6></div>
+                            <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #42AF15;"><h6>PROCESADO</h6><img width="30px" src="{% static 'img/check.png' %}" alt=""></div>
                         </div>
-                        <div class="arrow" style="left: {{i.num|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
-                            <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 83.44 83.44"><defs><style>.cls-1{fill:#ef0033;}</style></defs><title>Captura de pantalla 2023-04-28 155958</title><path class="cls-1" d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"/></svg>
-                        </div>
+                        {% if i.num <= 80 %}
+                            <div class="arrow" style="left: {{i.num|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
+                                <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 83.44 83.44"><defs><style>.cls-1{fill:#ef0033;}</style></defs><title>Captura de pantalla 2023-04-28 155958</title><path class="cls-1" d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"/></svg>
+                            </div>
+                        {% endif %}
                         
                     {% endfor %}
                 </div>
