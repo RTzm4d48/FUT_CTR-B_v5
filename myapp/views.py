@@ -4,6 +4,7 @@ import base64
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse # agregamos el HttpResponse
 from .models import fut
+from myapp_admin.models import process
 from datetime import date
 from django.http import HttpResponseRedirect
 
@@ -27,6 +28,9 @@ import os
 #send email
 # py -m pip install yagmail[all]
 import yagmail
+
+#para saber el dia y la hora actual
+from datetime import datetime
 
 def index(request):
     return render(request,'index.html')
@@ -248,6 +252,12 @@ def successful(request):
         'Password': objetos['password']
     })
 
+def save_process(tittle, name, reception, exit, state, num):
+    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num)
+    my_objet.save()
+    new_id = my_objet.id
+    return new_id
+
 def proceedings(request):
     code_ = request.GET.get('code')
     object = fut.objects.filter(code=code_).values('name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email').first()
@@ -276,20 +286,17 @@ def proceedings(request):
         details.append(x)
         x += 20
     # LO QUE VENDRA DE UNA BASE DE DATOS:
-    titulo = {'tittle1', 'tittle2', 'tittle3','tittle4'}
-    nombre = {'name1', 'name2', 'name3', 'name4'}
-    reception = {'recepción1', 'recepción2', 'recepción3', 'recepción4'}
-    exit = {'salida1', 'salida2', 'salida3', 'salida4'}
+    my_id = 1
+    data = process.objects.filter(id=my_id).values('tittle', 'name', 'reception', 'exit', 'state', 'num').first()
+    
 
-    data1 = {'tittle': 'TRAMITE EN CURSO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 27/04/2023 08:31:59 a.m.', 'exit':'Salida: 27/04/2023 09:31:59 a.m.', 'num': 20}
-    data2 = {'tittle': 'TESORERIA', 'name': 'Laura Faviola Mamani Quispe', 'reception': 'Recepción: 27/04/2023 010:31:59 a.m.', 'exit':'Salida: 27/04/2023 010:31:59 a.m.', 'num': 40}
-    data3 = {'tittle': 'SECRETARIA', 'name': 'Jessica Rodríguez Sanchez', 'reception': 'Recepción: 28/04/2023 08:31:59 a.m.', 'exit':'Salida: 28/04/2023 09:31:59 a.m.', 'num': 60}
-    data4 = {'tittle': 'DIRECCIÓN', 'name': 'Roman Alvarez Martínez', 'reception': 'Recepción: 29/04/2023 08:31:59 a.m.', 'exit':'Salida: 29/04/2023 10:31:59 a.m.', 'num': 80}
-    data5 = {'tittle': 'TRAMITE REALIZADO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 30/04/2023 08:31:59 a.m.', 'exit':'Salida: 30/04/2023 09:31:59 a.m.', 'num': 100}
+    #date = datetime.now() 
+    #date_format = date.strftime("%Y-%m-%d %H:%M:%S")
 
-    data = [data1, data2, data3, data4, data5]
+    #new_id = save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, False, 20)
 
-
+    
+    #print(daton)
 
     left = 20 # css left details picture
     return render(request, 'view_fut/proceedings.html', {
@@ -306,6 +313,8 @@ def proceedings(request):
         'Password': object['password'],
         'Data': data
     })
+
+
 def send_email(request):
     send_email = request.GET.get('gmail')
     name = request.GET.get('name')

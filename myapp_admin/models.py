@@ -10,3 +10,13 @@ class Admins(models.Model):
     phone = models.CharField(max_length=12)
     dni = models.CharField(max_length=10)
     password = models.CharField(max_length=30)
+
+
+class process(models.Model):
+    tittle = models.CharField(max_length=40)
+    name = models.CharField(max_length=40)
+    reception = models.DateTimeField()
+    exit = models.DateTimeField()
+    state = models.BooleanField()
+    num = models.IntegerField()
+
