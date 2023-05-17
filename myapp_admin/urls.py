@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('ils_admin', views.ilsadmin, name="n_ilsadmin"),
     path('ils_admin/treasury', views.treasury,name="n_treasury"),
+    path('ils_admin/treasury/fut', views.view_fut, name="n_view_fut")
 ]

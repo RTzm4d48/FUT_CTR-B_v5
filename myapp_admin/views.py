@@ -27,3 +27,6 @@ def treasury(request):
     return render(request, 'admin/treasury.html', {
         'Object': list_data
     })
+
+def view_fut(request):
+    return render(request, 'admin/treasury/view_fut.html')

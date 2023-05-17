@@ -128,6 +128,8 @@
                 <div class="label1">Todos</div>
                 <div class="label1">Pospuestos</div>
                 <div class="label1">Enviados</div>
+                <a id="miEnlace" href="#">Haz clic aquí</a>
+                <div id="miContenedor"><h1>Content</h1></div>
             </div>
         </div>
         <div class="block_two">
@@ -143,4 +145,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#miEnlace").click(function(event) {
+            event.preventDefault(); // Evita que se siga el enlace por defecto
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                url: "{% url 'n_view_fut' %}", // Ruta del archivo que contiene el contenido actualizado
+                method: "GET",
+                success: function(response) {
+                    $("#miContenedor").html(response); // Actualiza el contenido del div con la respuesta del servidor
+                },
+                error: function() {
+                    alert("Ocurrió un error al cargar el contenido.");
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
