@@ -21,5 +21,7 @@ class fut(models.Model):
     #imagen QR
     qrimg_binary = models.BinaryField(default=b'')
     code = models.TextField(default='00000000000')
+    stage = models.IntegerField(default=0)
+
     def __str__(self):
         return self.name+" - "+self.order

@@ -252,8 +252,8 @@ def successful(request):
         'Password': objetos['password']
     })
 
-def save_process(tittle, name, reception, exit, state, num):
-    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num)
+def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
+    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
     my_objet.save()
     new_id = my_objet.id
     return new_id
@@ -287,16 +287,33 @@ def proceedings(request):
         x += 20
     # LO QUE VENDRA DE UNA BASE DE DATOS:
     my_id = 1
-    data = process.objects.filter(id=my_id).values('tittle', 'name', 'reception', 'exit', 'state', 'num').first()
+    loco = []
     
+    num_registros = process.objects.filter(fut_id_id=3).count()
+    print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
 
-    #date = datetime.now() 
-    #date_format = date.strftime("%Y-%m-%d %H:%M:%S")
+    for i in range(num_registros):
+        print('----------------',i,'------------------')
+        data = process.objects.filter(stage=i).values('tittle', 'name', 'reception', 'exit', 'num').first()
+        loco.append(data)
+    
+    data1 = {'tittle': 'TRAMITE EN CURSO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 27/04/2023 08:31:59 a.m.', 'exit':'Salida: 27/04/2023 09:31:59 a.m.', 'num': 20}
+    data2 = {'tittle': 'TRAMITE EN CURSO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 27/04/2023 08:31:59 a.m.', 'exit':'Salida: 27/04/2023 09:31:59 a.m.', 'num': 20}
 
-    #new_id = save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, False, 20)
+    #Insert in the DB
+    date = datetime.now() 
+    date_format = date.strftime("%Y-%m-%d %H:%M:%S")
+
+    #new_id = save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, None, False, 20, 3, 0)
+    #new_id = save_process('TESORERIA', 'Laura Faviola Mamani Quispe', date_format, None, False, 40, 3, 1)
+    #new_id = save_process('SECRETARIA', 'Jessica Rodríguez Sanchez', date_format, None, False, 60, 3, 2)
+    #new_id = save_process('DIRECCIÓN', 'Roman Alvarez Martínez', date_format, None, False, 80, 3, 3)
+    #new_id = save_process('TRAMITE REALIZADO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, None, False, 100, 3, 4)
+
 
     
-    #print(daton)
+    
+    print(loco)
 
     left = 20 # css left details picture
     return render(request, 'view_fut/proceedings.html', {
@@ -311,7 +328,7 @@ def proceedings(request):
         'Email_code': email_code,
         'Email': email,
         'Password': object['password'],
-        'Data': data
+        'Data': loco
     })
 
 

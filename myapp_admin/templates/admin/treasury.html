@@ -1,4 +1,5 @@
 {% extends 'layouts/mainadmin.html' %}
+{% load static %}
 {% block content %}
 <style>
     .block_container{
@@ -36,20 +37,108 @@
         height: 50px;
         background: #464646;
         margin: 0px 0px 10px 0px;
+        display: flex;
+        justify-content: space-between;
+        /* font-weight: bold; */
+    }
+    /* ----------------------------------------------------- */
+    .info1{
+        /* background: red; */
+        display: block;
+        margin: 15px 0px;
+    }
+    .name{
+        /* background:green; */
+        font-size: large;
+        opacity: 80%;
+        margin: 20px 0px 0px 0px;
+        display: block;
+    }
+    .name p{
+        margin: 0px 10px;
+    }
+    .name2{
+        background: rgb(82, 82, 82);
+        display: flex;
+        
+        margin: 10px 0px 0px 0px;
+        padding: 10px;
+    }
+    .name2 .signal{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: auto 0px;
+    }
+    .name2 .eltext{
+        margin: 0px auto 0px 10px;
+        font-weight: bold;
+    }
+    .numb{
+        margin: 0px 10px 0px auto;
+        font-weight: bold;
+    }
+    .red_a{
+        color: red;
+    }
+    .green_a{
+        color: green;
+    }
+    .red_b{
+        background: red;
+    }
+    .green_b{
+        background: green;
+    }
+    .label{
+        /* background: pink; */
+        padding: 10px 2px;
+    }
+    .label1{
+        background: rgb(83, 83, 83);
+        margin: 5px 0px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+    .filauno{
+        width: 30%;
+        /* background: salmon; */
+        display: flex;
+    }
+    .filados{
+        width: 70%;
+        /* background: red; */
+        display: flex;
+    }
+    .ayelash p{
+        margin: auto 7px;
     }
 </style>
 <div class="block_container">
     <div class="block_barra"></div>
     <div class="block_bloker">
-        <div class="block_one"></div>
+        <div class="block_one">
+            <div class="info1">
+                <div class="name"><p>Maria Magdanela - Tesorera</p></div>
+                <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">3</p></div>
+            </div>
+            <div class="label">
+                <div class="label1">Todos</div>
+                <div class="label1">Pospuestos</div>
+                <div class="label1">Enviados</div>
+            </div>
+        </div>
         <div class="block_two">
             <!-- pesttañas -->
-            <div class="ayelash"></div>
-            <div class="ayelash"></div>
-            <div class="ayelash"></div>
-            <div class="ayelash"></div>
-            <div class="ayelash"></div>
-            <div class="ayelash"></div>
+            {% for i in Object %}
+                <div class="ayelash">
+                    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt=""><p>{{i.order}}</p></div>
+                    <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p></div>
+                    
+                </div>
+            {% endfor %}
             <!-- fin-pestañas -->
         </div>
     </div>
