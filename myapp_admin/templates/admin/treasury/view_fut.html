@@ -1,1 +1,201 @@
-<h1>Locura hermano!!</h1>
+{% extends 'admin/treasury.html' %}
+{% load static %}
+{% block fut %}
+<style>
+    .block_one{
+        height: 900px;
+    }
+    .ayelash2{
+        width: 100%;
+        height: 900px;
+        background: #464646;
+        margin: 0px 0px 10px 0px;
+        display: block;
+        justify-content: space-between;
+        /* font-weight: bold; */
+    }
+    .bastools{
+        width: 100%;
+        height: 50px;
+        /* background: salmon; */
+        display: flex;
+    }
+    .principaldiv{
+        width: 90%;
+        height: 500px;
+        /* background: red; */
+        margin: 10px auto;
+    }
+    .order{
+        width: 100%;
+        height: 40px;
+        /* background: blue; */
+        display: flex;
+    }
+    .order p{
+        margin: auto 10px;
+        font-size: larger;
+        font-weight: bold;
+    }
+    .alumno{
+        width: 100%;
+        height: 40px;
+        /* background: skyblue; */
+        display: flex;
+    }
+    .p_name{
+        margin: auto 5px;
+    }
+    .p_mail{
+        margin: auto 5px;
+        font-size: small;
+        opacity: 80%;
+    }
+    .contFUT{
+        width: 100%;
+        background: #e2e1cfbb;
+        background: white;
+        margin: 20px auto;
+        padding: 1px 0px;
+        display: block;
+    }
+    .baricon{
+        margin: auto 15px;
+    }
+    .logoils{
+        width: calc(100% - 100px);
+        height: 70px;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+        margin: 60px auto 30px auto;
+    }
+    .celd{
+        height: 30px;
+        /* background: yellow; */
+        color: black;
+        margin: auto 10px;
+        display: flex;
+    }
+    .celd label{
+        font-weight: bold;
+        margin: auto 0px auto 0px;
+    }
+    .celd .text{
+        height: 20px;
+        margin: auto 10px auto 5px ;
+        border: 1px solid black;
+    }
+    .celd .text p{
+        margin: 3px 2px auto 2px;
+    }
+    .orderils{
+        width: calc(100% - 160px);
+        background: white;
+        margin: 0px auto 10px auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .celd2{
+        height: auto;
+        /* background: yellow; */
+        color: black;
+        margin: auto 10px;
+        display: flex;
+    }
+    .celd2 label{
+        font-weight: bold;
+        margin: 2px 0px auto 0px;
+    }
+    .celd2 .text{
+        height: 45px;
+        margin: auto 10px auto 5px ;
+        border: 1px solid black;
+    }
+    .celd2 .text p{
+        margin: 3px 2px auto 3px;
+    }
+    .datails{
+        width: calc(100% - 160px);
+        background: white;
+        margin: 0px auto 60px auto;
+        padding: 1px 0px;
+        display: block;
+        color: black;
+    }
+    .datails p{
+        margin: 10px;
+        
+    }
+
+</style>
+
+<div class="ayelash2">
+    <div class="bastools">
+        <img width="25px" class="baricon" height="25px" src="{% static 'img/icon01.png' %}" alt="">
+        <img width="25px" class="baricon" height="25px" src="{% static 'img/icon02.png' %}" alt="">
+        <img width="25px" class="baricon" height="25px" src="{% static 'img/icon03.png' %}" alt="">
+    </div>
+    <div class="principaldiv">
+        <div class="order"><p>BUSQUEDA DE DOCUMENTOS PARA HACER UN TRASLADO</p></div>
+        <div class="alumno">
+            <img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">
+            <p class="p_name">Juan Edgar Aguirre Mamani</p>
+            <p class="p_mail">-edgar.aggre@gmail.com-</p>
+        </div>
+        <div class="contFUT">
+            <div class="logoils">
+                <img height="60px" style="margin: auto 5px;" src="{% static 'img/logoils.png' %}" alt="">
+                <div class="celd">
+                    <label style="color: red;" for="">Num:</label>
+                    <div class="text" style="width: 60px;"><p>Nº54</p></div>
+                </div>
+            </div>
+            <!--  -->
+            <div class="orderils">
+                <div class="celd2">
+                    <label style="" for="">Num:</label>
+                    <div class="text" style="width: 300px;"><p>Examen de cargo del curso de Negocios y Tecnologías de la información.</p></div>
+                </div>
+            </div>
+            <!--  -->
+            <div class="datails">
+                <p style="font-weight: bold;">SEÑOR DIRECTOR(A) DEL INSTITUTO LATINOAMERICANO SIGLO XXI-ILS</p>
+                <div class="celd" style="margin: auto 0px 10px 10px;">
+                    <label for="">YO:</label>
+                    <div class="text" style="width: 500px;"><p>Juan Edgar Aguirre Mamani</p></div>
+                </div>
+                <div class="celd" style="margin: auto 0px 10px 10px;">
+                    <label for="">PROGAMA:</label>
+                    <div class="text" style="width: 440px;"><p>Informática</p></div>
+                </div>
+                <div style="display: flex;">
+                    <div class="celd" style="margin: auto 0px 10px 10px;">
+                        <label for="">CELULAR:</label>
+                        <div class="text" style="width: 200px;"><p>910400159</p></div>
+                    </div>
+                    <div class="celd" style="margin: auto 0px 10px 10px;">
+                        <label for="">CON CODIGO DE CARNET O Nº D.N.I:</label>
+                        <div class="text" style="width: 200px;"><p>7934567</p></div>
+                    </div>
+                </div>
+                <div class="celd" style="margin: auto 0px 10px 10px;">
+                    <label for="">DEL:</label>
+                    <div class="text" style="width: 40px;"><p>6</p></div>
+                    <label for="">CICLO, CON TODO RESPETO ME PRESENTO Y EXPONGO:</label>
+                </div>
+                <div class="celd2" style="display: block;">
+                    <label for="">QUE POR MOTIVO DE:</label>
+                    <div class="text" style="width: 600px; margin: 5px 0px;"><p>Examen de cargo del curso de Negocios y Tecnologías de la información.</p></div>
+                </div>
+                <div class="celd2" style="display: block;">
+                    <label for="">SOLICITO A SU RESPETABLE AUTORIDAD , SE SIRVA A ORDENAR:</label>
+                    <div class="text" style="width: 600px; margin: 5px 0px;"><p>MALLA CURRICULAR DE PROGRAMA PROFESIONAL</p></div>
+                </div>
+                <p style="font-weight: bold;">POR LO EXPUESTO A USTED, SEÑOR DIRECTOR(A), RUEGO SE SIRVA ACCEDER A MI PETICIÓN POR SER DE JUSTICIA</p>
+                <p style="font-weight: bold;">Arequipa, 01/08/2022</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
