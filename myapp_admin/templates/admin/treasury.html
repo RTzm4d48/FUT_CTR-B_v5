@@ -102,6 +102,11 @@
         display: flex;
         align-items: center;
         padding: 10px;
+        color: white;
+        text-decoration: none;
+    }
+    .label1:hover{
+        background: rgb(117, 117, 117);
     }
     .filauno{
         width: 30%;
@@ -126,11 +131,10 @@
                 <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">3</p></div>
             </div>
             <div class="label">
-                <div class="label1">Todos</div>
-                <div class="label1">Pospuestos</div>
-                <div class="label1">Pendientes de pago</div>
-                <div class="label1">Enviados</div>
-                <a id="miEnlace" href="#">Haz clic aquí</a>
+                <a href="" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
+                <a href="" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt="">Pospuestos</a>
+                <a href="" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03.png' %}" alt="">Pendientes</a>
+                <a href="" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Enviados</a>
             </div>
         </div>
         <div class="block_two" id="miContenedor">
