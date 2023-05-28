@@ -1,0 +1,24 @@
+{% extends 'admin/staff.html' %}
+{% load static %}
+{% block fut %}
+
+<h1> {{Len_list_data}} </h1>
+
+{% if Len_list_data != 0 %}
+
+<!-- pesttañas -->
+{% for i in Object %}
+<a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash">
+    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt=""><p>{{i.order}}</p></div>
+    <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p></div>
+</a>
+{% endfor %}
+<!-- fin-pestañas -->
+
+{% else %}
+
+<h1>No Hay Datos</h1>
+
+{% endif %}
+
+{% endblock %}

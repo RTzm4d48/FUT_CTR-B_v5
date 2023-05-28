@@ -1,4 +1,4 @@
-{% extends 'admin/treasury.html' %}
+{% extends 'admin/staff.html' %}
 {% load static %}
 {% block fut %}
 <style>
@@ -22,9 +22,11 @@
     }
     .principaldiv{
         width: 90%;
-        height: 500px;
+        height: 400px;
         /* background: red; */
         margin: 10px auto;
+        display: flex;
+        flex-direction: column;
     }
     .order{
         width: 100%;
@@ -61,6 +63,12 @@
     }
     .baricon{
         margin: auto 15px;
+    }
+    .baricon:hover{
+        cursor: pointer;
+        height: 35px;
+        width: 35px;
+        margin: auto 10px;
     }
     .logoils{
         width: calc(100% - 100px);
@@ -127,35 +135,52 @@
         margin: 10px;
         
     }
+    .send_button{
+        background: red;
+        width: auto;
+        text-align: center;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 1px 5px;
+    }
+    .send_button:hover{
+        cursor: pointer;
+        background: gray;
+    }
+    .buttons_view_fut{
+        display: flex;
+    }
 
 </style>
 
 <div class="ayelash2">
     <div class="bastools">
-        <img width="25px" class="baricon" height="25px" src="{% static 'img/icon01.png' %}" alt="">
-        <img width="25px" class="baricon" height="25px" src="{% static 'img/icon02.png' %}" alt="">
-        <img width="25px" class="baricon" height="25px" src="{% static 'img/icon03.png' %}" alt="">
+        <a href="{% url 'n_staff' %}" style="display: flex;"><img width="25px" class="baricon" height="25px" src="{% static 'img/icon01.png' %}" alt=""></a>
+       
+        <img onclick="postponed()" width="25px" class="baricon" height="25px" src="{% static 'img/icon02.png' %}" alt="">
+        <img onclick="pending()" width="25px" class="baricon" height="25px" src="{% static 'img/icon03.png' %}" alt="">
+        
     </div>
     <div class="principaldiv">
-        <div class="order"><p>BUSQUEDA DE DOCUMENTOS PARA HACER UN TRASLADO</p></div>
+        <div class="order"><p>{{objs.order}}</p></div>
         <div class="alumno">
             <img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">
-            <p class="p_name">Juan Edgar Aguirre Mamani</p>
-            <p class="p_mail">-edgar.aggre@gmail.com-</p>
+            <p class="p_name">{{objs.name}}</p>
+            <p class="p_mail">-{{objs.email}}-</p>
         </div>
         <div class="contFUT">
             <div class="logoils">
                 <img height="60px" style="margin: auto 5px;" src="{% static 'img/logoils.png' %}" alt="">
                 <div class="celd">
                     <label style="color: red;" for="">Num:</label>
-                    <div class="text" style="width: 60px;"><p>Nº54</p></div>
+                    <div class="text" style="width: 60px;"><p>Nº{{objs.id}}</p></div>
                 </div>
             </div>
             <!--  -->
             <div class="orderils">
                 <div class="celd2">
-                    <label style="" for="">Num:</label>
-                    <div class="text" style="width: 300px;"><p>Examen de cargo del curso de Negocios y Tecnologías de la información.</p></div>
+                    <label style="" for="">SOLICITO:</label>
+                    <div class="text" style="width: 300px;"><p>{{objs.myrequest}}</p></div>
                 </div>
             </div>
             <!--  -->
@@ -163,39 +188,80 @@
                 <p style="font-weight: bold;">SEÑOR DIRECTOR(A) DEL INSTITUTO LATINOAMERICANO SIGLO XXI-ILS</p>
                 <div class="celd" style="margin: auto 0px 10px 10px;">
                     <label for="">YO:</label>
-                    <div class="text" style="width: 500px;"><p>Juan Edgar Aguirre Mamani</p></div>
+                    <div class="text" style="width: 500px;"><p>{{objs.name}}</p></div>
                 </div>
                 <div class="celd" style="margin: auto 0px 10px 10px;">
                     <label for="">PROGAMA:</label>
-                    <div class="text" style="width: 440px;"><p>Informática</p></div>
+                    <div class="text" style="width: 440px;"><p>{{objs.program}}</p></div>
                 </div>
                 <div style="display: flex;">
                     <div class="celd" style="margin: auto 0px 10px 10px;">
                         <label for="">CELULAR:</label>
-                        <div class="text" style="width: 200px;"><p>910400159</p></div>
+                        <div class="text" style="width: 200px;"><p>{{objs.phone}}</p></div>
                     </div>
                     <div class="celd" style="margin: auto 0px 10px 10px;">
                         <label for="">CON CODIGO DE CARNET O Nº D.N.I:</label>
-                        <div class="text" style="width: 200px;"><p>7934567</p></div>
+                        <div class="text" style="width: 200px;"><p>{{objs.dni}}</p></div>
                     </div>
                 </div>
                 <div class="celd" style="margin: auto 0px 10px 10px;">
                     <label for="">DEL:</label>
-                    <div class="text" style="width: 40px;"><p>6</p></div>
+                    <div class="text" style="width: 40px;"><p>{{objs.cycle}}</p></div>
                     <label for="">CICLO, CON TODO RESPETO ME PRESENTO Y EXPONGO:</label>
                 </div>
                 <div class="celd2" style="display: block;">
                     <label for="">QUE POR MOTIVO DE:</label>
-                    <div class="text" style="width: 600px; margin: 5px 0px;"><p>Examen de cargo del curso de Negocios y Tecnologías de la información.</p></div>
+                    <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.reason}}</p></div>
                 </div>
                 <div class="celd2" style="display: block;">
                     <label for="">SOLICITO A SU RESPETABLE AUTORIDAD , SE SIRVA A ORDENAR:</label>
-                    <div class="text" style="width: 600px; margin: 5px 0px;"><p>MALLA CURRICULAR DE PROGRAMA PROFESIONAL</p></div>
+                    <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.order}}</p></div>
                 </div>
                 <p style="font-weight: bold;">POR LO EXPUESTO A USTED, SEÑOR DIRECTOR(A), RUEGO SE SIRVA ACCEDER A MI PETICIÓN POR SER DE JUSTICIA</p>
-                <p style="font-weight: bold;">Arequipa, 01/08/2022</p>
+                <p style="font-weight: bold; color: blue;">Arequipa, {{objs.date}}</p>
             </div>
         </div>
+        <div class="buttons_view_fut">
+            <div class="send_button" onclick="send_fut()">Enviar</div>
+            <div class="send_button" onclick="pending()">Pendiente de pago</div>
+        </div>
+        
     </div>
 </div>
+
+<script>
+    //const form = document.getElementById('myForm2');
+    
+
+    // form.addEventListener('submit', function(event) {
+    //     event.preventDefault();
+
+    //     console.log('aquiiiiiiiiii');
+    //     var variable = 'Edgar';
+    //     //$.post('/viewsend/', {var: variable});
+    //     $.get('/viewsend/', {'var': 'variable'});
+
+    // });
+
+    function postponed(){
+        console.log('aquiiiiiiiiii');
+        var variable = 'Edgar';
+        $.get('/viewsend/', {'id': '{{objs.id}}', 'stage': 1});
+
+        window.location.href = '/ils_admin/staff';
+    }
+
+    function pending(){
+        var variable = 'Edgar';
+        $.get('/viewsend/', {'id': '{{objs.id}}', 'stage': 2});
+
+        window.location.href = '/ils_admin/staff';
+    }
+
+    function send_fut(){
+        document.getElementById("login-form-popup").style.display = "block";
+        console.log('send test')
+    }
+</script>
+
 {% endblock %}

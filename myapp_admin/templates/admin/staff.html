@@ -1,0 +1,315 @@
+{% extends 'layouts/mainadmin.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .block_container{
+        /* background: red; */
+        width: 100%;
+        height: auto;
+        margin: 10px 0px;
+    }
+    
+    .block_barra{
+        width: calc(100% - 20px);
+        height: 50px;
+        background: #464646;
+        margin: 10px auto;
+    }
+    .block_bloker{
+        width: 100%;
+        height: auto;
+        /* background: pink; */
+        display: flex;
+    }
+    .block_one{
+        width: 20%;
+        height: 800px;
+        background: #464646;
+        margin: 0px 10px 0px auto;
+    }
+    .block_two{
+        width: calc(80% - 30px);
+        height: 100%;
+        /* background: green; */
+        margin: 0px auto 0px 0px;
+    }
+    .ayelash{
+        width: 100%;
+        height: 50px;
+        background: #464646;
+        margin: 0px 0px 10px 0px;
+        display: flex;
+        justify-content: space-between;
+        /* font-weight: bold; */
+        text-decoration: none;
+        color: white;
+    }
+    .ayelash:hover{
+        background: #707070;
+    }
+    /* ----------------------------------------------------- */
+    .info1{
+        /* background: red; */
+        display: block;
+        margin: 15px 0px;
+    }
+    .name{
+        /* background:green; */
+        font-size: large;
+        opacity: 80%;
+        margin: 20px 0px 0px 0px;
+        display: block;
+    }
+    .name p{
+        margin: 0px 10px;
+    }
+    .name2{
+        background: rgb(82, 82, 82);
+        display: flex;
+        
+        margin: 10px 0px 0px 0px;
+        padding: 10px;
+    }
+    .name2 .signal{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: auto 0px;
+    }
+    .name2 .eltext{
+        margin: 0px auto 0px 10px;
+        font-weight: bold;
+    }
+    .numb{
+        margin: 0px 10px 0px auto;
+        font-weight: bold;
+    }
+    .red_a{
+        color: red;
+    }
+    .green_a{
+        color: #1be61b;
+    }
+    .red_b{
+        background: red;
+    }
+    .green_b{
+        background: #1be61b;
+    }
+    .label{
+        /* background: pink; */
+        padding: 10px 2px;
+    }
+    .label1{
+        background: rgb(83, 83, 83);
+        margin: 5px 0px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: white;
+        text-decoration: none;
+    }
+    .label1:hover{
+        background: rgb(117, 117, 117);
+    }
+    .filauno{
+        width: 30%;
+        /* background: salmon; */
+        display: flex;
+    }
+    .filados{
+        width: 70%;
+        /* background: red; */
+        display: flex;
+    }
+    .ayelash p{
+        margin: auto 7px;
+    }
+/* ----------------------------- */
+    #login-form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: white;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 3;
+    }
+    .window_title{
+    width: 100%;
+    background: #f34040;
+    padding: 10px 0px;
+    color: white;
+    
+    }
+    .window_title h1{
+        font-size: 25px;
+        margin: 10px;
+    }
+    .window_title button{
+        position: absolute;
+        top: 18px;
+        right: 10px;
+        font-size: larger;
+        font-weight: bold;
+        color: white;
+        background: none;
+        border: none;
+    }
+
+    #login-form-popup input[type="submit"]{
+        background: #f34040;
+        width: 50%;
+        height: 40px;
+        margin: 40px auto;
+        border: none;
+        border-radius: 4px;
+        color: white;
+    }
+    #login-form-popup hr{       
+        width: 90%;
+        border: 2px solid rgb(145, 144, 144);
+        margin: 0px auto;
+    }
+    #mypass{
+    /* background: #acacac; */
+    display: grid;
+    width: 50%;
+    margin: 20px auto 20px auto;
+    color: #464646;
+    }
+    #mypass .credent{
+        margin: 20px 20px 0px 20px;
+        font-size: small;
+        font-weight: bold;
+    }
+    #mypass input[type="text"]{
+        margin: 20px auto 0px auto;
+        font-size: small;
+        padding: 5px;
+        border-radius: 5px;
+        background: #cfcece;
+        border: 1px solid #575757;
+    }
+    #error2{
+        color: red;
+        margin: 0px auto 20px auto;
+        font-size: small;
+        font-weight: normal;
+    }
+    .mypassoptions{
+    /* background: #e79797; */
+    display: grid;
+    width: 50%;
+    margin: 0px auto 40px auto;
+    }
+
+    .mypassoptions a{
+        background: none;
+        border: none;
+        font-size: small;
+        color: #2984fc;
+        
+    }
+    #login-form-popup input[type="submit"]{
+        background: #f34040;
+        width: 50%;
+        height: 40px;
+        margin: 40px auto;
+        border: none;
+        border-radius: 4px;
+        color: white;
+    }
+    #login-form-popup hr{       
+        width: 90%;
+        border: 2px solid rgb(145, 144, 144);
+        margin: 0px auto;
+    }
+
+</style>
+<div class="block_container">
+    <div class="block_barra"></div>
+    <div class="block_bloker">
+        <div class="block_one">
+            <div class="info1">
+                <div class="name"><p>Maria Magdanela - Tesorera</p></div>
+                <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">{{Len_list_data}}</p></div>
+            </div>
+            <div class="label">
+                <a href="{% url 'n_staff' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
+                <a href="{% url 'n_postulated' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt="">Pospuestos</a>
+                <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03.png' %}" alt="">Pendientes</a>
+                <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Enviados</a>
+            </div>
+        </div>
+        <div class="block_two" id="miContenedor">
+            {% block fut %}
+            
+            <h1> {{Len_list_data}} </h1>
+
+            {% if Len_list_data != 0 %}
+
+            <!-- pesttañas -->
+            {% for i in Object %}
+                <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash">
+                    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt=""><p>{{i.order}}</p></div>
+                    <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p></div>
+                </a>
+            {% endfor %}
+            <!-- fin-pestañas -->
+            
+            {% else %}
+
+            <h1>No Hay Datos</h1>
+
+            {% endif %}
+
+            {% endblock %}
+            <div id="login-form-popup">
+                <div class="window_title"><h1>Enviar FUT</h1><button onclick="closeForm()">X</button></div>
+                <form id="F_download" action="{% url 'n_img_dow' %}" method="post">
+                    {% csrf_token %}
+                    <div id="mypass">
+                        <p class="credent">Introdusca aqui el numero de boleta que le proporciono el alumno</p>
+                        <input type="text" name="code" id="">
+                        <p id="error2"></p>
+                    </div>
+                    <hr>
+                    <input type="submit" value="Enviar">
+                    <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#miEnlace").click(function(event) {
+            event.preventDefault(); // Evita que se siga el enlace por defecto
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                url: "{% url 'n_view_fut' %}", // Ruta del archivo que contiene el contenido actualizado
+                method: "GET",
+                success: function(response) {
+                    $("#miContenedor___").html(response); // Actualiza el contenido del div con la respuesta del servidor
+                },
+                error: function() {
+                    alert("Ocurrió un error al cargar el contenido.");
+                }
+            });
+        });
+    });
+
+    function closeForm(){
+        document.getElementById("login-form-popup").style.display = "none";
+    }
+</script>
+{% endblock %}
