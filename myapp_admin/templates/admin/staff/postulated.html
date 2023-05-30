@@ -2,8 +2,6 @@
 {% load static %}
 {% block fut %}
 
-<h1> {{Len_list_data}} </h1>
-
 {% if Len_list_data != 0 %}
 
 <!-- pesttañas -->
@@ -17,7 +15,20 @@
 
 {% else %}
 
-<h1>No Hay Datos</h1>
+
+<style>
+    .empty{
+        /* background: red; */
+        display: block;
+        text-align: center;
+        margin: 200px auto;
+    }
+</style>
+
+<div class="empty">
+    <img src="{% static 'img/empty.png' %}" alt="">
+    <h1>No Hay Datos</h1>
+</div>
 
 {% endif %}
 
