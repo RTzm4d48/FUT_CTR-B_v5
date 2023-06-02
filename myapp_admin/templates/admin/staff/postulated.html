@@ -3,7 +3,16 @@
 {% block fut %}
 
 {% if Len_list_data != 0 %}
-<h1>pospuesto</h1>
+<style>
+    .tittle_{
+        /* background: red; */
+        margin: 0px 0px 10px 0px;
+        padding: 15px 10px;
+        border-bottom: 3px solid rgb(233, 239, 255);
+        opacity: 80%;
+    }
+</style>
+<h1 class="tittle_">pospuesto</h1>
 <!-- pesttañas -->
 {% for i in Object %}
 <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash">
