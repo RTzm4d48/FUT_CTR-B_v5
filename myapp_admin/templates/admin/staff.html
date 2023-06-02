@@ -283,7 +283,7 @@
             {% for i in Object %}
                 <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash">
                     <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt=""><p>{{i.order}}</p></div>
-                    <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p></div>
+                    <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.stage == 1 %} <p style="opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;">/Pospuesto</p> {% elif i.stage == 2 %} <p style="opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;">/Pendiente</p> {% endif %}</div>
                 </a>
             {% endfor %}
             <!-- fin-pestañas -->

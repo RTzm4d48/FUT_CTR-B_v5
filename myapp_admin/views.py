@@ -7,7 +7,7 @@ def ilsadmin(request):
 
 def treasury(request):
     print('jelouda locoooo')
-    objs = fut.objects.exclude(stage__exact=3).values('order', 'reason', 'name', 'dni', 'code')
+    objs = fut.objects.exclude(stage__exact=3).values('order', 'reason', 'name', 'dni', 'code', 'stage')
 
     #names_short = [str(ob['order'])[:6] for ob in objs]
     
@@ -19,6 +19,7 @@ def treasury(request):
         diccionary['reason'] = i['reason'][:40]
         diccionary['name'] = i['name'][:50]
         diccionary['code'] = i['code']
+        diccionary['stage'] = i['stage']
         list_data.append(diccionary)
         
         #reason.append(i['reason'][:40])
