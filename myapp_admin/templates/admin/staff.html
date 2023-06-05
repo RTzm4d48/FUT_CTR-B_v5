@@ -39,6 +39,9 @@
         color: white;
         border-radius: 4px;
     }
+    .ayelash_color{
+        background: #5C5C5C;
+    }
     .ayelash:hover{
         background: #707070;
     }
@@ -122,110 +125,6 @@
         margin: auto 7px;
     }
 /* ----------------------------- */
-    #login-form-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    background-color: white;
-    border: 1px solid rgb(211, 211, 211);
-    border-radius: 2px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    z-index: 3;
-    }
-    .window_title{
-    width: 100%;
-    background: #f34040;
-    padding: 10px 0px;
-    color: white;
-    
-    }
-    .window_title h1{
-        font-size: 25px;
-        margin: 10px;
-    }
-    .window_title button{
-        position: absolute;
-        top: 18px;
-        right: 10px;
-        font-size: larger;
-        font-weight: bold;
-        color: white;
-        background: none;
-        border: none;
-    }
-
-    #login-form-popup input[type="submit"]{
-        background: #f34040;
-        width: 50%;
-        height: 40px;
-        margin: 40px auto;
-        border: none;
-        border-radius: 4px;
-        color: white;
-    }
-    #login-form-popup hr{       
-        width: 90%;
-        border: 2px solid rgb(145, 144, 144);
-        margin: 0px auto;
-    }
-    #mypass{
-    /* background: #acacac; */
-    display: grid;
-    width: 50%;
-    margin: 20px auto 20px auto;
-    color: #464646;
-    }
-    #mypass .credent{
-        margin: 20px 20px 0px 20px;
-        font-size: small;
-        font-weight: bold;
-    }
-    #mypass input[type="text"]{
-        margin: 20px auto 0px auto;
-        font-size: small;
-        padding: 5px;
-        border-radius: 5px;
-        background: #cfcece;
-        border: 1px solid #575757;
-    }
-    #error2{
-        color: red;
-        margin: 0px auto 20px auto;
-        font-size: small;
-        font-weight: normal;
-    }
-    .mypassoptions{
-    /* background: #e79797; */
-    display: grid;
-    width: 50%;
-    margin: 0px auto 40px auto;
-    }
-
-    .mypassoptions a{
-        background: none;
-        border: none;
-        font-size: small;
-        color: #2984fc;
-        
-    }
-    #login-form-popup input[type="submit"]{
-        background: #f34040;
-        width: 50%;
-        height: 40px;
-        margin: 40px auto;
-        border: none;
-        border-radius: 4px;
-        color: white;
-    }
-    #login-form-popup hr{       
-        width: 90%;
-        border: 2px solid rgb(145, 144, 144);
-        margin: 0px auto;
-    }
     .prncipalcoso{
         /* background: green; */
         height: 60px;
@@ -276,12 +175,13 @@
                 <div class="label_principal"><p>Principal</p></div>
                 <div class="label_principal">
                     <p>No Leidos</p>
-                    <p class="paa">5 Nuevos</p>
+                    <p class="paa">{{views}} Nuevos</p>
                 </div>
             </div>
             <!-- pesttañas -->
             {% for i in Object %}
-                <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash">
+                
+                <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash {% if i.view == 0 %}ayelash_color{% endif %}">
                     <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt=""><p>{{i.order}}</p></div>
                     <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.stage == 1 %} <p style="opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;">/Pospuesto</p> {% elif i.stage == 2 %} <p style="opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;">/Pendiente</p> {% endif %}</div>
                 </a>
@@ -308,20 +208,7 @@
             {% endif %}
 
             {% endblock %}
-            <div id="login-form-popup">
-                <div class="window_title"><h1>Enviar FUT</h1><button onclick="closeForm()">X</button></div>
-                <form id="F_download" action="{% url 'n_img_dow' %}" method="post">
-                    {% csrf_token %}
-                    <div id="mypass">
-                        <p class="credent">Introdusca aqui el numero de boleta que le proporciono el alumno</p>
-                        <input type="text" name="code" id="">
-                        <p id="error2"></p>
-                    </div>
-                    <hr>
-                    <input type="submit" value="Enviar">
-                    <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
-                </form>
-            </div>
+            
         </div>
     </div>
 </div>
