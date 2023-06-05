@@ -140,10 +140,17 @@ def send_01_treasurer(request):
     print(ticket)
     print(id)
 
-    #actualizamos el campo stage del modelo fut
+    #actualizamos los datos de 'FUT'
     up_register = fut.objects.get(id=id)
     up_register.n_ticket = ticket
+    up_register.route = 'secretary'
+    up_register.stage = 0
+    up_register.view = 0
     up_register.save()
+
+    #agregamos datos a 'admn_process'
+    
+
 
     message = 'successful'
     return JsonResponse({'message': message})

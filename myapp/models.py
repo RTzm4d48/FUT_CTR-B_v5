@@ -22,9 +22,12 @@ class fut(models.Model):
     qrimg_binary = models.BinaryField(default=b'')
     code = models.TextField(default='00000000000')
     stage = models.IntegerField(default=0)
-
+    #view es pa que en la interfas figure si el registro fue abrierto o no
     view = models.BooleanField(default=False)
     n_ticket = models.CharField(max_length=30, default='0000000000')
 
+    #la ruta en la que se encuentra(tersoreria, secretaria...)
+    route = models.CharField(max_length=50, default='treasurer')
+
     def __str__(self):
-        return self.name+" - "+self.order
+        return self.name+" - "+self.order+" - "+self.email
