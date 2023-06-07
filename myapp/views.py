@@ -4,7 +4,7 @@ import base64
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse # agregamos el HttpResponse
 from .models import fut
-from myapp_admin.models import process
+from myapp_admin.models import process, Admins
 from datetime import date
 from django.http import HttpResponseRedirect
 
@@ -160,9 +160,7 @@ async def generate_qrcode(code_):
 
     return img_base64
 
-async def generate_email(email, name, exp_, pas_):
-    print('LOCURAAAAAA')
-    
+async def generate_email(email, name, exp_, pas_): 
     email = 'whiteman.play69@gmail.com'
     contraseña = 'hkekvgngsirgtjym'
 
@@ -210,7 +208,6 @@ async def generate_email(email, name, exp_, pas_):
 def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
     my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
     my_objet.save()
-    new_id = my_objet.id
 
     date_ = datetime.now() 
     date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
@@ -218,7 +215,11 @@ def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
     up_process = process.objects.get(stage=0, fut_id_id=fut_id)
     up_process.exit = date_format
     
-    return new_id
+@sync_to_async
+def name_admin(position):
+    objs = Admins.objects.filter(position=position).values('name', 'fullname').first()
+    name = objs['name']+' '+objs['fullname']
+    return name
 
 
 async def finisher(request):
@@ -252,8 +253,10 @@ async def finisher(request):
         date_ = datetime.now() 
         date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
 
-        l1 = await save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, False, 20, new_id, 0)
-        l2 = await save_process('TESORERIA', 'Laura Faviola Mamani Quispe', date_format, None, False, 40, new_id, 1)
+        await save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, False, 20, new_id, 0)
+        # obtenemos el nombrede la tesoreria para introducirlo en el modelo process
+        admin_name = await name_admin('treasury')
+        await save_process('TESORERIA', admin_name, date_format, None, False, 40, new_id, 1)
 
         response = redirect('n_successful')
         response.set_cookie('New_id', new_id)
@@ -277,7 +280,7 @@ def successful(request):
 
 def proceedings(request):
     code_ = request.GET.get('code')
-    object = fut.objects.filter(code=code_).values('name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email').first()
+    object = fut.objects.filter(code=code_).values('id', 'name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email').first()
     dni = str(object['dni'][:3])
     #Email process
     email = str(object['email'])
@@ -306,30 +309,13 @@ def proceedings(request):
     my_id = 1
     loco = []
     
-    num_registros = process.objects.filter(fut_id_id=3).count()
+    num_registros = process.objects.filter(fut_id_id=object['id']).count()
     print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
 
     for i in range(num_registros):
         data = process.objects.filter(stage=i).values('tittle', 'name', 'reception', 'exit', 'num').first()
         loco.append(data)
     
-    data1 = {'tittle': 'TRAMITE EN CURSO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 27/04/2023 08:31:59 a.m.', 'exit':'Salida: 27/04/2023 09:31:59 a.m.', 'num': 20}
-    data2 = {'tittle': 'TRAMITE EN CURSO', 'name': 'INSTITUTO LATINOAMERICANO SIGLO XXI', 'reception': 'Recepción: 27/04/2023 08:31:59 a.m.', 'exit':'Salida: 27/04/2023 09:31:59 a.m.', 'num': 20}
-
-    #Insert in the DB
-    date = datetime.now() 
-    date_format = date.strftime("%Y-%m-%d %H:%M:%S")
-
-    #new_id = save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, None, False, 20, 3, 0)
-    #new_id = save_process('TESORERIA', 'Laura Faviola Mamani Quispe', date_format, None, False, 40, 3, 1)
-    #new_id = save_process('SECRETARIA', 'Jessica Rodríguez Sanchez', date_format, None, False, 60, 3, 2)
-    #new_id = save_process('DIRECCIÓN', 'Roman Alvarez Martínez', date_format, None, False, 80, 3, 3)
-    #new_id = save_process('TRAMITE REALIZADO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, None, False, 100, 3, 4)
-
-
-    
-    
-    print(loco)
 
     left = 20 # css left details picture
     return render(request, 'view_fut/proceedings.html', {

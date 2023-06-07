@@ -396,7 +396,11 @@
                                 <p>{{i.reception}}</p>
                                 <p>{{i.exit}}</p>
                             </div>
+                            {% if i.exit == none %}
+                            <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #464646;opacity: 60%;"><h6>PENDIENTE</h6><img width="30px" src="{% static 'img/pending.png' %}" alt=""></div>
+                            {% else %}
                             <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #42AF15;"><h6>PROCESADO</h6><img width="30px" src="{% static 'img/check.png' %}" alt=""></div>
+                            {% endif %}
                         </div>
                         {% if i.num <= 80 %}
                             <div class="arrow" style="left: {{i.num|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
