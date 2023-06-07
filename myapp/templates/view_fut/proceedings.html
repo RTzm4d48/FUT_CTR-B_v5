@@ -18,15 +18,17 @@
 }
 .apart_R{
     width: 25%;
-    background: rgb(194, 188, 188);
+    background: rgba(138, 135, 135, 0.446);
     height: 800px;
     display: flex;
     position: fixed;
+    align-items: center;
     right: 0px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    margin: 50px auto;
 }
 .infocontect{
     /* background: pink; */
@@ -37,13 +39,13 @@
     border-radius: 10px;
 }
 .doccontent{
-    /* position: absolute; */
+    position: absolute;
     width: 400px;
     height: 600px;
     background: skyblue;
     /* position:absolute; z-index:1; */
     position:relative; z-index:1;
-    left:-200px; top:50px; opacity:1;
+    left:-200px; top:0px; opacity:1;
     border-radius: 10px;
 }
 .text_doc{
@@ -51,10 +53,11 @@
     position:absolute; z-index:1;
     left:0px; top:45%; opacity:1;
     width: 100%;
-    padding: auto;
+    padding: 10px 1px;
     text-align: center;
 }
 .text_doc button{
+    /* display: none; */
     background: red;
     border: none;
     color: white;
@@ -358,30 +361,63 @@
                     <div class="circle on">
                         <img width="100%" src="{% static 'img/process/P_02-on.png' %}" alt="">
                     </div>
-                    <div class="ProgressBar">
-                        {% for i in Progressbar %}
-                        <div class="progre on"></div>
-                        {% endfor %}
-                    </div>
-                    <div class="circle off">
-                        <img width="100%" src="{% static 'img/process/P_03-on.png' %}" alt="">
-                    </div>
-                    <div class="ProgressBar">
-                        {% for i in Progressbar %}
-                        <div class="progre on"></div>
-                        {% endfor %}
-                    </div>
-                    <div class="circle off">
-                        <img width="100%" src="{% static 'img/process/P_04-on.png' %}" alt="">
-                    </div>
-                    <div class="ProgressBar">
-                        {% for i in Progressbar %}
-                        <div class="progre on"></div>
-                        {% endfor %}
-                    </div>
-                    <div class="circle off">
-                        <img width="100%" src="{% static 'img/process/P_05-on.png' %}" alt="">
-                    </div>
+                    {% if Num_process >= 3 %}
+                        <div class="ProgressBar">
+                            {% for i in Progressbar %}
+                            <div class="progre on"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="circle off">
+                            <img width="100%" src="{% static 'img/process/P_03-on.png' %}" alt="">
+                        </div>
+                    {% else %}
+                        <div class="ProgressBar">
+                            {% for i in Progressbar %}
+                            <div class="progre off"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="circle off">
+                            <img width="100%" src="{% static 'img/process/P_03-off.png' %}" alt="">
+                        </div>
+                    {% endif %}
+                    {% if Num_process >= 4 %}
+                        <div class="ProgressBar">
+                            {% for i in Progressbar %}
+                            <div class="progre on"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="circle off">
+                            <img width="100%" src="{% static 'img/process/P_04-on.png' %}" alt="">
+                        </div>
+                    {% else %}
+                        <div class="ProgressBar">
+                            {% for i in Progressbar %}
+                            <div class="progre off"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="circle off">
+                            <img width="100%" src="{% static 'img/process/P_04-off.png' %}" alt="">
+                        </div>
+                    {% endif %}
+                    {% if Num_process >= 5 %}
+                        <div class="ProgressBar">
+                            {% for i in Progressbar %}
+                            <div class="progre on"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="circle off">
+                            <img width="100%" src="{% static 'img/process/P_05-on.png' %}" alt="">
+                        </div>
+                    {% else %}
+                        <div class="ProgressBar">
+                            {% for i in Progressbar %}
+                            <div class="progre off"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="circle off">
+                            <img width="100%" src="{% static 'img/process/P_05-off.png' %}" alt="">
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="tracking_content">
@@ -417,8 +453,10 @@
         <div class="doccontent">
             <img class="img_cocument" src="{% static '/img/document.jpg' %}" alt="">
             <div class="text_doc">
-                <h1>Documento</h1>
+                <h1 style="font-weight: bold; opacity: 60%;">Documento</h1>
+                {% if Num_process >= 5 %}
                 <button onclick="openLoginForm()">Descagar</button>
+                {% endif %}
             </div>
         </div>
     </div>

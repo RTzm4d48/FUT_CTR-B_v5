@@ -313,7 +313,7 @@ def proceedings(request):
     print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
 
     for i in range(num_registros):
-        data = process.objects.filter(stage=i).values('tittle', 'name', 'reception', 'exit', 'num').first()
+        data = process.objects.filter(stage=i, fut_id_id=object['id']).values('tittle', 'name', 'reception', 'exit', 'num').first()
         loco.append(data)
     
 
@@ -330,7 +330,8 @@ def proceedings(request):
         'Email_code': email_code,
         'Email': email,
         'Password': object['password'],
-        'Data': loco
+        'Data': loco,
+        'Num_process': num_registros
     })
 
 
