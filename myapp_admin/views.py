@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from myapp.models import fut
+from myapp_admin.models import process
+
+#para saber el dia y la hora actual
+from datetime import datetime
+from datetime import date
+
 # Create your views here.
 def ilsadmin(request):
     return render(request, 'ils_admin.html')
@@ -133,6 +139,12 @@ def send(request):
         'Len_list_data': len_list_data
     })
 
+def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
+    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
+    my_objet.save()
+    new_id = my_objet.id
+    return new_id
+
 def send_01_treasurer(request):
     ticket = request.GET.get('ticket')
     id = request.GET.get('id')
@@ -148,9 +160,16 @@ def send_01_treasurer(request):
     up_register.view = 0
     up_register.save()
 
-    #agregamos datos a 'admn_process'
-    
+    #obtener the date
+    date = datetime.now() 
+    date_format = date.strftime("%Y-%m-%d %H:%M:%S")
 
+    #Actualizamos los datos de 'admin_process'
+    up_process_2 = process.objects.get(stage=1)
+    up_process_2.exit = date_format
+
+    #Insert in the BD
+    new_id = save_process('SECRETARIA', 'Jessica Rodríguez Sanchez', date_format, None, False, 60, id, 2)
 
     message = 'successful'
     return JsonResponse({'message': message})

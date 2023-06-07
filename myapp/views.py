@@ -206,6 +206,21 @@ async def generate_email(email, name, exp_, pas_):
     yag.send(destinatarios, asunto, html)
     return name
 
+@sync_to_async
+def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
+    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
+    my_objet.save()
+    new_id = my_objet.id
+
+    date_ = datetime.now() 
+    date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
+
+    up_process = process.objects.get(stage=0, fut_id_id=fut_id)
+    up_process.exit = date_format
+    
+    return new_id
+
+
 async def finisher(request):
     if request.method == 'POST':
          # identification
@@ -232,6 +247,14 @@ async def finisher(request):
 
         new_id = await save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, pdf_bytes, exp_, pas_, code_, qrimg_bytes)
 
+        # CRUD en el modelo 'Process'
+        #obtener the date
+        date_ = datetime.now() 
+        date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
+
+        l1 = await save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, False, 20, new_id, 0)
+        l2 = await save_process('TESORERIA', 'Laura Faviola Mamani Quispe', date_format, None, False, 40, new_id, 1)
+
         response = redirect('n_successful')
         response.set_cookie('New_id', new_id)
         return response
@@ -251,12 +274,6 @@ def successful(request):
         'Proceeding': objetos['proceeding'],
         'Password': objetos['password']
     })
-
-def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
-    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
-    my_objet.save()
-    new_id = my_objet.id
-    return new_id
 
 def proceedings(request):
     code_ = request.GET.get('code')
@@ -293,7 +310,6 @@ def proceedings(request):
     print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
 
     for i in range(num_registros):
-        print('----------------',i,'------------------')
         data = process.objects.filter(stage=i).values('tittle', 'name', 'reception', 'exit', 'num').first()
         loco.append(data)
     

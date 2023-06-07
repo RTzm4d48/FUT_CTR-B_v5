@@ -4,15 +4,20 @@ from myapp.models import fut
 # Create your models here.
 
 class Admins(models.Model):
+    AREA_OPTIONS = [
+        ('treasury', 'Tesoreria'),
+        ('secretary', 'Secretaria'),
+        ('direction', 'Direccion'),
+    ]
     name = models.CharField(max_length=25)
     fullname = models.CharField(max_length=25)
     email = models.CharField(max_length=35)
-    position = models.CharField(max_length=25)
+    position = models.CharField(max_length=25, choices=AREA_OPTIONS)
     phone = models.CharField(max_length=12)
     dni = models.CharField(max_length=10)
     password = models.CharField(max_length=30)
     def __str__(self):
-        return self.name+" "+self.fullname+" - "+self.position
+        return self.name+" "+self.fullname+" - "+self.position+" - "+self.email+" - "+self.phone+" - "+self.dni+" - "+self.password
 
 class process(models.Model):
     tittle = models.CharField(max_length=40)
