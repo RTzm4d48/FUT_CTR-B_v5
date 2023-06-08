@@ -125,10 +125,15 @@
         margin: auto 7px;
     }
 /* ----------------------------- */
+    .navbar_extra{
+        display: flex;
+        justify-content: space-between;
+        /* background: red; */
+    }
     .prncipalcoso{
         /* background: green; */
         height: 60px;
-        margin: 0px auto 10px auto;
+        margin: 0px auto 10px 0px;
         display: flex;
     }
     .label_principal{
@@ -152,6 +157,25 @@
         border-radius: 20px;
         font-size: smaller;
     }
+    .chanels{
+        /* background: #1be61b; */
+        width: 25px;
+        height: 25px;
+        align-items: center;
+        text-align: center;
+        margin: auto 10px;
+        opacity: 90%;
+        cursor: pointer;
+    }
+    .chanels p{
+        margin: 0px;
+        padding: 0px;
+        font-weight: bold;
+        font-size: 20px
+    }
+    .chanels:hover{
+        opacity: 50%;
+    }
 </style>
 <div class="block_container">
     <div class="block_bloker">
@@ -171,11 +195,24 @@
             {% block fut %}
 
             {% if Len_list_data != 0 %}
-            <div class="prncipalcoso">
-                <div class="label_principal"><p>Principal</p></div>
-                <div class="label_principal">
-                    <p>No Leidos</p>
-                    <p class="paa">{{views}} Nuevos</p>
+            <div class="navbar_extra">
+                <div class="prncipalcoso">
+                    <div class="label_principal"><p>Principal</p></div>
+                    <div class="label_principal">
+                        <p>No Leidos</p>
+                        <p class="paa">{{views}} Nuevos</p>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="chanels">
+                        <p><</p>
+                    </div>
+                    
+                        <p style="margin: auto 1px;padding: 1px;font-size: 15px;">1 - 1</p>
+                    
+                    <div class="chanels">
+                        <p>></p>
+                    </div>
                 </div>
             </div>
             <!-- pesttañas -->

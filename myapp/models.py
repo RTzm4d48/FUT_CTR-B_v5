@@ -27,7 +27,7 @@ class fut(models.Model):
     n_ticket = models.CharField(max_length=30, default='0000000000')
 
     #la ruta en la que se encuentra(tersoreria, secretaria...)
-    route = models.CharField(max_length=50, default='treasurer')
+    route = models.CharField(max_length=50, default='treasury')
 
     def __str__(self):
         return self.name+" - "+self.order+" - "+self.email

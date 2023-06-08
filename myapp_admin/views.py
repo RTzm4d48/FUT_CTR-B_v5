@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from myapp.models import fut
-from myapp_admin.models import process
+from myapp_admin.models import process, Admins
 
 #para saber el dia y la hora actual
 from datetime import datetime
@@ -12,12 +12,12 @@ def ilsadmin(request):
     return render(request, 'ils_admin.html')
 
 def staff(request):
-    objs = fut.objects.exclude(stage__exact=3).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
+    objs = fut.objects.exclude(stage__exact=3).filter(route='treasury').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
 
     #names_short = [str(ob['order'])[:6] for ob in objs]
     
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
-
+    print('ME VOY')
     # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
     num_no_view = 0
     total_futs = 0
@@ -118,7 +118,7 @@ def pending(request):
     })
 
 def send(request):
-    objs = fut.objects.filter(stage=3).values('order', 'reason', 'name', 'dni', 'code')
+    objs = fut.objects.filter(route='secretary').values('order', 'reason', 'name', 'dni', 'code')
 
     #names_short = [str(ob['order'])[:6] for ob in objs]
     
@@ -131,13 +131,18 @@ def send(request):
         diccionary['name'] = i['name'][:50]
         diccionary['code'] = i['code']
         list_data.append(diccionary)
-        
         #reason.append(i['reason'][:40])
     len_list_data = len(list_data)
+    print('ESTAMOS EN SEND')
     return render(request, 'admin/staff/send.html', {
         'Object': list_data,
         'Len_list_data': len_list_data
     })
+
+def name_admin(position):
+    objs = Admins.objects.filter(position=position).values('name', 'fullname').first()
+    name = objs['name']+' '+objs['fullname']
+    return name
 
 def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
     my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
@@ -148,9 +153,6 @@ def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
 def send_01_treasurer(request):
     ticket = request.GET.get('ticket')
     id = request.GET.get('id')
-
-    print(ticket)
-    print(id)
 
     #actualizamos los datos de 'FUT'
     up_register = fut.objects.get(id=id)
@@ -165,11 +167,13 @@ def send_01_treasurer(request):
     date_format = date.strftime("%Y-%m-%d %H:%M:%S")
 
     #Actualizamos los datos de 'admin_process'
-    up_process_2 = process.objects.get(stage=1)
+    up_process_2 = process.objects.get(stage=1, fut_id_id=id)
     up_process_2.exit = date_format
+    up_process_2.save()
 
     #Insert in the BD
-    new_id = save_process('SECRETARIA', 'Jessica Rodríguez Sanchez', date_format, None, False, 60, id, 2)
+    admin_name = name_admin('secretary')
+    new_id = save_process('SECRETARIA', admin_name, date_format, None, False, 60, id, 2)
 
     message = 'successful'
     return JsonResponse({'message': message})

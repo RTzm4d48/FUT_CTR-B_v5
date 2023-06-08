@@ -65,12 +65,24 @@
             border-radius: 5px;
             border: none;
         }
+        .select_position select{
+            width: 100%;
+            padding: 5px;
+        }
     </style>
     
     <div class="container_log">
         <form action="{% url 'n_staff' %}" action="">
             <div class="tittle"><p>ILS ADMINISTRACIÓN</p></div>
             <div class="text">
+                <div class="select_position">
+                    <select id="lang" name="order">
+                        <option selected disabled>Posición:</option>
+                        <option value="treasury">Tesoreria</option>
+                        <option value="secretary">Secretaria</option>
+                        <option value="direction">Dirección</option>
+                    </select>
+                </div>
                 <div class="data">
                     <label for="">Email</label>
                     <input class="area" type="text" name="" id="">
