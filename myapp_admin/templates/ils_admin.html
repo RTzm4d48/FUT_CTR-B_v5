@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
+    {% load static %}
     <style>
         body{
             background: #212121;
@@ -37,7 +39,6 @@
         }
         .text{
             width: 80%;
-            height: 100px;
             /* background: darkblue; */
             margin: 30px auto;
             display: block;
@@ -58,26 +59,36 @@
         }
         button{
             background: #2B4E5F;
-            margin: 60px auto 20px auto;
+            margin: 0px auto 30px auto;
             display: block;
             padding: 8px 20px;
             color: white;
             border-radius: 5px;
             border: none;
+            cursor: pointer;
+        }
+        button:hover{
+            opacity: 70%;
         }
         .select_position select{
             width: 100%;
             padding: 5px;
         }
+        #error{
+            color: red;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: smaller;
+        }
     </style>
     
     <div class="container_log">
-        <form action="{% url 'n_staff' %}" action="">
+        <form action="{% url 'n_staff' %}" action="" id="myForm">
             <div class="tittle"><p>ILS ADMINISTRACIÓN</p></div>
             <div class="text">
                 <div class="select_position">
-                    <select id="lang" name="order">
-                        <option selected disabled>Posición:</option>
+                    <select id="theposition" name="order">
+                        <option selected disabled>Position:</option>
                         <option value="treasury">Tesoreria</option>
                         <option value="secretary">Secretaria</option>
                         <option value="direction">Dirección</option>
@@ -85,17 +96,45 @@
                 </div>
                 <div class="data">
                     <label for="">Email</label>
-                    <input class="area" type="text" name="" id="">
+                    <input class="area" type="text" name="" id="email">
                 </div>
 
                 <div class="data">
                     <label for="">Password</label>
-                    <input class="area" type="password" name="" id="">
+                    <input class="area" type="password" name="" id="pass">
                 </div>
 
             </div>
+            <p id="error"></p>
             <button>Log in</button>
         </form>
     </div>
+
+    <script>
+        const form = document.getElementById('myForm');
+        const email = document.getElementById('email');
+        const thepass = document.getElementById('pass');
+        const errorPara = document.getElementById('error');
+        const position = document.getElementById('theposition')
+
+        //validar usuario
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if(position.value.trim() === 'Position:') {
+                errorPara.textContent = 'Seleccione la posición del personal';
+            }else{
+                // enviamos el formulario y recibimos respuesta para el loguin
+                $.get('/admin_login/', {'position': position.value.trim(), 'email': email.value.trim(), 'thepass': thepass.value.trim()}, function(answer) {
+                    //validamos el acceso
+                    if(answer.status == 'success'){
+                        form.submit();
+                    }else{
+                        errorPara.textContent = answer.status;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

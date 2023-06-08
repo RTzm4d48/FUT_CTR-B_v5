@@ -9,5 +9,6 @@ urlpatterns = [
     path('ils_admin/staff/fut_postulated', views.postulated, name="n_postulated"),
     path('ils_admin/staff/fut_pending', views.pending, name="n_pending"),
     path('ils_admin/staff/fut_send', views.send, name="n_send"),
-    path('send_01/', views.send_01_treasurer, name="n_send_01")
+    path('send_01/', views.send_01_treasurer, name="n_send_01"),
+    path('admin_login/', views.admin_login, name="n_admin_login")
 ]

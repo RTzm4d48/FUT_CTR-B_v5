@@ -14,10 +14,13 @@ def ilsadmin(request):
 def staff(request):
     objs = fut.objects.exclude(stage__exact=3).filter(route='treasury').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
 
-    #names_short = [str(ob['order'])[:6] for ob in objs]
+    #comprueb si la sesión esta iniciada
+    valor_cookie = request.COOKIES.get('log_admin')
+    if valor_cookie == None:
+        return render(request, 'ils_admin.html')
     
+    #names_short = [str(ob['order'])[:6] for ob in objs]
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
-    print('ME VOY')
     # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
     num_no_view = 0
     total_futs = 0
@@ -177,3 +180,28 @@ def send_01_treasurer(request):
 
     message = 'successful'
     return JsonResponse({'message': message})
+
+def admin_login(request):
+    theposition = request.GET.get('position')
+    theemail = request.GET.get('email')
+    thepass = request.GET.get('thepass')
+
+    #Consultamos el modelo de 'admins'
+    objs_email = Admins.objects.filter(position=theposition, email=theemail).values('id').first()
+    objs_pass = Admins.objects.filter(position=theposition, email=theemail, password=thepass).values('id').first()
+
+    #validamos el login
+    answer = {}
+    if objs_email == None:
+        answer = {'status': 'Email incorrecto'}
+    else:
+        if objs_pass == None:
+            answer = {'status': 'Contraseña incorrecta'}
+        else:
+            answer = {'status': 'success'}
+            # Creamos la cookie
+            response = JsonResponse(answer)
+            response.set_cookie('log_admin', 'true')
+            return response
+    
+    return JsonResponse(answer)

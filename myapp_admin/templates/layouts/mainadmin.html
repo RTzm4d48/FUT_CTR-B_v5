@@ -65,12 +65,19 @@
 
     </style>
     <div class="navbar">
-        <div class="content1"><h1>ILS - ADMIN</h1><h2 class="position">/TESORERIA</h2></div>
-        <div class="logout"><img src="{% static 'img/longout.png' %}" width="30px" alt=""></div>
+        <div class="content1" ><h1>ILS - ADMIN</h1><h2 class="position">/TESORERIA</h2></div>
+        <div onclick="longout()" class="logout"><img src="{% static 'img/longout.png' %}" width="30px" alt=""></div>
     </div>
     <div class="contend">
         {% block content %}
         {% endblock %}
     </div>
+    <script>
+        function longout(){
+            //elimino las cookies del inicio de sesion y recargo la pagina
+            document.cookie = "log_admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            location.reload();
+        }
+    </script>
 </body>
 </html>
