@@ -11,7 +11,50 @@ from datetime import date
 def ilsadmin(request):
     return render(request, 'ils_admin.html')
 
-def staff(request):
+def staff_treasury(request):
+    objs = fut.objects.exclude(stage__exact=3).filter(route='treasury').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
+
+    #comprueb si la sesión esta iniciada
+    valor_cookie = request.COOKIES.get('log_admin')
+    if valor_cookie == None:
+        return render(request, 'ils_admin.html')
+    
+    #names_short = [str(ob['order'])[:6] for ob in objs]
+    #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
+    # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
+    num_no_view = 0
+    total_futs = 0
+    for i in objs:
+        total_futs = total_futs + 1
+        if i['view'] == 0:
+            num_no_view = num_no_view + 1
+    
+    list_data = []
+    num=1
+    for i in objs:
+
+        diccionary={}
+        diccionary['id'] = i['id']
+        diccionary['order'] = i['order'][:30]
+        diccionary['reason'] = i['reason'][:40]
+        diccionary['name'] = i['name'][:50]
+        diccionary['code'] = i['code']
+        diccionary['stage'] = i['stage']
+        diccionary['view'] = i['view']
+        diccionary['num'] = num
+        num = num + 1
+        list_data.append(diccionary)
+        
+        #reason.append(i['reason'][:40])
+    len_list_data = len(list_data)
+    return render(request, 'admin/staff_treasury.html', {
+        'Object': list_data,
+        'Len_list_data': len_list_data,
+        'views': num_no_view,
+        'total_futs': total_futs
+    })
+
+def staff_secretary(request):
     objs = fut.objects.exclude(stage__exact=3).filter(route='treasury').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
 
     #comprueb si la sesión esta iniciada

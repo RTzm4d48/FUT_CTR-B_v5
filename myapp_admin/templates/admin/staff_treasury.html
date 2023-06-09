@@ -116,6 +116,17 @@
         /* background: salmon; */
         display: flex;
     }
+    .filauno h2{
+        background: #707070;
+        padding: 1px 20px;
+        margin: 10px 1px;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        border-radius: 5px;
+        font-size: smaller;
+        opacity: 70%;
+    }
     .filados{
         width: 70%;
         /* background: red; */
@@ -185,7 +196,7 @@
                 <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">{{Len_list_data}}</p></div>
             </div>
             <div class="label">
-                <a href="{% url 'n_staff' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
+                <a href="{% url 'n_staff_treasury' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
                 <a href="{% url 'n_postulated' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt="">Pospuestos</a>
                 <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03.png' %}" alt="">Pendientes</a>
                 <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/send.png' %}" alt="">Enviados</a>
@@ -219,7 +230,10 @@
             {% for i in Object %}
                 
                 <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash {% if i.view == 0 %}ayelash_color{% endif %}">
-                    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt=""><p>{{i.order}}</p></div>
+                    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">
+                        <h2> {{i.num}} </h2>
+                        <p>{{i.order}}</p>
+                    </div>
                     <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.stage == 1 %} <p style="opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;">/Pospuesto</p> {% elif i.stage == 2 %} <p style="opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;">/Pendiente</p> {% endif %}</div>
                 </a>
             {% endfor %}

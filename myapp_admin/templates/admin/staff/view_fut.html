@@ -1,4 +1,4 @@
-{% extends 'admin/staff.html' %}
+{% extends 'admin/staff_treasury.html' %}
 {% load static %}
 {% block fut %}
 <style>
@@ -258,7 +258,7 @@
 
 <div class="ayelash2">
     <div class="bastools">
-        <a href="{% url 'n_staff' %}" style="display: flex;"><img width="25px" class="baricon" height="25px" src="{% static 'img/icon01.png' %}" alt=""></a>
+        <a href="{% url 'n_staff_treasury' %}" style="display: flex;"><img width="25px" class="baricon" height="25px" src="{% static 'img/icon01.png' %}" alt=""></a>
        
         <img onclick="postponed()" width="25px" class="baricon" height="25px" src="{% static 'img/icon02.png' %}" alt="">
         <img onclick="pending()" width="25px" class="baricon" height="25px" src="{% static 'img/icon03.png' %}" alt="">
@@ -358,32 +358,26 @@
 </div>
 
 <script>
-    //const form = document.getElementById('myForm2');
-    
-
-    // form.addEventListener('submit', function(event) {
-    //     event.preventDefault();
-
-    //     console.log('aquiiiiiiiiii');
-    //     var variable = 'Edgar';
-    //     //$.post('/viewsend/', {var: variable});
-    //     $.get('/viewsend/', {'var': 'variable'});
-
-    // });
-
     function postponed(){
         console.log('aquiiiiiiiiii');
         var variable = 'Edgar';
         $.get('/viewsend/', {'id': '{{objs.id}}', 'stage': 1});
 
-        window.location.href = '/ils_admin/staff';
+        //redireccionamos a la pagina anterior
+        setTimeout(function() {
+            location.replace("/ils_admin/staff_treasury");
+            //location.reload(true);
+        }, 100);
     }
 
     function pending(){
         var variable = 'Edgar';
         $.get('/viewsend/', {'id': '{{objs.id}}', 'stage': 2});
 
-        window.location.href = '/ils_admin/staff';
+        //window.location.href = '/ils_admin/staff_treasury';
+        setTimeout(function() {
+            location.replace("/ils_admin/staff_treasury");
+        }, 100);
     }
 
     function send_fut(){
