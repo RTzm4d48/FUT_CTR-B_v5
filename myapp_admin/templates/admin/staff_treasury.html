@@ -228,8 +228,7 @@
             </div>
             <!-- pesttañas -->
             {% for i in Object %}
-                
-                <a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash {% if i.view == 0 %}ayelash_color{% endif %}">
+                <a href="{% url 'n_view_fut' %}?code={{i.code}}&mode=1" class="ayelash {% if i.view == 0 %}ayelash_color{% endif %}">
                     <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">
                         <h2> {{i.num}} </h2>
                         <p>{{i.order}}</p>

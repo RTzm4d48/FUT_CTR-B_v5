@@ -15,7 +15,7 @@
 <h1 class="tittle_">pospuesto</h1>
 <!-- pesttañas -->
 {% for i in Object %}
-<a href="{% url 'n_view_fut' %}?code={{i.code}}" class="ayelash">
+<a href="{% url 'n_view_fut' %}?code={{i.code}}&mode=2" class="ayelash">
     <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt=""><p>{{i.order}}</p></div>
     <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p></div>
 </a>

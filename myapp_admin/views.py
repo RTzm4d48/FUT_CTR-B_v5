@@ -7,16 +7,31 @@ from myapp_admin.models import process, Admins
 from datetime import datetime
 from datetime import date
 
+
 # Create your views here.
 def ilsadmin(request):
     return render(request, 'ils_admin.html')
 
 def staff_treasury(request):
-    objs = fut.objects.exclude(stage__exact=3).filter(route='treasury').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
-
+    # VARIABLES GENERALES
     #comprueb si la sesión esta iniciada
-    valor_cookie = request.COOKIES.get('log_admin')
-    if valor_cookie == None:
+    login = request.COOKIES.get('log_admin')
+    Position = request.COOKIES.get('log_position')
+
+    if Position == 'treasury' or Position == 'secretaty' or Position == 'direction':
+        #Nada, aqui todo correcto
+        print("---------Nada, aqui todo correcto---------")
+    else:
+        #Mostramos la pagina de login
+        #No borraremos la cookie por que no pude hacerlo :3
+        return render(request, 'ils_admin.html')
+
+        
+
+
+    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
+
+    if login == None:
         return render(request, 'ils_admin.html')
     
     #names_short = [str(ob['order'])[:6] for ob in objs]
@@ -95,6 +110,8 @@ def staff_secretary(request):
 
 def view_fut(request):
     code_ = request.GET.get('code')
+    # el 'mode' es para determinar que botones mostrar
+    mode = request.GET.get('mode')
     objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date').first()
 
     # actualizamos el campo view
@@ -102,9 +119,12 @@ def view_fut(request):
     up_register.view = 1
     up_register.save()
 
+    print("ENTRAMOS A VIEW FUT")
+
     return render(request, 'admin/staff/view_fut.html', {
         'code': code_,
-        'objs': objs
+        'objs': objs,
+        'mode': mode
     })
 
 def view_send(request):
@@ -245,6 +265,7 @@ def admin_login(request):
             # Creamos la cookie
             response = JsonResponse(answer)
             response.set_cookie('log_admin', 'true')
+            response.set_cookie('log_position', theposition)
             return response
     
     return JsonResponse(answer)
