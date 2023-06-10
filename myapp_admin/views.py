@@ -17,10 +17,23 @@ def staff_treasury(request):
     #comprueb si la sesión esta iniciada
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    Name_admin = 'none'
+    Position_admin1 = 'none'
+    Position_admin2 = 'none'
+    if Position == 'treasury' or Position == 'secretary' or Position == 'direction':
 
-    if Position == 'treasury' or Position == 'secretaty' or Position == 'direction':
-        #Nada, aqui todo correcto
-        print("---------Nada, aqui todo correcto---------")
+        objs = Admins.objects.filter(position=Position).values('name', 'fullname').first()
+        Name_admin = objs['name']
+        if Position == 'treasury':
+            Position_admin1 = 'Tesorera'
+            Position_admin2 = 'Tesoreria'
+        elif Position == 'secretary':
+            Position_admin1 = 'Secretaria'
+            Position_admin2 = 'Secretaría'
+        else:
+            Position_admin1 = 'Director'
+            Position_admin2 = 'Dirección'
+
     else:
         #Mostramos la pagina de login
         #No borraremos la cookie por que no pude hacerlo :3
@@ -66,7 +79,11 @@ def staff_treasury(request):
         'Object': list_data,
         'Len_list_data': len_list_data,
         'views': num_no_view,
-        'total_futs': total_futs
+        'total_futs': total_futs,
+        #admin data
+        'Position1': Position_admin1,
+        'Position2': Position_admin2,
+        'Name': Name_admin
     })
 
 def staff_secretary(request):

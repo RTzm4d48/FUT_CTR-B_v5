@@ -1,5 +1,10 @@
 {% extends 'layouts/mainadmin.html' %}
 {% load static %}
+
+{% block position %}
+<h2 class="position">/ {{Position2}} </h2>
+{% endblock %}
+
 {% block content %}
 <style>
     .block_container{
@@ -192,13 +197,15 @@
     <div class="block_bloker">
         <div class="block_one">
             <div class="info1">
-                <div class="name"><p>Maria Magdanela - Tesorera</p></div>
+                <div class="name"><p>{{Name}} - {{Position1}}</p></div>
                 <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">{{Len_list_data}}</p></div>
             </div>
             <div class="label">
                 <a href="{% url 'n_staff_treasury' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
                 <a href="{% url 'n_postulated' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt="">Pospuestos</a>
-                <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03.png' %}" alt="">Pendientes</a>
+                {% if Position == 'treasury' %}
+                    <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03.png' %}" alt="">Pendientes</a>
+                {% endif %}
                 <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/send.png' %}" alt="">Enviados</a>
             </div>
         </div>

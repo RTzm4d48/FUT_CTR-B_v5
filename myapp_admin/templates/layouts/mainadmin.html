@@ -65,7 +65,10 @@
 
     </style>
     <div class="navbar">
-        <div class="content1" ><h1>ILS - ADMIN</h1><h2 class="position">/TESORERIA</h2></div>
+        <div class="content1" ><h1>ILS - ADMIN</h1>
+            {% block position %}
+            {% endblock %}
+        </div>
         <div onclick="longout()" class="logout"><img src="{% static 'img/longout.png' %}" width="30px" alt=""></div>
     </div>
     <div class="contend">
