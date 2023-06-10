@@ -12,6 +12,11 @@ from datetime import date
 def ilsadmin(request):
     return render(request, 'ils_admin.html')
 
+
+def log_verifying(log_position):
+    print('Hola')
+    return 'p'
+
 def staff_treasury(request):
     # VARIABLES GENERALES
     #comprueb si la sesión esta iniciada
@@ -129,6 +134,9 @@ def view_fut(request):
     code_ = request.GET.get('code')
     # el 'mode' es para determinar que botones mostrar
     mode = request.GET.get('mode')
+
+    Position = request.COOKIES.get('log_position')
+
     objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date').first()
 
     # actualizamos el campo view
@@ -141,7 +149,8 @@ def view_fut(request):
     return render(request, 'admin/staff/view_fut.html', {
         'code': code_,
         'objs': objs,
-        'mode': mode
+        'mode': mode,
+        'position': Position
     })
 
 def view_send(request):
@@ -158,7 +167,8 @@ def view_send(request):
         return HttpResponse('Variable recibida: ' + id)
     
 def postulated(request):
-    objs = fut.objects.filter(stage=1).values('order', 'reason', 'name', 'dni', 'code')
+    Position = request.COOKIES.get('log_position')
+    objs = fut.objects.filter(stage=1, route=Position).values('order', 'reason', 'name', 'dni', 'code')
 
     #names_short = [str(ob['order'])[:6] for ob in objs]
     
@@ -201,7 +211,16 @@ def pending(request):
     })
 
 def send(request):
-    objs = fut.objects.filter(route='secretary').values('order', 'reason', 'name', 'dni', 'code')
+    Position = request.COOKIES.get('log_position')
+    send_position = 'none'
+    if Position == 'treasury':
+        send_position = 'secretary'
+    elif Position == 'secretary':
+        send_position = 'direction'
+    else:
+        send_position = 'send_exit'
+
+    objs = fut.objects.filter(route=send_position).values('order', 'reason', 'name', 'dni', 'code')
 
     #names_short = [str(ob['order'])[:6] for ob in objs]
     
@@ -236,11 +255,34 @@ def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
 def send_01_treasurer(request):
     ticket = request.GET.get('ticket')
     id = request.GET.get('id')
+    #obtenemos la cookie para realizar el proceso de envio
+    Position = request.COOKIES.get('log_position')
+    send_position = 'none'
+    route_send = 'none'
+    stage = 0
+    num = 0
+
+    print("HASTA AQUÍ TODO BIEN")
+    if Position == 'treasury':
+        send_position = 'secretary'
+        route_send = 'SECRETARIA'
+        stage = 2
+        num = 60
+    elif Position == 'secretary':
+        send_position = 'direction'
+        route_send = 'DIRECCION'
+        stage = 3
+        num = 80
+    else:
+        send_position = 'send_exit'
+        route_send = 'TRAMITE REALIZADO'
+        stage = 4
+        num = 100
 
     #actualizamos los datos de 'FUT'
     up_register = fut.objects.get(id=id)
     up_register.n_ticket = ticket
-    up_register.route = 'secretary'
+    up_register.route = send_position
     up_register.stage = 0
     up_register.view = 0
     up_register.save()
@@ -250,13 +292,16 @@ def send_01_treasurer(request):
     date_format = date.strftime("%Y-%m-%d %H:%M:%S")
 
     #Actualizamos los datos de 'admin_process'
-    up_process_2 = process.objects.get(stage=1, fut_id_id=id)
+    bef_stage = stage - 1
+    print(bef_stage)
+    print(id)
+    up_process_2 = process.objects.get(stage=bef_stage, fut_id_id=id)
     up_process_2.exit = date_format
     up_process_2.save()
 
     #Insert in the BD
-    admin_name = name_admin('secretary')
-    new_id = save_process('SECRETARIA', admin_name, date_format, None, False, 60, id, 2)
+    admin_name = name_admin(Position)
+    new_id = save_process(route_send, admin_name, date_format, None, False, num, id, stage)
 
     message = 'successful'
     return JsonResponse({'message': message})
