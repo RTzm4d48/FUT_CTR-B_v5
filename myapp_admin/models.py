@@ -1,7 +1,16 @@
 from django.db import models
 from myapp.models import fut
 
+import random
+import string
+
 # Create your models here.
+
+# funcion para generar un coddigo de 7 caracteres incluyendo 'letras mayusculas y minusculas y numeros'
+def generate_code():
+    characters = string.ascii_letters + string.digits
+    code = ''.join(random.choice(characters) for _ in range(7))
+    return code
 
 class Admins(models.Model):
     AREA_OPTIONS = [
@@ -16,6 +25,9 @@ class Admins(models.Model):
     phone = models.CharField(max_length=12)
     dni = models.CharField(max_length=10)
     password = models.CharField(max_length=30)
+    code = models.CharField(max_length=7, unique=True, default=generate_code)
+
+    # endcoede generate
     def __str__(self):
         return self.name+" "+self.fullname+" - "+self.position+" - "+self.email+" - "+self.phone+" - "+self.dni+" - "+self.password
 
