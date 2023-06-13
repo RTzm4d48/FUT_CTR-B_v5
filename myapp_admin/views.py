@@ -14,43 +14,59 @@ def ilsadmin(request):
 
 
 def log_verifying(log_position):
-    print('Hola')
-    return 'p'
-
-def staff_treasury(request):
     # VARIABLES GENERALES
     #comprueb si la sesión esta iniciada
-    login = request.COOKIES.get('log_admin')
-    Position = request.COOKIES.get('log_position')
     Name_admin = 'none'
     Position_admin1 = 'none'
     Position_admin2 = 'none'
-    if Position == 'treasury' or Position == 'secretary' or Position == 'direction':
+    
+    list_data = []
+    diccionary={}
+    
+    if log_position == 'treasury' or log_position == 'secretary' or log_position == 'direction':
 
-        objs = Admins.objects.filter(position=Position).values('name', 'fullname').first()
+        objs = Admins.objects.filter(position=log_position).values('name', 'fullname').first()
         Name_admin = objs['name']
-        if Position == 'treasury':
-            Position_admin1 = 'Tesorera'
-            Position_admin2 = 'Tesoreria'
-        elif Position == 'secretary':
-            Position_admin1 = 'Secretaria'
-            Position_admin2 = 'Secretaría'
+        diccionary['admin_name'] = Name_admin
+            
+        if log_position == 'treasury':
+            diccionary['position_admin1'] = 'Tesorera'
+            diccionary['position_admin2'] = 'Tesoreria' 
+        elif log_position == 'secretary':
+            diccionary['position_admin1'] = 'Secretaria'
+            diccionary['position_admin2'] = 'Secretaría' 
         else:
-            Position_admin1 = 'Director'
-            Position_admin2 = 'Dirección'
+            diccionary['position_admin1'] = 'Director'
+            diccionary['position_admin2'] = 'Dirección' 
+            
+            
+        num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=log_position).count()
+        diccionary['num_futs'] = num_futs_total
+        
+        list_data.append(diccionary)
+        return list_data
 
     else:
         #Mostramos la pagina de login
         #No borraremos la cookie por que no pude hacerlo :3
-        return render(request, 'ils_admin.html')
+        return 'fail'
 
-        
-
-
-    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
-
+def staff_treasury(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
+    Position = request.COOKIES.get('log_position')
+  
+    Data_log = log_verifying(Position)
+    
     if login == None:
         return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    
+    # (/AQUÍ)(ESTO_SE_REPITE)
+
+    
+    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
     
     #names_short = [str(ob['order'])[:6] for ob in objs]
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
@@ -78,64 +94,30 @@ def staff_treasury(request):
         num = num + 1
         list_data.append(diccionary)
         
-        #reason.append(i['reason'][:40])
-    len_list_data = len(list_data)
     return render(request, 'admin/staff_treasury.html', {
         'Object': list_data,
-        'Len_list_data': len_list_data,
         'views': num_no_view,
         'total_futs': total_futs,
         #admin data
-        'Position1': Position_admin1,
-        'Position2': Position_admin2,
-        'Name': Name_admin
-    })
-
-def staff_secretary(request):
-    objs = fut.objects.exclude(stage__exact=3).filter(route='treasury').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
-
-    #comprueb si la sesión esta iniciada
-    valor_cookie = request.COOKIES.get('log_admin')
-    if valor_cookie == None:
-        return render(request, 'ils_admin.html')
-    
-    #names_short = [str(ob['order'])[:6] for ob in objs]
-    #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
-    # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
-    num_no_view = 0
-    total_futs = 0
-    for i in objs:
-        total_futs = total_futs + 1
-        if i['view'] == 0:
-            num_no_view = num_no_view + 1
-    
-    list_data = []
-    for i in objs:
-        diccionary={}
-        diccionary['id'] = i['id']
-        diccionary['order'] = i['order'][:30]
-        diccionary['reason'] = i['reason'][:40]
-        diccionary['name'] = i['name'][:50]
-        diccionary['code'] = i['code']
-        diccionary['stage'] = i['stage']
-        diccionary['view'] = i['view']
-        list_data.append(diccionary)
-        
-        #reason.append(i['reason'][:40])
-    len_list_data = len(list_data)
-    return render(request, 'admin/staff.html', {
-        'Object': list_data,
-        'Len_list_data': len_list_data,
-        'views': num_no_view,
-        'total_futs': total_futs
+        'Data_log': Data_log
     })
 
 def view_fut(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
+    Position = request.COOKIES.get('log_position')
+  
+    Data_log = log_verifying(Position)
+    
+    if login == None:
+        return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    # (/AQUÍ)(ESTO_SE_REPITE)
+
     code_ = request.GET.get('code')
     # el 'mode' es para determinar que botones mostrar
     mode = request.GET.get('mode')
-
-    Position = request.COOKIES.get('log_position')
 
     objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date').first()
 
@@ -144,13 +126,12 @@ def view_fut(request):
     up_register.view = 1
     up_register.save()
 
-    print("ENTRAMOS A VIEW FUT")
-
     return render(request, 'admin/staff/view_fut.html', {
         'code': code_,
         'objs': objs,
         'mode': mode,
-        'position': Position
+        'position': Position,
+        'Data_log': Data_log
     })
 
 def view_send(request):
@@ -167,10 +148,21 @@ def view_send(request):
         return HttpResponse('Variable recibida: ' + id)
     
 def postulated(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+  
+    Data_log = log_verifying(Position)
+    
+    if login == None:
+        return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    
+    # (/AQUÍ)(ESTO_SE_REPITE)
+
     objs = fut.objects.filter(stage=1, route=Position).values('order', 'reason', 'name', 'dni', 'code')
 
-    #names_short = [str(ob['order'])[:6] for ob in objs]
     
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
     list_data = []
@@ -182,17 +174,25 @@ def postulated(request):
         diccionary['code'] = i['code']
         list_data.append(diccionary)
         
-        #reason.append(i['reason'][:40])
-    len_list_data = len(list_data)
     return render(request, 'admin/staff/postulated.html', {
         'Object': list_data,
-        'Len_list_data': len_list_data
+        'Data_log': Data_log
     })
 def pending(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
+    Position = request.COOKIES.get('log_position')
+  
+    Data_log = log_verifying(Position)
+    
+    if login == None:
+        return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    # (/AQUÍ)(ESTO_SE_REPITE)
+
     objs = fut.objects.filter(stage=2).values('order', 'reason', 'name', 'dni', 'code')
 
-    #names_short = [str(ob['order'])[:6] for ob in objs]
-    
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
     list_data = []
     for i in objs:
@@ -203,26 +203,25 @@ def pending(request):
         diccionary['code'] = i['code']
         list_data.append(diccionary)
         
-        #reason.append(i['reason'][:40])
-    len_list_data = len(list_data)
     return render(request, 'admin/staff/pending.html', {
         'Object': list_data,
-        'Len_list_data': len_list_data
+        'Data_log': Data_log
     })
 
 def send(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
-    send_position = 'none'
-    if Position == 'treasury':
-        send_position = 'secretary'
-    elif Position == 'secretary':
-        send_position = 'direction'
-    else:
-        send_position = 'send_exit'
+  
+    Data_log = log_verifying(Position)
+    
+    if login == None:
+        return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    # (/AQUÍ)(ESTO_SE_REPITE)
 
-    objs = fut.objects.filter(route=send_position).values('order', 'reason', 'name', 'dni', 'code')
-
-    #names_short = [str(ob['order'])[:6] for ob in objs]
+    objs = fut.objects.filter(route=Position).values('order', 'reason', 'name', 'dni', 'code')
     
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
     list_data = []
@@ -233,12 +232,10 @@ def send(request):
         diccionary['name'] = i['name'][:50]
         diccionary['code'] = i['code']
         list_data.append(diccionary)
-        #reason.append(i['reason'][:40])
-    len_list_data = len(list_data)
-    print('ESTAMOS EN SEND')
+
     return render(request, 'admin/staff/send.html', {
         'Object': list_data,
-        'Len_list_data': len_list_data
+        'Data_log':Data_log
     })
 
 def name_admin(position):
