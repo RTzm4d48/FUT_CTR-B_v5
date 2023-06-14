@@ -328,9 +328,11 @@
             </div>
         </div>
         <div class="buttons_view_fut">
-            <div class="send_button" onclick="send_fut()">Enviar</div>
             {% if position == 'treasury' %}
+                <div class="send_button" onclick="send_fut()">Enviar</div>
                 <div class="send_button" onclick="pending()">Pendiente de pago</div>
+            {% elif position == 'secretary' %}
+                <div class="send_button" onclick="issued_certificate()">Emitir certificado</div>
             {% endif %}
         </div>
         
@@ -339,7 +341,6 @@
 
 <div class="form_poput" id="login-form-popup">
     <div class="window_title"><h1>Enviar FUT</h1><button onclick="clesed()">X</button></div>
-    
         {% csrf_token %}
         <div id="mypass">
             <p class="credent">Introdusca aqui el numero de boleta que le proporciono el alumno</p>
@@ -361,6 +362,19 @@
         <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
     </form>
 </div>
+
+<div class="form_poput" id="inssued">
+    <div class="window_title"><h1>Emitir Certificado</h1><button onclick="clesed()">X</button></div>
+    <form id="F_inssued" action="{% url 'n_img_dow' %}" method="post">
+        {% csrf_token %}
+        <div id="mypass">
+            <p class="credent" id="t_inssued" style="font-size: large; margin: 20px 20px 0px 20px;">---</p>
+        </div>
+        <input class="btn_send" type="submit" value="Si, Enviar">
+        <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
+    </form>
+</div>
+
 
 <script>
     function postponed(){
@@ -409,6 +423,12 @@
         setTimeout(function() {
             location.replace("/ils_admin/staff_treasury");
         }, 100);
+    }
+    // PARA EMITIR EL CERTIFICADO
+
+    function issued_certificate(){
+        document.getElementById("inssued").style.display = "block"
+        console.log('emitimos el certificado')
     }
 </script>
 
