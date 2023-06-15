@@ -42,3 +42,12 @@ class process(models.Model):
     fut_id = models.ForeignKey(fut, on_delete=models.CASCADE, default=3)
     def __str__(self):
         return self.tittle+" - "+self.name
+    
+
+class certificate(models.Model):
+    tittle = models.CharField(max_length=40)
+    pdf_binary = models.BinaryField(default=b'')
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE, default=3)
+    state = models.BooleanField()
+    def __str__(self):
+        return self.tittle+" - "+self.fut_id
