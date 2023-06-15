@@ -1,7 +1,8 @@
+import base64
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from myapp.models import fut
-from myapp_admin.models import process, Admins
+from myapp_admin.models import process, Admins, certificate
 
 #para saber el dia y la hora actual
 from datetime import datetime
@@ -131,6 +132,74 @@ def view_fut(request):
         'objs': objs,
         'mode': mode,
         'position': Position,
+        'Data_log': Data_log
+    })
+
+def save_my_certifcate(tittle_, pdf_binary_, state_, fut_id_):
+    my_objs = certificate(tittle=tittle_, pdf_binary=pdf_binary_, state=state_, fut_id_id=fut_id_)
+    my_objs.save()
+    new_id = my_objs.id
+    return new_id
+
+def send_inssued(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
+    Position = request.COOKIES.get('log_position')
+  
+    Data_log = log_verifying(Position)
+    
+    if login == None:
+        return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    
+    # (/AQUÍ)(ESTO_SE_REPITE)
+
+    
+    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
+    
+    #names_short = [str(ob['order'])[:6] for ob in objs]
+    #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
+    # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
+    num_no_view = 0
+    total_futs = 0
+    for i in objs:
+        total_futs = total_futs + 1
+        if i['view'] == 0:
+            num_no_view = num_no_view + 1
+    
+    list_data = []
+    num=1
+    for i in objs:
+
+        diccionary={}
+        diccionary['id'] = i['id']
+        diccionary['order'] = i['order'][:30]
+        diccionary['reason'] = i['reason'][:40]
+        diccionary['name'] = i['name'][:50]
+        diccionary['code'] = i['code']
+        diccionary['stage'] = i['stage']
+        diccionary['view'] = i['view']
+        diccionary['num'] = num
+        num = num + 1
+        list_data.append(diccionary)
+
+    # APARTIR DE QUI EMPIEZA EL PROCESO DE 'SEND INSSUED'
+    fut_id = request.POST.get('fut_id')
+    fut_tittle = request.POST.get('fut_tittle')
+
+    # my_pdf = request.POST.get('my_pdf')
+    archivo_pdf = request.FILES['my_pdf']
+    contenido_bytes = archivo_pdf.read()
+    pdf_binary_encoded = base64.b64encode(contenido_bytes)
+
+    save_my_certifcate(fut_tittle, pdf_binary_encoded, 0, fut_id)
+    
+    return render(request, 'admin/staff_treasury.html', {
+        'Object': list_data,
+        'views': num_no_view,
+        'total_futs': total_futs,
+        #admin data
         'Data_log': Data_log
     })
 

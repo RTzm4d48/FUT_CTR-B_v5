@@ -349,7 +349,6 @@
         </div>
         <hr>
         <input class="btn_send" onclick="cuestion_send()" value="Enviar">
-    
 </div>
 <div class="form_poput" id="cuestion_send">
     <div class="window_title"><h1>Enviar FUT</h1><button onclick="clesed()">X</button></div>
@@ -364,9 +363,6 @@
 </div>
 
 <style>
-    .count_insued{
-
-    }
     .item_inssued{
         display: block;
         width: 50%;
@@ -398,19 +394,34 @@
     }
 </style>
 
-<div class="form_poput" id="inssued">
+<div class="form_poput" id="cuestion_inssued">
     <div class="window_title"><h1>Emitir Certificado</h1><button onclick="clesed()">X</button></div>
-    <form id="F_inssued" action="{% url 'n_img_dow' %}" method="post">
+    <form id="acepted_inssued" action="{% url 'n_send_inssued' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="item_inssued">
             <p>Subir sertificado:</p>
-            <input type="file" id="pdf_file" name="pdf_file">
+            <input type="file" id="pdf_file" name="my_pdf">
         </div>
         <div class="item_inssued text_inss">
             <p>texto</p>
             <input type="text" name="" id="">
         </div>
-        <input class="btn_send" type="submit" value="Enviar">
+        <!-- <input class="btn_send" value="Enviar"> -->
+        <input type="hidden" name="fut_id" value="{{objs.id}}">
+        <input type="hidden" name="fut_tittle" value="{{objs.order}}">
+
+        <input class="btn_send" type="submit" value="Si, Enviar">
+    </form>
+</div>
+
+<div class="form_poput" id="inssued">
+    <div class="window_title"><h1>Emitir Certificado</h1><button onclick="clesed()">X</button></div>
+    <form id="acepted_inssued_" action="{% url 'n_send_inssued' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="mypass">
+            <p class="credent" id="text_p" style="font-size: large; margin: 20px 20px 0px 20px;">Estas seguro de emitir un sertificado para el FUT Nº{{objs.id}} Correspondiente al alumno '{{objs.name}}'</p>
+        </div>
+        <input class="btn_send" type="submit" value="Si, Enviar">
         <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
     </form>
 </div>
@@ -445,6 +456,8 @@
     function clesed(){
         document.getElementById("login-form-popup").style.display = "none";
         document.getElementById("cuestion_send").style.display = "none";
+        document.getElementById("inssued").style.display = "none";
+        document.getElementById("cuestion_inssued").style.display = "none";
     }
     function cuestion_send(){
         // obtenemos el numero deboleta
@@ -464,12 +477,58 @@
             location.replace("/ils_admin/staff_treasury");
         }, 100);
     }
-    // PARA EMITIR EL CERTIFICADO
 
+    // PARA EMITIR EL CERTIFICADO
     function issued_certificate(){
-        document.getElementById("inssued").style.display = "block"
+        document.getElementById("cuestion_inssued").style.display = "block"
         console.log('emitimos el certificado')
     }
+    function cuestion_send_inssued(){
+        console.log("CONFIRMAMOS LA EMISION DEL SERTIFICADO")
+        document.getElementById("cuestion_inssued").style.display = "none"
+        document.getElementById("inssued").style.display = "block"
+    }
+    // AQUÍ HACEMOS QUE SE GUARDE EL LA BD EL CERTIFICADO
+
+    const form = document.getElementById('acepted_inssued');
+    // var input_pdf = document.getElementById('pdf_file');
+    // var archivo = input_pdf.files[0];
+
+    // form.addEventListener('submit', function(event) {
+    //     event.preventDefault();
+    //     console.log("LOCURAA")
+    //     var futId = '{{objs.id}}';
+    //     var estudent_name = '{{objs.name}}';
+
+    //     //OTRA FORMA DE ENVIAR 'AJAX'
+
+    //     var formData = new FormData();
+    //     formData.append('fut_id', futId);
+    //     formData.append('student_name', estudent_name);
+    //     formData.append('my_pdf', archivo);
+
+    //     formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+    //     $.ajax({
+    //     url: '/send_inssued/',
+    //     type: 'POST',
+    //     data: formData,
+    //     processData: false,
+    //     contentType: false,
+    //     success: function(answer) {
+    //     // Manejar la respuesta del servidor
+    //     console.log("AQUIIIIIII")
+    //     console.log(answer);
+    //     },
+    //     error: function(xhr, status, error) {
+    //     // Manejar errores de la solicitud
+    //     console.error(error);
+    //     }
+    //     });
+
+  //asta aqui
+
+    //});
 </script>
 
 {% endblock %}
