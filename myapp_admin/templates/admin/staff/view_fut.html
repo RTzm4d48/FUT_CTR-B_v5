@@ -406,11 +406,11 @@
             <p>texto</p>
             <input type="text" name="" id="">
         </div>
-        <!-- <input class="btn_send" value="Enviar"> -->
+        <!-- <input class="btn_send" value="Enviar"> -->  
         <input type="hidden" name="fut_id" value="{{objs.id}}">
         <input type="hidden" name="fut_tittle" value="{{objs.order}}">
 
-        <input class="btn_send" type="submit" value="Si, Enviar">
+        <input class="btn_send" type="submit" value="Enviar">
     </form>
 </div>
 
@@ -421,7 +421,7 @@
         <div id="mypass">
             <p class="credent" id="text_p" style="font-size: large; margin: 20px 20px 0px 20px;">Estas seguro de emitir un sertificado para el FUT Nº{{objs.id}} Correspondiente al alumno '{{objs.name}}'</p>
         </div>
-        <input class="btn_send" type="submit" value="Si, Enviar">
+        <input class="btn_send" type="submit" value="Enviar">
         <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
     </form>
 </div>
@@ -429,7 +429,6 @@
 
 <script>
     function postponed(){
-        console.log('aquiiiiiiiiii');
         var variable = 'Edgar';
         $.get('/viewsend/', {'id': '{{objs.id}}', 'stage': 1});
 

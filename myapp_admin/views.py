@@ -21,7 +21,7 @@ def log_verifying(log_position):
     Position_admin1 = 'none'
     Position_admin2 = 'none'
     
-    list_data = []
+    # list_data = []
     diccionary={}
     
     if log_position == 'treasury' or log_position == 'secretary' or log_position == 'direction':
@@ -33,19 +33,25 @@ def log_verifying(log_position):
         if log_position == 'treasury':
             diccionary['position_admin1'] = 'Tesorera'
             diccionary['position_admin2'] = 'Tesoreria' 
+            diccionary['send_position'] = 'secretary'
+            diccionary['stage_send'] = 1
         elif log_position == 'secretary':
             diccionary['position_admin1'] = 'Secretaria'
             diccionary['position_admin2'] = 'Secretaría' 
+            diccionary['send_position'] = 'direction'
+            diccionary['stage_send'] = 2
         else:
             diccionary['position_admin1'] = 'Director'
-            diccionary['position_admin2'] = 'Dirección' 
+            diccionary['position_admin2'] = 'Dirección'
+            diccionary['send_position'] = 'fut_finished'
+            diccionary['stage_send'] = 3
             
             
         num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=log_position).count()
         diccionary['num_futs'] = num_futs_total
         
-        list_data.append(diccionary)
-        return list_data
+        # list_data.append(diccionary)
+        return diccionary
 
     else:
         #Mostramos la pagina de login
@@ -141,6 +147,7 @@ def save_my_certifcate(tittle_, pdf_binary_, state_, fut_id_):
     new_id = my_objs.id
     return new_id
 
+
 def send_inssued(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
@@ -188,6 +195,12 @@ def send_inssued(request):
     fut_id = request.POST.get('fut_id')
     fut_tittle = request.POST.get('fut_tittle')
 
+    # Ahora Haremos el proceso de 'Send Definitivo'
+    #obtenemos la cookie para realizar el proceso de envio
+    Position = request.COOKIES.get('log_position')
+    message = send_definity('none', fut_id, Position)
+    # Fin del 'Send Defintivo'
+    print('NI PAPASSS')
     # my_pdf = request.POST.get('my_pdf')
     archivo_pdf = request.FILES['my_pdf']
     contenido_bytes = archivo_pdf.read()
@@ -289,9 +302,17 @@ def send(request):
     elif Data_log == 'fail':
         return render(request, 'ils_admin.html')
     # (/AQUÍ)(ESTO_SE_REPITE)
+    objs = fut.objects.filter(route=Data_log['send_position']).values('id','order', 'reason', 'name', 'dni', 'code')
 
-    objs = fut.objects.filter(route=Position).values('order', 'reason', 'name', 'dni', 'code')
-    
+    #OBTENDREMOS LA FECHA DE ENVIO
+    id_fut = 0
+    for i in objs:
+        id_fut = i['id']
+    objs2 = process.objects.filter(fut_id_id=id_fut, stage=Data_log['stage_send']).values('exit').first()
+    fecha_str = str(objs2['exit'])
+    fecha = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M:%S%z')
+    fecha_compacta = fecha.strftime('%Y-%m-%d %H:%M:%S')
+
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
     list_data = []
     for i in objs:
@@ -300,6 +321,7 @@ def send(request):
         diccionary['reason'] = i['reason'][:40]
         diccionary['name'] = i['name'][:50]
         diccionary['code'] = i['code']
+        diccionary['date_exit'] = fecha_compacta
         list_data.append(diccionary)
 
     return render(request, 'admin/staff/send.html', {
@@ -308,9 +330,18 @@ def send(request):
     })
 
 def name_admin(position):
-    objs = Admins.objects.filter(position=position).values('name', 'fullname').first()
-    name = objs['name']+' '+objs['fullname']
-    return name
+    if position == 'treasury' or position == 'secretary' or position == 'direction':
+        if position == 'treasury':
+            next_position = 'secretary'
+        elif position == 'secretary':
+            next_position = 'direction'
+        else:
+            next_position = 'finisher'
+        objs = Admins.objects.filter(position=next_position).values('name', 'fullname').first()
+        name = objs['name']+' '+objs['fullname']
+        return name
+    else:
+        return 'fail'
 
 def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
     my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
@@ -318,17 +349,14 @@ def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
     new_id = my_objet.id
     return new_id
 
-def send_01_treasurer(request):
-    ticket = request.GET.get('ticket')
-    id = request.GET.get('id')
-    #obtenemos la cookie para realizar el proceso de envio
-    Position = request.COOKIES.get('log_position')
+def send_definity(ticket, id, Position):
+    #variables constantes
     send_position = 'none'
     route_send = 'none'
     stage = 0
     num = 0
 
-    print("HASTA AQUÍ TODO BIEN")
+    print("PASAMOS POR SEND DEFINITY")
     if Position == 'treasury':
         send_position = 'secretary'
         route_send = 'SECRETARIA'
@@ -347,7 +375,8 @@ def send_01_treasurer(request):
 
     #actualizamos los datos de 'FUT'
     up_register = fut.objects.get(id=id)
-    up_register.n_ticket = ticket
+    if Position == 'treasury':
+        up_register.n_ticket = ticket
     up_register.route = send_position
     up_register.stage = 0
     up_register.view = 0
@@ -364,12 +393,21 @@ def send_01_treasurer(request):
     up_process_2 = process.objects.get(stage=bef_stage, fut_id_id=id)
     up_process_2.exit = date_format
     up_process_2.save()
-
+    print('GUARDAMOS EL PROCESO PA')
     #Insert in the BD
     admin_name = name_admin(Position)
     new_id = save_process(route_send, admin_name, date_format, None, False, num, id, stage)
 
     message = 'successful'
+    return message
+
+def send_01_treasurer(request):
+    #obtenemos la cookie para realizar el proceso de envio
+    Position = request.COOKIES.get('log_position')
+
+    ticket = request.GET.get('ticket')
+    id = request.GET.get('id')
+    message = send_definity(ticket, id, Position)
     return JsonResponse({'message': message})
 
 def admin_login(request):

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block position %}
-<h2 class="position">/ {{Data_log.0.position_admin2}} </h2>
+<h2 class="position">/ {{Data_log.position_admin2}} </h2>
 {% endblock %}
 
 {% block content %}
@@ -197,13 +197,13 @@
     <div class="block_bloker">
         <div class="block_one">
             <div class="info1">
-                <div class="name"><p>{{Data_log.0.position_admin1}} - {{Data_log.0.admin_name}}</p></div>
-                <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">{{Data_log.0.num_futs}}</p></div>
+                <div class="name"><p>{{Data_log.position_admin1}} - {{Data_log.admin_name}}</p></div>
+                <div class="name2"><div class="signal green_b"></div><p class="eltext">pendientes</p><p class="numb green_a">{{Data_log.num_futs}}</p></div>
             </div>
             <div class="label">
                 <a href="{% url 'n_staff_treasury' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
                 <a href="{% url 'n_postulated' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt="">Pospuestos</a>
-                {% if Data_log.0.position_admin1 == 'Tesorera' %}
+                {% if Data_log.position_admin1 == 'Tesorera' %}
                     <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03.png' %}" alt="">Pendientes</a>
                 {% endif %}
                 <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/send.png' %}" alt="">Enviados</a>

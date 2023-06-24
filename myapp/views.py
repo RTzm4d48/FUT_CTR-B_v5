@@ -167,7 +167,6 @@ async def generate_email(email, name, exp_, pas_):
     yag = yagmail.SMTP(user=email, password=contraseña)
 
     destinatarios = [email]
-
     asunto = 'Credenciales ILS'
 
     html = f'''
