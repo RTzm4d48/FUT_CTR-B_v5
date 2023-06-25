@@ -74,7 +74,7 @@ def staff_treasury(request):
 
     
     objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
-    
+    num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=Position).count()
     #names_short = [str(ob['order'])[:6] for ob in objs]
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
     # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
@@ -106,7 +106,8 @@ def staff_treasury(request):
         'views': num_no_view,
         'total_futs': total_futs,
         #admin data
-        'Data_log': Data_log
+        'Data_log': Data_log,
+        'Len_list_data': num_futs_total
     })
 
 def view_fut(request):
@@ -242,8 +243,8 @@ def postulated(request):
         return render(request, 'ils_admin.html')
     
     # (/AQUÍ)(ESTO_SE_REPITE)
-
     objs = fut.objects.filter(stage=1, route=Position).values('order', 'reason', 'name', 'dni', 'code')
+    num_futs_total = fut.objects.filter(stage=1, route=Position).count()
 
     
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
@@ -258,7 +259,8 @@ def postulated(request):
         
     return render(request, 'admin/staff/postulated.html', {
         'Object': list_data,
-        'Data_log': Data_log
+        'Data_log': Data_log,
+        'Len_list_data': num_futs_total
     })
 def pending(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
@@ -302,26 +304,39 @@ def send(request):
     elif Data_log == 'fail':
         return render(request, 'ils_admin.html')
     # (/AQUÍ)(ESTO_SE_REPITE)
-    objs = fut.objects.filter(route=Data_log['send_position']).values('id','order', 'reason', 'name', 'dni', 'code')
 
-    #OBTENDREMOS LA FECHA DE ENVIO
-    id_fut = 0
-    for i in objs:
-        id_fut = i['id']
-    objs2 = process.objects.filter(fut_id_id=id_fut, stage=Data_log['stage_send']).values('exit').first()
-    fecha_str = str(objs2['exit'])
-    fecha = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M:%S%z')
-    fecha_compacta = fecha.strftime('%Y-%m-%d %H:%M:%S')
+    objs_process = process.objects.filter(route=Data_log['send_position']).values('fut_id_id', 'exit')
+    
+    id_fut = 0 
+    send_fut = [] # Lista oficial que tendra datos de 'FUT' y el 'TIME' de 'exit' de process
+    for i in objs_process:
+        diccionary={}
+        # FUT
+        id_fut = i['fut_id_id']
+        objs = fut.objects.filter(id = id_fut).values('id','order', 'reason', 'name', 'dni', 'code')
+        diccionary['data_fut'] = objs
+        # TIME
+        fecha_str = str(i['exit'])
+        fecha = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M:%S%z')
+        fecha_compacta = fecha.strftime('%Y-%m-%d %H:%M:%S')
+        diccionary['exit'] = fecha_compacta
+
+        send_fut.append(diccionary)
 
     #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
     list_data = []
-    for i in objs:
+    for i in send_fut:
         diccionary={}
-        diccionary['order'] = i['order'][:30]
-        diccionary['reason'] = i['reason'][:40]
-        diccionary['name'] = i['name'][:50]
-        diccionary['code'] = i['code']
-        diccionary['date_exit'] = fecha_compacta
+        #FUT
+        diccionary_fut = i['data_fut']
+        for e in diccionary_fut:
+            diccionary['order'] = e['order'][:30]
+            diccionary['reason'] = e['reason'][:40]
+            diccionary['name'] = e['name'][:50]
+            diccionary['code'] = e['code']
+        #PROCESS_TIME
+        diccionary['date_exit'] = i['exit']
+
         list_data.append(diccionary)
 
     return render(request, 'admin/staff/send.html', {

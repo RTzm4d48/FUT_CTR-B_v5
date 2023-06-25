@@ -40,8 +40,10 @@ class process(models.Model):
     num = models.IntegerField()
     stage = models.IntegerField(default=0)
     fut_id = models.ForeignKey(fut, on_delete=models.CASCADE, default=3)
+    route = models.CharField(max_length=40, default='noname')
     def __str__(self):
-        return self.tittle+" - "+self.name
+        num_id = str(self.fut_id.id)
+        return self.tittle+" - "+self.name+" - "+num_id
     
 
 class certificate(models.Model):
