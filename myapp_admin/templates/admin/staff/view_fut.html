@@ -484,11 +484,12 @@
         document.getElementById("login-form-popup").style.display = "none";
         document.getElementById("cuestion_send").style.display = "block";
 
-        $.get('/send_01/', {'ticket': text_ticket, 'id': '{{objs.id}}'});
+        console.log('HASTA AQUI BIEN ');
+        //$.get('/send_01/', {'ticket': text_ticket, 'id': '{{objs.id}}'});
         //redireccionamos a la pagina anterior
-        setTimeout(function() {
-            location.replace("/ils_admin/staff_treasury");
-        }, 100);
+        //setTimeout(function() {
+        //    location.replace("/ils_admin/staff_treasury");
+        //}, 100);
     }
     function create_certificate(){
         document.getElementById("cuestion_inssued").style.display = "block"
