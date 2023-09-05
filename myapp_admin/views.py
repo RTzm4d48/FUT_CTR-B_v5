@@ -305,8 +305,10 @@ def send(request):
         return render(request, 'ils_admin.html')
     # (/AQUÍ)(ESTO_SE_REPITE)
 
-    objs_process = process.objects.filter(route=Data_log['send_position']).values('fut_id_id', 'exit')
-    
+    objs_process = process.objects.filter(route=Data_log['send_position']).values('fut_id_id', 'reception')
+    print("-------")
+    print(objs_process)
+    print("-------")
     id_fut = 0 
     send_fut = [] # Lista oficial que tendra datos de 'FUT' y el 'TIME' de 'exit' de process
     for i in objs_process:
@@ -316,10 +318,12 @@ def send(request):
         objs = fut.objects.filter(id = id_fut).values('id','order', 'reason', 'name', 'dni', 'code')
         diccionary['data_fut'] = objs
         # TIME
-        fecha_str = str(i['exit'])
+        fecha_str = str(i['reception'])
         fecha = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M:%S%z')
         fecha_compacta = fecha.strftime('%Y-%m-%d %H:%M:%S')
-        diccionary['exit'] = fecha_compacta
+        diccionary['the_reception'] = fecha_compacta
+
+        print("patata con sebolla caditana: "+ Data_log['send_position'])
 
         send_fut.append(diccionary)
 
@@ -335,7 +339,7 @@ def send(request):
             diccionary['name'] = e['name'][:50]
             diccionary['code'] = e['code']
         #PROCESS_TIME
-        diccionary['date_exit'] = i['exit']
+        diccionary['date_exit'] = i['the_reception']
 
         list_data.append(diccionary)
 
@@ -358,8 +362,8 @@ def name_admin(position):
     else:
         return 'fail'
 
-def save_process(tittle, name, reception, exit, state, num, fut_id, stage):
-    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage)
+def save_process(tittle, name, reception, exit, state, num, fut_id, stage, Position):
+    my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage, route = Position)
     my_objet.save()
     new_id = my_objet.id
     return new_id
@@ -411,7 +415,7 @@ def send_definity(ticket, id, Position):
     print('GUARDAMOS EL PROCESO PA')
     #Insert in the BD
     admin_name = name_admin(Position)
-    new_id = save_process(route_send, admin_name, date_format, None, False, num, id, stage)
+    new_id = save_process(route_send, admin_name, date_format, None, False, num, id, stage, send_position)
 
     message = 'successful'
     return message

@@ -366,12 +366,11 @@
 </div>
 <div class="form_poput" id="cuestion_send">
     <div class="window_title"><h1>Enviar FUT</h1><button onclick="clesed()">X</button></div>
-    <form id="F_download" action="{% url 'n_img_dow' %}" method="post">
-        {% csrf_token %}
+        <!-- {% csrf_token %} -->
         <div id="mypass">
             <p class="credent" id="text_p" style="font-size: large; margin: 20px 20px 0px 20px;">---</p>
         </div>
-        <input class="btn_send" type="submit" value="Si, Enviar">
+        <input class="btn_send" type="submit" onclick="yes_send()" value="Si, Enviar">
         <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
     </form>
 </div>
@@ -483,13 +482,18 @@
 
         document.getElementById("login-form-popup").style.display = "none";
         document.getElementById("cuestion_send").style.display = "block";
+    }
+    function yes_send(){
+        // obtenemos el numero deboleta
+        var ticket = document.getElementById('ticket');
+        var text_ticket = ticket.value;
+        console.log("jelouda, el tiked es:"+ text_ticket);
 
-        console.log('HASTA AQUI BIEN ');
-        //$.get('/send_01/', {'ticket': text_ticket, 'id': '{{objs.id}}'});
-        //redireccionamos a la pagina anterior
-        //setTimeout(function() {
-        //    location.replace("/ils_admin/staff_treasury");
-        //}, 100);
+        $.get('/send_01/', {'ticket': text_ticket, 'id': '{{objs.id}}'});
+        // redireccionamos a la pagina anterior
+        setTimeout(function() {
+            location.replace("/ils_admin/staff_treasury");
+        }, 100);
     }
     function create_certificate(){
         document.getElementById("cuestion_inssued").style.display = "block"
