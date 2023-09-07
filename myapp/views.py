@@ -241,18 +241,20 @@ async def finisher(request):
         
         exp_, pas_ = await generate_proceedings()
         code_ = await generate_code()
+        print('LOCURA_01')
         qrimg_bytes = await generate_qrcode(code_)
-
+        print('LOCURA_02')
         nnn = await generate_email(email, name, exp_, pas_)
-
+        print('LOCURA_03')
         new_id = await save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, pdf_bytes, exp_, pas_, code_, qrimg_bytes)
-
+        print('LOCURA_04')
         # CRUD en el modelo 'Process'
         #obtener the date
         date_ = datetime.now() 
         date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
-
+        print('LOCURA_05')
         await save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, False, 20, new_id, 0)
+        print('LOCURA_06')
         # obtenemos el nombrede la tesoreria para introducirlo en el modelo process
         admin_name = await name_admin('treasury')
         await save_process('TESORERIA', admin_name, date_format, None, False, 40, new_id, 1)

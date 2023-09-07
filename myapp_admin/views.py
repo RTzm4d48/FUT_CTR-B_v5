@@ -144,7 +144,9 @@ def view_fut(request):
 
 def save_my_certifcate(tittle_, pdf_binary_, state_, fut_id_):
     my_objs = certificate(tittle=tittle_, pdf_binary=pdf_binary_, state=state_, fut_id_id=fut_id_)
+    print("INTENTAMOS GUARDAR")
     my_objs.save()
+    print("SE GUARDO")
     new_id = my_objs.id
     return new_id
 
@@ -201,10 +203,15 @@ def send_inssued(request):
     Position = request.COOKIES.get('log_position')
     message = send_definity('none', fut_id, Position)
     # Fin del 'Send Defintivo'
-    print('NI PAPASSS')
+    print('PROBANDO EL ENCODE BIEN')
     # my_pdf = request.POST.get('my_pdf')
-    archivo_pdf = request.FILES['my_pdf']
-    contenido_bytes = archivo_pdf.read()
+    #archivo_pdf = request.FILES['my_pdf']
+    print('AQUI OBTENEMOS EL FILE')
+    with open('myapp_admin/static/img/PRUEBA.pdf', 'rb') as pdf_file:
+        contenido_bytes = pdf_file.read()
+
+    #contenido_bytes = archivo_pdf.read()
+    #pdf_binary_encoded = base64.b64encode(contenido_bytes)
     pdf_binary_encoded = base64.b64encode(contenido_bytes)
 
     save_my_certifcate(fut_tittle, pdf_binary_encoded, 0, fut_id)

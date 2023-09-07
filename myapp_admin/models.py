@@ -52,4 +52,5 @@ class certificate(models.Model):
     fut_id = models.ForeignKey(fut, on_delete=models.CASCADE, default=3)
     state = models.BooleanField()
     def __str__(self):
-        return self.tittle+" - "+self.fut_id
+        num_id = str(self.fut_id.id)
+        return self.tittle+" - "+num_id

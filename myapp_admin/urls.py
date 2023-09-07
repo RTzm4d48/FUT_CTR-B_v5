@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import views_process
 
 urlpatterns = [
     path('ils_admin', views.ilsadmin, name="n_ilsadmin"),
@@ -11,5 +12,7 @@ urlpatterns = [
     path('ils_admin/staff/fut_send', views.send, name="n_send"),
     path('send_01/', views.send_01_treasurer, name="n_send_01"),
     path('admin_login/', views.admin_login, name="n_admin_login"),
-    path('send_inssued/', views.send_inssued, name="n_send_inssued")
+    path('send_inssued/', views.send_inssued, name="n_send_inssued"),
+
+    path('download/', views_process.direction_download, name="n_download")
 ]
