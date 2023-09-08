@@ -14,28 +14,15 @@ def direction_download(request):
     #mi_objeto = certificate.objects.filter(fut_id_id = 20).values('pdf_binary').first()
     mi_objeto = certificate.objects.get(fut_id_id=id)
     
-    #binary_data = mi_objeto['pdf_binary']
     binary_field = mi_objeto.pdf_binary
+
+    image_binary = base64.b64decode(binary_field)
+
+    ruta_guardar_pdf = 'myapp_admin/static/tmp/el_pedeefe_v1.pdf'
+
+
+    with open(ruta_guardar_pdf, 'wb') as output_image:
+        output_image.write(image_binary)
     
-    ruta_guardar_pdf = 'myapp_admin/static/tmp/nuevo_archivo.pdf'
-    
-
-    binary_data = binary_field.read()
-    # ESCRIBIR EL ARCHIVO BINARIO EN UN ARCHIVO PDF
-    # WRITE THE BINARY FILE TO A PDF FILE
-
-    #pdf_file = BytesIO(binary_data)
-
-    # Crea un objeto BytesIO y escribe los datos binarios en él
-    pdf_file = io.BytesIO(binary_data)
-
-    # Crea un archivo PDF a partir de los datos binarios
-    pdf_content = ContentFile(pdf_file.read(), 'miarchivo.pdf')
-    print("COMPRUEVO")
-    pdf_content.save(ruta_guardar_pdf)
-
-    #with open(ruta_guardar_pdf, 'wb') as output_pdf:
-    #    output_pdf.write(pdf_file.getbuffer())
-
     message = 'sussesfull'
     return JsonResponse({'message': message})
