@@ -13,6 +13,7 @@ urlpatterns = [
     path('send_01/', views.send_01_treasurer, name="n_send_01"),
     path('admin_login/', views.admin_login, name="n_admin_login"),
     path('send_inssued/', views.send_inssued, name="n_send_inssued"),
+    path('send_document/', views_process.send_document, name="n_send_document"),
 
     path('download/', views_process.direction_download, name="n_download")
 ]

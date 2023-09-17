@@ -46,9 +46,10 @@ class process(models.Model):
         return self.tittle+" - "+self.name+" - "+num_id
     
 
-class certificate(models.Model):
+class document(models.Model):
     tittle = models.CharField(max_length=40)
     pdf_binary = models.BinaryField(default=b'')
+    final_pdf_binary = models.BinaryField(default=b'')
     fut_id = models.ForeignKey(fut, on_delete=models.CASCADE, default=3)
     state = models.BooleanField()
     def __str__(self):

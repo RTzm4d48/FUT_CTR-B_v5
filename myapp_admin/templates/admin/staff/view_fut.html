@@ -343,10 +343,10 @@
                 <div class="send_button" onclick="send_fut()"><img src="{% static 'img/sendbutton.png' %}" alt=""><p>Enviar</p></div>
                 <div class="send_button" style="background: red;" onclick="pending()"><img src="{% static 'img/icon03.png' %}" alt=""><p>Pendiente de pago</p></div>
             {% elif position == 'secretary' %}
-                <div class="send_button" onclick="issued_certificate()"><img src="{% static 'img/send_button.png' %}" alt=""><p>Emitir certificado</p></div>
+                <div class="send_button" onclick="issued_certificate()"><img src="{% static 'img/sendbutton.png' %}" alt=""><p>Emitir certificado</p></div>
             {% elif position == 'direction' %}
                 <div class="send_button" onclick="direction_download()"><img src="{% static 'img/download.png' %}" alt=""><p>Descargar</p></div>
-                <div class="send_button" style="background: red;" onclick="issued_certificate()"><img src="{% static 'img/public.png' %}" alt=""><p>Publicar Certificado</p></div>
+                <div class="send_button" style="background: red;" onclick="issued_document()"><img src="{% static 'img/public.png' %}" alt=""><p>Publicar Certificado</p></div>
             {% endif %}
         </div>
         
@@ -408,7 +408,7 @@
 </style>
 
 <div class="form_poput" id="cuestion_inssued">
-    <div class="window_title"><h1>Emitir Certificado</h1><button onclick="clesed()">X</button></div>
+    <div class="window_title"><h1>Emitir Documento</h1><button onclick="clesed()">X</button></div>
     <form id="acepted_inssued" action="{% url 'n_send_inssued' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="item_inssued">
@@ -419,11 +419,25 @@
             <p>texto</p>
             <input type="text" name="" id="">
         </div>
-        <!-- <input class="btn_send" value="Enviar"> -->  
         <input type="hidden" name="fut_id" value="{{objs.id}}">
         <input type="hidden" name="fut_tittle" value="{{objs.order}}">
 
         <input class="btn_send" type="submit" value="Enviar">
+    </form>
+</div>
+
+<div class="form_poput" id="cuestion_inssued2">
+    <div class="window_title"><h1>Publicar Documento</h1><button onclick="clesed()">X</button></div>
+    <form id="acepted_inssued" action="{% url 'n_send_document' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="item_inssued">
+            <p>Subir Certificado:</p>
+            <input type="file" id="pdf_file" name="my_pdf">
+        </div>
+        <input type="hidden" name="fut_id" value="{{objs.id}}">
+        <input type="hidden" name="fut_tittle" value="{{objs.order}}">
+
+        <input class="btn_send" type="submit" value="Publicar">
     </form>
 </div>
 
@@ -435,7 +449,6 @@
             <p class="credent" id="text_p" style="font-size: large; margin: 20px 20px 0px 20px;">Estas seguro de emitir un sertificado para el FUT Nº{{objs.id}} Correspondiente al alumno '{{objs.name}}'</p>
         </div>
         <input class="btn_send" type="submit" value="Enviar">
-        <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
     </form>
 </div>
 
@@ -504,6 +517,10 @@
         document.getElementById("cuestion_inssued").style.display = "block"
         console.log('emitimos el certificado')
     }
+    function issued_document(){
+        document.getElementById("cuestion_inssued2").style.display = "block"
+    }
+
     function cuestion_send_inssued(){
         console.log("CONFIRMAMOS LA EMISION DEL SERTIFICADO")
         document.getElementById("cuestion_inssued").style.display = "none"

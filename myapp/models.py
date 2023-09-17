@@ -30,4 +30,4 @@ class fut(models.Model):
     route = models.CharField(max_length=50, default='treasury')
 
     def __str__(self):
-        return self.name+" - "+self.order+" - "+self.email
+        return f"ID: {self.id} - {self.name} - {self.order} - {self.email}"
