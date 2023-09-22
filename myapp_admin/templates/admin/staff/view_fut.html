@@ -12,6 +12,7 @@
         margin: 0px 0px 10px 0px;
         display: block;
         justify-content: space-between;
+        overflow: hidden;
         /* font-weight: bold; */
     }
     .bastools{
@@ -22,7 +23,7 @@
     }
     .principaldiv{
         width: 90%;
-        height: 400px;
+        height: calc(100% - 100px);
         /* background: red; */
         margin: 10px auto;
         display: flex;
@@ -60,6 +61,7 @@
         margin: 20px auto;
         padding: 1px 0px;
         display: block;
+        overflow-y: scroll;
     }
     .baricon{
         margin: auto 15px;
@@ -317,6 +319,12 @@
                         <div class="text" style="width: 200px;"><p>{{objs.phone}}</p></div>
                     </div>
                     <div class="celd" style="margin: auto 0px 10px 10px;">
+                        <label for="">FUT ID:</label>
+                        <div class="text" style="width: 40px;"><p>{{objs.id}}</p></div>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="celd" style="margin: auto 0px 10px 10px;">
                         <label for="">CON CODIGO DE CARNET O Nº D.N.I:</label>
                         <div class="text" style="width: 200px;"><p>{{objs.dni}}</p></div>
                     </div>
@@ -334,6 +342,14 @@
                     <label for="">SOLICITO A SU RESPETABLE AUTORIDAD , SE SIRVA A ORDENAR:</label>
                     <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.order}}</p></div>
                 </div>
+                {% if position == 'treasury' %}
+
+                {% else %}
+                <div class="celd" style="margin: auto 0px 10px 10px;">
+                    <label for="">Ticket:</label>
+                    <div class="text" style="width: 100px;"><p>{{objs.n_ticket}}</p></div>
+                </div>
+                {% endif %}
                 <p style="font-weight: bold;">POR LO EXPUESTO A USTED, SEÑOR DIRECTOR(A), RUEGO SE SIRVA ACCEDER A MI PETICIÓN POR SER DE JUSTICIA</p>
                 <p style="font-weight: bold; color: blue;">Arequipa, {{objs.date}}</p>
             </div>

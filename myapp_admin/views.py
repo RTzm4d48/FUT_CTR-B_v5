@@ -127,7 +127,7 @@ def view_fut(request):
     # el 'mode' es para determinar que botones mostrar
     mode = request.GET.get('mode')
 
-    objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date').first()
+    objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date','n_ticket').first()
 
     # actualizamos el campo view
     up_register = fut.objects.get(code=code_)
