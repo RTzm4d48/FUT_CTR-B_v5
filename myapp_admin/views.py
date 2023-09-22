@@ -352,18 +352,17 @@ def send(request):
     })
 
 def name_admin(position):
-    if position == 'treasury' or position == 'secretary' or position == 'direction':
+    if position == 'treasury' or position == 'secretary':
         if position == 'treasury':
             next_position = 'secretary'
         elif position == 'secretary':
             next_position = 'direction'
-        else:
-            next_position = 'finisher'
+
         objs = Admins.objects.filter(position=next_position).values('name', 'fullname').first()
         name = objs['name']+' '+objs['fullname']
         return name
     else:
-        return 'fail'
+        return 'direction_finisher'
 
 def save_process(tittle, name, reception, exit, state, num, fut_id, stage, Position):
     my_objet = process(tittle = tittle, name = name, reception = reception, exit = exit, state = state, num = num, fut_id_id = fut_id, stage = stage, route = Position)
@@ -417,11 +416,14 @@ def send_definity(ticket, id, Position):
     up_process_2.save()
     print('GUARDAMOS EL PROCESO PA')
     #Insert in the BD
+    print(Position)
     admin_name = name_admin(Position)
-    new_id = save_process(route_send, admin_name, date_format, None, False, num, id, stage, send_position)
-
     message = 'successful'
-    return message
+    if admin_name == "direction_finisher":
+        return message
+    else:
+        new_id = save_process(route_send, admin_name, date_format, None, False, num, id, stage, send_position)
+        return message
 
 def send_01_treasurer(request):
     #obtenemos la cookie para realizar el proceso de envio

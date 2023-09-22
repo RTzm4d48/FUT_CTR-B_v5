@@ -8,6 +8,8 @@ import io
 from django.core.files.base import ContentFile
 from io import BytesIO
 
+from myapp_admin.views import send_definity
+
 def direction_download(request):
     id = request.GET.get('id')
     
@@ -99,6 +101,11 @@ def fut_data(Position):
     }
     return output
 
+def update_document(fut_id, pdf_binary_encoded):
+    up_register = document.objects.get(fut_id_id=fut_id)
+    up_register.final_pdf_binary = pdf_binary_encoded
+    up_register.save()
+    return None
 
 def send_document(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
@@ -117,6 +124,24 @@ def send_document(request):
     print('Estamoh en send document')
     Position = request.COOKIES.get('log_position')
     data = fut_data(Position)
+
+    # APARTIR DE QUI EMPIEZA EL PROCESO DE 'SEND INSSUED'
+    fut_id = request.POST.get('fut_id')
+    fut_tittle = request.POST.get('fut_tittle')
+
+    # Ahora Haremos el proceso de 'Send Definitivo'
+    #obtenemos la cookie para realizar el proceso de envio
+    Position = request.COOKIES.get('log_position')
+    message = send_definity('none', fut_id, Position)
+    # Fin del 'Send Defintivo'
+
+    print('AQUI OBTENEMOS EL FILE')
+    archivo_pdf = request.FILES['my_pdf']
+    contenido_bytes = archivo_pdf.read()
+        
+    pdf_binary_encoded = base64.b64encode(contenido_bytes)
+
+    update_document(fut_id, pdf_binary_encoded)
 
     return render(request, 'admin/staff_treasury.html', {
         'Object': data["List_data"],
