@@ -87,6 +87,8 @@ def staff_treasury(request):
     
     list_data = []
     num=1
+    role=1
+
     for i in objs:
 
         diccionary={}
@@ -99,11 +101,15 @@ def staff_treasury(request):
         diccionary['view'] = i['view']
         diccionary['num'] = num
         num = num + 1
+        if num % 12 == 0:
+            role = role + 1
+
         list_data.append(diccionary)
         
     return render(request, 'admin/staff_treasury.html', {
         'Object': list_data,
         'views': num_no_view,
+        'role': role,
         'total_futs': total_futs,
         #admin data
         'Data_log': Data_log,
