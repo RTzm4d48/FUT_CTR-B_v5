@@ -233,18 +233,20 @@
                         <p style="margin: auto 1px;padding: 1px;font-size: 15px;">1 - {{role}}</p>
                     
                     <div class="chanels">
-                        <p>></p>
+                        <p onclick="next()">></p>
                     </div>
                 </div>
             </div>
+            
+            <div id="TESTED">Esto es Tested</div>
             <!-- pesttañas -->
             {% for i in Object %}
-                <a href="{% url 'n_view_fut' %}?code={{i.code}}&mode=1" class="ayelash {% if i.view == 0 %}ayelash_color{% endif %}">
-                    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">
+                <a href='/ils_admin/staff/fut?code={{i.code}}&mode=1' class='ayelash'>
+                    <div class='filauno'><img width='25px' height='25px' style='margin: auto 7px;' src='/static/img/procedure.png' alt=''>
                         <h2> {{i.num}} </h2>
                         <p>{{i.order}}</p>
                     </div>
-                    <div class="filados"><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.stage == 1 %} <p style="opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;">/Pospuesto</p> {% elif i.stage == 2 %} <p style="opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;">/Pendiente</p> {% endif %}</div>
+                    <div class='filados'><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>-------<p>{{i.date}}</p>{% if i.stage == 1 %} <p style='opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;'>/Pospuesto</p> {% elif i.stage == 2 %} <p style='opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;'>/Pendiente</p> {% endif %}</div>
                 </a>
             {% endfor %}
             <!-- fin-pestañas -->
@@ -295,6 +297,35 @@
 
     function closeForm(){
         document.getElementById("login-form-popup").style.display = "none";
+    }
+
+    function next(){
+        event.preventDefault(); // Evita que se siga el enlace por defecto
+
+        // Realiza la solicitud AJAX
+        $.ajax({
+            url: "/ils_admin/staff_treasury2", // Ruta del archivo que contiene el contenido actualizado
+            method: "GET",
+            success: function(response) {
+                //$("#miContenedor___").html(response); // Actualiza el contenido del div con la respuesta del servidor
+                const data = response.data;
+                const contenedor = document.getElementById("TESTED");
+                const direction = "{% static 'img/procedure.png' %}"
+                console.log("la direccion es:"+direction)
+                //creamos el div
+                
+                for (let i = 0; i < data['length']; i++){
+                    const div = document.createElement('div');
+                    div.innerHTML='<h1>LALALAND</h1>';
+                    console.log('cocoro');
+                    contenedor.appendChild(div)
+                }
+                
+            },
+            error: function() {
+                alert("Ocurrió un error al cargar el contenido.");
+            }
+        });
     }
 </script>
 {% endblock %}

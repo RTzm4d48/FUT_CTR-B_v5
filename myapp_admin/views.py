@@ -58,6 +58,36 @@ def log_verifying(log_position):
         #No borraremos la cookie por que no pude hacerlo :3
         return 'fail'
 
+def staff_view_data(objs, page):
+    num=0
+    list_data = []
+    for i in objs:
+        num = num + 1
+        diccionary={}
+        diccionary['id'] = i['id']
+        diccionary['order'] = i['order'][:30]
+        diccionary['reason'] = i['reason'][:40]
+        diccionary['name'] = i['name'][:50]
+        diccionary['code'] = i['code']
+        diccionary['stage'] = i['stage']
+        diccionary['view'] = i['view']
+        diccionary['date'] = i['date']
+        diccionary['num'] = num
+        if page == 1 and num <=12:
+            list_data.append(diccionary)
+            if num % 12 == 0:
+                break
+        if page == 2 and num <=24 and num >12:
+            list_data.append(diccionary)
+            if num % 12 == 0:
+                break
+        if page == 3 and num <=36 and num >24:
+            list_data.append(diccionary)
+            if num % 12 == 0:
+                break
+
+    return list_data
+
 def staff_treasury(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
@@ -73,10 +103,16 @@ def staff_treasury(request):
     # (/AQUÍ)(ESTO_SE_REPITE)
 
     
-    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')
+    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).order_by('date').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view', 'date')[::-1]
     num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=Position).count()
-    #names_short = [str(ob['order'])[:6] for ob in objs]
-    #modifico el numero de caracteres del los datos de los diccionarios y los agrego a la lista 'list_data'
+
+    # aquí contabilizamos el número de paginas que debe de haber
+    role=1
+    for i in range(1,num_futs_total):
+        if i % 12 == 0:
+            role = role+1
+
+    
     # Esto para saber cuantos fut's no esta leídos y el numero totoal de fut's
     num_no_view = 0
     total_futs = 0
@@ -84,27 +120,9 @@ def staff_treasury(request):
         total_futs = total_futs + 1
         if i['view'] == 0:
             num_no_view = num_no_view + 1
-    
-    list_data = []
-    num=1
-    role=1
 
-    for i in objs:
 
-        diccionary={}
-        diccionary['id'] = i['id']
-        diccionary['order'] = i['order'][:30]
-        diccionary['reason'] = i['reason'][:40]
-        diccionary['name'] = i['name'][:50]
-        diccionary['code'] = i['code']
-        diccionary['stage'] = i['stage']
-        diccionary['view'] = i['view']
-        diccionary['num'] = num
-        num = num + 1
-        if num % 12 == 0:
-            role = role + 1
-
-        list_data.append(diccionary)
+    list_data = staff_view_data(objs, 2)
         
     return render(request, 'admin/staff_treasury.html', {
         'Object': list_data,
@@ -465,3 +483,18 @@ def admin_login(request):
             return response
     
     return JsonResponse(answer)
+
+
+def next(request):
+    data = "jelouda"
+    print("tambien estamos en next")
+
+    list_data=[]
+    for i in range(1,4):
+        diccionary={}
+        diccionary['name']="edgar"
+        diccionary['full name']="edgar"
+        list_data.append(diccionary)
+
+
+    return JsonResponse({'data': list_data})

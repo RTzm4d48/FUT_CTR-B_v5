@@ -15,5 +15,7 @@ urlpatterns = [
     path('send_inssued/', views.send_inssued, name="n_send_inssued"),
     path('send_document/', views_process.send_document, name="n_send_document"),
 
+    path('ils_admin/staff_treasury2', views.next, name="n_next"),
+
     path('download/', views_process.direction_download, name="n_download")
 ]
