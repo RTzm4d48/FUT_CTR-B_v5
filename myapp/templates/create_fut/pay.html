@@ -7,46 +7,28 @@
 {% endblock %}
 
 {% block contentf %}
+<style>
+    .content_form{
+        background: yellow;
+        height: auto;
+        padding: 1px;
+    }
+    .content_form2{
+        background: red;
+        width: 60%;
+        height: 300px;
+        margin: 20px auto;
+    }
+</style>
 <div class="bodyf">
     <form action="{% url 'n_end' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
-        <div class="form_block" style="height: 60px; margin: 30px auto 0px auto;">
-            <div class="from_item" style="float: none; margin: auto;">
-                <div class="group" style="padding: auto; margin: 0px;">
-                    <input type="text" id="name1" name="gamil" value="defecto@gmail.com" required>
-                    <label for="name1">Correo:</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
+        <div class="content_form2">
+            
         </div>
-        <div class="form_block">
-            <div class="from_item" style="float: none; margin: auto;">
-                <div class="group">
-                    <input type="text" id="name2" name="card" value="4545454545454545" required>
-                    <label for="name2">Numero de Tarjeta:</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-        <div class="form_block" style="height: 60px; margin: 30px auto 0px auto; display: block;">
-            <div class="from_item" style="float: none; margin: auto; display: flex;">
-                <div class="group" style="padding: auto; margin: 0px; width: 45%; float: left;">
-                    <input type="text" id="name3" name="mmyy" value="09/24" required>
-                    <label for="name3">MMYY:</label>
-                    <div class="bar"></div>
-                </div>
-                <div class="group" style="padding: auto; margin: autopx;width: 10%;float: right;">
-                </div>
-                <div class="group" style="padding: auto; margin: autopx;width: 45%;float: right;">
-                    <input type="text" id="name4" name="cvc" value="222" required>
-                    <label for="name4">CVC:</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-        <div class="form_block">
-            <div class="from_item" style="float:right">
+        <div class="form_block" style="display:flex;background:green;height: auto;">
+            <div class="from_item" style="background: palevioletred; margin:0px 20px 10px auto; display: flex;">
                 <input type="hidden" name="name" value="{{Name}}">
                 <input type="hidden" name="program" value="{{Program}}">
                 <input type="hidden" name="dni" value="{{Dni}}">
