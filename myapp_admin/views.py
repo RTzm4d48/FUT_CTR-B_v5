@@ -122,7 +122,7 @@ def staff_treasury(request):
             num_no_view = num_no_view + 1
 
 
-    list_data = staff_view_data(objs, 2)
+    list_data = staff_view_data(objs, 1)
         
     return render(request, 'admin/staff_treasury.html', {
         'Object': list_data,
@@ -486,15 +486,27 @@ def admin_login(request):
 
 
 def next(request):
-    data = "jelouda"
-    print("tambien estamos en next")
+    page = request.GET.get('page')
+    role = request.GET.get('role')
+    action = request.GET.get('action')
+    
+    if action == 'next':
+        if page == role:
+            #print("es lo mismo")
+            newPage = int(page)
+        else:
+            #print("no es lo mismo")
+            newPage = int(page)+1
+    elif action == 'before':
+        if int(page) <= 1:
+            #print("numero muy bajo")
+            newPage = int(page)
+        else:
+            newPage = int(page)-1
 
-    list_data=[]
-    for i in range(1,4):
-        diccionary={}
-        diccionary['name']="edgar"
-        diccionary['full name']="edgar"
-        list_data.append(diccionary)
+   
+    Position = request.COOKIES.get('log_position')
+    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).order_by('date').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view', 'date')[::-1]
+    list_data = staff_view_data(objs, newPage)
 
-
-    return JsonResponse({'data': list_data})
+    return JsonResponse({'data': list_data, 'new_page':newPage})
