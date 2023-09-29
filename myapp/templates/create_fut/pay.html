@@ -9,15 +9,52 @@
 {% block contentf %}
 <style>
     .content_form{
-        background: yellow;
+        /* background: yellow; */
         height: auto;
         padding: 1px;
     }
     .content_form2{
-        background: red;
+        background: #ffffff70;
         width: 60%;
-        height: 300px;
+        height: auto;
         margin: 20px auto;
+        border: 1px solid gray;
+        border-radius: 3px;
+        padding: 5px 0px 10px 0px;
+    }
+    .block{
+        width: 95%;
+        /* background: salmon; */
+        display: flex;
+        margin: 5px auto;
+    }
+    .column1{
+        width: 70%;
+        height: auto;
+        padding: 5px 0px;
+        /* background: #5add26; */
+    }
+    .column1 p{
+        font-size: small; opacity: 80%;margin: 0px;
+    }
+    .column2{
+        width: 30%;
+        height: 50px;
+        /* background: #f8d50f; */
+        display: flex;
+    }
+    .pay_content{
+        background: #6a6a6d1c;
+        display: flex;        
+        margin: 5px 0px;
+        padding: 10px 0px;
+        width: 80%;
+        border-radius: 10px;
+    }
+    .radio{
+        /* background: skyblue; */
+        display: flex;
+        margin: auto 5px auto 10px;
     }
 </style>
 <div class="bodyf">
@@ -25,10 +62,59 @@
         {% csrf_token %}
     <div class="content_form">
         <div class="content_form2">
+<<<<<<< Updated upstream
             
+=======
+            <div class="block">
+                <div class="column1">
+                    <img style="width: 100px;" src="{% static 'img/fut_ctr-b.png' %}" alt="">
+                    <p>Tarifa gestion: 100 PEN</p>
+                </div>
+                <div class="column2">
+                </div>
+            </div>
+            <hr>
+            <div class="block">
+                <div class="column1">
+                    <p style="font-weight: bold;">Hola, {{Name}}:</p>
+                    <p>Solo un paso más para realizar tu tramite.</p>
+                </div>
+                <div class="column2">
+                    <a style="font-size: smaller;text-align: center;margin: auto;" href="">mas información sobre metodos de pago</a>
+                </div>
+            </div>
+            <div class="block">
+                <div class="column1">
+                    <p>metodo de pago:</p>
+                    <div class="pay_content">
+                        <div class="radio"><input name="intereses" type="radio" value="rbipeliculas" checked="checked" /></div> Presencial por caja
+                    </div>
+                    <div class="pay_content">
+                        <div class="radio"><input name="interseses" type="radio" value="rbipelicsulas" /></div>Pasarela de pago virtual
+                        <img src="{% static 'img/visa.png' %}" height="20px" style="margin: auto 10px auto auto;" alt="">
+                    </div>
+                </div>
+                <div class="column2"></div>
+            </div>
+            <div class="block">
+                <div class="column1">
+                    <p style="font-weight: bold;">Solicitud de {{Order}}</p>
+                    <p>Costo Tramite: S/. 100</p>
+                    <p>Cargo por Pasarela: S/. 5</p>
+                </div>
+                <div class="column2">
+                    <p style="text-align: center; margin: auto;">TOTAL: S/. 105</p>
+                </div>
+            </div>
+            <!-- <div class="block">
+                <div class="column1"></div>
+                <div class="column2"></div>
+            </div> -->
+
+>>>>>>> Stashed changes
         </div>
-        <div class="form_block" style="display:flex;background:green;height: auto;">
-            <div class="from_item" style="background: palevioletred; margin:0px 20px 10px auto; display: flex;">
+        <div class="form_block" style="display:flex;height: auto;">
+            <div class="from_item" style="margin:0px 20px 10px auto; display: flex;">
                 <input type="hidden" name="name" value="{{Name}}">
                 <input type="hidden" name="program" value="{{Program}}">
                 <input type="hidden" name="dni" value="{{Dni}}">
