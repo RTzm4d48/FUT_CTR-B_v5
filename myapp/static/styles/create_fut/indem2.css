@@ -184,6 +184,7 @@ select::-ms-expand {
 
 @media (max-width: 990px) {
   .from_item {
+    align-items: center;
     margin: 10px 10px;
   }
 }/*# sourceMappingURL=indem2.css.map */
