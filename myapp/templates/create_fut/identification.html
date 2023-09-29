@@ -2,10 +2,19 @@
 
 {% load static %}
 {% block linkstyle2 %}
+<!--DE LAS LETAS -->
+
 <link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
+
+<!--COLORES -->
 <link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+
+<!--<link rel="stylesheet" href="/static/styles/create_fut/identifaca.css">-->
+
+
 {% endblock %}
 {% block contentf %}
+
 <div class="bodyf">
     <form action="{% url 'n_process' %}" method="post">
         {% csrf_token %}
@@ -14,7 +23,7 @@
             <div class="from_item">
                 <div class="group">
                     <input type="text" id="name1" name="name" value="Edgar Aguirre" required>
-                    <label for="name1">Nombre</label>
+                    <label  for="name1">Nombre</label>
                     <div class="bar"></div>
                 </div>
             </div>
@@ -67,6 +76,7 @@
     </div>
     </form>
 </div>
+
 {% endblock %}
 
 <!-- ----- -->

@@ -3,11 +3,12 @@ body {
     background: white;
     font-family: verdana;
     color: black;
-  
+
 }
 .mynavbar2{
     width: 70%;
     margin: 0px auto;
+    
 }
 .mynavbar{
     width: 100%;
@@ -39,6 +40,7 @@ body {
 }
 .content_myuser{
     margin: auto;
+    
 }
 .myuser{
     /* background: green; */

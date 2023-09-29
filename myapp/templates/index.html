@@ -1,16 +1,19 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block linkstyle %}
-<link rel="stylesheet" href="{% static '/styles/Home.css' %}">
+<!--<link rel="stylesheet" href="{% static '/styles/Home.css' %}">-->
+<!--<link rel="stylesheet" href="static/styles/index.css">-->
+<link rel="stylesheet" href="static/styles/indexx.css">
+
 {% endblock %}
 
 {% block content %}
+<section>
 
 <div class="content-h">
     <div class="subcontent">
-        <h1 class="fw-light">¡Hola!</h1>
+        <h1 class="fw-light">¡Holaaaa!</h1>
         <p class="fw-medium">Realice aqui tramites para titulos o certificados.</p>
-
         <div class="mybuttons">
             <a href="form_new_fut/identification">Realizar un Tramite</a>
             <a href="my_fut">Consultar Tramites</a>
@@ -30,14 +33,15 @@
     <div class="cuestions">
         <h5>¿Que es el codigo QR?</h5>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex it voluptas nihil!</p>
-        <img src="{% static 'img/qr_code.png' %}" alt="">
+        <img class="qr" src="{% static 'img/qr_code.png' %}" alt="">
     </div>
 
     <div class="cuestions">
         <h5>¿Por que tener un certificado con QR?</h5>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex it voluptas nihil!</p>
-        <img src="{% static 'img/img_certificado.png' %}" alt="" width="600px">
+        <img class="certi"   src="{% static 'img/img_certificado.png' %}" alt="" >
     </div>
 </div>
 
+</section>
 {% endblock %}

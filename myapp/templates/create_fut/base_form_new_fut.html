@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block linkstyle %}
-<link rel="stylesheet" href="{% static '/styles/create_fut/base4.css' %}">
+<!--<link rel="stylesheet" href="{% static '/styles/create_fut/base4.css' %}">-->
 {% block linkstyle2 %}
 {% endblock %}
 {% endblock %}
@@ -51,6 +51,21 @@
 .activate-f p{
     margin: auto;
     font-size: 18px;
+}
+@media (max-width:990px){
+    .content-f{
+        padding: 10px;
+        font-size: 20px;
+    }
+    .navbar-f{
+        padding: 50px 50px;
+        width: 100%;
+    }
+    p{
+        text-align: center;
+    }
+    
+    
 }
 </style>
 <div class="content-f" style="margin: 50px auto;">
