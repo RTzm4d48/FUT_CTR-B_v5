@@ -139,6 +139,7 @@
     }
     .ayelash p{
         margin: auto 7px;
+        font-size: 15px;
     }
 /* ----------------------------- */
     .navbar_extra{
@@ -192,6 +193,15 @@
     .chanels:hover{
         opacity: 50%;
     }
+    .data_fut{
+        display: flex;
+        opacity: 80%;
+        font-weight: bold;
+    }
+    .new{
+        font-weight: bold;
+        color: #27b627;
+    }
 </style>
 <div class="block_container">
     <div class="block_bloker">
@@ -244,12 +254,14 @@
             <div id="cont_ayelash">
             <!-- pesttañas -->
             {% for i in Object %}
-                <a href='/ils_admin/staff/fut?code={{i.code}}&mode=1' class='ayelash'>
+                <a href='/ils_admin/staff/fut?code={{i.code}}&mode=1' class='ayelash {% if i.view == 0 %}ayelash_color{% endif %}'>
                     <div class='filauno'><img width='25px' height='25px' style='margin: auto 7px;' src='/static/img/procedure.png' alt=''>
-                        <h2> {{i.num}} </h2>
+                        <h2>{{i.num}}</h2>
                         <p>{{i.order}}</p>
                     </div>
-                    <div class='filados'><p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.stage == 1 %} <p style='opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;'>/Pospuesto - {{i.date}}</p> {% elif i.stage == 2 %} <p style='opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;'>/Pendiente - {{i.date}}</p>{% else %}<p style='opacity: 80%; font-weight: bold; margin: auto 20px auto auto;'>{{i.date}}</p>{% endif %}</div>
+                    <div class='filados'>
+                        <p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.view == 0 %}<p class='new'>/Nuevo</p>{% endif %}{% if i.stage == 1 %}<p class='data_fut' style='color: orange; margin: auto 20px auto auto;'>/Pospuesto - {{i.date}}</p> {% elif i.stage == 2 %} <p class='data_fut' style='color: skyblue; margin: auto 20px auto auto;'>/Pendiente - {{i.date}}</p>{% else %}<p class='data_fut' style='margin: auto 20px auto auto;'>{{i.date}}</p>{% endif %}
+                    </div>
                 </a>
             {% endfor %}
             <!-- fin-pestañas -->
@@ -339,21 +351,28 @@ var role = "{{role}}";
                     //estado pospuesto o pendiente
                     var estado="<p></p>";
                     if(data[i]['stage']==1){ //POSPUESTO
-                        estado = "<p style='opacity: 80%; color: orange; font-weight: bold; margin: auto 20px auto auto;'>/Pospuesto - "+data[i]['date']+"</p>";
+                        estado = "<p class='data_fut' style='color: orange;margin: auto 20px auto auto;'>/Pospuesto - "+data[i]['date']+"</p>";
                     }else if(data[i]['stage']==2){//PENDIENTE
-                        estado = "<p style='opacity: 80%; color: skyblue; font-weight: bold; margin: auto 20px auto auto;'>/Pendiente - "+data[i]['date']+"</p>";
+                        estado = "<p class='data_fut' style='color: skyblue;margin: auto 20px auto auto;'>/Pendiente - "+data[i]['date']+"</p>";
                     }else{
-                        estado="<p style='opacity: 80%; font-weight: bold; margin: auto 20px auto auto;'>"+data[i]['date']+"</p>";
+                        estado="<p class='data_fut' style='margin: auto 20px auto auto;'>"+data[i]['date']+"</p>";
                     }
+                    var new_fut="";
+                    var class_view="";
+                    if(data[i]["view"]==0){
+                        new_fut="<p class='new'>/Nuevo</p>";
+                        class_view="ayelash_color";
+                    }
+
 
                     // contenido del  div
                     const div = document.createElement('div');
-                    div.innerHTML="<a href='/ils_admin/staff/fut?code="+data[i]['code']+"&mode=1' class='ayelash'>"+
+                    div.innerHTML="<a href='/ils_admin/staff/fut?code="+data[i]['code']+"&mode=1' class='ayelash "+class_view+"'>"+
                     "<div class='filauno'><img width='25px' height='25px' style='margin: auto 7px;' src='/static/img/procedure.png' alt=''>"+
                         "<h2>"+data[i]['num']+"</h2>"+
                         "<p>"+data[i]['order']+"</p>"+
                     "</div>"+
-                    "<div class='filados'><p>"+data[i]['reason']+"</p><p>-</p><p>"+data[i]['name']+"</p>"+estado+"</div>"+
+                    "<div class='filados'><p>"+data[i]['reason']+"</p><p>-</p><p>"+data[i]['name']+"</p>"+new_fut+estado+"</div>"+
                     "</a>";
                     contenedor.appendChild(div)
                 }
