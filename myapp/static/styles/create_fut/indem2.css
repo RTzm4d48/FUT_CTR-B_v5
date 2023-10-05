@@ -1,4 +1,6 @@
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -184,6 +186,24 @@ select::-ms-expand {
 
 @media (max-width: 990px) {
   .from_item {
-    margin: 10px 10px;
+    position: relative;
+    margin: 10px;
+    display: flex;
+    width: 100%;
+    max-width: 100vh;
   }
+  .from_item .group {
+    flex-direction: column;
+    /*label{
+      align-items: center;
+      justify-content: center;
+    }
+    */
+  }
+  /*.form_block{
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+  */
 }/*# sourceMappingURL=indem2.css.map */

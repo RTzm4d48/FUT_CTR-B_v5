@@ -2,8 +2,15 @@
 
 {% load static %}
 {% block linkstyle2 %}
+
+<!--FORMAS DEL FORMULARIO-->
 <link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
+
+<!--Coloroes-->
 <link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+
+
+
 {% endblock %}
 
 {% block contentf %}
@@ -44,12 +51,17 @@
                     <div class="bar"></div>
                 </div>
             </div>
-            <div class="from_item">
+            
+            
+            <div  class="from_item">
                 <p>Subir archivo pdf (opcional)</p>
-                  <label for="pdf_file">Seleccionar archivo PDF:</label>
-                  <input type="file" id="pdf_file" name="pdf_file">
+                <input type="file" id="pdf_file" name="pdf_file">
+                    
             </div>
+            
+        
         </div>
+    
         <div class="form_block">
             <div class="from_item" style="float:right">
                 <input type="hidden" name="name" value="{{ Name }}">
