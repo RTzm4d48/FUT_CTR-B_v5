@@ -3,45 +3,461 @@
 {% block linkstyle %}
 <!--<link rel="stylesheet" href="{% static '/styles/Home.css' %}">-->
 <!--<link rel="stylesheet" href="static/styles/index.css">-->
-<link rel="stylesheet" href="static/styles/indexx.css">
+<!-- <link rel="stylesheet" href="static/styles/indexx.css"> -->
 
 {% endblock %}
 
 {% block content %}
-<section>
+<style>
+    @font-face {
+    font-family: 'myfont_robot_bold';
+    src: url('/static/fonts/Roboto-Bold.ttf') format('truetype')
+    }
+    @font-face {
+    font-family: 'myfont_robot_normal';
+    src: url('/static/fonts/Roboto-Regular.ttf') format('truetype')
+    }
 
+    body{
+        font-family: 'myfont_robot_normal';
+    }
+    .points{
+        display: flex;
+    }
+    .qr {
+        width: 15%;
+        height: auto;
+        margin: 10px 0px 10px 20px;
+    }
+    .certi {
+        width: 50%;
+        left: 150px;
+        margin: 10px 0px 50px 20px;
+        background: #929292;
+        padding: 20px 30px;
+        height: auto;
+    }
+    /* ------------------------- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    section {
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        top: 0;
+        left: 0;
+    }
+    section .content-h {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        color: black;
+        display: flex;
+        background: #476aa7;
+    }
+    section .content-h .subcontent {
+        display: flex;
+        width: 70%;
+        height: 100%;
+        margin: 0px auto;
+        /* background: green; */
+    }
+    .subcont2{
+        width: 50%;
+        margin: auto;
+        /* background: pink; */
+        display: flex;
+    }
+    .subcont3{
+        /* background: slateblue; */
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .flotar_imagen{
+        animation: floatUpDown 3s ease-in-out infinite;
+    }
+    @keyframes floatUpDown {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+    .subcont2 img{
+        height: 400px;
+        margin: auto;
+    }
+    .fw-light {
+        color: red;
+        font-size: 80px;
+        font-family: 'myfont_robot_bold';
+    }
+    .coment{
+        color: white;
+        font-size: large;
+        opacity: 80%;
+    }
+    .mybuttons{
+        /* background: darkgreen; */
+        height: auto;
+        display: flex;
+    }
+    .procedure{
+        background: #EF0033;
+        color: white;
+        padding: 10px 25px;
+        font-family: 'myfont_robot_bold';
+        border-radius: 100px;
+        text-decoration: none;
+        margin: auto 5px auto 0px;
+    }
+    .consult{
+        padding: 10px 25px;
+        border-radius: 100px;
+        margin: auto 5px auto 0px;
+        display: flex;
+        /* background: #EF0033; */
+    }
+    .consult img{
+        width: 25px;
+        height: 25px;
+        margin: auto 5px;
+    }
+    .consult a{
+        text-decoration: none;
+        color: white;
+        margin: auto;
+    }
+    .consult:hover{
+        opacity: 0.5; /* La imagen de hover estará oculta inicialmente */
+        transition: opacity 0.3s;
+    }
+    .procedure:hover{
+        transition-duration: 0.4s;
+        opacity: 100%;
+        background: #b8032a;
+        color: white;
+    }
+    .content2-h {
+        width: 70%;
+        margin: 10px auto 50px auto;
+        color: black;
+        display: block;
+        /* background: green; */
+    }
+    .cuestions{
+        width: 45%;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        /* background: blue; */
+    }
+    .cuestions h5 {
+        color: red;
+    }
+    .cuestions p {
+        opacity: 70%;
+        text-align: justify;
+    }
+    .cuestions a{
+        color:  #476aa7;
+        width: 150px;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px 30px;
+        border-radius: 5px;
+        border: 3px solid #476aa7;
+        /* margin: auto 0px auto auto; */
+        margin: auto;
+        display: inline-block;
+    }
+    .cuestions .more{
+        opacity: 100%;
+        color:  #476aa7;
+        width: 150px;
+        text-align: center;
+        padding: 10px 30px;
+        border-radius: 5px;
+        border: 3px solid #476aa7;
+        /* margin: auto 0px auto auto; */
+        margin: auto;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .cuestions .more:hover{
+        background: #476aa7;
+        color: white;
+    }
+    .qr {
+        margin: auto;
+        width: 500px;
+    }
+    section .content2-h .cuestions .certi {
+        width: 100%;
+        left: 15px;
+        height: auto;
+    }
+    .line{
+        opacity: 0;
+    }
+    .title_content{
+        width: 100%;
+        /* background: yellow; */
+        padding: 100px 0px 60px 0px;
+        display: flex;
+    }
+    .title{
+        /* background: red; */
+        margin: auto;
+    }
+    .title h1{
+        font-size: 22px;
+        font-family: 'myfont_robot_bold';
+        color: #EF0033;
+    }
+    .title_line1{
+        width: 200px;
+        height: 3px;
+        background: #EF0033;
+        margin: 0px auto;
+    }
+    .title_line2{
+        width: 80%;
+        margin: 0px auto;
+        height: 1px;
+        background: rgb(190, 190, 190);
+    }
+    .content_cuestions{
+        display: flex;
+        /* background: hotpink; */
+    }
+    .content_complete{
+        background: #F3F5FA;
+        width: 100%;
+        padding: 30px 0px;
+        display: flex;
+    }
+    .ques_a{
+        /* background: gray; */
+        margin: 0px 0px auto auto;
+    }
+    .ques_b{
+        /* background: gray; */
+        width: 35%;
+        margin: auto auto auto 0px;
+    }
+    .footer{
+        width: 100%;
+        height: 200px;
+        background: #476aa7;
+    }
+    .reasons{
+        background: white;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0px;
+        margin: 10px 0px;
+    }
+    .reasons p{
+        margin: 0px 10px;
+        /* background: green; */
+    }
+    .reason_title{
+        color: #EF0033;
+        font-family: 'myfont_robot_bold';
+    }
+
+    @media (max-width: 990px) {
+        section {
+            padding: 5px;
+        }
+        section .content-h {
+            text-align: center;
+        }
+        section .mybuttons a {
+            gap: 25px;
+            display: flex;
+            margin-bottom: 10px;
+        }
+        section .mybuttons .content2-h {
+            display: inline-block;
+        }
+        section .mybuttons .cuestions {
+            position: relative;
+        }
+        section .mybuttons .cuestions .qr {
+            width: 100%;
+        }
+        section .mybuttons .cuestions .certi {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            left: 0;
+            max-height: 200px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+</style>
+
+<style>
+    .dynamic {
+        opacity: 0;
+        transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
+        transition: opacity 1s ease, transform 1s ease;
+    }
+    .dynamic2 {
+        opacity: 0;
+        transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
+        transition: opacity 1s ease, transform 1s ease;
+    }
+    .dynamic3 {
+        opacity: 0;
+        transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    /* Aplica la animación cuando el elemento está en el viewport */
+    .show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<section>
 <div class="content-h">
-    <div class="subcontent">
-        <h1 class="fw-light">¡Hola!</h1>
-        <p class="fw-medium">Realice aqui tramites para titulos o certificados.</p>
-        <div class="mybuttons">
-            <a href="form_new_fut/identification">Realizar un Tramite</a>
-            <a href="my_fut">Consultar Tramites</a>
+    <div class="subcontent dynamic">
+        <div class="subcont2" style="margin: 105px 0px auto 0px;">
+            <div class="subcont3">
+                <h1 class="fw-light">¡Hola!</h1>
+                <p class="coment">¡Comienza tu proceso de trámite aquí!</p>
+                <div class="mybuttons">
+                    <a class="procedure" href="form_new_fut/identification">Realizar un Tramite</a>
+                    <div class="consult">
+                        <img src="/static/img/procedure.png" alt="">
+                        <a href="my_fut">Consultar Tramites</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="subcont2">
+            <img class="flotar_imagen" src="/static/img/front_img.png" alt="">
         </div>
     </div>
 </div>
+<div class="content2-h dynamic2">
+    <div class="title_content">
+        <div class="title">
+            <h1>¿POR QUE HACER UN TRAMITE VIRTUAL?</h1>
+            <div class="title_line1"></div>
+            <div class="title_line2"></div>
+        </div>
+    </div>
+    <div class="content_cuestions">
+        <div class="cuestions">
+            <p>Hacer trámites virtuales simplifica la vida de los estudiantes al eliminar desplazamientos, reducir tiempos de espera y minimizar el uso de papel. La inclusión de códigos QR asegura la autenticidad de los documentos y la plataforma proporciona seguimiento en tiempo real, mejorando la experiencia del usuario.</p>
+            <p onclick="topscrolll()" class="more">Saber Más</p>
+        </div>
+        <div class="cuestions">
+            <p style="font-family: 'myfont_robot_bold';">Algúnas ventajas tambien pueden ser:</p>
+            <div class="points">
+                <p>Eficiencia: Los trámites virtuales ahorran tiempo al evitar desplazamientos y permitir envíos instantáneos de documentos.</p>
+            </div>
+            <div class="points">
+                <p>Ahorro de recursos: La reducción del uso de papel beneficia al medio ambiente y reduce costos.</p>
+            </div>
+            <div class="points">
+                <p>Accesibilidad: Los estudiantes pueden realizar trámites desde cualquier lugar con conexión a internet.</p>
+            </div>
 
-<div class="content2-h">
-    <div class="cuestions">
-        <h5>¿Por que hacer un tramite virtual?</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus sequi, nisi quaerat officia corporis atque! Porro molestias dicta quos expedita, ipsam fuga temporibus veniam, voluptate recusandae a eos eius iusto aliquam consequuntur sunt dolorem atque sequi quae iste earum!</p>
+        </div>
     </div>
-    <div class="cuestions">
-        <h5>Ventajas</h5>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex incidunt, repellendus quis molestias vitae voluptates voluptas expedita facere nulla rerum impedit maiores quos eaque pariatur? Iure reprehenderit voluptas nihil!</p>
-    </div>
-    <div class="cuestions">
+</div>
+<div class="content_complete content dynamic3">
+    <div class="cuestions ques_a">
         <h5>¿Que es el codigo QR?</h5>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex it voluptas nihil!</p>
-        <img class="qr" src="{% static 'img/qr_code.png' %}" alt="">
-    </div>
+        <p>Un código QR (Quick Response) es un código de barras bidimensional que almacena información, como enlaces web o datos. Se escanea con un dispositivo para acceder a esa información.</p>
 
-    <div class="cuestions">
         <h5>¿Por que tener un certificado con QR?</h5>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ex it voluptas nihil!</p>
-        <img class="certi"   src="{% static 'img/img_certificado.png' %}" alt="" >
+        <p>Un certificado con código QR es conveniente, seguro y ecológico. Facilita el acceso, verifica la autenticidad y ahorra tiempo y recursos.</p>
+
+        <div class="reasons">
+            <p class="reason_title">1.- Verificación rápida</p>
+            <p>Los códigos QR permiten verificar la autenticidad de un certificado de manera instantánea.</p>
+        </div>
+        <div class="reasons">
+            <p class="reason_title">2.- Seguridad mejorada</p>
+            <p>Los certificados con códigos QR son difíciles de falsificar, proporcionando confiabilidad.</p>
+        </div>
+        <div class="reasons">
+            <p class="reason_title">3.- Facilita el acceso</p>
+            <p>Facilita el acceso a información adicional o detalles específicos relacionados con el certificado.</p>
+        </div>
+    </div>
+    <div class="cuestions ques_b">
+        <img class="qr" src="{% static 'img/illustration_qr.png' %}" alt="">
     </div>
 </div>
 
+<div class="footer">
+</div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dynamic = document.querySelector(".dynamic");
+        const dynamic2 = document.querySelector(".dynamic2");
+        const dynamic3 = document.querySelector(".dynamic3");
+        const line = document.querySelector(".line");
+
+        window.addEventListener("scroll", function () {
+            // Calcula la opacidad en función de la posición de desplazamiento
+            const scrollPosition = window.scrollY;
+            const maxOpacityScroll = 300; // Ajusta este valor según tu preferencia
+
+            // Ajusta la opacidad en función de la posición de desplazamiento
+            const opacity = (scrollPosition / maxOpacityScroll);
+
+            // Asegura que la opacidad no sea menor que 0
+            line.style.opacity = opacity > 1 ? 1 : opacity;
+        });
+        // ----------------------------
+        function checkScroll() {
+            const windowHeight = window.innerHeight;
+
+            const contentTop = dynamic.getBoundingClientRect().top;
+            const contentTop2 = dynamic2.getBoundingClientRect().top;
+            const contentTop3 = dynamic3.getBoundingClientRect().top;
+
+            if (contentTop < windowHeight * 0.75) {
+                dynamic.classList.add("show");
+                //window.removeEventListener("scroll", checkScroll);
+            }
+            if (contentTop2 < windowHeight * 0.75) {
+                dynamic2.classList.add("show");
+                // window.removeEventListener("scroll", checkScroll);
+            }
+            if (contentTop3 < windowHeight * 0.75) {
+                dynamic3.classList.add("show");
+                window.removeEventListener("scroll", checkScroll);
+            }
+        }
+        window.addEventListener("scroll", checkScroll);
+        checkScroll(); // Comprueba el estado inicial
+    });
+    function topscrolll(){
+            console.log("jelou");
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+</script>
 {% endblock %}

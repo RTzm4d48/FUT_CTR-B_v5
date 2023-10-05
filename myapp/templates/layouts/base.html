@@ -18,6 +18,92 @@
     <title>FUT_CTR-B</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+<style>
+  body {
+    /*background: #161B22;*/
+    background: white;
+    font-family: verdana;
+    color: black;
+
+}
+.mynavbar2{
+    width: 70%;
+    margin: 0px auto;
+    
+}
+.mynavbar{
+    width: 100%;
+    margin: 0px auto;
+    background: #476aa7;
+}
+
+.line{
+    background: red;
+    width: 100%;
+    height: 3px;
+}
+.pp {
+    background: red;
+}
+.color1{
+    background: #d8dfe0;
+    color: red;
+    border: none;
+    width: 120px;
+    font-size: small;
+}
+.color1:hover{
+    background: red;
+    color: white;
+}
+.nav-link{
+    margin: 0px 10px;
+}
+.content_myuser{
+    margin: auto;
+    
+}
+.myuser{
+    /* background: green; */
+    display: flex;
+    margin: auto;   
+}
+.content_mavbar{
+  width: 100%;
+  display: flex;
+}
+.mi_nav{
+  margin: auto 0px auto auto; font-size: large;
+  
+  /* background: green; */
+  display: flex;
+  list-style: none;
+}
+.nav{
+  /* background: yellow; */
+  margin: auto 5px;
+  align-items: center;
+  align-content: center;
+  text-decoration: none;
+  color: white;
+  padding: 5px 15px;
+}
+.nav:hover{
+  color: #EF0033;
+  transition-duration: 0.4s;
+}
+.active{
+  opacity: 90%;
+  background: #EF0033;
+  font-weight: bold;
+  border-radius: 15px;
+}
+.active:hover{
+  color: white;
+  background: #ac062a;
+  transition-duration: 0.4s;
+}
+</style>
 <body>
     
     <div class="mynavbar" style="position: fixed; z-index: 4;top: 0px;">
@@ -78,19 +164,19 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse container-fluid" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+          <div class="content_mavbar" id="navbarNavDropdown">
+            <ul class="mi_nav">
+              <li>
+                <a class="nav active" aria-current="page" href="/">Inicios</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Nuevo tramite</a>
+              <li>
+                <a class="nav" href="#">Nuevo tramite</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'n_proceedings' %}?code=123">Consultar tramites</a>
+              <li>
+                <a class="nav" href="{% url 'n_proceedings' %}?code=123">Consultar tramites</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Acerca de</a>
+              <li>
+                <a class="nav" href="#">Acerca de</a>
               </li>
               
             </ul>
