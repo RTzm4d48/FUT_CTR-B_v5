@@ -31,3 +31,14 @@ class fut(models.Model):
 
     def __str__(self):
         return f"ID: {self.id} - {self.name} - {self.order} - {self.email}"
+    
+
+class tupa(models.Model):
+    areas_incolucradas = models.CharField(max_length=100)
+    tipo_de_servicio = models.CharField(max_length=100)
+    monto = models.IntegerField()
+    duracion_de_tramite = models.IntegerField()
+    procedimiento = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"ID: {self.id} - {self.tipo_de_servicio} - {self.monto} - {self.duracion_de_tramite}"
