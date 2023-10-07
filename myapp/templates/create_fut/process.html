@@ -178,6 +178,12 @@ textarea:-webkit-autofill {
         cursor: pointer;
         margin: 0px 0px auto auto;
     }
+    .boxlist_inner{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
     .content_boxlist:hover{
         border: 2px solid #272ae4;
     }
@@ -289,17 +295,19 @@ textarea:-webkit-autofill {
                     <div class="bar"></div>
                 </div>
             </div>
-            <div class="from_item" style="float:right">
-                <div class="content_boxlist list_activate">
-                    <!-- <p>Seleccionar Tramite</p>
-                    <div class="icono">
-                        <svg style="pointer-events: none; display: block; width: 100%; height: 100%;" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path fill="gray" d="M18,9l-6,6L6,9H18z"></path></g></svg>
-                    </div> -->
-                    <div class="content_boxlist2">
-                        <div class="search_content">
-                            <input class="txt_search" type="text" id="miCuadroDeTexto" placeholder="Busca el tramite que deseas">
-                            <div class="svg_search">
-                                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g><path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"></path></g></svg>
+            <div class="from_item" style="float:right;" >
+                <div class="content_boxlist" id='boxlist'>
+                    <div class='boxlist_inner' onclick='show_list()'>
+                        <p>Seleccionar Tramite</p>
+                        <div class='icono'>
+                            <svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>
+                        </div>
+                    </div>
+                    <!-- <div class='content_boxlist2'>
+                        <div class='search_content'>
+                            <input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas'>
+                            <div class='svg_search'>
+                                <svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>
                             </div>
                         </div>
                         <div class='procedure_content'>
@@ -311,37 +319,16 @@ textarea:-webkit-autofill {
                                 <img src='/static/img/procedure2.png' alt=''>
                                 <p>Cambio de programa</p>
                             </div>
-                            <div class="procedure color_procedure">
-                                <img src="/static/img/procedure2.png" alt="">
-                                <p>Carta presentacion practica preprof</p>
-                            </div>
-                            <div class="procedure">
-                                <img src="/static/img/procedure2.png" alt="">
-                                <p>Certificado de estudios (paga por cada ciclo)</p>
-                            </div>
-                            <div class="procedure color_procedure">
-                                <img src="/static/img/procedure2.png" alt="">
-                                <p>Certificado formacion cotinua</p>
-                            </div>
-                            <div class="procedure">
-                                <img src="/static/img/procedure2.png" alt="">
-                                <p>Certificado progresivo</p>
-                            </div>
-                            <div class="procedure color_procedure">
-                                <img src="/static/img/procedure2.png" alt="">
-                                <p>Constancia de egresado</p>
-                            </div>
                         </div>
-                        <div class="close_conte">
-                            <p>Close</p>
+                        <div class='close_conte'>
+                            <p onclick='hide_list()'>Close</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="form_block" style="display: flex; justify-content: space-between;">
             <div class="from_item">
-
                 <div class="group">
                     <textarea id="name" name="reason" cols="30" rows="10" required>Motivo por defecto</textarea>
                     <label id="label_def" for="name">Que por motivos de:</label>
@@ -375,6 +362,47 @@ textarea:-webkit-autofill {
     </div>
     </form>
 </div>
+<script>
+    function show_list(){
+        console.log("TEXT TAMBIEN");
+        var divContenedor = document.getElementById("boxlist");
+        var list_html = "<div class='content_boxlist2'>"+
+                            "<div class='search_content'>"+
+                                "<input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas'>"+
+                                "<div class='svg_search'>"+
+                                    "<svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='procedure_content'>"+
+                                "<div class='procedure color_procedure'>"+
+                                    "<img src='/static/img/procedure2.png' alt=''>"+
+                                    "<p>Búsqueda de documentos</p>"+
+                                "</div>"+
+                                "<div class='procedure'>"+
+                                    "<img src='/static/img/procedure2.png' alt=''>"+
+                                    "<p>Cambio de programa</p>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='close_conte'>"+
+                                "<p onclick='hide_list()'>Close</p>"+
+                            "</div>"+
+                        "</div>";
+        divContenedor.innerHTML = list_html;
+        divContenedor.classList.add("list_activate");
+    }
+    function hide_list(){
+        console.log("estoy en hide");
+        var divContenedor = document.getElementById("boxlist");
+        var txt_html  = "<div class='boxlist_inner' onclick='show_list()'>"+
+                            "<p>Seleccionar Tramite</p>"+
+                            "<div class='icono'>"+
+                                "<svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>"+
+                            "</div>"+
+                        "</div>";
+        divContenedor.innerHTML = txt_html;
+        divContenedor.classList.remove("list_activate");
+    }
+</script>
 {% endblock %}
 
 
