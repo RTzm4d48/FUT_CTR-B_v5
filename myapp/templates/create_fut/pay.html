@@ -7,6 +7,48 @@
 {% endblock %}
 
 {% block contentf %}
+
+<!-- identification2.css style -->
+<style>
+    .bodyf{
+    width: 100%;
+    /*background: #ECF2F9;*/
+    /*background: red;*/
+    padding: 10px 0px;
+    
+}
+.content_form{
+    width: 90%;
+    height: 100%;
+    /* background: green; */
+    margin: auto;
+    display: block;
+}
+.button_block{
+    width: 100%;
+    height: 100px;
+    margin: 40px 0px 20px 0px;
+    display: block;
+    display:flex;height: auto; 
+    /* background: pink; */
+}
+.botons_display{
+    /* background: blue; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.botons_display button{
+    border: none;
+    border-radius: 5px;
+    color:white;
+    background: red;
+    width: 90px;
+    height: 30px;
+}
+</style>
+
 <style>
     .content_form{
         /* background: yellow; */
@@ -62,9 +104,6 @@
         {% csrf_token %}
     <div class="content_form">
         <div class="content_form2">
-<<<<<<< Updated upstream
-            
-=======
             <div class="block">
                 <div class="column1">
                     <img style="width: 100px;" src="{% static 'img/fut_ctr-b.png' %}" alt="">
@@ -87,10 +126,10 @@
                 <div class="column1">
                     <p>metodo de pago:</p>
                     <div class="pay_content">
-                        <div class="radio"><input name="intereses" type="radio" value="rbipeliculas" checked="checked" /></div> Presencial por caja
+                        <div class="radio"><input name="typepay" type="radio" value="5" checked="checked" onclick="capturarValor(this)"/></div> Presencial por caja
                     </div>
                     <div class="pay_content">
-                        <div class="radio"><input name="interseses" type="radio" value="rbipelicsulas" /></div>Pasarela de pago virtual
+                        <div class="radio"><input name="typepay" type="radio" value="0" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
                         <img src="{% static 'img/visa.png' %}" height="20px" style="margin: auto 10px auto auto;" alt="">
                     </div>
                 </div>
@@ -100,22 +139,20 @@
                 <div class="column1">
                     <p style="font-weight: bold;">Solicitud de {{Order}}</p>
                     <p>Costo Tramite: S/. 100</p>
-                    <p>Cargo por Pasarela: S/. 5</p>
+                    <p id="p_cargo">Cargo por Pasarela: S/. 5</p>
                 </div>
                 <div class="column2">
-                    <p style="text-align: center; margin: auto;">TOTAL: S/. 105</p>
+                    <p id="p_total" style="text-align: center; margin: auto;">TOTAL: S/. 105</p>
                 </div>
             </div>
             <!-- <div class="block">
                 <div class="column1"></div>
                 <div class="column2"></div>
             </div> -->
-
->>>>>>> Stashed changes
         </div>
-        <div class="form_block" style="display:flex;height: auto;">
-            <div class="from_item" style="margin:0px 20px 10px auto; display: flex;">
-                <input type="hidden" name="name" value="{{Name}}">
+        <div class="button_block">
+            <div class="botons_display">
+                <!-- <input type="hidden" name="name" value="{{Name}}">
                 <input type="hidden" name="program" value="{{Program}}">
                 <input type="hidden" name="dni" value="{{Dni}}">
                 <input type="hidden" name="phone" value="{{Phone}}">
@@ -124,14 +161,30 @@
                 <input type="hidden" name="myrequest" value="{{Myrequest}}">
                 <input type="hidden" name="order" value="{{Order}}">
                 <input type="hidden" name="reason" value="{{Reason}}">
-                <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}">
-
+                <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}"> -->
+                <button type="button" onclick="window.history.back()">Volver</button>
                 <button type="submit">Finalizar</button>
             </div>
         </div>
     </div>
     </form>
 </div>
+<script>
+    function capturarValor(radio) {
+        var esp_cargo = "Cargo por Pasarela: S/. ";
+        var esp_total = "TOTAL: S/. ";
+        var taria = 100;
+
+        if (radio.checked) {
+            var valor = radio.value;
+            var valor_int = parseInt(valor);
+
+            document.getElementById("p_cargo").textContent = esp_cargo+valor;
+            document.getElementById("p_total").textContent = esp_total + (taria + valor_int);
+
+        }
+    }
+</script>
 {% endblock %}
 
 

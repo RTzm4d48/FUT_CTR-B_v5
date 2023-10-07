@@ -19,16 +19,13 @@
     /* background: pink; */
     margin: 40px 0px 0px 0px;
     display: block;
-
-
 }
 .from_item{
     width: 45%;
     height: 100%;
     /* background: skyblue; */
     float: left;
-    display: grid;
-    position: relative;
+    display: flex;
 }
 .from_item label{
     margin: auto 10px;
@@ -43,15 +40,6 @@
 .from_item textarea{
     border: none;
     border-radius: 10px;
-}
-.from_item button{
-    border: none;
-    border-radius: 5px;
-    color:white;
-    background: red;
-    width: 90px;
-    height: 30px;
-    margin: auto 0px auto auto;
 }
 
 

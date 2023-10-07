@@ -7,13 +7,276 @@
 <link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
 
 <!--Coloroes-->
-<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+<!-- <link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}"> -->
 
 
 
 {% endblock %}
 
 {% block contentf %}
+<style>
+
+.group {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+label{
+  position: absolute;
+  top: 20px;
+  color: rgba(0, 0, 0, 0.664);
+  font: 400 20px Roboto;
+  font-size: 15px;
+  cursor: text;
+  margin: auto;
+  transition: 0.25s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text_comoda {
+  display: block;
+  width: 100%;
+  padding-top: 25px;
+  padding-left: 20px;
+  border: none;
+  border-radius: 0;
+  color: black;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s ease;
+  margin: auto;
+  font-size: 15px;
+}
+.text_comoda:valid ~ label {
+  top: 0;
+  font: 700 12px Roboto;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.text_comoda:focus {
+  outline: none;
+}
+.text_comoda:focus ~ label {
+  top: 0;
+  font: 700 12px Roboto;
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.text_comoda:focus ~ .bar:before {
+  transform: translateX(0);
+}
+.text_comoda:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px red inset;
+  -webkit-text-fill-color: white !important;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  padding-top: 20px;
+  padding-left: 20px;
+  border: none;
+  color: black;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s ease;
+  margin: auto;
+  font-size: 15px;
+  height: 95%;
+}
+textarea:valid ~ label {
+  top: 0;
+  font: 700 12px Roboto;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Arial, Helvetica, sans-serif;
+}
+textarea:focus {
+  outline: none;
+}
+textarea:focus ~ label {
+  top: 0;
+  font: 700 12px Roboto;
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+}
+textarea:focus ~ .bar:before {
+  transform: translateX(0);
+}
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px red inset;
+  -webkit-text-fill-color: white !important;
+}
+
+.bar{
+  background: rgba(0, 0, 255, 0.5);
+  content: "";
+  width: 100%;
+  height: 2px;
+  transition: 0.3s ease;
+  position: relative;
+}
+.bar:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 150%;
+  background: red;
+  transform: translateX(-100%);
+}
+@media (max-width: 990px) {
+  .from_item {
+    position: relative;
+    margin: 10px;
+    display: flex;
+    width: 100%;
+    max-width: 100vh;
+  }
+  .from_item .group {
+    flex-direction: column;
+  }
+}
+</style>
+<style>
+    .from_item{
+        /* background: green; */
+        display: flex;
+        flex-direction: column;
+    }
+    .button_block{
+        width: 100%;
+        height: 100px;
+        margin: 40px 0px 20px 0px;
+        display: block;
+        display:flex;height: auto; 
+        /* background: pink; */
+    }
+    .botons_display{
+        /* background: blue; */
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .botons_display button{
+        border: none;
+        border-radius: 5px;
+        color:white;
+        background: red;
+        width: 90px;
+        height: 30px;
+    }
+    .content_boxlist{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        border-radius: 5px;
+        height: 50px;
+        color: gray;
+        border: 2px solid #7679FA;
+        cursor: pointer;
+        margin: 0px 0px auto auto;
+    }
+    .content_boxlist:hover{
+        border: 2px solid #272ae4;
+    }
+    .content_boxlist p{
+        margin: auto 10px;
+    }
+    .icono{
+        height: 30px;
+        margin: auto 10px;
+    }
+    .list_activate{
+        border: 0px solid #7679FA;
+    }
+    .list_activate:hover{
+        border: 0px solid #7679FA;
+    }
+    .content_boxlist2{
+        background: #ECF2F9;
+        width: 100%;
+        height: 310px;
+        z-index: 2;
+        border-radius: 5px;
+        border: 2px solid #7679FA;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+    }
+    .search_content{
+        width: 80%;
+        height: 40px;
+        margin: 10px auto;
+        /* background: gray; */
+        display: flex;
+        position: relative;
+    }
+    .txt_search{
+        background: white;
+        height: 100%;
+        width: 100%;
+        padding: 0px 10px;
+        font-size: 13px;
+    }
+    .txt_search:focus {
+        outline: none;
+    }
+    .svg_search{
+        /* background: pink; */
+        display: flex;
+        width: 25px;
+        position: absolute;
+        top: 50%; /* Centra verticalmente */
+        right: 5px; /* Posición a la derecha */
+        transform: translateY(-50%); /* Corrige la posición vertical para centrar */
+    }
+    .procedure_content{
+        width: 100%;
+        height: calc(100% - 100px);
+        /* background: salmon; */
+    }
+    .close_conte{
+        width: 100%;
+        height: 40px;
+        /* background: #272ae4; */
+        display: flex;
+    }
+    .close_conte p{
+        background: gray;
+        color: white;
+        margin: 10px auto auto auto;
+        padding: 2px 15px;
+        border-radius: 3px;
+        font-size: small;
+        border: 1px solid #5e5e5e;
+    }
+    .close_conte p:hover{
+        background: #686868;
+    }
+    .procedure{
+        width: 100%;
+        height: 30px;
+        display: flex;
+        color: black;
+        /* background: red; */
+    }
+    .procedure:hover{
+        background: #9cbaf1af;
+    }
+    .procedure img{
+        height: 70%;
+        margin: auto 0px auto 15px;
+        opacity: 70%;
+    }
+    .procedure p{
+        font-size: small;
+        margin: auto 15px auto 10px;
+        opacity: 80%;
+    }
+    .color_procedure{
+        background: #afafaf56;
+    }
+</style>
 <div class="bodyf">
     <form action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -21,24 +284,58 @@
         <div class="form_block">
             <div class="from_item">
                 <div class="group">
-                    <input type="text" id="name1" name="myrequest" value="Solicitud por defecto" required>
+                    <input class="text_comoda" type="text" id="name1" name="myrequest" value="Solicitud por defecto" required>
                     <label for="name1">Solicito:</label>
                     <div class="bar"></div>
                 </div>
             </div>
             <div class="from_item" style="float:right">
-                <div class="labelInside">
-                    <select id="lang" name="order">
-                        <option selected disabled>Ordenar:</option>
-                        <option value="BUSQUEDA DE DOCUMENTOS">BUSQUEDA DE DOCUMENTOS</option>
-                        <option value="CAMBIO DE PROGRAMA PROFESIONAL TÉCNICO">CAMBIO DE PROGRAMA PROFESIONAL TÉCNICO</option>
-                        <option value="CAMBIO DE TURNO">CAMBIO DE TURNO</option>
-                        <option value="CARTA DE PRESENTACIÓN DE EXPERIENCIAS FORMATIVAS">CARTA DE PRESENTACIÓN DE EXPERIENCIAS FORMATIVAS</option>
-                        <option value="CERTIFICADO DE ESTUDIOS">CERTIFICADO DE ESTUDIOS</option>
-                        <option value="CERTIFICADO DE FORMACIÓN CONTINUA">CERTIFICADO DE FORMACIÓN CONTINUA</option>
-                        <option value="CERTIFICADO MODULAR POR AÑO">CERTIFICADO MODULAR POR AÑO</option>
-                        <option value="CERTIFICADO PROGRESIVO DE FORMACIÓN CONTINUA">CERTIFICADO PROGRESIVO DE FORMACIÓN CONTINUA</option>
-                    </select>
+                <div class="content_boxlist list_activate">
+                    <!-- <p>Seleccionar Tramite</p>
+                    <div class="icono">
+                        <svg style="pointer-events: none; display: block; width: 100%; height: 100%;" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path fill="gray" d="M18,9l-6,6L6,9H18z"></path></g></svg>
+                    </div> -->
+                    <div class="content_boxlist2">
+                        <div class="search_content">
+                            <input class="txt_search" type="text" id="miCuadroDeTexto" placeholder="Busca el tramite que deseas">
+                            <div class="svg_search">
+                                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g><path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"></path></g></svg>
+                            </div>
+                        </div>
+                        <div class='procedure_content'>
+                            <div class='procedure color_procedure'>
+                                <img src='/static/img/procedure2.png' alt=''>
+                                <p>Búsqueda de documentos</p>
+                            </div>
+                            <div class='procedure'>
+                                <img src='/static/img/procedure2.png' alt=''>
+                                <p>Cambio de programa</p>
+                            </div>
+                            <div class="procedure color_procedure">
+                                <img src="/static/img/procedure2.png" alt="">
+                                <p>Carta presentacion practica preprof</p>
+                            </div>
+                            <div class="procedure">
+                                <img src="/static/img/procedure2.png" alt="">
+                                <p>Certificado de estudios (paga por cada ciclo)</p>
+                            </div>
+                            <div class="procedure color_procedure">
+                                <img src="/static/img/procedure2.png" alt="">
+                                <p>Certificado formacion cotinua</p>
+                            </div>
+                            <div class="procedure">
+                                <img src="/static/img/procedure2.png" alt="">
+                                <p>Certificado progresivo</p>
+                            </div>
+                            <div class="procedure color_procedure">
+                                <img src="/static/img/procedure2.png" alt="">
+                                <p>Constancia de egresado</p>
+                            </div>
+                        </div>
+                        <div class="close_conte">
+                            <p>Close</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,8 +359,8 @@
         
         </div>
     
-        <div class="form_block">
-            <div class="from_item" style="float:right">
+        <div class="button_block">
+            <div class="botons_display">
                 <input type="hidden" name="name" value="{{ Name }}">
                 <input type="hidden" name="program" value="{{ Program }}">
                 <input type="hidden" name="dni" value="{{ Dni }}">
@@ -71,6 +368,7 @@
                 <input type="hidden" name="phone" value="{{ Phone }}">
                 <input type="hidden" name="email" value="{{ Email }}">
 
+                <button type="button" onclick="window.history.back()">Volver</button>
                 <button type="submit">Siguiente</button>
             </div>
         </div>
