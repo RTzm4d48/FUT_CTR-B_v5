@@ -9,12 +9,11 @@
 <!--COLORES -->
 <link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
 
-<!--<link rel="stylesheet" href="/static/styles/create_fut/identifaca.css">-->
+<!-- <link rel="stylesheet" href="/static/styles/create_fut/identifaca.css"> -->
 
 
 {% endblock %}
 {% block contentf %}
-
 <div class="bodyf">
     <form action="{% url 'n_process' %}" method="post">
         {% csrf_token %}

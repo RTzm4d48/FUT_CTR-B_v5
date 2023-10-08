@@ -4,23 +4,10 @@
 <!--<link rel="stylesheet" href="{% static '/styles/Home.css' %}">-->
 <!--<link rel="stylesheet" href="static/styles/index.css">-->
 <!-- <link rel="stylesheet" href="static/styles/indexx.css"> -->
-
 {% endblock %}
 
 {% block content %}
 <style>
-    @font-face {
-    font-family: 'myfont_robot_bold';
-    src: url('/static/fonts/Roboto-Bold.ttf') format('truetype')
-    }
-    @font-face {
-    font-family: 'myfont_robot_normal';
-    src: url('/static/fonts/Roboto-Regular.ttf') format('truetype')
-    }
-
-    body{
-        font-family: 'myfont_robot_normal';
-    }
     .points{
         display: flex;
     }
@@ -51,35 +38,39 @@
         top: 0;
         left: 0;
     }
-    section .content-h {
+    .content_h{
         position: relative;
         width: 100%;
         height: 500px;
         color: black;
         display: flex;
         background: #476aa7;
+        margin: auto;
     }
-    section .content-h .subcontent {
-        display: flex;
+    .subcontent {
         width: 70%;
         height: 100%;
         margin: 0px auto;
         /* background: green; */
+        align-items: center;
+        display: flex;
     }
     .subcont2{
         width: 50%;
-        margin: auto;
+        height: 100%;
         /* background: pink; */
         display: flex;
+        
     }
     .subcont3{
         /* background: slateblue; */
-        margin: auto;
+        margin: 100px auto;
         display: flex;
         flex-direction: column;
     }
     .flotar_imagen{
         animation: floatUpDown 3s ease-in-out infinite;
+        /* background: red; */
     }
     @keyframes floatUpDown {
         0%, 100% {
@@ -272,39 +263,6 @@
         color: #EF0033;
         font-family: 'myfont_robot_bold';
     }
-
-    @media (max-width: 990px) {
-        section {
-            padding: 5px;
-        }
-        section .content-h {
-            text-align: center;
-        }
-        section .mybuttons a {
-            gap: 25px;
-            display: flex;
-            margin-bottom: 10px;
-        }
-        section .mybuttons .content2-h {
-            display: inline-block;
-        }
-        section .mybuttons .cuestions {
-            position: relative;
-        }
-        section .mybuttons .cuestions .qr {
-            width: 100%;
-        }
-        section .mybuttons .cuestions .certi {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-            left: 0;
-            max-height: 200px;
-            align-items: center;
-            justify-content: center;
-        }
-    }
 </style>
 
 <style>
@@ -332,9 +290,9 @@
 </style>
 
 <section>
-<div class="content-h">
+<div class="content_h">
     <div class="subcontent dynamic">
-        <div class="subcont2" style="margin: 105px 0px auto 0px;">
+        <div class="subcont2">
             <div class="subcont3">
                 <h1 class="fw-light">¡Hola!</h1>
                 <p class="coment">¡Comienza tu proceso de trámite aquí!</p>

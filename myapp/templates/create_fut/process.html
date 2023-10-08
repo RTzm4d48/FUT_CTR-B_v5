@@ -4,7 +4,7 @@
 {% block linkstyle2 %}
 
 <!--FORMAS DEL FORMULARIO-->
-<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
+<!-- <link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}"> -->
 
 <!--Coloroes-->
 <!-- <link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}"> -->
@@ -183,12 +183,15 @@ textarea:-webkit-autofill {
         height: 100%;
         display: flex;
         justify-content: space-between;
+        background: #E9E9E9;
+        border-radius: 5px;
     }
     .content_boxlist:hover{
         border: 2px solid #272ae4;
     }
     .content_boxlist p{
         margin: auto 10px;
+        color: black;
     }
     .icono{
         height: 30px;
@@ -225,7 +228,7 @@ textarea:-webkit-autofill {
         font-size: 13px;
     }
     .txt_search:focus {
-        outline: none;
+        outline: 1px solid #7679FA;
     }
     .svg_search{
         /* background: pink; */
