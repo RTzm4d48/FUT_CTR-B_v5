@@ -16,4 +16,6 @@ urlpatterns = [
     path('my_fut/my_credentials_EMAIL', views.my_credentials_email, name="n_send_email"),
 
     path('send_email/', views.send_email, name='n_send_email'),
+
+    path('procedures_list/', views.procedures_list, name='n_procedures_list')
 ]

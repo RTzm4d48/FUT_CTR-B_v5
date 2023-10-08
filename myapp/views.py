@@ -3,7 +3,7 @@ from asgiref.sync import sync_to_async, async_to_sync
 import base64
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse # agregamos el HttpResponse
-from .models import fut
+from .models import fut, tupa
 from myapp_admin.models import process, Admins
 from datetime import date
 from django.http import HttpResponseRedirect
@@ -447,6 +447,10 @@ def my_credentials_email(request):
     </div>
     '''
     #yag.send(destinatarios, asunto, html)
-
-
     return render(request, 'view_fut/functions/my_credentials_EMAIL.html', {'success': True, 'Email':email})
+
+def procedures_list(request):
+    tipeo = request.GET.get('tipeo')
+    objs = tupa.objects.filter(tipo_de_servicio__startswith=tipeo).order_by('id').values('tipo_de_servicio')
+    result_list = list(objs)
+    return JsonResponse({'message': result_list})

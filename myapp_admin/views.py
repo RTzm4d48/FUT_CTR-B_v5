@@ -103,7 +103,7 @@ def staff_treasury(request):
     # (/AQUÍ)(ESTO_SE_REPITE)
 
     
-    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).order_by('date').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view', 'date')[::-1]
+    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).order_by('date').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view', 'date')[::-1]# esto -> [::-1] es para invertir el orden del resultado
     num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=Position).count()
 
     # aquí contabilizamos el número de paginas que debe de haber

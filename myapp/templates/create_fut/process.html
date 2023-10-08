@@ -303,27 +303,6 @@ textarea:-webkit-autofill {
                             <svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>
                         </div>
                     </div>
-                    <!-- <div class='content_boxlist2'>
-                        <div class='search_content'>
-                            <input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas'>
-                            <div class='svg_search'>
-                                <svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>
-                            </div>
-                        </div>
-                        <div class='procedure_content'>
-                            <div class='procedure color_procedure'>
-                                <img src='/static/img/procedure2.png' alt=''>
-                                <p>Búsqueda de documentos</p>
-                            </div>
-                            <div class='procedure'>
-                                <img src='/static/img/procedure2.png' alt=''>
-                                <p>Cambio de programa</p>
-                            </div>
-                        </div>
-                        <div class='close_conte'>
-                            <p onclick='hide_list()'>Close</p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -364,16 +343,15 @@ textarea:-webkit-autofill {
 </div>
 <script>
     function show_list(){
-        console.log("TEXT TAMBIEN");
         var divContenedor = document.getElementById("boxlist");
         var list_html = "<div class='content_boxlist2'>"+
                             "<div class='search_content'>"+
-                                "<input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas'>"+
+                                "<input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas' oninput='event_search()'>"+
                                 "<div class='svg_search'>"+
                                     "<svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>"+
                                 "</div>"+
                             "</div>"+
-                            "<div class='procedure_content'"+
+                            "<div class='procedure_content' id='procedures' style='overflow-y: scroll;'>"+
                             "</div>"+
                             "<div class='close_conte'>"+
                                 "<p onclick='hide_list()'>Close</p>"+
@@ -381,9 +359,9 @@ textarea:-webkit-autofill {
                         "</div>";
         divContenedor.innerHTML = list_html;
         divContenedor.classList.add("list_activate");
+        event_search();
     }
     function hide_list(){
-        console.log("estoy en hide");
         var divContenedor = document.getElementById("boxlist");
         var txt_html  = "<div class='boxlist_inner' onclick='show_list()'>"+
                             "<p>Seleccionar Tramite</p>"+
@@ -393,6 +371,40 @@ textarea:-webkit-autofill {
                         "</div>";
         divContenedor.innerHTML = txt_html;
         divContenedor.classList.remove("list_activate");
+    }
+    function event_search(){
+        // Obtén el valor actual del campo de entrada
+        var texto = document.getElementById("miCuadroDeTexto").value;
+        // Muestra el valor en la consola
+        var cont_procedures = document.getElementById("procedures");// id contenedor
+        cont_procedures.innerHTML = "";
+        //AJAX
+        $.ajax({
+            url: "/procedures_list/", // ruta en url.py para que ejecute una funcion
+            method: "GET",
+            data:{
+                'tipeo':texto,
+            },
+            success: function(response){
+                const midata = response;
+                for (var i = 0; i < midata['message']['length']; i++) {
+                    if(i % 2 == 0){
+                        cont_procedures.innerHTML += "<div class='procedure'>"+
+                        "<img src='/static/img/procedure2.png' alt=''>"+
+                        "<p>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
+                        "</div>";
+                    }else{
+                        cont_procedures.innerHTML += "<div class='procedure color_procedure'>"+
+                        "<img src='/static/img/procedure2.png' alt=''>"+
+                        "<p>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
+                        "</div>";
+                    }
+                }
+            },
+            error: function() {
+                alert("Ocurrió un error al cargar el contenido.");
+            }
+        });
     }
 </script>
 {% endblock %}
