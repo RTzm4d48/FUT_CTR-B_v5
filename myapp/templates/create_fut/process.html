@@ -4,12 +4,10 @@
 {% block linkstyle2 %}
 
 <!--FORMAS DEL FORMULARIO-->
-<!-- <link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}"> -->
+<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
 
 <!--Coloroes-->
-<!-- <link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}"> -->
-
-
+<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
 
 {% endblock %}
 
@@ -285,6 +283,12 @@ textarea:-webkit-autofill {
     .color_procedure{
         background: #afafaf56;
     }
+    .ocultar{
+        display: none;
+    }
+    .mostrar{
+        display: flex;
+    }
 </style>
 <div class="bodyf">
     <form action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
@@ -300,12 +304,28 @@ textarea:-webkit-autofill {
             </div>
             <div class="from_item" style="float:right;" >
                 <div class="content_boxlist" id='boxlist'>
-                    <div class='boxlist_inner' onclick='show_list()'>
-                        <p>Seleccionar Tramite</p>
+                    <!-- - -->
+                    <div id="list_show_01" class='boxlist_inner' onclick='show_list()'>
+                        <p id='select_procedure'>Seleccionar Tramite</p>
                         <div class='icono'>
                             <svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>
                         </div>
                     </div>
+                    <!-- - -->
+                    <div id="list_show_02" class='content_boxlist2 ocultar'>
+                        <div class='search_content'>
+                            <input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas' oninput='event_search()'>
+                            <div class='svg_search'>
+                                <svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>
+                            </div>
+                        </div>
+                        <div class='procedure_content' id='procedures' style='overflow-y: scroll;'>
+                        </div>
+                        <div class='close_conte'>
+                            <p onclick='hide_list(0)'>Close</p>
+                        </div>
+                    </div>
+                    <!-- - -->
                 </div>
             </div>
         </div>
@@ -337,6 +357,8 @@ textarea:-webkit-autofill {
                 <input type="hidden" name="phone" value="{{ Phone }}">
                 <input type="hidden" name="email" value="{{ Email }}">
 
+                <input type="hidden" name="order" value="">
+
                 <button type="button" onclick="window.history.back()">Volver</button>
                 <button type="submit">Siguiente</button>
             </div>
@@ -347,32 +369,28 @@ textarea:-webkit-autofill {
 <script>
     function show_list(){
         var divContenedor = document.getElementById("boxlist");
-        var list_html = "<div class='content_boxlist2'>"+
-                            "<div class='search_content'>"+
-                                "<input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas' oninput='event_search()'>"+
-                                "<div class='svg_search'>"+
-                                    "<svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>"+
-                                "</div>"+
-                            "</div>"+
-                            "<div class='procedure_content' id='procedures' style='overflow-y: scroll;'>"+
-                            "</div>"+
-                            "<div class='close_conte'>"+
-                                "<p onclick='hide_list()'>Close</p>"+
-                            "</div>"+
-                        "</div>";
-        divContenedor.innerHTML = list_html;
+        var list_show_02 = document.getElementById("list_show_02");
+        var list_show_01 = document.getElementById("list_show_01");
+
+        list_show_02.classList.remove("ocultar");
+        list_show_01.classList.add("ocultar");
+
         divContenedor.classList.add("list_activate");
         event_search();
     }
-    function hide_list(){
+    function hide_list(procedure){
+        var select_procedure = document.getElementById('select_procedure');
         var divContenedor = document.getElementById("boxlist");
-        var txt_html  = "<div class='boxlist_inner' onclick='show_list()'>"+
-                            "<p>Seleccionar Tramite</p>"+
-                            "<div class='icono'>"+
-                                "<svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>"+
-                            "</div>"+
-                        "</div>";
-        divContenedor.innerHTML = txt_html;
+        var list_show_01 = document.getElementById("list_show_01");
+        var list_show_02 = document.getElementById("list_show_02");
+
+        if(procedure == 0){// significa que esta funcion fue ejecutada con el botón 'ocultar' asi que solo copiamos el textContent de la etiqueta 'p'
+            procedure = select_procedure.textContent; 
+        }
+        list_show_01.classList.remove("ocultar");
+        list_show_02.classList.add("ocultar");
+
+        select_procedure.innerHTML = procedure;
         divContenedor.classList.remove("list_activate");
     }
     function event_search(){
@@ -392,14 +410,14 @@ textarea:-webkit-autofill {
                 const midata = response;
                 for (var i = 0; i < midata['message']['length']; i++) {
                     if(i % 2 == 0){
-                        cont_procedures.innerHTML += "<div class='procedure'>"+
+                        cont_procedures.innerHTML += "<div class='procedure color_procedure' onclick='select_proc("+i+")'>"+
                         "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
+                        "<p id='proc"+i+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
                         "</div>";
                     }else{
-                        cont_procedures.innerHTML += "<div class='procedure color_procedure'>"+
+                        cont_procedures.innerHTML += "<div class='procedure' onclick='select_proc("+i+")'>"+
                         "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
+                        "<p id='proc"+i+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
                         "</div>";
                     }
                 }
@@ -408,6 +426,15 @@ textarea:-webkit-autofill {
                 alert("Ocurrió un error al cargar el contenido.");
             }
         });
+    }
+    function select_proc(num){
+        var procedure = document.getElementById('proc'+num+'_id');// obtenemos el valor del procedure seleccionado
+
+        // escribimos en el value del input oculto para que se envie el dato con el formulario
+        var orderInput = document.querySelector('input[name="order"]');
+        orderInput.value = procedure.textContent;
+
+        hide_list(procedure.textContent);// enviamos lo que camturamos el content de la etiqueta 'p'
     }
 </script>
 {% endblock %}
