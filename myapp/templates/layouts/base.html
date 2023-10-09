@@ -107,7 +107,7 @@ body{
     
     <div class="mynavbar" style="position: fixed; z-index: 4;top: 0px;">
       <nav class="mynavbar2">
-        <a class="logo_ils" href="#">
+        <a class="logo_ils" href="/">
           <!--logo-->
           <svg class="ellogo" preserveAspectRatio="xMidYMid meet" data-bbox="0 0 2080.19 936.41" viewBox="0 0 2080.19 936.41" height="91.232" width="202.667" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" data-type="color" role="presentation" aria-hidden="true" aria-labelledby="svgcid-dh86kqkvszzm"><title id="svgcid-dh86kqkvszzm"></title>
               <g>
@@ -161,16 +161,16 @@ body{
         </a>
         <div class="content_mavbar" id="navbarNavDropdown">
           <div class="mi_nav">
-            <a class="nav active" href="/">Inicios</a>
+            <a id="nav1" class="nav" href="/">Inicios</a>
           </div>
           <div class="mi_nav">
-            <a class="nav" href="#">Nuevo tramite</a>
+            <a id="nav2" class="nav" href="/form_new_fut/identification">Nuevo tramite</a>
           </div>
           <div class="mi_nav">
-            <a class="nav" href="{% url 'n_proceedings' %}?code=123">Consultar tramites</a>
+            <a id="nav3" class="nav" href="/my_fut">Consultar tramites</a>
           </div>
           <div class="mi_nav">
-            <a class="nav" href="#">Acerca de</a>
+            <a id="nav4" class="nav" href="/">Acerca de</a>
           </div>
         </div>
       </nav>
@@ -178,6 +178,28 @@ body{
       </div>
     </div>
     <div class="content_definitive">
+      <script>
+        activation('inicio');
+        function activation(position){
+          var minav1 = document.getElementById('nav1');
+          var minav2 = document.getElementById('nav2');
+          var minav3 = document.getElementById('nav3');
+          var minav4 = document.getElementById('nav4');
+          minav1.classList.remove("active");
+          minav2.classList.remove("active");
+          minav3.classList.remove("active");
+          minav4.classList.remove("active");
+          if(position == 'inicio'){
+            minav1.classList.add("active");
+          }else if(position == 'nuevo_tramite'){
+            minav2.classList.add("active");
+          }else if(position == 'consultar_tramite'){
+            minav3.classList.add("active");
+          }else{
+            minav4.classList.add("active");
+          }
+        }
+      </script>
       {% block content %}
       {% endblock %}
     </div>
