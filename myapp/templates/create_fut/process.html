@@ -2,169 +2,14 @@
 
 {% load static %}
 {% block linkstyle2 %}
-
-<!--FORMAS DEL FORMULARIO-->
-<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
-
-<!--Coloroes-->
-<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
-
+<!-- Aun no estamos usando archivos .css -->
+<!-- Los estilos base estan en 'base_from_new_fut.html' -->
 {% endblock %}
 
 {% block contentf %}
+
+<!-- ------------SOLO ESTILOS DEL 'LIST' PARA SELECCIONAR LOS TRAMITES---------- -->
 <style>
-
-.group {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-label{
-  position: absolute;
-  top: 20px;
-  color: rgba(0, 0, 0, 0.664);
-  font: 400 20px Roboto;
-  font-size: 15px;
-  cursor: text;
-  margin: auto;
-  transition: 0.25s ease;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.text_comoda {
-  display: block;
-  width: 100%;
-  padding-top: 25px;
-  padding-left: 20px;
-  border: none;
-  border-radius: 0;
-  color: black;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  transition: 0.3s ease;
-  margin: auto;
-  font-size: 15px;
-}
-.text_comoda:valid ~ label {
-  top: 0;
-  font: 700 12px Roboto;
-  color: rgba(0, 0, 0, 0.5);
-  font-family: Arial, Helvetica, sans-serif;
-}
-.text_comoda:focus {
-  outline: none;
-}
-.text_comoda:focus ~ label {
-  top: 0;
-  font: 700 12px Roboto;
-  color: red;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.text_comoda:focus ~ .bar:before {
-  transform: translateX(0);
-}
-.text_comoda:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px red inset;
-  -webkit-text-fill-color: white !important;
-}
-
-textarea {
-  display: block;
-  width: 100%;
-  padding-top: 20px;
-  padding-left: 20px;
-  border: none;
-  color: black;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  transition: 0.3s ease;
-  margin: auto;
-  font-size: 15px;
-  height: 95%;
-}
-textarea:valid ~ label {
-  top: 0;
-  font: 700 12px Roboto;
-  color: rgba(0, 0, 0, 0.5);
-  font-family: Arial, Helvetica, sans-serif;
-}
-textarea:focus {
-  outline: none;
-}
-textarea:focus ~ label {
-  top: 0;
-  font: 700 12px Roboto;
-  color: red;
-  font-family: Arial, Helvetica, sans-serif;
-}
-textarea:focus ~ .bar:before {
-  transform: translateX(0);
-}
-textarea:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px red inset;
-  -webkit-text-fill-color: white !important;
-}
-
-.bar{
-  background: rgba(0, 0, 255, 0.5);
-  content: "";
-  width: 100%;
-  height: 2px;
-  transition: 0.3s ease;
-  position: relative;
-}
-.bar:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 150%;
-  background: red;
-  transform: translateX(-100%);
-}
-@media (max-width: 990px) {
-  .from_item {
-    position: relative;
-    margin: 10px;
-    display: flex;
-    width: 100%;
-    max-width: 100vh;
-  }
-  .from_item .group {
-    flex-direction: column;
-  }
-}
-</style>
-<style>
-    .from_item{
-        /* background: green; */
-        display: flex;
-        flex-direction: column;
-    }
-    .button_block{
-        width: 100%;
-        height: 100px;
-        margin: 40px 0px 20px 0px;
-        display: block;
-        display:flex;height: auto; 
-        /* background: pink; */
-    }
-    .botons_display{
-        /* background: blue; */
-        width: 100%;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-    }
-    .botons_display button{
-        border: none;
-        border-radius: 5px;
-        color:white;
-        background: red;
-        width: 90px;
-        height: 30px;
-    }
     .content_boxlist{
         display: flex;
         width: 100%;
@@ -224,6 +69,8 @@ textarea:-webkit-autofill {
         width: 100%;
         padding: 0px 10px;
         font-size: 13px;
+        border: none;
+        border-radius: 3px;
     }
     .txt_search:focus {
         outline: 1px solid #7679FA;
@@ -290,10 +137,59 @@ textarea:-webkit-autofill {
         display: flex;
     }
 </style>
+
+<!-- ------------SOLO ESTILOS DEL 'TEXTAREA'---------- -->
+<style>
+* {
+  box-sizing: border-box;
+}
+textarea {
+  display: block;
+  width: 100%;
+  padding-top: 20px;
+  padding-left: 20px;
+  border: none;
+  color: black;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s ease;
+  margin: auto;
+  font-size: 15px;
+  height: 95%;
+  border-radius: 3px;
+}
+textarea:valid ~ label {
+  top: 0;
+  font: 700 12px Roboto;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Arial, Helvetica, sans-serif;
+  /* background: sandybrown; */
+}
+textarea:focus {
+  outline: none;
+}
+textarea:focus ~ label {
+  top: 0;
+  font: 700 12px Roboto;
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+}
+textarea:focus ~ .bar:before {
+  transform: translateX(0);
+}
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px red inset;
+  -webkit-text-fill-color: white !important;
+}
+select::-ms-expand {
+  display: none;
+}
+</style>
+
 <div class="bodyf">
-    <form action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
+    <form class="thefrom" action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    <div class="content_form"> 
+    <div class="content_form">
         <div class="form_block">
             <div class="from_item">
                 <div class="group">
@@ -337,17 +233,13 @@ textarea:-webkit-autofill {
                     <div class="bar"></div>
                 </div>
             </div>
-            
-            
+
             <div  class="from_item">
                 <p>Subir archivo pdf (opcional)</p>
                 <input type="file" id="pdf_file" name="pdf_file">
-                    
             </div>
-            
-        
         </div>
-    
+
         <div class="button_block">
             <div class="botons_display">
                 <input type="hidden" name="name" value="{{ Name }}">
@@ -356,7 +248,6 @@ textarea:-webkit-autofill {
                 <input type="hidden" name="cycle" value="{{ Cycle }}">
                 <input type="hidden" name="phone" value="{{ Phone }}">
                 <input type="hidden" name="email" value="{{ Email }}">
-
                 <input type="hidden" name="order" value="">
 
                 <button type="button" onclick="window.history.back()">Volver</button>
@@ -385,7 +276,7 @@ textarea:-webkit-autofill {
         var list_show_02 = document.getElementById("list_show_02");
 
         if(procedure == 0){// significa que esta funcion fue ejecutada con el botón 'ocultar' asi que solo copiamos el textContent de la etiqueta 'p'
-            procedure = select_procedure.textContent; 
+            procedure = select_procedure.textContent;
         }
         list_show_01.classList.remove("ocultar");
         list_show_02.classList.add("ocultar");
@@ -439,7 +330,6 @@ textarea:-webkit-autofill {
 </script>
 {% endblock %}
 
-
 <!-- ----- -->
 {% block check_1 %}
 <!-- {% if name != '' %} -->
@@ -448,7 +338,6 @@ textarea:-webkit-autofill {
 {% endif %} -->
 {% endblock %}
 <!-- ----- -->
-
 
 <!-- ----- -->
 {% block navbaractivate_2 %}

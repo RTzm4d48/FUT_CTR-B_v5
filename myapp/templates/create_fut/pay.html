@@ -2,59 +2,13 @@
 
 {% load static %}
 {% block linkstyle2 %}
-<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
-<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+<!-- Aun no estamos usando archivos .css -->
+<!-- Los estilos base estan en 'base_from_new_fut.html' -->
 {% endblock %}
-
 {% block contentf %}
 
-<!-- identification2.css style -->
+<!-- ------SOLO ESTILOS DEL CUADRO DE PAGO------ -->
 <style>
-    .bodyf{
-    width: 100%;
-    /*background: #ECF2F9;*/
-    /*background: red;*/
-    padding: 10px 0px;
-    
-}
-.content_form{
-    width: 90%;
-    height: 100%;
-    /* background: green; */
-    margin: auto;
-    display: block;
-}
-.button_block{
-    width: 100%;
-    height: 100px;
-    margin: 40px 0px 20px 0px;
-    display: block;
-    display:flex;height: auto; 
-    /* background: pink; */
-}
-.botons_display{
-    /* background: blue; */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.botons_display button{
-    border: none;
-    border-radius: 5px;
-    color:white;
-    background: red;
-    width: 90px;
-    height: 30px;
-}
-</style>
-
-<style>
-    .content_form{
-        /* background: yellow; */
-        height: auto;
-        padding: 1px;
-    }
     .content_form2{
         background: #ffffff70;
         width: 60%;
@@ -99,8 +53,9 @@
         margin: auto 5px auto 10px;
     }
 </style>
+
 <div class="bodyf">
-    <form action="{% url 'n_end' %}" method="post">
+    <form class="thefrom" action="{% url 'n_end' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
         <div class="content_form2">

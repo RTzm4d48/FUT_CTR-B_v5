@@ -1,42 +1,29 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block linkstyle %}
-<!--<link rel="stylesheet" href="{% static '/styles/Home.css' %}">-->
-<!--<link rel="stylesheet" href="static/styles/index.css">-->
+<!-- <link rel="stylesheet" href="{% static '/styles/Home.css' %}"> -->
+<!-- <link rel="stylesheet" href="static/styles/index.css"> -->
 <!-- <link rel="stylesheet" href="static/styles/indexx.css"> -->
 {% endblock %}
-
 {% block content %}
+
+<!-- ----------SOLO ESTILOS DE LA PAGINA INDEX.HTML---------- -->
 <style>
     .points{
         display: flex;
     }
     .qr {
-        width: 15%;
-        height: auto;
-        margin: 10px 0px 10px 20px;
+        margin: auto;
+        width: 500px;
+        /* background: seagreen; */
     }
-    .certi {
-        width: 50%;
-        left: 150px;
-        margin: 10px 0px 50px 20px;
-        background: #929292;
-        padding: 20px 30px;
-        height: auto;
-    }
-    /* ------------------------- */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
     section {
         align-items: center;
         justify-content: center;
         min-height: 100vh;
         top: 0;
         left: 0;
+        /* background: darkcyan; */
     }
     .content_h{
         position: relative;
@@ -88,6 +75,8 @@
         color: red;
         font-size: 80px;
         font-family: 'myfont_robot_bold';
+        /* background: salmon; */
+        margin: 0px;
     }
     .coment{
         color: white;
@@ -151,6 +140,9 @@
     }
     .cuestions h5 {
         color: red;
+        font-size: medium;
+        /* background: forestgreen; */
+        margin: 0px;
     }
     .cuestions p {
         opacity: 70%;
@@ -168,31 +160,19 @@
         margin: auto;
         display: inline-block;
     }
-    .cuestions .more{
+    .more{
         opacity: 100%;
         color:  #476aa7;
-        width: 150px;
-        text-align: center;
-        padding: 10px 30px;
+        padding: 10px 40px;
         border-radius: 5px;
         border: 3px solid #476aa7;
         /* margin: auto 0px auto auto; */
         margin: auto;
-        display: inline-block;
         cursor: pointer;
     }
-    .cuestions .more:hover{
+    .more:hover{
         background: #476aa7;
         color: white;
-    }
-    .qr {
-        margin: auto;
-        width: 500px;
-    }
-    section .content2-h .cuestions .certi {
-        width: 100%;
-        left: 15px;
-        height: auto;
     }
     .line{
         opacity: 0;
@@ -247,6 +227,7 @@
         width: 100%;
         height: 200px;
         background: #476aa7;
+        display: flex;
     }
     .reasons{
         background: white;
@@ -263,8 +244,28 @@
         color: #EF0033;
         font-family: 'myfont_robot_bold';
     }
+    .developer{
+        margin: auto;
+        display: flex;
+    }
+    .developer p{
+        margin: 0px;
+        color: white;
+        margin: auto 2px;
+    }
+    .developer a{
+        text-decoration: none;
+        color: #48adf0;
+        margin: auto 2px;
+    }
+    .developer a:hover{
+        color: #58d8ff;
+        /* text-decoration: underline; */
+        transition-duration: 0.4s;
+    }
 </style>
 
+<!-- ----------ESTILOS DE TRANCICIÓN DE OPACIDAD AL CARGAR LA PAGINA--------- -->
 <style>
     .dynamic {
         opacity: 0;
@@ -281,7 +282,6 @@
         transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
         transition: opacity 1s ease, transform 1s ease;
     }
-
     /* Aplica la animación cuando el elemento está en el viewport */
     .show {
         opacity: 1;
@@ -365,6 +365,10 @@
 </div>
 
 <div class="footer">
+    <div class="developer">
+        <p>Developer by</p>
+        <a href="https://github.com/Edgar-ae" target="_blank">Edgar Aguirre</a>
+    </div>
 </div>
 </section>
 
@@ -411,7 +415,6 @@
         checkScroll(); // Comprueba el estado inicial
     });
     function topscrolll(){
-            console.log("jelou");
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'

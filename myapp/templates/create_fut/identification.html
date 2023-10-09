@@ -2,33 +2,25 @@
 
 {% load static %}
 {% block linkstyle2 %}
-
-<!--DE LAS LETAS -->
-<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
-
-<!--COLORES -->
-<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
-
-<!-- <link rel="stylesheet" href="/static/styles/create_fut/identifaca.css"> -->
-
-
+<!-- Aun no estamos usando archivos .css -->
+<!-- Los estilos base estan en 'base_from_new_fut.html' -->
 {% endblock %}
 {% block contentf %}
 <div class="bodyf">
-    <form action="{% url 'n_process' %}" method="post">
+    <form class="thefrom" action="{% url 'n_process' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
         <div class="form_block">
             <div class="from_item">
                 <div class="group">
-                    <input type="text" id="name1" name="name" value="Edgar Aguirre" required>
+                    <input class="text_comoda" type="text" id="name1" name="name" value="Edgar Aguirre" required>
                     <label  for="name1">Nombre</label>
                     <div class="bar"></div>
                 </div>
             </div>
             <div class="from_item" style="float:right">
                 <div class="group">
-                    <input type="text" id="name2" name="program" value="Informática" required>
+                    <input class="text_comoda" type="text" id="name2" name="program" value="Informática" required>
                     <label for="name2">Programa</label>
                     <div class="bar"></div>
                 </div>
@@ -38,14 +30,14 @@
         <div class="form_block">
             <div class="from_item">
                 <div class="group">
-                    <input type="text" id="name3" name="dni" value="7876356" required>
+                    <input class="text_comoda" type="text" id="name3" name="dni" value="7876356" required>
                     <label id="label_def" for="name3">CON CÓDIGO DE CARNET O Nº D.N.I.</label>
                     <div class="bar"></div>
                 </div>
             </div>
             <div class="from_item" style="float:right">
                 <div class="group nomber_long">
-                    <input type="text" id="name4" name="phone" value="982654253" required>
+                    <input class="text_comoda" class="text_comoda" type="text" id="name4" name="phone" value="982654253" required>
                     <label for="name4">Celular</label>
                     <div class="bar"></div>
                 </div>
@@ -54,21 +46,22 @@
         <div class="form_block">
             <div class="from_item">
                 <div class="group number">
-                    <input type="text" id="name5" name="cycle" value="6" required>
+                    <input class="text_comoda" type="text" id="name5" name="cycle" value="6" required>
                     <label for="name5">Ciclo</label>
                     <div class="bar"></div>
                 </div>
             </div>
             <div class="from_item" style="float:right">
                 <div class="group nomber_long">
-                    <input type="text" id="name6" name="email" value="tapieese500@gmail.com" required>
+                    <input class="text_comoda" type="text" id="name6" name="email" value="tapieese500@gmail.com" required>
                     <label for="name6">Email</label>
                     <div class="bar"></div>
                 </div>
             </div>
         </div>
-        <div class="form_block">
-            <div class="from_item" style="float:right">
+        <div class="button_block">
+            <div class="botons_display">
+                <p></p> <!-- esto es solo para acomodar el botón -->
                 <button>Siguiente</button>
             </div>
         </div>
