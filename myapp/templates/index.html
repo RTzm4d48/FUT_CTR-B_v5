@@ -263,9 +263,58 @@
         /* text-decoration: underline; */
         transition-duration: 0.4s;
     }
+        
+    @media (max-width: 700px){
+        section{
+            position: relative;
+            flex-direction: column;
+            margin: auto;
+        }
+        section .subcont3{
+            right: 10px;
+            
+        }
+        section .fw-light{
+            padding: 20px;
+            text-align: center;
+        }
+        section .coment{
+            line-height: 40px;
+            text-align: center;
+        }
+        section .mybuttons{
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            
+            
+        }
+
+        /*
+        section .subcont2{
+            bottom: 10px;
+            position: absolute;
+            width: auto;
+            font-size: 10px;
+            
+            
+        }
+        section .subcont2 .flotar_imagen{
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            object-fit: cover;
+            
+            
+            
+        }
+        */
+    }
+
 </style>
 
 <!-- ----------ESTILOS DE TRANCICIÓN DE OPACIDAD AL CARGAR LA PAGINA--------- -->
+
 <style>
     .dynamic {
         opacity: 0;
@@ -288,6 +337,7 @@
         transform: translateY(0);
     }
 </style>
+
 
 <section>
 <div class="content_h">
