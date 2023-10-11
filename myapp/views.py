@@ -87,9 +87,13 @@ def create_fut_pay(request):
         order = request.POST.get('order')
         reason = request.POST.get('reason')
         # Procedimiento con el PDF
-        pdf_file = request.FILES['pdf_file']
-        pdf_binary = pdf_file.read()
-        pdf_binary_encoded = base64.b64encode(pdf_binary)
+        # Validando si se envio el pdf
+        if 'pdf_file' in request.FILES:
+            pdf_file = request.FILES['pdf_file']
+            pdf_binary = pdf_file.read()
+            pdf_binary_encoded = base64.b64encode(pdf_binary)
+        else:
+            pdf_binary_encoded = "Aqui no hay nada"
 
         return render(request, 'create_fut/pay.html', {
             'Name': name,
