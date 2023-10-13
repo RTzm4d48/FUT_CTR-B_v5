@@ -16,7 +16,7 @@ import random, qrcode
 #pip install opencv-python-headless
 import cv2
 import base64
-
+    
 import string
 
 from django.urls import reverse
@@ -71,7 +71,6 @@ def create_fut_process(request):
     else:
         return HttpResponse("<h1>404 Not Found :(</h1>")
 
-    
 @csrf_exempt  
 def create_fut_pay(request):
     if request.method=='POST':

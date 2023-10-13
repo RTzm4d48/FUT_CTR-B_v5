@@ -136,6 +136,9 @@
     .mostrar{
         display: flex;
     }
+    .error_list{
+        background: rgba(255, 0, 0, 0.281);
+    }
 </style>
 
 <!-- ------------SOLO ESTILOS DEL 'TEXTAREA'---------- -->
@@ -187,7 +190,7 @@ select::-ms-expand {
 </style>
 
 <div class="bodyf">
-    <form class="thefrom" action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
+    <form id="myform" class="thefrom" action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
     <div class="content_form">
         <div class="form_block">
@@ -248,7 +251,7 @@ select::-ms-expand {
                 <input type="hidden" name="cycle" value="{{ Cycle }}">
                 <input type="hidden" name="phone" value="{{ Phone }}">
                 <input type="hidden" name="email" value="{{ Email }}">
-                <input type="hidden" name="order" value="">
+                <input type="hidden" name="order" value="" required>
 
                 <button type="button" onclick="window.history.back()">Volver</button>
                 <button type="submit">Siguiente</button>
@@ -258,11 +261,13 @@ select::-ms-expand {
     </form>
 </div>
 <script>
-    function show_list(){
-        var divContenedor = document.getElementById("boxlist");
-        var list_show_02 = document.getElementById("list_show_02");
-        var list_show_01 = document.getElementById("list_show_01");
+    var list_show_01 = document.getElementById("list_show_01");
+    var divContenedor = document.getElementById("boxlist");
+    var list_show_02 = document.getElementById("list_show_02");
+    var select_procedure = document.getElementById('select_procedure');
+    var form = document.getElementById('myform');
 
+    function show_list(){
         list_show_02.classList.remove("ocultar");
         list_show_01.classList.add("ocultar");
 
@@ -270,15 +275,11 @@ select::-ms-expand {
         event_search();
     }
     function hide_list(procedure){
-        var select_procedure = document.getElementById('select_procedure');
-        var divContenedor = document.getElementById("boxlist");
-        var list_show_01 = document.getElementById("list_show_01");
-        var list_show_02 = document.getElementById("list_show_02");
-
         if(procedure == 0){// significa que esta funcion fue ejecutada con el botón 'ocultar' asi que solo copiamos el textContent de la etiqueta 'p'
             procedure = select_procedure.textContent;
         }
         list_show_01.classList.remove("ocultar");
+        list_show_01.classList.remove("error_list");
         list_show_02.classList.add("ocultar");
 
         select_procedure.innerHTML = procedure;
@@ -327,6 +328,16 @@ select::-ms-expand {
 
         hide_list(procedure.textContent);// enviamos lo que camturamos el content de la etiqueta 'p'
     }
+
+    //Evento Prevent Para asegurarnos que se seleccione un tramite
+    form.addEventListener('submit', function(event){
+        if(select_procedure.textContent == "Seleccionar Tramite"){
+            list_show_01.classList.add("error_list");
+            alert("Selecciona el trámite que deseas realizar");
+            event.preventDefault(); // Detiene el envío del formulario
+        }
+    });
+    
 </script>
 {% endblock %}
 
