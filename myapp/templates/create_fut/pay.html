@@ -152,11 +152,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="content_form2 expandir">
+                <div id="mode_pay_content" class="content_form2 expandir">
                     <div class="block">
                         <div class="column1">
                             <h2>Forma de pago</h2>
-                            <p class="paycard">Seleccione forma de pago</p>
+                            <p onclick="add_pay_card()" class='paycard'>Seleccione forma de pago</p>
                         </div>
                     </div>
                 </div>
@@ -196,10 +196,22 @@
         if (radio.checked) {
             var valor = radio.value;
             var valor_int = parseInt(valor);
-
+            var mode_pay = document.getElementById("mode_pay_content");
+            
             document.getElementById("p_cargo").textContent = esp_cargo+valor;
             document.getElementById("p_total").textContent = esp_total + (taria + valor_int);
+            if(valor!=0){
+                console.log(valor);
+                mode_pay.classList.add("ocultar");
+            }else{
+                mode_pay.classList.remove("ocultar");
+            }
         }
+    }
+    function add_pay_card(){
+        console.log("pay card");
+        //var pop_windows fue creado en base.html
+        pop_windows.classList.remove("ocultar");
     }
 </script>
 {% endblock %}

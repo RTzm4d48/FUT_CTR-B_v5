@@ -177,7 +177,7 @@ body{
         <div class="line">
       </div>
     </div>
-
+    <!-- ----------POP UP WINDOWS STYLE---------- -->
     <style>
       .pop_up_window_content{
         background: #68686888;
@@ -189,20 +189,56 @@ body{
         z-index: 3;
       }
       .pop_up_window{
-        width: 400px;
+        width: 700px;
         background: white;
         margin: 250px auto auto auto;
         border-radius: 10px;
-        padding: 20px 20px;
+        padding: 10px 10px;
+        position: relative;
       }
-      .pop_up_window h3{
-        margin: 0px;
-        
+      #pop_windows_2{
+        margin: 150px auto auto auto;
       }
       .pop_up_window p{
-        margin: 20px 10px;
+        /* margin: 20px 10px; */
         opacity: 70%;
         font-size: smaller;
+      }
+      .area_title{
+        width: 100%;
+        height: auto;
+        /* background: gray; */
+        display: flex;
+        flex-direction: column;
+      }
+      .area_title h3{
+        margin: 5px auto;
+        font-size: medium;
+      }
+      .area_title p{
+        margin: 0px auto;
+        color: green;
+      }
+      .area{
+        width: 100%;
+        /* background: #2c86da; */
+        margin: 20px 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .area input[type="text"]{
+        /* background: gold; */
+        outline: 1px solid #838383;
+        padding: 10px 5px;
+        border-radius: 8px;
+        border: none;
+      }
+      .text_1{
+        width: calc(50% - 20px);
+      }
+      .area input[type="text"]:focus{
+        outline: 1px solid #7679FA;
       }
       .buttons{
         display: flex;
@@ -221,12 +257,134 @@ body{
       .ocultar{
         display: none;
       }
+      .close{
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        /* background: salmon; */
+      }
+      .new_card{
+        display: flex;
+        /* background: pink; */
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid #3838385d;
+        cursor: pointer;
+      }
+      .new_card:hover{
+        background: #0000000c;
+      }
+      .imagecard{
+        height: 15px;
+        margin: 3px auto 3px 5px;
+      }
+      .cont_card{
+        /* background: greenyellow; */
+        display: flex;
+        flex-direction: column;
+      }
+      .card{
+        display: flex;
+        /* background: green; */
+      }
+      .card img{
+        width: 20px;
+        height: 20px;
+        margin: auto 2px;
+      }
+      .card p{
+        margin: 5px 0px;
+        font-family: 'myfont_robot_bold';
+      }
+      .warning{
+        width: 100%;
+        display: flex;
+        background: #FFF7F4;
+        padding: 15px 0px;
+        border-radius: 7px;
+      }
+      .warning *{
+        margin: 0px 5px;
+        height: 15px;
+
+      }
+      .btn_save{
+        margin: auto;
+      }
+      .btn_save button{
+        padding: 5px 15px;
+        border-radius: 5px;
+        border: none;
+        background: red;
+        color: white;
+        font-family: 'myfont_robot_bold';
+      }
     </style>
-    <div id="pop_windows" class="pop_up_window_content ocultar">
-      <div class="pop_up_window">
-        <h3>¿Deseas descartar este tramite?</h3>
-        <p>Todos los datos que hayas ingresado se descartaran.</p>
-        <div class="buttons">
+    <div id="pop_windows" class="pop_up_window_content">
+      <div id="pop_windows_1" class="pop_up_window ocultar">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">X</div>
+        <div class="area_title">
+          <h3>Método de pago</h3>
+          <p>tu información de pago está segura con nosotros</p>
+        </div>
+        <div class="area">
+          <div class="new_card" onclick="new_card()">
+            <div class="radio">
+              <input name="type_pay" type="radio" value="0" checked="checked"/>
+            </div>
+            <div class="cont_card">
+              <div class="card"><img src="{% static 'img/procedure2.png' %}" alt=""><p>Añadir una nueva targeta</p></div>
+              <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
+            </div>
+            
+          </div>
+        </div> 
+        <div class="buttons ocultar">
+          <button onclick="close_pop_up()">Descartar Tramite</button>
+          <button onclick="close_pop_up()">Cancelar</button>
+        </div>
+      </div>
+      <!-- - -->
+      <div id="pop_windows_2" class="pop_up_window">
+        <div onclick="new_card_back()" class="close" style="left: 15px;">X</div>
+        <div class="area_title">
+          <h3>Proporcionar más información</h3>
+          <p>tu información de pago está segura con nosotros</p>
+        </div>
+        <div class="area">
+          <div class="warning">
+            <img src="{% static 'img/procedure2.png' %}" alt="">
+            <p>Añade una nueva tarjeta</p>
+            <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
+          </div>
+        </div>
+        <div class="area">
+          <input type="text" name="" class="text_1" placeholder='Número de tarjeta' id="">
+          <input type="text" name="" class="text_1" placeholder='Nombre del titular de targeta' id="">
+        </div>
+        <div class="area">
+          <div class="subarea text_1" style="display: flex; justify-content: space-between;">
+            <input type="text" name="" class="text_1" placeholder='MM' id="">
+            <p style="margin: auto 0px;">/</p>
+            <input type="text" name="" class="text_1" placeholder='YY' id="">
+          </div>
+          
+          <input type="text" name="" class="text_1" placeholder='CVV' id="">
+        </div>
+        <div class="area">
+          <div style="display: flex;">
+            <div class="radio">
+              <input name="type_pay" type="radio" value="0" checked="checked"/>
+            </div>
+            <p>Guardar esta targeta</p>
+          </div>
+        </div>
+        <div class="area">
+          <div class="btn_save">
+            <button>Guardar y continuar</button>
+          </div>
+        </div>
+        <div class="buttons ocultar">
           <button onclick="close_pop_up()">Descartar Tramite</button>
           <button onclick="close_pop_up()">Cancelar</button>
         </div>
@@ -260,12 +418,19 @@ body{
     </div>
     <script>
       var pop_windows = document.getElementById("pop_windows");
+      var pop_windows_1 = document.getElementById("pop_windows_1");
+      var pop_windows_2 = document.getElementById("pop_windows_2");
 
-      function random(){
-        alert("esto es random");
-      }
       function close_pop_up(){
         pop_windows.classList.add("ocultar");
+      }
+      function new_card_back(){
+        pop_windows_1.classList.remove("ocultar");
+        pop_windows_2.classList.add("ocultar");
+      }
+      function new_card(){
+        pop_windows_1.classList.add("ocultar");
+        pop_windows_2.classList.remove("ocultar");
       }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
