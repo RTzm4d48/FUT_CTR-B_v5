@@ -15,7 +15,7 @@
         height: auto;
         margin: 20px auto;
         border-radius: 5px;
-        padding: 5px 0px 10px 0px;
+        padding: 5px 0px;
     }
     .block{
         width: 95%;
@@ -29,16 +29,19 @@
         padding: 5px 0px;
         /* background: #5add26; */
     }
-
+    .visa{
+        height: 25px;
+        margin: auto 10px auto 5px;
+    }
     .column1 p{
         font-size: small; opacity: 80%;
         margin: 5px 0px;
     }
-    .column1 img{
+    .img_ctr{
         width: 100px;
     }
     .column1 h2{
-        margin: 0px 0px 10px 0px;
+        margin: auto 0px;
         opacity: 80%;
         font-size: medium;
     }
@@ -103,7 +106,7 @@
                 <div class="content_form2 expandir">
                     <div class="block">
                         <div class="column1">
-                            <img src="{% static 'img/fut_ctr-b.png' %}" alt="">
+                            <img class="img_ctr" src="{% static 'img/fut_ctr-b.png' %}" alt="">
                             <p>Tarifa gestion: 100 PEN</p>
                         </div>
                         <div class="column2">
@@ -152,11 +155,18 @@
                         </div>
                     </div>
                 </div>
-                <div id="mode_pay_content" class="content_form2 expandir">
+                <div id="mode_pay_content" class="content_form2 expandir ocultar">
                     <div class="block">
-                        <div class="column1">
+                        <div id="f_p_1" class="column1">
                             <h2>Forma de pago</h2>
-                            <p onclick="add_pay_card()" class='paycard'>Seleccione forma de pago</p>
+                            <p onclick="add_pay_card()" style="margin: 10px 0px 0px 0px;" class='paycard'>Seleccione forma de pago</p>
+                        </div>
+                        <div id="f_p_2" class="column1 ocultar">
+                            <div style="display: flex;">
+                                <img class="visa" src="{% static 'img/visa_sello.jpg' %}" alt="">
+                                <h2>4557 88** **** 9055</h2>
+                            </div>
+                            <p onclick="add_pay_card()" style="margin: 10px 0px 0px 10px;" class='paycard'>Cambiar forma de pago</p>
                         </div>
                     </div>
                 </div>
@@ -202,9 +212,9 @@
             document.getElementById("p_total").textContent = esp_total + (taria + valor_int);
             if(valor!=0){
                 console.log(valor);
-                mode_pay.classList.add("ocultar");
-            }else{
                 mode_pay.classList.remove("ocultar");
+            }else{
+                mode_pay.classList.add("ocultar");
             }
         }
     }

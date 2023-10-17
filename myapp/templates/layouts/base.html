@@ -238,10 +238,20 @@ body{
         margin: 5px auto;
         font-size: medium;
       }
-      .area_title p{
-        margin: 0px auto;
-        color: green;
+      .save_inf{
+        /* background: salmon; */
+        display: flex;
+        justify-content: center;
+        height: auto;
       }
+      .save_inf *{
+        /* background: gold; */
+        margin: 1px 2px;
+        padding: 1px;
+        color: #09AD72;
+        height: 15px;
+      }
+      
       .area{
         width: 100%;
         /* background: #2c86da; */
@@ -284,7 +294,13 @@ body{
         position: absolute;
         top: 10px;
         cursor: pointer;
+        opacity: 60%;
+        width: 20px;
+        height: auto;
         /* background: salmon; */
+      }
+      .close:hover{
+        opacity: 1;
       }
       .new_card{
         display: flex;
@@ -299,7 +315,7 @@ body{
       }
       .imagecard{
         height: 15px;
-        margin: 3px auto 3px 5px;
+        margin: 3px auto 6px 5px;
       }
       .cont_card{
         /* background: greenyellow; */
@@ -311,8 +327,8 @@ body{
         /* background: green; */
       }
       .card img{
-        width: 20px;
-        height: 20px;
+        width: auto;
+        height: 15px;
         margin: auto 2px;
       }
       .card p{
@@ -341,14 +357,23 @@ body{
         background: red;
         color: white;
         font-family: 'myfont_robot_bold';
+        cursor: pointer;
+      }
+      .btn_save button:hover{
+        background: #c70909;
       }
     </style>
     <div id="pop_windows" class="pop_up_window_content ocultar">
-      <div id="pop_windows_1" class="pop_up_window ocultar">
-        <div onclick="close_pop_up()" class="close" style="right: 15px;">X</div>
+      <div id="pop_windows_1" class="pop_up_window">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
         <div class="area_title">
           <h3>Método de pago</h3>
-          <p>tu información de pago está segura con nosotros</p>
+          <div class="save_inf">
+            <img src="{% static 'img/tps.png' %}" alt="">
+            <p>tu información de pago está segura con nosotros</p>
+          </div>
         </div>
         <div class="area">
           <div class="new_card" onclick="new_card()">
@@ -356,7 +381,7 @@ body{
               <input name="type_pay" type="radio" value="0" checked="checked"/>
             </div>
             <div class="cont_card">
-              <div class="card"><img src="{% static 'img/procedure2.png' %}" alt=""><p>Añadir una nueva targeta</p></div>
+              <div class="card"><img src="{% static 'img/card.png' %}" alt=""><p>Añadir una nueva targeta</p></div>
               <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
             </div>
             
@@ -368,22 +393,27 @@ body{
         </div>
       </div>
       <!-- - -->
-      <div id="pop_windows_2" class="pop_up_window">
-        <div onclick="new_card_back()" class="close" style="left: 15px;">X</div>
+      <div id="pop_windows_2" class="pop_up_window ocultar">
+        <div onclick="new_card_back()" class="close" style="left: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M166.218667 471.285333l1.888-1.984 331.157333-331.157333a32 32 0 0 1 46.698667 43.722667l-1.44 1.536L247.146667 480.768h594.752a32 32 0 0 1 1.877333 63.946667l-1.877333 0.053333H247.146667l297.386666 297.376a32 32 0 0 1 1.429334 43.722667l-1.44 1.536a32 32 0 0 1-43.722667 1.44l-1.536-1.44L168.106667 556.234667a61.472 61.472 0 0 1-1.888-84.949334z"></path></svg>
+        </div>
         <div class="area_title">
           <h3>Proporcionar más información</h3>
-          <p>tu información de pago está segura con nosotros</p>
+          <div class="save_inf">
+            <img src="{% static 'img/tps.png' %}" alt="">
+            <p>tu información de pago está segura con nosotros</p>
+          </div>
         </div>
         <div class="area">
           <div class="warning">
-            <img src="{% static 'img/procedure2.png' %}" alt="">
+            <img src="{% static 'img/card.png' %}" alt="">
             <p>Añade una nueva tarjeta</p>
             <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
           </div>
         </div>
         <div class="area">
           <input type="text" name="" class="text_1" placeholder='Número de tarjeta' id="">
-          <input type="text" name="" class="text_1" placeholder='Nombre del titular de targeta' id="">
+          <input type="text" name="" class="text_1" placeholder='Nombre del titular de targeta' value="{{Name}}" id="">
         </div>
         <div class="area">
           <div class="subarea text_1" style="display: flex; justify-content: space-between;">
@@ -404,7 +434,7 @@ body{
         </div>
         <div class="area">
           <div class="btn_save">
-            <button>Guardar y continuar</button>
+            <button onclick="save_and_continue()">Guardar y continuar</button>
           </div>
         </div>
         <div class="buttons ocultar">
@@ -443,6 +473,9 @@ body{
       var pop_windows = document.getElementById("pop_windows");
       var pop_windows_1 = document.getElementById("pop_windows_1");
       var pop_windows_2 = document.getElementById("pop_windows_2");
+      // ----
+      var f_p_1 = document.getElementById("f_p_1");
+      var f_p_2 = document.getElementById("f_p_2");
 
       function close_pop_up(){
         pop_windows.classList.add("ocultar");
@@ -454,6 +487,11 @@ body{
       function new_card(){
         pop_windows_1.classList.add("ocultar");
         pop_windows_2.classList.remove("ocultar");
+      }
+      function save_and_continue(){
+        f_p_1.classList.add('ocultar');
+        f_p_2.classList.remove('ocultar');
+        close_pop_up();
       }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
