@@ -177,6 +177,61 @@ body{
         <div class="line">
       </div>
     </div>
+
+    <style>
+      .pop_up_window_content{
+        background: #68686888;
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        height: calc(100% - 100px);
+        display: flex;
+        z-index: 3;
+      }
+      .pop_up_window{
+        width: 400px;
+        background: white;
+        margin: 250px auto auto auto;
+        border-radius: 10px;
+        padding: 20px 20px;
+      }
+      .pop_up_window h3{
+        margin: 0px;
+        
+      }
+      .pop_up_window p{
+        margin: 20px 10px;
+        opacity: 70%;
+        font-size: smaller;
+      }
+      .buttons{
+        display: flex;
+        justify-content: space-between;
+      }
+      .buttons button{
+        font-family: 'myfont_robot_bold';
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #3D9FF8;
+      }
+      .buttons button:hover{
+        color: #2c86da;
+      }
+      .ocultar{
+        display: none;
+      }
+    </style>
+    <div id="pop_windows" class="pop_up_window_content ocultar">
+      <div class="pop_up_window">
+        <h3>¿Deseas descartar este tramite?</h3>
+        <p>Todos los datos que hayas ingresado se descartaran.</p>
+        <div class="buttons">
+          <button onclick="close_pop_up()">Descartar Tramite</button>
+          <button onclick="close_pop_up()">Cancelar</button>
+        </div>
+      </div>
+    </div>
     <div class="content_definitive">
       <script>
         activation('inicio');
@@ -203,6 +258,16 @@ body{
       {% block content %}
       {% endblock %}
     </div>
+    <script>
+      var pop_windows = document.getElementById("pop_windows");
+
+      function random(){
+        alert("esto es random");
+      }
+      function close_pop_up(){
+        pop_windows.classList.add("ocultar");
+      }
+    </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
 </body>

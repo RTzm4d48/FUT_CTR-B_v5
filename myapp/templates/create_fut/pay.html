@@ -10,12 +10,11 @@
 <!-- ------SOLO ESTILOS DEL CUADRO DE PAGO------ -->
 <style>
     .content_form2{
-        background: #ffffff70;
+        background: #ffffff;
         width: 60%;
         height: auto;
         margin: 20px auto;
-        border: 1px solid gray;
-        border-radius: 3px;
+        border-radius: 5px;
         padding: 5px 0px 10px 0px;
     }
     .block{
@@ -30,14 +29,27 @@
         padding: 5px 0px;
         /* background: #5add26; */
     }
+
     .column1 p{
-        font-size: small; opacity: 80%;margin: 0px;
+        font-size: small; opacity: 80%;
+        margin: 5px 0px;
+    }
+    .column1 img{
+        width: 100px;
+    }
+    .column1 h2{
+        margin: 0px 0px 10px 0px;
+        opacity: 80%;
+        font-size: medium;
     }
     .column2{
         width: 30%;
         height: 50px;
         /* background: #f8d50f; */
         display: flex;
+    }
+    .column2 a{
+        font-size: smaller;text-align: center;margin: auto;
     }
     .pay_content{
         background: #6a6a6d1c;
@@ -47,10 +59,37 @@
         width: 80%;
         border-radius: 10px;
     }
+    .pay_content img{
+        display: flex;
+        margin: auto 10px auto auto;
+        width: auto;
+        height: 17px;   
+    }
     .radio{
         /* background: skyblue; */
         display: flex;
         margin: auto 5px auto 10px;
+    }
+    .dato_other{
+        /* background: salmon; */
+        display: flex;
+        justify-content: space-between;
+    }
+    .dato_other p{
+        font-size: medium;
+        font-family: 'myfont_robot_bold';
+        margin: 5px 10px 0px 10px;
+    }
+    .expandir{
+        width: 100%;
+    }
+    .paycard{
+        color: #3FA1E2;
+        cursor: pointer;
+    }
+    .paycard:hover{
+        color: #288ed1;
+        text-decoration: underline;
     }
 </style>
 
@@ -58,52 +97,71 @@
     <form class="thefrom" action="{% url 'n_end' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
-        <div class="content_form2">
-            <div class="block">
-                <div class="column1">
-                    <img style="width: 100px;" src="{% static 'img/fut_ctr-b.png' %}" alt="">
-                    <p>Tarifa gestion: 100 PEN</p>
-                </div>
-                <div class="column2">
-                </div>
-            </div>
-            <hr>
-            <div class="block">
-                <div class="column1">
-                    <p style="font-weight: bold;">Hola, {{Name}}:</p>
-                    <p>Solo un paso más para realizar tu tramite.</p>
-                </div>
-                <div class="column2">
-                    <a style="font-size: smaller;text-align: center;margin: auto;" href="">mas información sobre metodos de pago</a>
-                </div>
-            </div>
-            <div class="block">
-                <div class="column1">
-                    <p>metodo de pago:</p>
-                    <div class="pay_content">
-                        <div class="radio"><input name="typepay" type="radio" value="5" checked="checked" onclick="capturarValor(this)"/></div> Presencial por caja
+        <div class="form_block">
+            <div class="from_item">
+                <!-- - -->
+                <div class="content_form2 expandir">
+                    <div class="block">
+                        <div class="column1">
+                            <img src="{% static 'img/fut_ctr-b.png' %}" alt="">
+                            <p>Tarifa gestion: 100 PEN</p>
+                        </div>
+                        <div class="column2">
+                        </div>
                     </div>
-                    <div class="pay_content">
-                        <div class="radio"><input name="typepay" type="radio" value="0" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
-                        <img src="{% static 'img/visa.png' %}" height="20px" style="margin: auto 10px auto auto;" alt="">
+                    <hr>
+                    <div class="block">
+                        <div class="column1">
+                            <p style="font-weight: bold;">Hola, {{Name}}:</p>
+                            <p>Solo un paso más para realizar tu tramite.</p>
+                        </div>
+                        <div class="column2">
+                            <a href="">mas información sobre metodos de pago</a>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <div class="column1">
+                            <p>metodo de pago:</p>
+                            <div class="pay_content">
+                                <div class="radio"><input name="typepay" type="radio" value="0" checked="checked" onclick="capturarValor(this)"/></div> Presencial por caja
+                            </div>
+                            <div class="pay_content">
+                                <div class="radio"><input name="typepay" type="radio" value="5" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
+                                <img src="{% static 'img/visa.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="column2"></div>
                     </div>
                 </div>
-                <div class="column2"></div>
+                <!-- - -->
             </div>
-            <div class="block">
-                <div class="column1">
-                    <p style="font-weight: bold;">Solicitud de {{Order}}</p>
-                    <p>Costo Tramite: S/. 100</p>
-                    <p id="p_cargo">Cargo por Pasarela: S/. 5</p>
+            <div class="from_item">
+                <!-- - -->
+                <div class="content_form2 expandir">
+                    <div class="block">
+                        <div class="column1 expandir">
+                            <h2>Resumen</h2>
+                            <p style="font-weight: bold;">Solicitud de {{Order}}</p>
+                            <p>Costo Tramite: S/. 100</p>
+                            <p id="p_cargo">Cargo por Pasarela: S/. 5</p>
+                            <hr>
+                            <div class="dato_other">
+                                <p>Total:</p>
+                                <p id="p_total">S/. 100</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="column2">
-                    <p id="p_total" style="text-align: center; margin: auto;">TOTAL: S/. 105</p>
+                <div class="content_form2 expandir">
+                    <div class="block">
+                        <div class="column1">
+                            <h2>Forma de pago</h2>
+                            <p class="paycard">Seleccione forma de pago</p>
+                        </div>
+                    </div>
                 </div>
+                <!-- - -->
             </div>
-            <!-- <div class="block">
-                <div class="column1"></div>
-                <div class="column2"></div>
-            </div> -->
         </div>
         <div class="button_block">
             <div class="botons_display">
@@ -126,9 +184,13 @@
     </form>
 </div>
 <script>
+    // -----Variables
+    var name_order = "{{Order}}";
+</script>
+<script>
     function capturarValor(radio) {
         var esp_cargo = "Cargo por Pasarela: S/. ";
-        var esp_total = "TOTAL: S/. ";
+        var esp_total = "S/. ";
         var taria = 100;
 
         if (radio.checked) {
@@ -137,7 +199,6 @@
 
             document.getElementById("p_cargo").textContent = esp_cargo+valor;
             document.getElementById("p_total").textContent = esp_total + (taria + valor_int);
-
         }
     }
 </script>
