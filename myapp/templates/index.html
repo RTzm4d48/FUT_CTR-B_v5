@@ -28,11 +28,16 @@
     .content_h{
         position: relative;
         width: 100%;
-        height: 500px;
+        height: calc(500px + 100px);
         color: black;
         display: flex;
-        background: #476aa7;
+        flex-direction: column;
+        background: rgb(89, 134, 212);
         margin: auto;
+        background: radial-gradient(circle at center, #6a98e6, #3c5ca1);
+        background-position: left 200px center;
+        background-size: 1000px 1000px; /* Tamaño inicial */
+        animation: gradientAnimation 6s linear infinite;
     }
     .subcontent {
         width: 70%;
@@ -171,11 +176,14 @@
         cursor: pointer;
     }
     .more:hover{
-        background: #476aa7;
+        background: rgb(72, 107, 168);
         color: white;
     }
     .line{
         opacity: 0;
+    }
+    .color_nav{
+        background: rgba(72, 107, 168, 0);
     }
     .title_content{
         width: 100%;
@@ -338,9 +346,22 @@
     }
 </style>
 
-
+<!-- -----Una pequeña modificacion para que por temas de navbar---- -->
+<style>
+    .content_definitive{
+        position: relative;
+        top:0px;
+        /* background: orange; */
+    }
+    .relleno{
+        width: 100%;
+        height: 100px;
+        /* background: goldenrod; */
+    }
+</style>
 <section>
 <div class="content_h">
+    <div class="relleno"></div>
     <div class="subcontent dynamic">
         <div class="subcont2">
             <div class="subcont3">
@@ -428,18 +449,48 @@
         const dynamic2 = document.querySelector(".dynamic2");
         const dynamic3 = document.querySelector(".dynamic3");
         const line = document.querySelector(".line");
+        const color_nav = document.querySelector(".color_nav");
 
         window.addEventListener("scroll", function () {
             // Calcula la opacidad en función de la posición de desplazamiento
             const scrollPosition = window.scrollY;
-            const maxOpacityScroll = 300; // Ajusta este valor según tu preferencia
+            const maxOpacityScroll = 300; // Ajusta este valor según nuestra preferencia
 
             // Ajusta la opacidad en función de la posición de desplazamiento
-            const opacity = (scrollPosition / maxOpacityScroll);
+            const progress = (scrollPosition / maxOpacityScroll);
+            
+            //-------------------------------------------Color
+            // Define los colores inicial y final
+            const initialColor = "rgba(89, 134, 212, 0)"; // Color inicial con opacidad 0
+            const finalColor = "rgba(89, 134, 212, 0.999)";   // Color final con opacidad 1
 
-            // Asegura que la opacidad no sea menor que 0
-            line.style.opacity = opacity > 1 ? 1 : opacity;
+            const intermediateColor = interpolateColors(initialColor, finalColor, progress);         
+
+            // Establece el color de fondo y la opacidad del elemento color_nav
+            
+            //--------------------------------------------/Color
+
+            // Aignamos lo calculado a las clases
+            line.style.opacity = progress > 1 ? 1 : progress;
+            color_nav.style.backgroundColor = intermediateColor;
         });
+
+        // Función para interpolar entre dos colores RGBA
+        function interpolateColors(color1, color2, progress) {
+            const rgba1 = color1.substring(5, color1.length - 1).split(', ');
+            const rgba2 = color2.substring(5, color2.length - 1).split(', ');
+
+            const interpolatedRGBA = [];
+            for (let i = 0; i < 4; i++) {
+                interpolatedRGBA[i] = Math.round(
+                parseFloat(rgba1[i]) + progress * (parseFloat(rgba2[i]) - parseFloat(rgba1[i]))
+                );
+            }
+            // Interpolación del canal alfa
+            interpolatedRGBA[3] = parseFloat(rgba1[3]) + progress * (parseFloat(rgba2[3]) - parseFloat(rgba1[3]));
+
+            return `rgba(${interpolatedRGBA.join(', ')})`;
+        }
         // ----------------------------
         function checkScroll() {
             const windowHeight = window.innerHeight;
