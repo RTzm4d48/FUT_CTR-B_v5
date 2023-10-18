@@ -101,7 +101,7 @@ def create_fut_pay(request):
             pdf_binary = pdf_file.read()
             pdf_binary_encoded = base64.b64encode(pdf_binary)
         else:
-            pdf_binary_encoded = "Aqui no hay nada"
+            pdf_binary_encoded = "null"
 
         return render(request, 'create_fut/pay.html', {
             'Name': name,
@@ -139,6 +139,7 @@ async def generate_code():
 
 @sync_to_async
 def save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, pdf_bytes, exp_, pas_, code_, qrimg_bytes):
+
     my_objet = fut(name=name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, pdf_binary=pdf_bytes, proceeding=exp_, password=pas_, code=code_, qrimg_binary=qrimg_bytes)
     my_objet.save()
     new_id = my_objet.id
@@ -249,7 +250,11 @@ async def finisher(request):
         order = request.POST.get('order')
         reason = request.POST.get('reason')
         pdf_memoryview = request.POST.get('pdf_binary_encoded')
-        pdf_bytes = pdf_memoryview.encode("utf-8")
+        
+        if pdf_memoryview == 'null':
+            pdf_bytes = bytes()
+        else:
+            pdf_bytes = pdf_memoryview.encode("utf-8")
 
         now_date = date.today()
         
