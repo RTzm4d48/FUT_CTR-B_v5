@@ -70,6 +70,11 @@ def create_fut_process(request):
         })
     else:
         return HttpResponse("<h1>404 Not Found :(</h1>")
+    
+def get_monto(order_id):
+    obj = tupa.objects.filter(id=order_id).values('monto').first()
+    monto = obj['monto']
+    return monto
 
 @csrf_exempt  
 def create_fut_pay(request):
@@ -84,7 +89,11 @@ def create_fut_pay(request):
         # process
         myrequest = request.POST.get('myrequest')
         order = request.POST.get('order')
+        order_id = request.POST.get('order_id')
         reason = request.POST.get('reason')
+
+        monto = get_monto(order_id)
+        
         # Procedimiento con el PDF
         # Validando si se envio el pdf
         if 'pdf_file' in request.FILES:
@@ -103,6 +112,8 @@ def create_fut_pay(request):
             'Email': email,
             'Myrequest': myrequest,
             'Order': order,
+            'Order_id': order_id,
+            'Monto': monto,
             'Reason': reason,
             'Pdf_binary_encoded': pdf_binary_encoded
         })
@@ -454,6 +465,6 @@ def my_credentials_email(request):
 
 def procedures_list(request):
     tipeo = request.GET.get('tipeo')
-    objs = tupa.objects.filter(tipo_de_servicio__startswith=tipeo).order_by('id').values('tipo_de_servicio')
+    objs = tupa.objects.filter(tipo_de_servicio__startswith=tipeo).order_by('id').values('id', 'tipo_de_servicio')
     result_list = list(objs)
     return JsonResponse({'message': result_list})

@@ -251,7 +251,8 @@ select::-ms-expand {
                 <input type="hidden" name="cycle" value="{{ Cycle }}">
                 <input type="hidden" name="phone" value="{{ Phone }}">
                 <input type="hidden" name="email" value="{{ Email }}">
-                <input type="hidden" name="order" value="" required>
+                <input type="hidden" name="order" value="">
+                <input type="hidden" name="order_id" value="">
 
                 <button type="button" onclick="window.history.back()">Volver</button>
                 <button type="submit">Siguiente</button>
@@ -301,15 +302,16 @@ select::-ms-expand {
             success: function(response){
                 const midata = response;
                 for (var i = 0; i < midata['message']['length']; i++) {
+                    
                     if(i % 2 == 0){
-                        cont_procedures.innerHTML += "<div class='procedure color_procedure' onclick='select_proc("+i+")'>"+
+                        cont_procedures.innerHTML += "<div class='procedure color_procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
                         "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p id='proc"+i+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
+                        "<p style='margin:auto 0px auto 10px;'>"+midata['message'][i]['id']+"</p><p id='proc"+midata['message'][i]['id']+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
                         "</div>";
                     }else{
-                        cont_procedures.innerHTML += "<div class='procedure' onclick='select_proc("+i+")'>"+
+                        cont_procedures.innerHTML += "<div class='procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
                         "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p id='proc"+i+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
+                        "<p style='margin:auto 0px auto 10px;'>"+midata['message'][i]['id']+"</p><p id='proc"+midata['message'][i]['id']+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
                         "</div>";
                     }
                 }
@@ -321,10 +323,13 @@ select::-ms-expand {
     }
     function select_proc(num){
         var procedure = document.getElementById('proc'+num+'_id');// obtenemos el valor del procedure seleccionado
-
+        
         // escribimos en el value del input oculto para que se envie el dato con el formulario
         var orderInput = document.querySelector('input[name="order"]');
+        var orderInput_id = document.querySelector('input[name="order_id"]');
+        
         orderInput.value = procedure.textContent;
+        orderInput_id.value = num;
 
         hide_list(procedure.textContent);// enviamos lo que camturamos el content de la etiqueta 'p'
     }

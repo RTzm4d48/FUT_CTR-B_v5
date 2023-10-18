@@ -107,7 +107,7 @@
                     <div class="block">
                         <div class="column1">
                             <img class="img_ctr" src="{% static 'img/fut_ctr-b.png' %}" alt="">
-                            <p>Tarifa gestion: 100 PEN</p>
+                            <p>Tarifa gestion: {{Monto}} PEN</p>
                         </div>
                         <div class="column2">
                         </div>
@@ -145,12 +145,12 @@
                         <div class="column1 expandir">
                             <h2>Resumen</h2>
                             <p style="font-weight: bold;">Solicitud de {{Order}}</p>
-                            <p>Costo Tramite: S/. 100</p>
+                            <p>Costo Tramite: S/. {{Monto}}</p>
                             <p id="p_cargo">Cargo por Pasarela: S/. 5</p>
                             <hr>
                             <div class="dato_other">
                                 <p>Total:</p>
-                                <p id="p_total">S/. 100</p>
+                                <p id="p_total">S/. {{Monto}}</p>
                             </div>
                         </div>
                     </div>
@@ -196,12 +196,13 @@
 <script>
     // -----Variables
     var name_order = "{{Order}}";
+    var monto = "{{Monto}}";
 </script>
 <script>
     function capturarValor(radio) {
         var esp_cargo = "Cargo por Pasarela: S/. ";
         var esp_total = "S/. ";
-        var taria = 100;
+        var taria = parseInt(monto);
 
         if (radio.checked) {
             var valor = radio.value;
