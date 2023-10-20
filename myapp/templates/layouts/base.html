@@ -131,7 +131,7 @@ body{
   transition-duration: 0.4s;
 }
 </style>
-<body>
+<body id="the_body">
     
     <div class="mynavbar color_nav" style="position: fixed; z-index: 4;top: 0px;">
       <nav class="mynavbar2">
@@ -201,7 +201,7 @@ body{
             <a id="nav4" class="nav" href="/">Acerca de</a>
           </div>
           <div class="mi_nav log">
-            <a id="nav4" class="nav" href="/">Login</a>
+            <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p>
           </div>
         </div>
       </nav>
@@ -435,9 +435,9 @@ body{
         font-size: small;
         opacity: 70%;
       }
-      /* body{
+      .no_scroll{
         overflow: hidden;
-      } */
+      }
     </style>
     <div id="pop_windows" class="pop_up_window_content ocultar">
       <div id="pop_windows_1" class="pop_up_window">
@@ -520,9 +520,9 @@ body{
       </div>
     </div>
     <!-- - -->
-    <div id="pop_windowss" class="pop_up_window_login">
+    <div id="pop_windows_login" class="pop_up_window_login ocultar">
       <div class="pop_up_login" >
-        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+        <div onclick="close_for_login()" class="close" style="right: 15px;">
           <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
         </div>
         <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
@@ -609,6 +609,22 @@ body{
         f_p_1.classList.add('ocultar');
         f_p_2.classList.remove('ocultar');
         close_pop_up();
+      }
+      // ---------LOGIN--------
+      function login_in(){
+        var the_body = document.getElementById('the_body');
+        the_body.classList.add('no_scroll');
+
+        var pop_windows_login = document.getElementById('pop_windows_login');
+        pop_windows_login.classList.remove('ocultar');
+      }
+      function close_for_login(){
+        var pop_windows_login = document.getElementById('pop_windows_login');
+        pop_windows_login.classList.add('ocultar');
+
+        var the_body = document.getElementById('the_body');
+        the_body.classList.remove('no_scroll');
+        
       }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
