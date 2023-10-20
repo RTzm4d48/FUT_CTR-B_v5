@@ -503,6 +503,41 @@ body{
       .button_acound_b button:hover{
         background: #b4052b;
       }
+      .img_qr{
+        /* background: darkgreen; */
+        width: 100%;
+      }
+      .img_qr img{
+        width: 100%;
+      }
+      .link_cont{
+        background: gray;
+        margin: 10px 0px;
+        padding: 5px 0px;
+        border-radius: 10px;
+      }
+      .link_cont input[type="text"]{
+        margin: 0px 5px 0px 10px;
+        padding: 5px 0px;
+        width: calc(100% - 90px);
+        background: none;
+        border: none;
+        color: white;
+      }
+      .link_cont input[type="text"]:focus{
+        outline: none;
+      }
+      .link_cont button{
+        background: #EF0033;
+        border: none;
+        width: 60px;
+        padding: 5px 0px;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      .link_cont button:hover{
+        background: #c4062f;
+      }
     </style>
     <div id="pop_windows" class="pop_up_window_content ocultar">
       <div id="pop_windows_1" class="pop_up_window">
@@ -553,17 +588,17 @@ body{
           </div>
         </div>
         <div class="area">
-          <input type="text" name="" class="text_1" placeholder='Número de tarjeta' id="">
+          <input type="text" name="" class="text_1" placeholder='Número de tarjeta'>
           <input type="text" name="" class="text_1" placeholder='Nombre del titular de targeta' value="{{Name}}" id="">
         </div>
         <div class="area">
           <div class="subarea text_1" style="display: flex; justify-content: space-between;">
-            <input type="text" name="" class="text_1" placeholder='MM' id="">
+            <input type="text" name="" class="text_1" placeholder='MM'>
             <p style="margin: auto 0px;">/</p>
-            <input type="text" name="" class="text_1" placeholder='YY' id="">
+            <input type="text" name="" class="text_1" placeholder='YY'>
           </div>
 
-          <input type="text" name="" class="text_1" placeholder='CVV' id="">
+          <input type="text" name="" class="text_1" placeholder='CVV'>
         </div>
         <div class="area">
           <div style="display: flex;">
@@ -632,7 +667,7 @@ body{
         <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
         <div class="acound_b">
           <img src="{% static 'img/atras.png' %}" alt="" onclick="retourn_acount_exist()">
-          <p>unusuaro@ils.edu.pe</p>
+          <p>edgar.mani@ils.edu.pe</p>
         </div>
         <h3>Escribir Contraseña</h3>
         <!-- ----- -->
@@ -646,6 +681,24 @@ body{
         </div>
       </div>
     </div>
+    <!-- -----------Share------------- -->
+    <div id="pop_windows_share" class="pop_up_window_login ocultar">
+      <div id="share_qr" class="pop_up_login">
+        <div onclick="close_for_share()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <h3>Compartir</h3>
+        <div class="img_qr">
+          <img src="{% static 'tmp/79XNZxF1cuAqrcode.png' %}" alt="">
+        </div>
+        <div class="link_cont">
+          <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
+          <button>Copiar</button>
+        </div>
+        
+      </div>
+    </div>
+
     <div class="content_definitive">
       <script>
         activation('inicio');
@@ -684,6 +737,8 @@ body{
       var the_body = document.getElementById('the_body');
       var windows_log_1 = document.getElementById('windows_log_1');
       var windows_log_2 = document.getElementById('windows_log_2');
+      //-----share
+      var pop_windows_share = document.getElementById('pop_windows_share');
 
       function close_pop_up(){
         pop_windows.classList.add("ocultar");
@@ -702,7 +757,13 @@ body{
         close_pop_up();
       }
       // ---------LOGIN--------
-      function login_in(){
+      async function login_in(){
+        // Para posicionarnos en el top de pa pagina
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        await new Promise(resolve => setTimeout(resolve, 500));
         the_body.classList.add('no_scroll');
         pop_windows_login.classList.remove('ocultar');
       }
@@ -718,6 +779,18 @@ body{
       function retourn_acount_exist(){
         windows_log_1.classList.remove('ocultar');
         windows_log_2.classList.add('ocultar');
+      }
+      //----------SHARE----------
+      function open_for_share(){
+        window.scrollTo({
+            top: 0,
+        });
+        the_body.classList.add('no_scroll');
+        pop_windows_share.classList.remove('ocultar');
+      }
+      function close_for_share(){
+        pop_windows_share.classList.add('ocultar');
+        the_body.classList.remove('no_scroll');
       }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
