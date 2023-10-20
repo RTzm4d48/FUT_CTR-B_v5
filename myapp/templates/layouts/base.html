@@ -27,7 +27,10 @@ src: url('/static/fonts/Roboto-Bold.ttf') format('truetype')
 font-family: 'myfont_robot_normal';
 src: url('/static/fonts/Roboto-Regular.ttf') format('truetype')
 }
-
+@font-face {
+font-family: 'quicksand_light';
+src: url('/static/fonts/Quicksand-Regular.ttf') format('truetype')
+}
 body{
     font-family: 'myfont_robot_normal';
     /* background: rebeccapurple; */
@@ -130,6 +133,29 @@ body{
   background: #ac062a;
   transition-duration: 0.4s;
 }
+.user_space{
+  background: #4242421c;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.user_space:hover{
+  background: #42424231;
+}
+.user_space img{
+  height: 35px;
+  border-radius: 50%;
+  margin: auto 3px;
+}
+.user_space p{
+  color: white;
+  font-size: small;
+  font-family: 'quicksand_light';
+  margin: auto 10px auto 0px;
+}
+.user_space svg{
+  margin: auto;
+}
 </style>
 <body id="the_body">
 
@@ -200,9 +226,17 @@ body{
           <div class="mi_nav">
             <a id="nav4" class="nav" href="/">Acerca de</a>
           </div>
-          <div class="mi_nav log">
+          <!-- <div class="mi_nav log">
             <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p>
+          </div> -->
+          <div class="mi_nav user_space">
+            <img src="{% static 'img/profile_user_test.jpg' %}" alt="">
+            <p>Edgar Aguirre</p>
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+              <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#ffffff"></path>
+          </svg>
           </div>
+          <!-- - -->
         </div>
       </nav>
         <div class="line"></div>
