@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!--ESTILOS 1-->
     <!-- <link rel="stylesheet" href="{% static '/node_modules/bootstrap/dist/css/bootstrap.css' %}"> -->
 
@@ -117,22 +117,22 @@ body{
   border-radius: 15px;
 }
 .nav:hover{
-  color: #EF0033;
   transition-duration: 0.4s;
+  color: #b6bee0;
 }
 .active{
   background: #EF0033;
   font-family: 'myfont_robot_bold';
-  
 }
 .active:hover{
+  opacity: 100%;
   color: white;
   background: #ac062a;
   transition-duration: 0.4s;
 }
 </style>
 <body id="the_body">
-    
+
     <div class="mynavbar color_nav" style="position: fixed; z-index: 4;top: 0px;">
       <nav class="mynavbar2">
         <a class="logo_ils" href="/">
@@ -259,7 +259,7 @@ body{
         color: #09AD72;
         height: 15px;
       }
-      
+
       .area{
         width: 100%;
         /* background: #2c86da; */
@@ -386,7 +386,7 @@ body{
         width: 350px;
         background: white;
         margin: 250px auto auto auto;
-        border-radius: 10px;
+        border-radius: 5px;
         padding: 30px;
         position: relative;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
@@ -438,6 +438,71 @@ body{
       .no_scroll{
         overflow: hidden;
       }
+      /* ------Other----- */
+      .acound_b{
+        display: flex;
+        font-size: small;
+        opacity: 80%;
+        /* background: salmon; */
+        margin: 10px 0px 0px 0px;
+      }
+      .acound_b img{
+        height: 15px;
+        margin: auto 4px;
+        cursor: pointer;
+        position: relative;
+        
+      }
+      .acound_b img:hover{
+        transition-duration: 0.9s;
+        left: -3px;
+      }
+      .acound_b p{
+        margin: 0px;
+      }
+      .pass_cont{
+        /* background: darkcyan; */
+        width: 100%;
+      }
+      .pass_cont input[type="password"]{
+        width: 100%;
+        padding: 5px 0px;
+        background: none;
+        border: none;
+      }
+      .pop_up_login h3{
+        margin: 10px 0px;
+      }
+      .pass_cont input[type="password"]:focus{
+        outline: none;
+      }
+      .pass_cont hr{
+        margin: 0px 0px 20px 0px;
+      }
+      .pop_up_login a{
+        margin: 20px 0px;
+        font-size: small;
+        text-decoration: none;
+        color: #2c86da;
+      }
+      .button_acound_b{
+        /* background: darkkhaki; */
+        width: 100%;
+        margin: 20px 0px 0px 0px;
+        display: flex;
+      }
+      .button_acound_b button{
+        margin: 0px 0px 0px auto;
+        background: #EF0033;
+        border: none;
+        color: #ffffffec;
+        padding: 7px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .button_acound_b button:hover{
+        background: #b4052b;
+      }
     </style>
     <div id="pop_windows" class="pop_up_window_content ocultar">
       <div id="pop_windows_1" class="pop_up_window">
@@ -460,9 +525,9 @@ body{
               <div class="card"><img src="{% static 'img/card.png' %}" alt=""><p>Añadir una nueva targeta</p></div>
               <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
             </div>
-            
+
           </div>
-        </div> 
+        </div>
         <div class="buttons ocultar">
           <button onclick="close_pop_up()">Descartar Tramite</button>
           <button onclick="close_pop_up()">Cancelar</button>
@@ -497,7 +562,7 @@ body{
             <p style="margin: auto 0px;">/</p>
             <input type="text" name="" class="text_1" placeholder='YY' id="">
           </div>
-          
+
           <input type="text" name="" class="text_1" placeholder='CVV' id="">
         </div>
         <div class="area">
@@ -519,19 +584,19 @@ body{
         </div>
       </div>
     </div>
-    <!-- - -->
+    <!-- -----------LOGIN------------- -->
     <div id="pop_windows_login" class="pop_up_window_login ocultar">
-      <div class="pop_up_login" >
+      <div id="windows_log_1" class="pop_up_login">
         <div onclick="close_for_login()" class="close" style="right: 15px;">
           <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
         </div>
         <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
         <h3>Seleccione una cuenta</h3>
         <!-- ----- -->
-        <div class="acount">
+        <div class="acount" onclick="log_acount_exist()">
           <div class="credentials">
             <img src="{% static 'img/Sample_User_Icon.png' %}" alt="">
-            <p>edgar.agg@ils.edu.pe</p>
+            <p>edgar.mani@ils.edu.pe</p>
           </div>
           <div class="options">
             <img src="{% static 'img/options.png' %}" alt="">
@@ -541,7 +606,7 @@ body{
         <div class="acount">
           <div class="credentials">
             <img src="{% static 'img/Sample_User_Icon.png' %}" alt="">
-            <p>edgar.agg@ils.edu.pe</p>
+            <p>unsuaruio@ils.edu.pe</p>
           </div>
           <div class="options">
             <img src="{% static 'img/options.png' %}" alt="">
@@ -554,10 +619,31 @@ body{
             <p>Usar Otra Cuenta</p>
           </div>
           <div class="options">
-            
+
           </div>
         </div>
         <!-- ----- -->
+      </div>
+      <!-- ---------Other--------- -->
+      <div id="windows_log_2" class="pop_up_login ocultar">
+        <div onclick="close_for_login()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
+        <div class="acound_b">
+          <img src="{% static 'img/atras.png' %}" alt="" onclick="retourn_acount_exist()">
+          <p>unusuaro@ils.edu.pe</p>
+        </div>
+        <h3>Escribir Contraseña</h3>
+        <!-- ----- -->
+        <div class="pass_cont">
+          <input type="password" placeholder='Password'>
+          <hr>
+        </div>
+        <a href="">He olvidado mi contraseña</a>
+        <div class="button_acound_b">
+          <button>Iniciar Sesión</button>
+        </div>
       </div>
     </div>
     <div class="content_definitive">
@@ -593,6 +679,11 @@ body{
       // ----
       var f_p_1 = document.getElementById("f_p_1");
       var f_p_2 = document.getElementById("f_p_2");
+      //-----login
+      var pop_windows_login = document.getElementById('pop_windows_login');
+      var the_body = document.getElementById('the_body');
+      var windows_log_1 = document.getElementById('windows_log_1');
+      var windows_log_2 = document.getElementById('windows_log_2');
 
       function close_pop_up(){
         pop_windows.classList.add("ocultar");
@@ -612,19 +703,21 @@ body{
       }
       // ---------LOGIN--------
       function login_in(){
-        var the_body = document.getElementById('the_body');
         the_body.classList.add('no_scroll');
-
-        var pop_windows_login = document.getElementById('pop_windows_login');
         pop_windows_login.classList.remove('ocultar');
       }
       function close_for_login(){
-        var pop_windows_login = document.getElementById('pop_windows_login');
         pop_windows_login.classList.add('ocultar');
-
-        var the_body = document.getElementById('the_body');
         the_body.classList.remove('no_scroll');
-        
+      }
+      //----
+      function log_acount_exist(){
+        windows_log_1.classList.add('ocultar');
+        windows_log_2.classList.remove('ocultar');
+      }
+      function retourn_acount_exist(){
+        windows_log_1.classList.remove('ocultar');
+        windows_log_2.classList.add('ocultar');
       }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
