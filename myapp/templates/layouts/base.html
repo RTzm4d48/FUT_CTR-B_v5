@@ -156,6 +156,87 @@ body{
 .user_space svg{
   margin: auto;
 }
+
+  /*esto se agrego */
+@media (max-width:655px){
+  body{
+    position: relative;
+  }
+  .mynavbar{
+  align-items: center;
+}
+.logo_ils{
+  position: relative;
+  right: 114px;
+}
+
+.mi_nav{
+    display: none;
+
+  }
+  .mi_nav li a {
+    font-size: 1.5em;
+    margin: 10px 0;
+    display: inline-block;
+  }
+  .mi_nav.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #476aa7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .toggle {
+    position: relative;
+    width: 32px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+    cursor: pointer;
+  }
+  .toggle::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 0 #fff;
+    transition: 0.25s;
+  }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: translateY(10px);
+    transition: 0.25s;
+  }
+  .toggle.active {
+    position: fixed;
+    right: 40px;
+  }
+  .toggle.active::before {
+    transform: translateY(0px) rotate(45deg);
+    box-shadow: 0 0 0 #fff;
+  }
+  .toggle.active::after {
+    transform: translateY(0px) rotate(-45deg);
+  }
+}
+/*fin lo que se agreto*/
+
+
+
 </style>
 <body id="the_body">
 
@@ -214,6 +295,7 @@ body{
           <!--endel-->
         </a>
         <div class="content_mavbar" id="navbarNavDropdown">
+          <div class="toggle"></div>
           <div class="mi_nav">
             <a id="nav1" class="nav" href="/">Inicios</a>
           </div>
@@ -826,6 +908,18 @@ body{
         pop_windows_share.classList.add('ocultar');
         the_body.classList.remove('no_scroll');
       }
+
+
+
+        //---------esto se agrego menu de despleagable----------------
+        const menutoggle = document.querySelector('.toggle');
+        const navigation = document.querySelector('.mi_nav');
+        menutoggle.onclick=function(){
+        menutoggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+    }
+
+
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 </body>

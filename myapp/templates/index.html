@@ -271,7 +271,7 @@
         /* text-decoration: underline; */
         transition-duration: 0.4s;
     }
-        
+     /*    
     @media (max-width: 700px){
         section{
             position: relative;
@@ -317,7 +317,199 @@
             
         }
         */
+        
+        @media (max-width: 991px){
+        section{
+            flex-direction: column;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+        .content_h{
+            padding: 25px;
+            /* bottom: 136px; */
+            /* min-height: 100vh; */
+            /* position: relative; */
+            /* align-items: center;*/
+        }
+        .subcontent{
+            left: 20px;
+            top: 22px;
+            display: flex;
+        }
+        .subcont3{
+            position: absolute;
+            right: 38px;
+            display: flex;
+            flex-wrap: wrap;
+            bottom: 277px;
+            justify-content: center;
+            align-items: center;
+            margin: 2px;
+            left: 6px;
+        }
+        .fw-light{
+            text-align: center;
+            font-size: 60px;
+            left: 64px;
+            bottom: 34px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin: 28px;
+            margin-left: 34px;
+        }
+        .coment{
+            text-align: center;
+            position: relative;
+            bottom: 38px;
+            right: 0px;
+            display: flex;
+            font-size: 17px;
+
+        }
+        .mybuttons{
+            margin: -8px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* top: 200px; */
+            gap: 15px
+        }
+        .procedure{
+            bottom: 29px;
+            display: flex;
+            position: relative;
+            /* justify-content: center; */
+            /* right: 0px; */
+            /* align-items: center;*/
+        }
+        .consult{
+            top: -31px;
+            position: relative;
+            bottom: 21px;
+            right: 8px;
+            display: flex;
+        }
+        .subcont2{
+            margin-bottom: 26px;
+            width: auto;
+            left: 12px;
+            height: 302px;
+            margin-right: -100px;
+            margin-top: 297px;
+            font-size: 16px;
+        }
+        .flotar_imagen{
+            width: 90%;
+            height: 70%;
+            z-index: 1000;
+            overflow: hidden;
+            top: 30%;
+            left: -3%;
+        }
+        .content2-h{
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            bottom: 100px;
+        }
+        .title_content{
+            display: flex;
+        }
+        .title{
+            display: block;
+        }
+        h1{
+            position: static;
+            /* display: flex; */
+            /* text-align: center; */
+        }
+        .content_cuestions{
+            position: relative;
+        }
+        .parrafo1{
+            position: fixed;
+            text-align: center;
+            top: 200px;
+            left: 20px;
+            width: 91%;
+        }
+        .cuestions{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+        .more{
+            position: absolute;
+            top: 145px;
+            left: 53px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 59%;
+            right: 9px;
+            
+        }
+        .titulo1{
+            /*top: -39px; */
+            /* right: 77px; */
+            width: 419px;
+            border-radius: 1px solid;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 22px;
+            padding: 230px;
+            bottom: 40px;
+            position: relative;
+        }
+        .points{
+            position: relative;
+            align-items: center;
+            text-align: center;
+            width: 233%;
+            padding-right: 166px;
+            bottom: 233px;
+        }
+        p{
+            margin: 20px 0;
+        }
+        .content_complete{
+            display: flex;
+            position: relative;
+            align-items: center;
+            right: 13px;
+            bottom: 400px;
+            width: 150%;
+                
+        }
+        .qr{
+            position: absolute;
+            display: block;
+            width: 320px;
+            height: 300px;
+            margin-right: 477px;
+            top: 413px;
+            display: block;
+            margin: 10px auto;
+            right: 175px;
+        }
+        .footer{
+            position: absolute;
+            width: 100%;
+            display: flex;
+            
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
     }
+    }
+    
 
 </style>
 
@@ -361,7 +553,7 @@
 </style>
 <section>
 <div class="content_h">
-    <div class="relleno"></div>
+    <!--<div class="relleno"></div>-->
     <div class="subcontent dynamic">
         <div class="subcont2">
             <div class="subcont3">
@@ -391,11 +583,11 @@
     </div>
     <div class="content_cuestions">
         <div class="cuestions">
-            <p>Hacer trámites virtuales simplifica la vida de los estudiantes al eliminar desplazamientos, reducir tiempos de espera y minimizar el uso de papel. La inclusión de códigos QR asegura la autenticidad de los documentos y la plataforma proporciona seguimiento en tiempo real, mejorando la experiencia del usuario.</p>
+            <p class="parrafo1">Hacer trámites virtuales simplifica la vida de los estudiantes al eliminar desplazamientos, reducir tiempos de espera y minimizar el uso de papel. La inclusión de códigos QR asegura la autenticidad de los documentos y la plataforma proporciona seguimiento en tiempo real, mejorando la experiencia del usuario.</p>
             <p onclick="topscrolll()" class="more">Saber Más</p>
         </div>
         <div class="cuestions">
-            <p style="font-family: 'myfont_robot_bold';">Algúnas ventajas tambien pueden ser:</p>
+            <p class="titulo1" style="font-family: 'myfont_robot_bold';">Algúnas ventajas tambien pueden ser:</p>
             <div class="points">
                 <p>Eficiencia: Los trámites virtuales ahorran tiempo al evitar desplazamientos y permitir envíos instantáneos de documentos.</p>
             </div>
