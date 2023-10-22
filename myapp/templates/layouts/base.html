@@ -226,16 +226,16 @@ body{
           <div class="mi_nav">
             <a id="nav4" class="nav" href="/">Acerca de</a>
           </div>
-          <!-- <div class="mi_nav log">
+          <div class="mi_nav log">
             <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p>
-          </div> -->
-          <div class="mi_nav user_space">
+          </div>
+          <!-- <div class="mi_nav user_space">
             <img src="{% static 'img/profile_user_test.jpg' %}" alt="">
             <p>Edgar Aguirre</p>
             <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
               <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#ffffff"></path>
-          </svg>
-          </div>
+            </svg>
+          </div> -->
           <!-- - -->
         </div>
       </nav>
@@ -655,7 +655,7 @@ body{
     </div>
     <!-- -----------LOGIN------------- -->
     <div id="pop_windows_login" class="pop_up_window_login ocultar">
-      <div id="windows_log_1" class="pop_up_login">
+      <div id="windows_log_1" class="pop_up_login ocultar">
         <div onclick="close_for_login()" class="close" style="right: 15px;">
           <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
         </div>
@@ -714,8 +714,25 @@ body{
           <button>Iniciar Sesión</button>
         </div>
       </div>
+      <!-- -----------LOGIN UP------------- -->
+      <div id="windows_log_3" class="pop_up_login">
+        <div onclick="close_for_login()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
+        <h3>Iniciar Sesión</h3>
+        <!-- ----- -->
+        <div class="pass_cont">
+          <input type="password" placeholder='Password'>
+          <hr>
+        </div>
+        <a href="">He olvidado mi contraseña</a>
+        <div class="button_acound_b">
+          <button>Iniciar Sesión</button>
+        </div>
+      </div>
     </div>
-    <!-- -----------Share------------- -->
+  <!-- -----------Share------------- -->
     <div id="pop_windows_share" class="pop_up_window_login ocultar">
       <div id="share_qr" class="pop_up_login">
         <div onclick="close_for_share()" class="close" style="right: 15px;">

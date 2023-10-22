@@ -200,7 +200,7 @@ async def generate_email(email, name, exp_, pas_):
                 <div class="proce" style="background: white;display: flex;width: 80%;margin: 8px auto;height: 50px;"><P style="font-size: 16px;margin: auto 2px auto auto;">Contraseña</P><h2 style="margin: auto auto auto 2px;font-size: 16px;">{pas_}</h2></div>
             </div>
             <div class="qr" style="width: 150px;height: 150px;margin: 20px auto;">
-                <img style="width: 100%;" src="https://i.ibb.co/zRq5c2Z/s-BUWS8kthxqqrcode.png" alt="">
+                <img style="width: 100%;" src="https://i.ibb.co/V0GrnzK/79-XNZx-F1cu-Aqrcode.png" alt="">
             </div>
         </div>
         <div class="info" style="text-align: center;font-family: Arial, Helvetica, sans-serif;">
@@ -386,7 +386,7 @@ def send_email(request):
                 <div class="proce" style="background: white;display: flex;width: 80%;margin: 8px auto;height: 50px;"><P style="font-size: 16px;margin: auto 2px auto auto;">Contraseña</P><h2 style="margin: auto auto auto 2px;font-size: 16px;">{password}</h2></div>
             </div>
             <div class="qr" style="width: 150px;height: 150px;margin: 20px auto;">
-                <img style="width: 100%;" src="https://i.ibb.co/zRq5c2Z/s-BUWS8kthxqqrcode.png" alt="">
+                <img style="width: 100%;" src="https://i.ibb.co/V0GrnzK/79-XNZx-F1cu-Aqrcode.png" alt="">
             </div>
         </div>
         <div class="info" style="text-align: center;font-family: Arial, Helvetica, sans-serif;">
@@ -450,7 +450,7 @@ def my_credentials_email(request):
                 <div class="proce" style="background: white;display: flex;width: 80%;margin: 8px auto;height: 50px;"><P style="font-size: 16px;margin: auto 2px auto auto;">Contraseña</P><h2 style="margin: auto auto auto 2px;font-size: 16px;">{password}</h2></div>
             </div>
             <div class="qr" style="width: 150px;height: 150px;margin: 20px auto;">
-                <img style="width: 100%;" src="https://i.ibb.co/zRq5c2Z/s-BUWS8kthxqqrcode.png" alt="">
+                <img style="width: 100%;" src="https://i.ibb.co/V0GrnzK/79-XNZx-F1cu-Aqrcode.png" alt="">
             </div>
         </div>
         <div class="info" style="text-align: center;font-family: Arial, Helvetica, sans-serif;">

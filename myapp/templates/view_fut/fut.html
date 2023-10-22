@@ -16,6 +16,62 @@
 
 <h1>Hola</h1>
 
+<!-- <script src="https://alcdn.msauth.net/lib/1.5.0/js/msal.js"></script> -->
+<style>
+  .cont_form{
+    background: whitesmoke;
+  }
+</style>
+<div class="cont_form">
+  <h2>Iniciar Sesión</h2>
+    <form id="loginForm">
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required><br><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required><br><br>
+
+        <input type="submit" value="Iniciar Sesión" id="loginButton">
+    </form>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+  const msalConfig = {
+    auth: {
+      clientId: '11960c5d-fb3c-494e-9062-59e4d201460a',
+      authority: 'https://login.microsoftonline.com/5ce759eb-f346-49c8-a506-f8839107ec38',
+      redirectUri: 'https://www.youtube.com/watch?v=2061vKZrN-U',
+    }
+  };
+console.log("hasta aqui todo bien");
+const msalInstance = new Msal.UserAgentApplication(msalConfig);
+
+console.log("veamos");
+
+///------------------------------
+
+// Escuchar el evento submit del formulario
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+
+            // Obtener los valores de usuario y contraseña
+            var usuario = document.getElementById("usuario").value;
+            var contrasena = document.getElementById("contrasena").value;
+
+            msalInstance.loginPopup()
+            .then(response => {
+              // El usuario ha iniciado sesión correctamente
+              // Puedes usar el token de acceso en `response.accessToken`
+            })
+            .catch(error => {
+              // Maneja errores de inicio de sesión
+            });
+        });
+</script>
+
+
 <ul>
   {% for i in some_list %}
       <li>Iteración {{ i|add:5 }}</li>
