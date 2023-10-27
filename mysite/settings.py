@@ -155,3 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_HOST_USER = 'whiteman.play69@gmail.com'
 # EMAIL_HOST_PASSWORD = '_MAa_madchenzarolasoukupova'
 # DEFAULT_FROM_EMAIL = 'whiteman.play69@gmail.com'
+
+# VARIABLES DE REDIRECCIÓN DE LOGIN Y LOGOUT
+LOGIN_REDIRECT_URL = 'n_home'
+LOGOUT_REDIRECT_URL = 'n_home'

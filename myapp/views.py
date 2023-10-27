@@ -7,8 +7,10 @@ from .models import fut, tupa
 from myapp_admin.models import process, Admins
 from datetime import date
 from django.http import HttpResponseRedirect
-
 from django.views.decorators.csrf import csrf_exempt
+
+#Para el login
+from django.contrib.auth.decorators import login_required
 
 #pip install qrcode
 import random, qrcode
@@ -35,6 +37,7 @@ from datetime import datetime
 def index(request):
     return render(request,'index.html')
 
+@login_required
 @csrf_exempt
 def my_fut(request):
     my_list_ = list(range(10))
@@ -46,7 +49,7 @@ def my_fut(request):
     })
 
 
-
+@login_required
 def form_new_fut(request):
     return render(request, 'create_fut/identification.html')
 

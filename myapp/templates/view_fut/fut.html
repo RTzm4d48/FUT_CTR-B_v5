@@ -1,83 +1,139 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
 
 {% block content %}
 
-<script>
-  //La funcion esta en 'base_form_new_fut.html'
-  //es para el navbar
-  activation('consultar_tramite');    
-</script>
-
-<h1>My Fut (Hola)</h1>
-
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, libero.</p>
-
-<hr>
-
-<h1>Hola</h1>
-
-<!-- <script src="https://alcdn.msauth.net/lib/1.5.0/js/msal.js"></script> -->
+{# ---------NAVBAR STYLES--------- #}
 <style>
-  .cont_form{
+  .fut_conteiner{
     background: whitesmoke;
+    width: 70%;
+    margin: 50px auto 0px auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .fut_navbar{
+    width: 100%;
+    height: 50px;
+    background: #E9E9E9;
+    display: flex;
+  }
+  ul{
+    list-style: none;
+    display: flex;
+    /*    background: blue;*/
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  .fut_navbar li{
+    /*    background: salmon;*/
+    
+    height: 100%;
+    margin: auto 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .fut_navbar a{
+    margin: 15px auto auto auto;
+    color: black;
+    text-decoration: none;
+    opacity: 80%;
+    /*    background: yellow;*/
+  }
+  .fut_navbar a:hover{
+    opacity: 100%;
+  }
+  .fut_line{
+    width: 100%;
+    height: 2px;
+    margin: auto 0px 0px 0px;
+  }
+  .fl_activate{
+    background: black;
   }
 </style>
-<div class="cont_form">
-  <h2>Iniciar Sesión</h2>
-    <form id="loginForm">
-        <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario" name="usuario" required><br><br>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required><br><br>
-
-        <input type="submit" value="Iniciar Sesión" id="loginButton">
-    </form>
-
-    <div id="resultado"></div>
+{# -----------ESTILOS SOLO DEL CUADRO DE FUT------------ #}
+<style>
+  .cont_fut{
+    width: calc(100% - 30px);
+    height: 130px;
+    background: white;
+    border: 1px solid gray;
+    margin: 15px auto;
+    display: flex;
+    border-radius: 3px;
+  }
+  .cont_information{
+    width: calc(80% - 30px);
+    height: calc(100% - 30px);
+    /*    background: salmon;*/
+    padding: 15px;
+  }
+  .cont_information h3{
+    margin: 0px 0px 5px 0px;
+  }
+  .cont_img{
+    width: 20%;
+    height: 100%;
+    background: #D1D1D1;
+    display: flex;
+  }
+  .info_fut{
+    /*    background: violet;*/
+  }
+  .info_fut p{
+    margin: 0px;
+    font-size: smaller;
+  }
+  .pay_fut{
+    display: flex;
+  }
+  .pay_fut p{
+    margin: 0px 5px 0px 0px;
+  }
+  .cont_information button{
+    background: red;
+    color: white;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 3px;
+    margin: 6px 0px;
+  }
+  .cont_img img{
+    width: 80px;
+    margin: auto;
+  }
+</style>
+<div class="fut_conteiner">
+  <nav class="fut_navbar">
+      <ul>
+          <li><a href="#">FUTs en proceso</a><div class="fut_line fl_activate"></div></li>
+          <li><a href="#">FUTs Finalizados</a><div class="fut_line"></div></li>
+      </ul>
+  </nav>
+  {# ---- #}
+  <div class="cont_fut">
+    <div class="cont_information">
+      <h3>BUSQUEDA DE DOCUMENTOS PARA MATRICULA</h3>
+      <div class="info_fut">
+        <p>Numero de expediente: 45679</p>
+        <p>Emitido el: 26-10-2023</p>
+        <div class="pay_fut"><p>Estado de factura:</p><p style="color: red;">Sin pagar</p></div>
+      </div>
+      <button>View</button>
+    </div>
+    <div class="cont_img">
+      <img src="{% static 'img/doc.png' %}">
+    </div>
+  </div>
+  {# ---- #}
 </div>
 
 <script>
-  const msalConfig = {
-    auth: {
-      clientId: '11960c5d-fb3c-494e-9062-59e4d201460a',
-      authority: 'https://login.microsoftonline.com/5ce759eb-f346-49c8-a506-f8839107ec38',
-      redirectUri: 'https://www.youtube.com/watch?v=2061vKZrN-U',
-    }
-  };
-console.log("hasta aqui todo bien");
-const msalInstance = new Msal.UserAgentApplication(msalConfig);
-
-console.log("veamos");
-
-///------------------------------
-
-// Escuchar el evento submit del formulario
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
-
-            // Obtener los valores de usuario y contraseña
-            var usuario = document.getElementById("usuario").value;
-            var contrasena = document.getElementById("contrasena").value;
-
-            msalInstance.loginPopup()
-            .then(response => {
-              // El usuario ha iniciado sesión correctamente
-              // Puedes usar el token de acceso en `response.accessToken`
-            })
-            .catch(error => {
-              // Maneja errores de inicio de sesión
-            });
-        });
+  //La funcion está en 'base.html'
+  //es para el navbar
+  activation('consultar_tramite');
 </script>
-
-
-<ul>
-  {% for i in some_list %}
-      <li>Iteración {{ i|add:5 }}</li>
-  {% endfor %}
-</ul>
-
-<h1>mi numero es: {{ var|add:5 }} </h1>
-
 {% endblock %}

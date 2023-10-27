@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<style>
+	@font-face {
+		font-family: 'myfont_robot_bold';
+		src: url('/static/fonts/Roboto-Bold.ttf') format('truetype')
+	}
+	@font-face {
+		font-family: 'myfont_robot_normal';
+		src: url('/static/fonts/Roboto-Regular.ttf') format('truetype')
+	}
+	@font-face {
+		font-family: 'quicksand_light';
+		src: url('/static/fonts/Quicksand-Regular.ttf') format('truetype')
+	}
+	body{
+		background-image: linear-gradient(to bottom right, #FFA50050, #0000FF30, #FFA50050); /*gradiente de dos colores*/
+		background-size: 100% 100%; /*para asegurarnos que el fondo gradiente ocuper el 100% del ancho y largo*/
+		background-attachment: fixed; /*para que el fondo cupe todo el ancho y largo de la pagina*/
+		background-repeat: no-repeat; /*especifica de que un fondo no se puede repetir o clonar*/
+		font-family: 'myfont_robot_normal';
+	}
+	.content_form{
+		background: white;
+		width: 400px;
+		margin: 100px auto auto auto;
+		padding: 30px;
+		border-radius: 2px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+	}
+	.content_form img{
+		margin: 0px;
+		height: 50px;
+		background: salmon;
+	}
+	.content_form h3{
+		margin: 0px 13px;
+	}
+	form{
+		display: flex;
+		flex-direction: column;
+	}
+	input[type="text"]{
+		width: calc(100% - 10px);
+		margin: 0px auto;
+		border: none;
+		padding: 5px 0px;
+	}
+	input[type="password"]{
+		width: calc(100% - 10px);
+		margin: 0px auto;
+		border: none;
+		padding: 5px 0px;
+	}
+
+	input[type="text"]:focus{
+		outline: none;
+	}
+	input[type="password"]:focus{
+		outline: none;
+	}
+	hr{
+		margin: 0px auto;
+		
+		width: calc(100% - 10px);
+
+
+	}
+	button{
+		background: #0060BA;
+		color: white;
+		border: none;
+		padding: 5px 10px;
+		margin: 10px 1px 20px auto;
+		cursor: pointer;
+	}
+	button:hover{
+		background: #00407C;
+	}
+</style>
+<body>
+	<div class="content_form">
+		<img src="{% static 'img/microsoft_logo.jpg' %}">
+
+		<h3>Iniciar Sesión</h3>
+		<br>
+		<form action="" method="post">
+		    {% csrf_token %}
+
+		    <input type="text" name="username" id="" placeholder="Nombre de Usuario" autocomplete="off">
+		    <hr>
+		    <br>
+		    <input type="password" name="password" id="" placeholder="Contraseña" autocomplete="off">
+		    <hr>
+		    <br>
+		    <button type="submit">Iniciar Sesión</button>
+		</form>
+	</div>
+</body>
+</html>

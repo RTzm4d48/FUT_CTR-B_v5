@@ -93,7 +93,7 @@ body{
 }
 .content_mavbar{
   height: 100%;
-  /* background: forestgreen; */
+/*  background: forestgreen;*/
   display: flex;
   align-items: center;
 }
@@ -297,27 +297,30 @@ body{
         <div class="content_mavbar" id="navbarNavDropdown">
           <div class="toggle"></div>
           <div class="mi_nav">
-            <a id="nav1" class="nav" href="/">Inicios</a>
+            <a id="nav1" class="nav" href="{% url 'n_home' %}">Inicio</a>
           </div>
           <div class="mi_nav">
-            <a id="nav2" class="nav" href="/form_new_fut/identification">Nuevo tramite</a>
+            <a id="nav2" class="nav" href="{% url 'n_new_fut' %}">Nuevo tramite</a>
           </div>
           <div class="mi_nav">
             <a id="nav3" class="nav" href="/my_fut">Consultar tramites</a>
           </div>
           <div class="mi_nav">
-            <a id="nav4" class="nav" href="/">Acerca de</a>
+            <a id="nav4" class="nav" href="{% url 'login' %}">Acerca de</a>
           </div>
-          <div class="mi_nav log">
-            <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p>
-          </div>
-          <!-- <div class="mi_nav user_space">
-            <img src="{% static 'img/profile_user_test.jpg' %}" alt="">
-            <p>Edgar Aguirre</p>
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
-              <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#ffffff"></path>
-            </svg>
-          </div> -->
+          {% if request.user.is_authenticated %}
+            <div class="mi_nav user_space">
+              <img src="{% static 'img/profile_user_test.jpg' %}" alt="">
+              <p>Edgar Aguirre</p>
+              <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#ffffff"></path>
+              </svg>
+            </div>
+          {% else %}
+            <div class="mi_nav log">
+              <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p>
+            </div>
+          {% endif %}
           <!-- - -->
         </div>
       </nav>
