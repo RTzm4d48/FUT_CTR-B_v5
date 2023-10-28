@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 #Para el login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 #pip install qrcode
 import random, qrcode
@@ -48,6 +49,9 @@ def my_fut(request):
         'var': var
     })
 
+def exit(request):
+    logout(request)
+    return redirect('n_home')
 
 @login_required
 def form_new_fut(request):
@@ -184,6 +188,7 @@ async def generate_email(email, name, exp_, pas_):
 
     yag = yagmail.SMTP(user=email, password=contraseña)
 
+
     destinatarios = [email]
     asunto = 'Credenciales ILS'
 
@@ -266,7 +271,7 @@ async def finisher(request):
         print('LOCURA_01')
         qrimg_bytes = await generate_qrcode(code_)
         print('LOCURA_02')
-        nnn = await generate_email(email, name, exp_, pas_)
+        # nnn = await generate_email(email, name, exp_, pas_)
         print('LOCURA_03')
         new_id = await save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, pdf_bytes, exp_, pas_, code_, qrimg_bytes)
         print('LOCURA_04')
@@ -476,3 +481,11 @@ def procedures_list(request):
     objs = tupa.objects.filter(tipo_de_servicio__startswith=tipeo).order_by('id').values('id', 'tipo_de_servicio')
     result_list = list(objs)
     return JsonResponse({'message': result_list})
+
+@login_required
+def view_fut_in_progress(request):
+    return render(request, 'view_fut/futs/in-progress.html')
+
+@login_required
+def view_fut_finished(request):
+    return render(request, 'view_fut/futs/finished.html')

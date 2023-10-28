@@ -134,12 +134,18 @@ body{
   transition-duration: 0.4s;
 }
 .user_space{
-  background: #4242421c;
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
+  position: relative; /*importante*/
 }
-.user_space:hover{
+.user_space_color_1{
+  background: #4242421c;
+}
+.user_space_color_2{
+  background: #42424231;
+}
+.user_space_color_1:hover{
   background: #42424231;
 }
 .user_space img{
@@ -234,9 +240,55 @@ body{
   }
 }
 /*fin lo que se agreto*/
-
-
-
+</style>
+{# ----------ESTILOS DE SETTINGS USER----------- #}
+<style>
+  .settings_user_cont{
+    position: absolute;/*importante*/
+    top: 50px;
+    border-radius: 3px;
+    width: 155px;
+    background: #22262Ab9;
+    z-index: 3;
+    padding: 5px 0px 10px 0px;
+  }
+  .settings_user_cont hr{
+    margin: 5px auto 5px auto;
+    width: 90%;
+    opacity: 50%;
+  }
+  .sett_ul{
+    display: flex;
+/*    background: orange;*/
+    border-radius: 5px;
+    margin: 1px 10px;
+    padding: 1px 5px;
+  }
+  .sett_ul:hover{
+    background: #22262Ab9;
+  }
+  .sett_ul p{
+    margin: 5px 5px;
+  }
+  .sett_ul img{
+    width: 18px;
+    height: 18px;
+    margin: auto 0px;
+  }
+  .settings_user_cont .log_out{
+    margin: 10px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    /*stiles p*/
+    color: white;
+    font-size: small;
+    font-family: 'quicksand_light';
+    text-decoration: none;
+    
+  }
+  .settings_user_cont .log_out:hover{
+    background: #22262Ab9;
+  }
 </style>
 <body id="the_body">
 
@@ -303,23 +355,36 @@ body{
             <a id="nav2" class="nav" href="{% url 'n_new_fut' %}">Nuevo tramite</a>
           </div>
           <div class="mi_nav">
-            <a id="nav3" class="nav" href="/my_fut">Consultar tramites</a>
+            <a id="nav3" class="nav" href="{% url 'n_in_progress' %}">Consultar tramites</a>
           </div>
           <div class="mi_nav">
-            <a id="nav4" class="nav" href="{% url 'login' %}">Acerca de</a>
+            {# <a id="nav4" class="nav" href="">Acerca de</a> #}
+            <p id="nav4" class="nav" onclick="acerca_de()" style="cursor: pointer;">Acerca de</p>
           </div>
           {% if request.user.is_authenticated %}
-            <div class="mi_nav user_space">
+            <div id="cont_user" class="mi_nav user_space user_space_color_1" onclick="user_options()">
               <img src="{% static 'img/profile_user_test.jpg' %}" alt="">
               <p>Edgar Aguirre</p>
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
                 <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#ffffff"></path>
               </svg>
+              {# --up windows-- #}
+
+              <div id="settings_user" class="settings_user_cont ocultar">
+                <div class="sett_ul"><img src="{% static 'img/sett_profile.png' %}"><p>Tu Perfil</p></div>
+                <div class="sett_ul"><img src="{% static 'img/sett_setting.png' %}"><p>Ajustes</p></div>
+                <hr>
+                <a class="log_out" href="{% url 'n_exit' %}">Cerrar Sesión</a>
+              </div>
+
+              {# --up windows-- #}
             </div>
           {% else %}
             <div class="mi_nav log">
-              <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p>
+              {# <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p> #}
+              <a id="nav4" class="nav" href="{% url 'login' %}">Login</a>
             </div>
+            <div id="settings_user"></div> {# ESTO LO PUSE PARA EQUILIBRAR Y NO ASI NO ME DERROR POR LA FALTA DE LA ID setting_user #}
           {% endif %}
           <!-- - -->
         </div>
@@ -939,7 +1004,45 @@ body{
         navigation.classList.toggle('active')
     }
 
+    function user_options(){
+      const settings_user = document.getElementById("settings_user");
+      const cont_user = document.getElementById("cont_user");
 
+      var clases = settings_user.classList;
+
+      // Convierte las clases a un array si necesitas manipularlas como tal
+      var clasesArray = Array.from(clases);
+
+      // Itera a través del array de clases
+      for (var i = 0; i < clasesArray.length; i++) {
+          if(clasesArray[i] == "ocultar"){
+            settings_user.classList.remove("ocultar")
+            cont_user.classList.remove("user_space_color_1");
+            cont_user.classList.add("user_space_color_2");
+          }else{
+            settings_user.classList.add("ocultar")
+            cont_user.classList.add("user_space_color_1");
+            cont_user.classList.remove("user_space_color_2");
+          }
+      }
+    }
+    //Evento Scroll 
+    //Aqui cerraremos los setings
+    window.addEventListener('scroll', function() {
+      const settings_user = document.getElementById("settings_user");
+      settings_user.classList.add("ocultar");
+    });
+    //botón 'acerca de' del navbar
+    function acerca_de(){
+      // Obtén la posición exacta a la que deseas desplazarte
+      const posicionExacta = 560; // Cambia esto a la posición que desees
+
+      // Realiza el desplazamiento suave
+      window.scrollTo({
+          top: posicionExacta,
+          behavior: "smooth"
+      });
+    }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 </body>
