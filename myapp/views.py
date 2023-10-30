@@ -489,3 +489,41 @@ def view_fut_in_progress(request):
 @login_required
 def view_fut_finished(request):
     return render(request, 'view_fut/futs/finished.html')
+
+def create_fut_wait(request):
+    if request.method == 'POST':
+         # identification
+        name = request.POST.get('name')
+        program = request.POST.get('program')
+        dni = request.POST.get('dni')
+        phone = request.POST.get('phone')
+        cycle = request.POST.get('cycle')
+        email = request.POST.get('email')
+        # process
+        myrequest = request.POST.get('myrequest')
+        order = request.POST.get('order')
+        reason = request.POST.get('reason')
+        pdf_memoryview = request.POST.get('pdf_binary_encoded')
+        
+        if pdf_memoryview == 'null':
+            pdf_bytes = bytes()
+        else:
+            pdf_bytes = pdf_memoryview.encode("utf-8")
+
+        now_date = date.today()
+        return render(request, 'create_fut/create_fut_wait.html',{
+            'Name': name,
+            'Program': program,
+            'Dni': dni,
+            'Phone': phone,
+            'Cycle': cycle,
+            'Email': email,
+            'Myrequest': myrequest,
+            'Order': order,
+            # 'Order_id': order_id,
+            # 'Monto': monto,
+            'Reason': reason,
+            # 'Pdf_binary_encoded': pdf_binary_encoded
+        })
+    else:
+        return HttpResponse("<h1>404 Not Found :(</h1>")

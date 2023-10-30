@@ -1,0 +1,3 @@
+(DONE)- Crear la interfaz de 'create_fut_wait'
+- Arreglar las funciones de 'views' y organizarlo todo
+- Orgarnizar 'myapp/views.py'

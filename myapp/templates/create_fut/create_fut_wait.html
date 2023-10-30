@@ -1,0 +1,85 @@
+{% extends 'create_fut/base_form_new_fut.html' %}
+
+{% load static %}
+{% block linkstyle2 %}
+<!-- Aun no estamos usando archivos .css -->
+<!-- Los estilos base estan en 'base_from_new_fut.html' -->
+{% endblock %}
+{% block contentf %}
+
+<!-- ------SOLO ESTILOS DEL CUADRO DE PAGO------ -->
+
+<div class="bodyf">
+    <h1>CREATE FUT WAIT</h1>
+    <h2>NOMBRE: {{Name}} </h2>
+    <h2>Program: {{Program}} </h2>
+</div>
+<script>
+    // -----Variables
+    var name_order = "{{Order}}";
+    var monto = "{{Monto}}";
+</script>
+<script>
+    function capturarValor(radio) {
+        var esp_cargo = "Cargo por Pasarela: S/. ";
+        var esp_total = "S/. ";
+        var taria = parseInt(monto);
+        var f_p_0 = document.getElementById('f_p_0');
+        var f_p_1 = document.getElementById('f_p_1');
+        var f_p_2 = document.getElementById('f_p_2');
+
+        if (radio.checked) {
+            var valor = radio.value;
+            var valor_int = parseInt(valor);
+            
+            document.getElementById("p_cargo").textContent = esp_cargo+valor;
+            document.getElementById("p_total").textContent = esp_total + (taria + valor_int);
+            if(valor!=0){
+                console.log(valor);
+                f_p_0.classList.add('ocultar');
+                f_p_1.classList.remove('ocultar');
+                f_p_2.classList.add('ocultar');
+            }else{
+                f_p_0.classList.remove('ocultar');
+                f_p_1.classList.add('ocultar');
+                f_p_2.classList.add('ocultar');
+            }
+        }
+    }
+    function add_pay_card(){
+        console.log("pay card");
+        //var pop_windows fue creado en base.html
+        pop_windows.classList.remove("ocultar");
+    }
+</script>
+{% endblock %}
+
+
+<!-- ----- -->
+{% block check_1 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+
+<!-- ----- -->
+{% block check_2 %}
+<!-- {% if name != '' %} -->
+<p style="width: 30px; text-align: center;">✅</p>
+<!-- {% else %}
+{% endif %} -->
+{% endblock %}
+<!-- ----- -->
+
+
+<!-- ----- -->
+{% block navbaractivate_3 %}
+
+activate-f
+
+{% endblock %}
+<!-- ----- -->

@@ -123,7 +123,7 @@
 </style>
 
 <div class="bodyf">
-    <form class="thefrom" action="{% url 'n_end' %}" method="post">
+    <form class="thefrom" action="{% url 'n_wait' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
         <div class="form_block">
@@ -224,7 +224,7 @@
                 <input type="hidden" name="reason" value="{{Reason}}">
                 <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}">
                 <button type="button" onclick="window.history.back()">Volver</button>
-                <button type="submit">Finalizar</button>
+                <button type="submit">Siguiente</button>
             </div>
         </div>
     </div>
