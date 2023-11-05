@@ -2,7 +2,7 @@ import json
 from asgiref.sync import sync_to_async, async_to_sync
 import base64
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse # agregamos el HttpResponse
+from django.http import HttpResponse
 from .models import fut, tupa
 from myapp_admin.models import process, Admins
 from datetime import date

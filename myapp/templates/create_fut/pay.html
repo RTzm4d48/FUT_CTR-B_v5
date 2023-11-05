@@ -5,8 +5,245 @@
 <!-- Aun no estamos usando archivos .css -->
 <!-- Los estilos base estan en 'base_from_new_fut.html' -->
 {% endblock %}
-{% block contentf %}
 
+{# ESTO LO ESTAMOS HEREDANDO DE BASE.HTML #}
+{% block up_pop_space %}
+
+<style>
+    #pop_windows_2{
+        margin: 150px auto auto auto;
+      }
+      .pop_up_window p{
+        /* margin: 20px 10px; */
+        opacity: 70%;
+        font-size: smaller;
+      }
+      .area_title{
+        width: 100%;
+        height: auto;
+        /* background: gray; */
+        display: flex;
+        flex-direction: column;
+      }
+      .area_title h3{
+        margin: 5px auto;
+        font-size: medium;
+      }
+      .save_inf{
+        /* background: salmon; */
+        display: flex;
+        justify-content: center;
+        height: auto;
+      }
+      .save_inf *{
+        /* background: gold; */
+        margin: 1px 2px;
+        padding: 1px;
+        color: #09AD72;
+        height: 15px;
+      }
+
+      .area{
+        width: 100%;
+        /* background: #2c86da; */
+        margin: 20px 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .area input[type="text"]{
+        /* background: gold; */
+        outline: 1px solid #838383;
+        padding: 10px 5px;
+        border-radius: 8px;
+        border: none;
+      }
+      .text_1{
+        width: calc(50% - 20px);
+      }
+      .area input[type="text"]:focus{
+        outline: 1px solid #7679FA;
+      }
+      .buttons{
+        display: flex;
+        justify-content: space-between;
+      }
+      .buttons button{
+        font-family: 'myfont_robot_bold';
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #3D9FF8;
+      }
+      .buttons button:hover{
+        color: #2c86da;
+      }
+      .close{
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        opacity: 60%;
+        width: 20px;
+        height: auto;
+        /* background: salmon; */
+      }
+      .close:hover{
+        opacity: 1;
+      }
+      .new_card{
+        display: flex;
+        /* background: pink; */
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid #3838385d;
+        cursor: pointer;
+      }
+      .new_card:hover{
+        background: #0000000c;
+      }
+      .imagecard{
+        height: 15px;
+        margin: 3px auto 6px 5px;
+      }
+      .cont_card{
+        /* background: greenyellow; */
+        display: flex;
+        flex-direction: column;
+      }
+      .card{
+        display: flex;
+        /* background: green; */
+      }
+      .card img{
+        width: auto;
+        height: 15px;
+        margin: auto 2px;
+      }
+      .card p{
+        margin: 5px 0px;
+        font-family: 'myfont_robot_bold';
+      }
+      .warning{
+        width: 100%;
+        display: flex;
+        background: #FFF7F4;
+        padding: 15px 0px;
+        border-radius: 7px;
+      }
+      .warning *{
+        margin: 0px 5px;
+        height: 15px;
+
+      }
+      .btn_save{
+        margin: auto;
+      }
+      .btn_save button{
+        padding: 5px 15px;
+        border-radius: 5px;
+        border: none;
+        background: red;
+        color: white;
+        font-family: 'myfont_robot_bold';
+        cursor: pointer;
+      }
+      .btn_save button:hover{
+        background: #c70909;
+      }
+</style>
+<!-- -----------Share------------- -->
+<div id="pop_windows" class="pop_up_window_content ocultar">
+  <div id="pop_windows_1" class="pop_up_window">
+    <div onclick="close_pop_up()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    <div class="area_title">
+      <h3>Método de pago</h3>
+      <div class="save_inf">
+        <img src="{% static 'img/tps.png' %}" alt="">
+        <p>tu información de pago está segura con nosotros</p>
+      </div>
+    </div>
+    <div class="area">
+      <div class="new_card" onclick="new_card()">
+        <div class="radio">
+          <input name="type_pay" type="radio" value="0" checked="checked"/>
+        </div>
+        <div class="cont_card">
+          <div class="card"><img src="{% static 'img/card.png' %}" alt=""><p>Añadir una nueva targeta</p></div>
+          <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
+        </div>
+
+      </div>
+    </div>
+    <div class="buttons ocultar">
+      <button onclick="close_pop_up()">Descartar Tramite</button>
+      <button onclick="close_pop_up()">Cancelar</button>
+    </div>
+  </div>
+  <!-- - -->
+  <div id="pop_windows_2" class="pop_up_window ocultar">
+    <div onclick="new_card_back()" class="close" style="left: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M166.218667 471.285333l1.888-1.984 331.157333-331.157333a32 32 0 0 1 46.698667 43.722667l-1.44 1.536L247.146667 480.768h594.752a32 32 0 0 1 1.877333 63.946667l-1.877333 0.053333H247.146667l297.386666 297.376a32 32 0 0 1 1.429334 43.722667l-1.44 1.536a32 32 0 0 1-43.722667 1.44l-1.536-1.44L168.106667 556.234667a61.472 61.472 0 0 1-1.888-84.949334z"></path></svg>
+    </div>
+    <div class="area_title">
+      <h3>Proporcionar más información</h3>
+      <div class="save_inf">
+        <img src="{% static 'img/tps.png' %}" alt="">
+        <p>tu información de pago está segura con nosotros</p>
+      </div>
+    </div>
+    <div class="area">
+      <div class="warning">
+        <img src="{% static 'img/card.png' %}" alt="">
+        <p>Añade una nueva tarjeta</p>
+        <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
+      </div>
+    </div>
+    <div class="area">
+      <input type="text" name="" class="text_1" placeholder='Número de tarjeta'>
+      <input type="text" name="" class="text_1" placeholder='Nombre del titular de targeta' value="{{Name}}" id="">
+    </div>
+    <div class="area">
+      <div class="subarea text_1" style="display: flex; justify-content: space-between;">
+        <input type="text" name="" class="text_1" placeholder='MM'>
+        <p style="margin: auto 0px;">/</p>
+        <input type="text" name="" class="text_1" placeholder='YY'>
+      </div>
+
+      <input type="text" name="" class="text_1" placeholder='CVV'>
+    </div>
+    <div class="area">
+      <div style="display: flex;">
+        <div class="radio">
+          <input name="type_pay" type="radio" value="0" checked="checked"/>
+        </div>
+        <p>Guardar esta targeta</p>
+      </div>
+    </div>
+    <div class="area">
+      <div class="btn_save">
+        <button onclick="save_and_continue()">Guardar y continuar</button>
+      </div>
+    </div>
+    <div class="buttons ocultar">
+      <button onclick="close_pop_up()">Descartar Tramite</button>
+      <button onclick="close_pop_up()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+{# ------------------------------------------ #}
+
+<div id="pop_windows" class="pop_up_window_content ocultar">
+  <div id="pop_windows_1" class="pop_up_window">
+    <h1>Hello</h1>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block contentf %}
 <!-- ------SOLO ESTILOS DEL CUADRO DE PAGO------ -->
 <style>
     .content_form2{
@@ -123,7 +360,7 @@
 </style>
 
 <div class="bodyf">
-    <form class="thefrom" action="{% url 'n_wait' %}" method="post">
+    <form class="thefrom" action="{% url 'n_end' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
         <div class="form_block">

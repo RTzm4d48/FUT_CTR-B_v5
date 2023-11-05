@@ -1,7 +1,8 @@
 from asgiref.sync import sync_to_async, async_to_sync
 from django.shortcuts import render
-from .models import fut
+from .models import fut, tupa
 from myapp_admin.models import process
+from django.http import HttpResponse, JsonResponse
 
 #pip install qrcode
 import random, qrcode
