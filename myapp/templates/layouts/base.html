@@ -414,6 +414,18 @@ body{
       .ocultar{
         display: none;
       }
+      .close{
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        opacity: 60%;
+        width: 20px;
+        height: auto;
+        /* background: salmon; */
+      }
+      .close:hover{
+        opacity: 1;
+      }
     </style>
     {% block up_pop_space %}
     {% endblock %}
@@ -445,10 +457,12 @@ body{
         }
       }
     </script>
-    
+
     <script>
       var pop_windows = document.getElementById("pop_windows");
       var pop_windows_1 = document.getElementById("pop_windows_1");
+      var pop_windows_wait = document.getElementById("pop_windows_wait"); //LA VENTANA EMERGENTE PARA EL WAIT
+
       var pop_windows_2 = document.getElementById("pop_windows_2");
       // ----
       var f_p_1 = document.getElementById("f_p_1");
@@ -462,7 +476,7 @@ body{
       var pop_windows_share = document.getElementById('pop_windows_share');
 
       function close_pop_up(){
-        pop_windows.classList.add("ocultar");
+        pop_windows_wait.classList.add("ocultar");
       }
       function new_card_back(){
         pop_windows_1.classList.remove("ocultar");

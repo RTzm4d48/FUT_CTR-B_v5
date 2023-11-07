@@ -10,6 +10,7 @@
 {% block up_pop_space %}
 
 <style>
+    /*ESTOS SON LOS ESTILOS DEL POPUP PAY*/
     #pop_windows_2{
         margin: 150px auto auto auto;
       }
@@ -78,18 +79,6 @@
       .buttons button:hover{
         color: #2c86da;
       }
-      .close{
-        position: absolute;
-        top: 10px;
-        cursor: pointer;
-        opacity: 60%;
-        width: 20px;
-        height: auto;
-        /* background: salmon; */
-      }
-      .close:hover{
-        opacity: 1;
-      }
       .new_card{
         display: flex;
         /* background: pink; */
@@ -150,6 +139,57 @@
       .btn_save button:hover{
         background: #c70909;
       }
+      /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/
+      .pop_up_window{
+        margin: 150px auto auto auto;
+      }
+      .icon_img{
+        /*background: salmon;*/
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+      }
+      .icon_img img{
+        margin: auto;
+        height: 60px;
+      }
+      .texto_explicativo{
+        display: flex;
+        width: 80%;
+        margin: 5px auto;
+        background: #EDEDED;
+        padding: 7px;
+        height: 60px;
+        border-radius: 4px;
+      }
+      .icon_img *{
+        margin: 5px auto;
+      }
+      .input-file {
+        display: none;
+      }
+
+      .select_img_cnt{
+        /*background: green;*/
+        width: 100%;
+        height: 50px;
+        display: flex;
+        }
+
+        /* Estilos para el botón personalizado */
+        .custom_button {
+          background-color: #007BFF;
+          color: #fff;
+          padding: 10px 20px;
+          cursor: pointer;
+          margin: auto;
+          border: none;
+          border-radius: 5px;
+          top: 0px;
+        }
+        .custom-button:hover {
+          background-color: #0056b3;
+        }
 </style>
 <!-- -----------Share------------- -->
 <div id="pop_windows" class="pop_up_window_content ocultar">
@@ -235,9 +275,27 @@
 
 {# ------------------------------------------ #}
 
-<div id="pop_windows" class="pop_up_window_content ocultar">
-  <div id="pop_windows_1" class="pop_up_window">
-    <h1>Hello</h1>
+<div id="pop_windows_wait" class="pop_up_window_content">
+  <div class="pop_up_window">
+    <div onclick="close_pop_up()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    {# Context pop_up #}
+    <div class="icon_img">
+        <img src="{% static 'img/icon03.png' %}">
+        <h2>Realize el pago</h2>
+        <div class="texto_explicativo">
+            <p>Aproximece a un cajero BCP y realice el pago a la siguiente cuenta <strong>3456 4567 4567 4523</strong>
+            que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al tiked y suba la foto aqui para su evaluación</p>
+        </div>
+        <div class="select_img_cnt">
+          <input type="file" id="pdf_file" name="pdf_file" class="input-file">
+          <label for="pdf_file" class="custom_button">Seleccionar archivo</label>
+          {# <button for="pdf_file" class="custom_button">Seleccionar archivo</button> #}
+        </div>
+        <a href="">omitir por ahora</a>
+    </div>
+    {#/Context pop_up #}
   </div>
 </div>
 {% endblock %}

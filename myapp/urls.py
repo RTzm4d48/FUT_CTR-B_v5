@@ -29,5 +29,5 @@ urlpatterns = [
     #vws_view_fut AQUI ESTARA TODAS LAS VITAS PARA VER EL TRAMITE REALIZADO
     path('my_fut/in-progress', vws_view_fut.view_fut_in_progress, name='n_in_progress'),
     path('my_fut/finished', vws_view_fut.view_fut_finished, name='n_finished'),
-
+    
 ]

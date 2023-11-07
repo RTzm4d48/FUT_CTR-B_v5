@@ -202,7 +202,7 @@
                 </div>
             </div>
             <div class="from_item">
-                <div class="content_boxlist" id='boxlist'>
+                <div class="content_boxlist" id='boxlist' style="margin:0px">
                     <!-- - -->
                     <div id="list_show_01" class='boxlist_inner' onclick='show_list()'>
                         <p id='select_procedure'>Seleccionar Tramite</p>
@@ -226,6 +226,7 @@
                     </div>
                     <!-- - -->
                 </div>
+                <p id="alert_tramite" style="color:red; margin: 0px;" class="ocultar">*Seleccione un tramite antes de continuar</p>
             </div>
         </div>
         <div class="form_block">
@@ -267,11 +268,12 @@
     var list_show_02 = document.getElementById("list_show_02");
     var select_procedure = document.getElementById('select_procedure');
     var form = document.getElementById('myform');
+    var message_alert = document.getElementById("alert_tramite");
 
     function show_list(){
         list_show_02.classList.remove("ocultar");
         list_show_01.classList.add("ocultar");
-
+        message_alert.classList.add("ocultar");
         divContenedor.classList.add("list_activate");
         event_search();
     }
@@ -339,7 +341,7 @@
     form.addEventListener('submit', function(event){
         if(select_procedure.textContent == "Seleccionar Tramite"){
             list_show_01.classList.add("error_list");
-            alert("Selecciona el trámite que deseas realizar");
+            message_alert.classList.remove("ocultar");
             event.preventDefault(); // Detiene el envío del formulario
         }
     });
