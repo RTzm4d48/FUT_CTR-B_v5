@@ -1,161 +1,151 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %} 
 {% load static %}
 
 {% block linkstyle %}
-{% endblock %}
-
-
-{% block up_pop_space %}
-<div id="pop_windows_share" class="pop_up_window_content ocultar">
-  <div id="share_qr" class="pop_up_window">
-    <div onclick="close_for_share()" class="close" style="right: 15px;">
-      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
-    </div>
-    <h3>Compartir</h3>
-    <div class="img_qr">
-      <img src="{% static 'tmp/79XNZxF1cuAqrcode.png' %}" alt="">
-    </div>
-    <div class="link_cont">
-      <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
-      <button>Copiar</button>
-    </div>
-    
-  </div>
-</div>
-{% endblock %}
+{%endblock %}
 
 {% block content %}
 <style>
-.locaso {
-    color:blue;
-}
-.mycontent{
-    background: #F0F1F5;
+  .locaso {
+    color: blue;
+  }
+  .mycontent {
+    background: #f0f1f5;
+    min-height:100vh;
+    height:auto;
     width: 100%;
     display: flex;
-}
-.content_dos{
-    width: 70%;
-    margin: auto;
-    /* background: red; */
+    justify-content: center;
+    align-items: start;
+    padding-top:100px;
+  }
+  .content_dos {
+    width: 90%;
+    max-width:1200px;
     height: 100%;
-}
-.Content_my_data{
+    overflow:hidden
+  }
+  .Content_my_data {
     /* background: pink; */
     width: 100%;
     display: flex;
-}
-.doccontent{
+  }
+  .doccontent {
     position: absolute;
     width: 400px;
     height: 600px;
     background: skyblue;
     /* position:absolute; z-index:1; */
-    position:relative; z-index:1;
-    left:-200px; top:0px; opacity:1;
+    position: relative;
+    z-index: 1;
+    left: -200px;
+    top: 0px;
+    opacity: 1;
     border-radius: 10px;
-}
-.text_doc{
+  }
+  .text_doc {
     background: rgb(206, 206, 206);
-    position:absolute; z-index:1;
-    left:0px; top:45%; opacity:1;
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 45%;
+    opacity: 1;
     width: 100%;
     padding: 10px 1px;
     text-align: center;
-}
-.text_doc button{
+  }
+  .text_doc button {
     /* display: none; */
     background: red;
     border: none;
     color: white;
     border-radius: 5px;
     margin: 10px 0px;
-}
-.img_cocument{
+  }
+  .img_cocument {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-}
-.student_content{
+  }
+  .student_content {
     width: calc(100% - 40px);
     background: white;
     padding: 20px 20px;
     border-radius: 15px;
     margin: 10px 0px;
     height: 250px;
-}
-.tittle_student{
+  }
+  .tittle_student {
     /* background: hotpink; */
     font-weight: bold;
-}
-.tittle_student h4{
+  }
+  .tittle_student h4 {
     margin: 0px 0px 20px 0px;
-}
-.data_data{
+  }
+  .data_data {
     /* background: tomato; */
     margin: 0px 20px;
-}
-.data_data p{
+  }
+  .data_data p {
     margin: 10px 0px;
     opacity: 90%;
-}
-.data_data hr{
+  }
+  .data_data hr {
     margin: 0px;
     opacity: 70%;
-}
-.route_tittle{
+  }
+  .route_tittle {
     width: 100%;
     height: 20px;
     /* background: red; */
     margin: 0px 0px 20px 0px;
-
-}
-.route_tittle h4{
+  }
+  .route_tittle h4 {
     margin: 0px;
-}
-.route{
+  }
+  .route {
     width: 100%;
     height: 50px;
     /* background: skyblue; */
     margin: auto;
     display: flex;
-}
-.circle{
+  }
+  .circle {
     width: 50px;
     height: 50px;
     border-radius: 50%; /* La mitad del ancho y alto */
-}
-.ProgressBar{
+  }
+  .ProgressBar {
     width: calc((100% - 250px) / 4);
     height: 3px;
     /* background: gold; */
     margin: auto 0px;
     display: flex;
     justify-content: space-between;
-}
-.progre{
+  }
+  .progre {
     width: 10px;
     height: 100%;
-}
-.on{
+  }
+  .on {
     background: rgb(37, 123, 252);
-}
-.off{
+  }
+  .off {
     background: #acacac;
-}
-.tracking_content{
+  }
+  .tracking_content {
     width: calc(100% - 20px);
     background: white;
     padding: 20px 10px 30px 10px;
     border-radius: 15px;
     margin: 10px 0px;
-}
-.route_content{
+  }
+  .route_content {
     width: 100%;
     /* background: gold; */
-}
-.tracking{
-    width: 700px;
+  }
+  .tracking {
+    width: 90%;
     /* background: green; */
     display: flex;
     border-radius: 10px;
@@ -163,136 +153,44 @@
     margin: 20px 0px 0px 0px;
     padding: 10px;
     position: relative;
-}
-.tracking *{
+  }
+  .tracking * {
     margin: 0px;
-}
-.tra_info{
+  }
+  .tra_info {
     width: 80%;
     /* background: red; */
     font-size: 10px;
     margin: auto 0px;
     height: auto;
-}
-.tra_info p{
+  }
+  .tra_info p {
     margin: 0px;
-}
-.tra_info hr{
+  }
+  .tra_info hr {
     margin: 5px;
-}
-.tra_seal{
+  }
+  .tra_seal {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20%;
     /* background: purple; */
     color: green;
-}
-.tra_seal h6{
+  }
+  .tra_seal h6 {
     font-weight: bold;
     font-size: 15px;
-}
-.arrow{
+  }
+  .arrow {
     width: 20px;
     height: 20px;
     /* background: aqua; */
     margin: 0px 0px 20px 20px;
     position: relative;
-}
-/* ventana flotante */
-#login-form-popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  background-color: white;
-  border: 1px solid rgb(211, 211, 211);
-  border-radius: 2px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  z-index: 3;
-}
-.window_title{
-    width: 100%;
-    background: #f34040;
-    padding: 10px 0px;
-    color: white;
-
-}
-.window_title h1{
-    font-size: 25px;
-    margin: 10px;
-}
-.window_title button{
-    position: absolute;
-    top: 18px;
-    right: 10px;
-    font-size: larger;
-    font-weight: bold;
-    color: white;
-    background: none;
-    border: none;
-}
-#mypass{
-    /* background: #acacac; */
-    display: grid;
-    width: 50%;
-    margin: 40px auto 0px auto;
-}
-#mypass .credent{
-    margin: 20px 20px 0px 20px;
-    font-size: small;
-    font-weight: bold;
-}
-#mypass input[type="password"]{
-    margin: 20px auto 0px auto;
-    font-size: small;
-    padding: 5px;
-    border-radius: 5px;
-    background: #cfcece;
-    border: 0px solid #a7a4a4;
-}
-#error2{
-    color: red;
-    margin: 0px auto 20px auto;
-    font-size: small;
-    font-weight: normal;
-}
-.mypassoptions{
-    /* background: #e79797; */
-    display: grid;
-    width: 50%;
-    margin: 0px auto 40px auto;
-}
-
-.mypassoptions a{
-    background: none;
-    border: none;
-    font-size: small;
-    color: #2984fc;
-
-}
-.mypassoptions a:hover{
-    color: rgb(39, 58, 236);
-}
-#login-form-popup input[type="submit"]{
-    background: #f34040;
-    width: 50%;
-    height: 40px;
-    margin: 40px auto;
-    border: none;
-    border-radius: 4px;
-    color: white;
-}
-#login-form-popup hr{
-    width: 90%;
-    border: 2px solid rgb(145, 144, 144);
-    margin: 0px auto;
-}
-
-#Forgetp{
+  }
+  /* ventana flotante */
+  #login-form-popup {
     display: none;
     position: fixed;
     top: 50%;
@@ -304,17 +202,107 @@
     border-radius: 2px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     text-align: center;
-    z-index:3;
-}
-#Forgetp [type="text"]{
+    z-index: 3;
+  }
+  .window_title {
+    width: 100%;
+    background: #f34040;
+    padding: 10px 0px;
+    color: white;
+  }
+  .window_title h1 {
+    font-size: 25px;
+    margin: 10px;
+  }
+  .window_title button {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+    background: none;
+    border: none;
+  }
+  #mypass {
+    /* background: #acacac; */
+    display: grid;
+    width: 50%;
+    margin: 40px auto 0px auto;
+  }
+  #mypass .credent {
+    margin: 20px 20px 0px 20px;
+    font-size: small;
+    font-weight: bold;
+  }
+  #mypass input[type="password"] {
+    margin: 20px auto 0px auto;
+    font-size: small;
+    padding: 5px;
+    border-radius: 5px;
+    background: #cfcece;
+    border: 0px solid #a7a4a4;
+  }
+  #error2 {
+    color: red;
+    margin: 0px auto 20px auto;
+    font-size: small;
+    font-weight: normal;
+  }
+  .mypassoptions {
+    /* background: #e79797; */
+    display: grid;
+    width: 50%;
+    margin: 0px auto 40px auto;
+  }
+
+  .mypassoptions a {
+    background: none;
+    border: none;
+    font-size: small;
+    color: #2984fc;
+  }
+  .mypassoptions a:hover {
+    color: rgb(39, 58, 236);
+  }
+  #login-form-popup input[type="submit"] {
+    background: #f34040;
+    width: 50%;
+    height: 40px;
+    margin: 40px auto;
+    border: none;
+    border-radius: 4px;
+    color: white;
+  }
+  #login-form-popup hr {
+    width: 90%;
+    border: 2px solid rgb(145, 144, 144);
+    margin: 0px auto;
+  }
+
+  #Forgetp {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: white;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 3;
+  }
+  #Forgetp [type="text"] {
     margin: 40px 20px 0px 20px;
     font-size: small;
     padding: 5px;
     border-radius: 5px;
     background: #cfcece;
     border: 0px solid #a7a4a4;
-}
-#Forgetp input[type="submit"]{
+  }
+  #Forgetp input[type="submit"] {
     background: #f34040;
     width: 50%;
     height: 40px;
@@ -322,26 +310,26 @@
     border: none;
     border-radius: 4px;
     color: white;
-}
-#Forgetp p{
+  }
+  #Forgetp p {
     color: red;
     margin: 0px auto 40px auto;
     font-size: small;
-}
+  }
 
-#Forgetp hr{
+  #Forgetp hr {
     width: 90%;
     border: none;
     margin: 0px auto;
-}
-.uncontetforget{
+  }
+  .uncontetforget {
     display: block;
-}
-.uncontetforget img{
+  }
+  .uncontetforget img {
     margin: 50px auto;
     width: 100px;
-}
-.uncontetforget a{
+  }
+  .uncontetforget a {
     display: block;
     color: white;
     width: 50%;
@@ -349,435 +337,612 @@
     background: #f34040;
     padding: 10px 20px;
     border-radius: 3px;
-    text-decoration:none;
-}
-/*  */
+    text-decoration: none;
+  }
+  /*  */
 </style>
 <!-- ----------------------------------------------------------------------------- -->
 
 <!-- ----------------Nuevos estole (se agrego en el diseño de interfaz v2)------------------ -->
 <style>
-.personcontent{
+  .personcontent {
     width: 100%;
     /* background: #2984fc; */
     display: flex;
     justify-content: space-between;
     padding: 50px 0px;
-}
-.data_person{
+    flex-wrap:wrap;
+    align-items:center;
+    gap:1.5em;
+  }
+  .data_person {
     display: flex;
     /* background: salmon; */
-}
-.icon_pers{
+  }
+  .icon_pers {
     height: 25px;
     margin: auto 5px auto 0px;
     opacity: 70%;
-}
-.profil_person{
+  }
+  .profil_person {
     height: 60px;
     border-radius: 50%;
     margin: auto 20px auto 5px;
-}
-.data_person p{
+  }
+  .data_person p {
     margin: auto 5px;
     font-size: 25px;
-}
-.name{
-font-family: 'quicksand_light';
-}
-.fullname{
-font-family: 'myfont_robot_bold';
-opacity: 80%;
-}
-.content_tools{
+  }
+  .name {
+    font-family: "quicksand_light";
+  }
+  .fullname {
+    font-family: "myfont_robot_bold";
+    opacity: 80%;
+  }
+  .content_tools {
     /* background: darkmagenta; */
     display: flex;
-}
-.share{
+  }
+  .share {
     display: flex;
     opacity: 80%;
     cursor: pointer;
-}
-.share img{
+  }
+  .share img {
     height: 30px;
     margin: auto;
-}
-.share p{
+  }
+  .share p {
     margin: auto;
-}
-.share:hover{
-opacity: 100%;
-}
-.tools{
+  }
+  .share:hover {
+    opacity: 100%;
+  }
+  .tools {
     height: 30px;
     margin: auto 0px auto 30px;
     opacity: 80%;
     cursor: pointer;
-}
-.tools:hover{
+  }
+  .tools:hover {
     opacity: 100%;
-}
-/* ----------------- */
-.tittle_order{
-/* background: #42AF15; */
-padding: 0px 0px 50px 0px;
-}
-.content_exped{
+  }
+  /* ----------------- */
+  .tittle_order {
+    /* background: #42AF15; */
+    padding: 0px 0px 50px 0px;
+  }
+  .content_exped {
     display: flex;
     /* background: firebrick; */
     margin: 0px 5px;
     opacity: 70%;
-}
-.content_exped .number{
+  }
+  .content_exped .number {
     font-weight: bold;
     margin: auto 5px;
-}
-.content_exped p{
+  }
+  .content_exped p {
     margin: 5px 0px;
-}
-.tittle_order h1{
+  }
+  .tittle_order h1 {
     /* background: rebeccapurple; */
     margin: 0px;
-}
-/* ---------------------- */
-.content_A{
+  }
+  /* ---------------------- */
+  .content_A {
     /* background: orange; */
     width: 65%;
-}
-.content_B{
+  }
+  .content_B {
     /* background: yellow; */
     width: calc(35% - 20px);
     margin: 0px 0px 0px auto;
-}
-.cont_doc{
+  }
+  .cont_doc {
     /* background: #42AF15; */
     display: flex;
     flex-direction: column;
-}
-.cont_doc img{
+  }
+  .cont_doc img {
     margin: 5px auto;
-}
-.cont_doc p{
+  }
+  .cont_doc p {
     margin: auto;
     color: #2984fc;
     cursor: pointer;
-}
-.cont_doc p:hover{
+  }
+  .cont_doc p:hover {
     text-decoration: underline;
-}
-.state{
+  }
+  .state {
     /* background: salmon; */
     display: flex;
     justify-content: center;
     margin: 30px 0px 0px 0px;
-}
-.state p{
+  }
+  .state p {
     margin: auto 10px;
     font-weight: bold;
-}
-.data_document{
+  }
+  .data_document {
     margin: 0px 10px;
     opacity: 80%;
     font-size: smaller;
-}
-.d_document{
+  }
+  .d_document {
     display: flex;
     margin: 5px 0px;
-}
-.d_document p{
+  }
+  .d_document p {
     margin: 0px 2px;
-}
-.num_data_doc{
+  }
+  .num_data_doc {
     font-weight: bold;
     margin: 0px 5px;
-}
+  }
+
+  @media (max-width: 650px){
+    .mycontent{
+      padding-bottom:3em;
+    }
+    .Content_my_data{
+      width:100%;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+    .data_person p{
+      font-size:1.2em;
+    }
+    .content_A{
+      width:100%;
+    }
+    .tittle_order h1{
+      font-size:1.3em;
+    }
+    .tracking{
+      margin-left:-20px;
+    }
+    .tra_seal h6{
+      font-size:0.5em;
+    }
+    .content_B{
+      width:100%;
+      margin:0;
+    }
+  }
+
+  @media (max-height: 500px){
+    .mycontent{
+      padding-bottom:3em;
+    }
+    .Content_my_data{
+      width:100%;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+    .data_person p{
+      font-size:1.2em;
+    }
+    .content_A{
+      width:100%;
+    }
+    .tittle_order h1{
+      font-size:1.3em;
+    }
+    .tracking{
+      margin-left:-20px;
+    }
+    .tra_seal h6{
+      font-size:0.5em;
+    }
+    .content_B{
+      width:100%;
+      margin:0;
+    }
+  }
 </style>
 
-<div class="mycontent" >
-    <div class="content_dos" >
-        <div class="personcontent">
-            <div class="data_person">
-                <img src="{% static 'img/icon_student.png' %}" alt="" class="icon_pers">
-                <img src="{% static 'img/profile_user_test.jpg' %}" alt="" class="profil_person">
-                <p class="name">Juan Edgar</p>
-                <p class="fullname">Aguirre Mamani</p>
-            </div>
-            <div class="content_tools">
-                <div class="share" onclick="open_for_share()">
-                    <img src="{% static 'img/share.png' %}" alt="">
-                    <p>Compartir</p>
-                </div>
-                <img src="{% static 'img/tools.png' %}" alt="" class="tools">
-            </div>
+<div class="mycontent">
+  <div class="content_dos">
+    <div class="personcontent">
+      <div class="data_person">
+        <img
+          src="{% static 'img/icon_student.png' %}"
+          alt=""
+          class="icon_pers"
+        />
+        <img
+          src="{% static 'img/profile_user_test.jpg' %}"
+          alt=""
+          class="profil_person"
+        />
+        <p class="name">Juan Edgar</p>
+        <p class="fullname">Aguirre Mamani</p>
+      </div>
+      <div class="content_tools">
+        <div class="share" onclick="open_for_share()">
+          <img src="{% static 'img/share.png' %}" alt="" />
+          <p>Compartir</p>
         </div>
-        <div class="tittle_order">
-            <div class="content_exped">
-                <p>N° DE EXPEDIENTE:</p>
-                <p class="number">{{Proceeding}}</p>
-            </div>
-            <h1>{{Order}}</h1>
+        <img src="{% static 'img/tools.png' %}" alt="" class="tools" />
+      </div>
+    </div>
+    <div class="tittle_order">
+      <div class="content_exped">
+        <p>N° DE EXPEDIENTE:</p>
+        <p class="number">{{Proceeding}}</p>
+      </div>
+      <h1>{{Order}}</h1>
+    </div>
+    <!-- ----------------------- -->
+    <div class="Content_my_data">
+      <div class="content_A">
+        <div class="student_content">
+          <div class="tittle_student">
+            <h4>Datos del solicitante</h4>
+          </div>
+          <div class="data_data">
+            <hr />
+            <p>Alumno: {{Name}}</p>
+            <hr />
+            <p>DNI: {{Dni}}****</p>
+            <hr />
+            <p>Programa: {{Program}}</p>
+            <hr />
+            <p>Email: {{Email_code}}</p>
+            <hr />
+          </div>
         </div>
-        <!-- ----------------------- -->
-        <div class="Content_my_data" >
-            <div class="content_A">
-                <div class="student_content">
-                    <div class="tittle_student">
-                        <h4>Datos del solicitante</h4>
-                    </div>
-                    <div class="data_data">
-                        <hr>
-                        <p>Alumno: {{Name}}</p>
-                        <hr>
-                        <p>DNI: {{Dni}}****</p>
-                        <hr>
-                        <p>Programa: {{Program}}</p>
-                        <hr>
-                        <p>Email: {{Email_code}} </p>
-                        <hr>
-                    </div>
-                </div>
-                <h5>Palabras del director</h5>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum corrupti aperiam dolorem eos expedita pariatur temporibus a tempora architecto, minima soluta eaque nihil maxime corporis aspernatur tempore ex doloribus, totam velit eveniet fugiat, sapiente sequi placeat? Sint dignissimos autem maiores.</p>
-                <div class="student_content" style="height: auto;">
-                    <div class="route_tittle"><h4>Ruta de Tramite</h4></div>
-                    <!-- Todo esto es tuta de tramites -->
-                    <div class="route">
-                        <div class="circle on">
-                            <img width="100%" src="{% static 'img/process/P_01-on.png' %}" alt="">
-                        </div>
-                        <div class="ProgressBar">
-                            {% for i in Progressbar %}
-                            <div class="progre on"></div>
-                            {% endfor %}
-                        </div>
-                        <div class="circle on">
-                            <img width="100%" src="{% static 'img/process/P_02-on.png' %}" alt="">
-                        </div>
-                        {% if Num_process >= 3 %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre on"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_03-on.png' %}" alt="">
-                            </div>
-                        {% else %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre off"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_03-off.png' %}" alt="">
-                            </div>
-                        {% endif %}
-                        {% if Num_process >= 4 %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre on"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_04-on.png' %}" alt="">
-                            </div>
-                        {% else %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre off"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_04-off.png' %}" alt="">
-                            </div>
-                        {% endif %}
-                        {% if Num_process >= 5 %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre on"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_05-on.png' %}" alt="">
-                            </div>
-                        {% else %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre off"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_05-off.png' %}" alt="">
-                            </div>
-                        {% endif %}
-                    </div>
-                    <!-- --------- -->
-                </div>
-                <div class="student_content" style="height: auto;">
-                    <div class="route_tittle"><h4>Detalles de Seguimiento</h4></div>
-                    <div class="route_content">
-                        {% for i in Data %}
-                            <div class="tracking" style="left: {{i.num}}px; width: calc(700px - {{i.num}}px);"> <!----'i' variables iteradas Details--->
-                                <div class="tra_info">
-                                    <h4> {{i.tittle}} </h4>
-                                    <p> {{i.name}} </p>
-                                    <hr>
-                                    <p>{{i.reception}}</p>
-                                    <p>{{i.exit}}</p>
-                                </div>
-                                {% if i.exit == none %}
-                                <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #464646;opacity: 60%;"><h6>PENDIENTE</h6><img width="30px" src="{% static 'img/pending.png' %}" alt=""></div>
-                                {% else %}
-                                <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #42AF15;"><h6>PROCESADO</h6><img width="30px" src="{% static 'img/check.png' %}" alt=""></div>
-                                {% endif %}
-                            </div>
-                            {% if i.num <= 80 %}
-                                <div class="arrow" style="left: {{i.num|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
-                                    <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 83.44 83.44"><defs><style>.cls-1{fill:#ef0033;}</style></defs><title>Captura de pantalla 2023-04-28 155958</title><path class="cls-1" d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"/></svg>
-                                </div>
-                            {% endif %}
-
-                        {% endfor %}
-                    </div>
-                </div>
+        <h5>Palabras del director</h5>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum corrupti
+          aperiam dolorem eos expedita pariatur temporibus a tempora architecto,
+          minima soluta eaque nihil maxime corporis aspernatur tempore ex
+          doloribus, totam velit eveniet fugiat, sapiente sequi placeat? Sint
+          dignissimos autem maiores.
+        </p>
+        <div class="student_content" style="height: auto">
+          <div class="route_tittle"><h4>Ruta de Tramite</h4></div>
+          <!-- Todo esto es tuta de tramites -->
+          <div class="route">
+            <div class="circle on">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_01-on.png' %}"
+                alt=""
+              />
             </div>
-            <div class="content_B">
-                <div class="student_content">
-                    <div class="cont_doc">
-                        <img src="{% static 'img/doc.png' %}" alt="">
-                        <p>Download</p>
-                    </div>
-                    <div class="state">
-                        <p>Estado</p>
-                        <p style="color: green;">Finalizado</p>
-                    </div>
-                </div>
-                <div class="data_document">
-                    <div class="d_document">
-                        <p>Disponibilidad de descarga:</p>
-                        <p class="num_data_doc" style="color: green;">Publico</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Origen:</p>
-                        <p class="num_data_doc">Instituto ILS</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Numero de paginas:</p>
-                        <p class="num_data_doc">5</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Tamaño:</p>
-                        <p class="num_data_doc">250KB</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Formato:</p>
-                        <p class="num_data_doc">pdf</p>
-                    </div>
-                </div>
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre on"></div>
+              {% endfor %}
             </div>
+            <div class="circle on">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_02-on.png' %}"
+                alt=""
+              />
+            </div>
+            {% if Num_process >= 3 %}
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre on"></div>
+              {% endfor %}
+            </div>
+            <div class="circle off">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_03-on.png' %}"
+                alt=""
+              />
+            </div>
+            {% else %}
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre off"></div>
+              {% endfor %}
+            </div>
+            <div class="circle off">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_03-off.png' %}"
+                alt=""
+              />
+            </div>
+            {% endif %} {% if Num_process >= 4 %}
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre on"></div>
+              {% endfor %}
+            </div>
+            <div class="circle off">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_04-on.png' %}"
+                alt=""
+              />
+            </div>
+            {% else %}
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre off"></div>
+              {% endfor %}
+            </div>
+            <div class="circle off">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_04-off.png' %}"
+                alt=""
+              />
+            </div>
+            {% endif %} {% if Num_process >= 5 %}
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre on"></div>
+              {% endfor %}
+            </div>
+            <div class="circle off">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_05-on.png' %}"
+                alt=""
+              />
+            </div>
+            {% else %}
+            <div class="ProgressBar">
+              {% for i in Progressbar %}
+              <div class="progre off"></div>
+              {% endfor %}
+            </div>
+            <div class="circle off">
+              <img
+                width="100%"
+                src="{% static 'img/process/P_05-off.png' %}"
+                alt=""
+              />
+            </div>
+            {% endif %}
+          </div>
+          <!-- --------- -->
         </div>
-    </div>
-    <!-- ventana flotanete -->
-    <div id="login-form-popup">
-        <div class="window_title"><h1>Descargar</h1><button onclick="closeForm()">X</button></div>
-        <form id="F_download" action="{% url 'n_img_dow' %}" method="post">
-            {% csrf_token %}
-            <div id="mypass">
-                <p class="credent">Expediente: {{Proceeding}}   </p>
-                <input id="passInput" type="password" name="password" placeholder="Contraseña" required>
-                <p id="error2"></p>
+        <div class="student_content" style="height: auto">
+          <div class="route_tittle"><h4>Detalles de Seguimiento</h4></div>
+          <div class="route_content">
+            {% for i in Data %}
+            <div
+              class="tracking"
+              style="left: {{i.num}}px; ;"
+            >
+              <!----'i' variables iteradas Details--->
+              <div class="tra_info">
+                <h4>{{i.tittle}}</h4>
+                <p>{{i.name}}</p>
+                <hr />
+                <p>{{i.reception}}</p>
+                <p>{{i.exit}}</p>
+              </div>
+              {% if i.exit == none %}
+              <div
+                class="tra_seal"
+                style="
+                  display: block;
+                  text-align: center;
+                  align-items: center;
+                  height: 50px;
+                  margin: auto 0px;
+                  color: #464646;
+                  opacity: 60%;
+                "
+              >
+                <h6>PENDIENTE</h6>
+                <img width="30px" src="{% static 'img/pending.png' %}" alt="" />
+              </div>
+              {% else %}
+              <div
+                class="tra_seal"
+                style="
+                  display: block;
+                  text-align: center;
+                  align-items: center;
+                  height: 50px;
+                  margin: auto 0px;
+                  color: #42af15;
+                "
+              >
+                <h6>PROCESADO</h6>
+                <img width="30px" src="{% static 'img/check.png' %}" alt="" />
+              </div>
+              {% endif %}
             </div>
-            <div class="mypassoptions">
-                <a href="#" onclick="forgetpass()">¿Olvidasete tu contraseña?</a>
+            {% if i.num <= 80 %}
+            <div class="arrow" style="left: {{i.num|add:10}}px;">
+              <!---variable iterada y le agregamos 10px mas---->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="Capa_1"
+                data-name="Capa 1"
+                viewBox="0 0 83.44 83.44"
+              >
+                <defs>
+                  <style>
+                    .cls-1 {
+                      fill: #ef0033;
+                    }
+                  </style>
+                </defs>
+                <title>Captura de pantalla 2023-04-28 155958</title>
+                <path
+                  class="cls-1"
+                  d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"
+                />
+              </svg>
             </div>
-            <hr>
-            <input type="submit" value="Descargar Documento">
-            <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
-        </form>
+            {% endif %} {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="content_B">
+        <div class="student_content">
+          <div class="cont_doc">
+            <img src="{% static 'img/doc.png' %}" alt="" />
+            <p>Download</p>
+          </div>
+          <div class="state">
+            <p>Estado</p>
+            <p style="color: green">Finalizado</p>
+          </div>
+        </div>
+        <div class="data_document">
+          <div class="d_document">
+            <p>Disponibilidad de descarga:</p>
+            <p class="num_data_doc" style="color: green">Publico</p>
+          </div>
+          <div class="d_document">
+            <p>Origen:</p>
+            <p class="num_data_doc">Instituto ILS</p>
+          </div>
+          <div class="d_document">
+            <p>Numero de paginas:</p>
+            <p class="num_data_doc">5</p>
+          </div>
+          <div class="d_document">
+            <p>Tamaño:</p>
+            <p class="num_data_doc">250KB</p>
+          </div>
+          <div class="d_document">
+            <p>Formato:</p>
+            <p class="num_data_doc">pdf</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <!--  -->
-    <!-- FORGET PASS -->
-    <div id="Forgetp">
-        <div class="window_title"><h1>Enviar credenciales al tu correo</h1><button onclick="closeForm2()">X</button></div>
-        <form id="myForm" action="{% url 'n_send_email' %}" method="post">
-            {% csrf_token %}
-            <div class="uncontetforget" id="DivForget">
-                <input type="text" name="gmail" id="gmail" placeholder="@Correo" required>
-                <p id="error"></p>
-                <hr>
-                <input type="submit" value="Enviar">
-            </div>
-        </form>
+  </div>
+  <!-- ventana flotanete -->
+  <div id="login-form-popup">
+    <div class="window_title">
+      <h1>Descargar</h1>
+      <button onclick="closeForm()">X</button>
     </div>
-    <!--  -->
+    <form id="F_download" action="{% url 'n_img_dow' %}" method="post">
+      {% csrf_token %}
+      <div id="mypass">
+        <p class="credent">Expediente: {{Proceeding}}</p>
+        <input
+          id="passInput"
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          required
+        />
+        <p id="error2"></p>
+      </div>
+      <div class="mypassoptions">
+        <a href="#" onclick="forgetpass()">¿Olvidasete tu contraseña?</a>
+      </div>
+      <hr />
+      <input type="submit" value="Descargar Documento" />
+      <!-- <a href="/my_fut/download_image">Desacargar imagen</a> -->
+    </form>
+  </div>
+  <!--  -->
+  <!-- FORGET PASS -->
+  <div id="Forgetp">
+    <div class="window_title">
+      <h1>Enviar credenciales al tu correo</h1>
+      <button onclick="closeForm2()">X</button>
+    </div>
+    <form id="myForm" action="{% url 'n_send_email' %}" method="post">
+      {% csrf_token %}
+      <div class="uncontetforget" id="DivForget">
+        <input
+          type="text"
+          name="gmail"
+          id="gmail"
+          placeholder="@Correo"
+          required
+        />
+        <p id="error"></p>
+        <hr />
+        <input type="submit" value="Enviar" />
+      </div>
+    </form>
+  </div>
+  <!--  -->
 </div>
 
 <script>
-    //variables
-    const form = document.getElementById('myForm');
-    const gmailinput = document.getElementById('gmail');
-    const errorPara = document.getElementById('error');
-    const div = document.getElementById('DivForget');
-    const formDownload = document.getElementById('F_download');
-    const passInput = document.getElementById('passInput')
-    const errorPass = document.getElementById('error2')
+  //variables
+  const form = document.getElementById("myForm");
+  const gmailinput = document.getElementById("gmail");
+  const errorPara = document.getElementById("error");
+  const div = document.getElementById("DivForget");
+  const formDownload = document.getElementById("F_download");
+  const passInput = document.getElementById("passInput");
+  const errorPass = document.getElementById("error2");
 
+  function openLoginForm() {
+    document.getElementById("login-form-popup").style.display = "block";
+  }
 
-    function openLoginForm() {
-        document.getElementById("login-form-popup").style.display = "block";
-    }
-
-    window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == document.getElementById("login-form-popup")) {
-        document.getElementById("login-form-popup").style.display = "none";
+      document.getElementById("login-form-popup").style.display = "none";
     }
+  };
+
+  function closeForm() {
+    document.getElementById("login-form-popup").style.display = "none";
+  }
+  //Descargar documento
+  formDownload.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (passInput.value.trim() === "{{Password}}") {
+      formDownload.submit();
+      document.getElementById("login-form-popup").style.display = "none";
+    } else {
+      errorPass.textContent = "contraseña incorrecta";
+      return;
     }
+  });
 
-    function closeForm(){
-        document.getElementById("login-form-popup").style.display = "none";
+  //validar correo
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (gmailinput.value.trim() === "{{Email}}") {
+      //form.submit();
+      div.innerHTML = `<img src="{% static '/img/check.png' %}" alt=""><hr><a onclick="closeforget()" href="#">Cerrar</a>`;
+      $.get("/send_email/", {
+        gmail: gmailinput.value.trim(),
+        name: "{{Name}}",
+        proceeding: "{{Proceeding}}",
+        password: "{{Password}}",
+      });
+    } else {
+      errorPara.textContent = "Email invalido";
+      return;
     }
-    //Descargar documento
-    formDownload.addEventListener('submit', function(event) {
-        event.preventDefault();
-        if(passInput.value.trim() === '{{Password}}') {
-            formDownload.submit();
-            document.getElementById("login-form-popup").style.display = "none";
-        }else{
-            errorPass.textContent = 'contraseña incorrecta';
-            return;
-        }
-    });
+  });
 
-    //validar correo
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+  function closeforget() {
+    document.getElementById("Forgetp").style.display = "none";
+  }
 
-        if(gmailinput.value.trim() === '{{Email}}') {
-            //form.submit();
-            div.innerHTML = `<img src="{% static '/img/check.png' %}" alt=""><hr><a onclick="closeforget()" href="#">Cerrar</a>`
-            $.get('/send_email/', {'gmail': gmailinput.value.trim(), 'name': '{{Name}}', 'proceeding':'{{Proceeding}}', 'password': '{{Password}}'});
-        }else{
-            errorPara.textContent = 'Email invalido';
-            return;
-        }
-    });
+  //Botton enviar al correo
+  function forgetpass() {
+    document.getElementById("login-form-popup").style.display = "none";
+    console.log();
+    document.getElementById("Forgetp").style.display = "block";
+  }
 
-    function closeforget(){
-        document.getElementById("Forgetp").style.display = "none";
-    }
-
-    //Botton enviar al correo
-    function forgetpass(){
-        document.getElementById("login-form-popup").style.display = "none";
-        console.log()
-        document.getElementById("Forgetp").style.display = "block";
-    }
-
-
-
-    function closeForm2(){
-        document.getElementById("Forgetp").style.display = "none";
-    }
+  function closeForm2() {
+    document.getElementById("Forgetp").style.display = "none";
+  }
 </script>
 
 {% endblock %}

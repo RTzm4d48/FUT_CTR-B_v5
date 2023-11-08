@@ -10,358 +10,487 @@
 
 <!-- ------------SOLO ESTILOS DEL 'LIST' PARA SELECCIONAR LOS TRAMITES---------- -->
 <style>
-    .content_boxlist{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        border-radius: 5px;
-        height: 50px;
-        color: gray;
-        border: 2px solid #7679FA;
-        cursor: pointer;
-        margin: 0px 0px auto auto;
-    }
-    .boxlist_inner{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        background: #E9E9E9;
-        border-radius: 5px;
-    }
-    .content_boxlist:hover{
-        border: 2px solid #272ae4;
-    }
-    .content_boxlist p{
-        margin: auto 10px;
-        color: black;
-    }
-    .icono{
-        height: 30px;
-        margin: auto 10px;
-    }
-    .list_activate{
-        border: 0px solid #7679FA;
-    }
-    .list_activate:hover{
-        border: 0px solid #7679FA;
-    }
-    .content_boxlist2{
-        background: #ECF2F9;
-        width: 100%;
-        height: 310px;
-        z-index: 2;
-        border-radius: 5px;
-        border: 2px solid #7679FA;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
-    }
-    .search_content{
-        width: 80%;
-        height: 40px;
-        margin: 10px auto;
-        /* background: gray; */
-        display: flex;
-        position: relative;
-    }
-    .txt_search{
-        background: white;
-        height: 100%;
-        width: 100%;
-        padding: 0px 10px;
-        font-size: 13px;
-        border: none;
-        border-radius: 3px;
-    }
-    .txt_search:focus {
-        outline: 1px solid #7679FA;
-    }
-    .svg_search{
-        /* background: pink; */
-        display: flex;
-        width: 25px;
-        position: absolute;
-        top: 50%; /* Centra verticalmente */
-        right: 5px; /* Posición a la derecha */
-        transform: translateY(-50%); /* Corrige la posición vertical para centrar */
-    }
-    .procedure_content{
-        width: 100%;
-        height: calc(100% - 100px);
-        /* background: salmon; */
-    }
-    .close_conte{
-        width: 100%;
-        height: 40px;
-        /* background: #272ae4; */
-        display: flex;
-    }
-    .close_conte p{
-        background: gray;
-        color: white;
-        margin: 10px auto auto auto;
-        padding: 2px 15px;
-        border-radius: 3px;
-        font-size: small;
-        border: 1px solid #5e5e5e;
-    }
-    .close_conte p:hover{
-        background: #686868;
-    }
-    .procedure{
-        width: 100%;
-        height: 30px;
-        display: flex;
-        color: black;
-        /* background: red; */
-    }
-    .procedure:hover{
-        background: #9cbaf1af;
-    }
-    .procedure img{
-        height: 70%;
-        margin: auto 0px auto 15px;
-        opacity: 70%;
-    }
-    .procedure p{
-        font-size: small;
-        margin: auto 15px auto 10px;
-        opacity: 80%;
-    }
-    .color_procedure{
-        background: #afafaf56;
-    }
-    .ocultar{
-        display: none;
-    }
-    .mostrar{
-        display: flex;
-    }
-    .error_list{
-        background: rgba(255, 0, 0, 0.281);
-    }
+  .content_boxlist {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 5px;
+    height: 50px;
+    color: gray;
+    border: 2px solid #7679fa;
+    cursor: pointer;
+    margin: 0px 0px auto auto;
+  }
+  .boxlist_inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #e9e9e9;
+    border-radius: 5px;
+  }
+  .content_boxlist:hover {
+    border: 2px solid #272ae4;
+  }
+  .content_boxlist p {
+    margin: auto 10px;
+    color: black;
+  }
+  .icono {
+    height: 30px;
+    margin: auto 10px;
+  }
+  .list_activate {
+    border: 0px solid #7679fa;
+  }
+  .list_activate:hover {
+    border: 0px solid #7679fa;
+  }
+  .content_boxlist2 {
+    background: #ecf2f9;
+    width: 100%;
+    height: 310px;
+    z-index: 2;
+    border-radius: 5px;
+    border: 2px solid #7679fa;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+  }
+  .search_content {
+    width: 80%;
+    height: 40px;
+    margin: 10px auto;
+    /* background: gray; */
+    display: flex;
+    position: relative;
+  }
+  .txt_search {
+    background: white;
+    height: 100%;
+    width: 100%;
+    padding: 0px 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 3px;
+  }
+  .txt_search:focus {
+    outline: 1px solid #7679fa;
+  }
+  .svg_search {
+    /* background: pink; */
+    display: flex;
+    width: 25px;
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    right: 5px; /* Posición a la derecha */
+    transform: translateY(-50%); /* Corrige la posición vertical para centrar */
+  }
+  .procedure_content {
+    width: 100%;
+    height: calc(100% - 100px);
+    /* background: salmon; */
+  }
+  .close_conte {
+    width: 100%;
+    height: 40px;
+    /* background: #272ae4; */
+    display: flex;
+  }
+  .close_conte p {
+    background: gray;
+    color: white;
+    margin: 10px auto auto auto;
+    padding: 2px 15px;
+    border-radius: 3px;
+    font-size: small;
+    border: 1px solid #5e5e5e;
+  }
+  .close_conte p:hover {
+    background: #686868;
+  }
+  .procedure {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    color: black;
+    /* background: red; */
+  }
+  .procedure:hover {
+    background: #9cbaf1af;
+  }
+  .procedure img {
+    height: 70%;
+    margin: auto 0px auto 15px;
+    opacity: 70%;
+  }
+  .procedure p {
+    font-size: small;
+    margin: auto 15px auto 10px;
+    opacity: 80%;
+  }
+  .color_procedure {
+    background: #afafaf56;
+  }
+  .ocultar {
+    display: none;
+  }
+  .mostrar {
+    display: flex;
+  }
+  .error_list {
+    background: rgba(255, 0, 0, 0.281);
+  }
 </style>
 
 <!-- ------------SOLO ESTILOS DEL 'TEXTAREA'---------- -->
 <style>
-    * {
-      box-sizing: border-box;
+  * {
+    box-sizing: border-box;
+  }
+  textarea {
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 20px;
+    border: none;
+    color: black;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.3s ease;
+    margin: auto;
+    font-size: 15px;
+    height: 95%;
+    border-radius: 3px;
+  }
+  textarea:valid ~ label {
+    top: 0;
+    font: 700 12px Roboto;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: sandybrown; */
+  }
+  textarea:focus {
+    outline: none;
+  }
+  textarea:focus ~ label {
+    top: 0;
+    font: 700 12px Roboto;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  textarea:focus ~ .bar:before {
+    transform: translateX(0);
+  }
+  textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px red inset;
+    -webkit-text-fill-color: white !important;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  /*{% comment %}*/ @media (max-width: 990px) {
+    .bodyf {
+      position: absolute;
+      width: auto;
+      /* right: 34px; */
+      left: 92px;
+      top: 78px;
     }
-    textarea {
-      display: block;
-      width: 100%;
-      padding-top: 20px;
-      padding-left: 20px;
-      border: none;
-      color: black;
-      font-size: 20px;
-      font-family: Arial, Helvetica, sans-serif;
-      transition: 0.3s ease;
-      margin: auto;
-      font-size: 15px;
-      height: 95%;
-      border-radius: 3px;
+    .thefrom {
+      /*position: absolute; */
+      display: flex;
+      padding-top: 2px;
+      /* top: auto; */
+      padding-right: auto;
+      /* bottom: 1px; */
+      padding-left: 4px;
     }
-    textarea:valid ~ label {
-      top: 0;
-      font: 700 12px Roboto;
-      color: rgba(0, 0, 0, 0.5);
-      font-family: Arial, Helvetica, sans-serif;
-      /* background: sandybrown; */
+    .content_form {
+      /*position: relative; */
+      margin: auto 12px;
+      right: 63px;
+      position: relative;
+      background: red;
+      /* width: 88%; */
+      /* max-width: 121%;*/
     }
-    textarea:focus {
-      outline: none;
+    .from_item {
+      /* position: relative; */
+      /* margin: 10px; */
+      /* display: flex; */
+      /* width: 100px; */
+      /* max-width: 100vh; */
+      bottom: 10px;
+      /* margin-bottom: 18px; */
+      margin-top: 5px;
+      padding-left: 2px;
+      /* padding-bottom: 62px; */
+      /* top: -12px; */
+      /* margin-top: 58px; */
+      /* bottom: 60px;*/
     }
-    textarea:focus ~ label {
-      top: 0;
-      font: 700 12px Roboto;
-      color: red;
-      font-family: Arial, Helvetica, sans-serif;
+    .group {
+      flex-direction: column;
+      /* position: absolute; */
+      /* gap: 36px; */
+      bottom: 10px;
+      left: 49px;
+      margin-right: 16px;
     }
-    textarea:focus ~ .bar:before {
-      transform: translateX(0);
+    .text_comoda {
+      position: relative;
     }
-    textarea:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0px 1000px red inset;
-      -webkit-text-fill-color: white !important;
+    label {
+      display: flex;
     }
-    select::-ms-expand {
-      display: none;
+    .bar {
+      display: flex;
     }
+    .content_boxlist {
+      position: absolute;
+      /* flex-wrap: wrap; */
+      top: 47px;
+      right: 53px;
+      width: 221px;
+      /* left: 30px; */
+      /* justify-content: center; */
+      /* align-items: center; */
+      margin-left: -129px;
+      /* padding-bottom: 16px;*/
+    }
+  }
+  /*{% endcomment %}*/
 </style>
 
 <div class="bodyf">
-    <form id="myform" class="thefrom" action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+  <form id="myform" class="thefrom" action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="content_form">
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name1" name="myrequest" value="Solicitud por defecto" required>
-                    <label for="name1">Solicito:</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item">
-                <div class="content_boxlist" id='boxlist' style="margin:0px">
-                    <!-- - -->
-                    <div id="list_show_01" class='boxlist_inner' onclick='show_list()'>
-                        <p id='select_procedure'>Seleccionar Tramite</p>
-                        <div class='icono'>
-                            <svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>
-                        </div>
-                    </div>
-                    <!-- - -->
-                    <div id="list_show_02" class='content_boxlist2 ocultar'>
-                        <div class='search_content'>
-                            <input class='txt_search' type='text' id='miCuadroDeTexto' placeholder='Busca el tramite que deseas' oninput='event_search()'>
-                            <div class='svg_search'>
-                                <svg viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false' style='pointer-events: none; display: block; width: 100%; height: 100%;'><g><path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'></path></g></svg>
-                            </div>
-                        </div>
-                        <div class='procedure_content' id='procedures' style='overflow-y: scroll;'>
-                        </div>
-                        <div class='close_conte'>
-                            <p onclick='hide_list(0)'>Close</p>
-                        </div>
-                    </div>
-                    <!-- - -->
-                </div>
-                <p id="alert_tramite" style="color:red; margin: 0px;" class="ocultar">*Seleccione un tramite antes de continuar</p>
-            </div>
+      <div class="form_block">
+        <div class="from_item">
+          <div class="group">
+            <input
+              class="text_comoda"
+              type="text"
+              id="name1"
+              name="myrequest"
+              value="Solicitud por defecto"
+              required
+            />
+            <label for="name1">Solicito:</label>
+            <div class="bar"></div>
+          </div>
         </div>
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <textarea id="name" name="reason" cols="30" rows="10" required>Motivo por defecto</textarea>
-                    <label id="label_def" for="name">Que por motivos de:</label>
-                    <div class="bar"></div>
+        <div class="from_item">
+          <div class="content_boxlist" id="boxlist">
+            <!-- - -->
+            <div id="list_show_01" class="boxlist_inner" onclick="show_list()">
+              <p id="select_procedure">Seleccionar Tramite</p>
+              <div class="icono">
+                <svg
+                  style="
+                    pointer-events: none;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                  "
+                  viewBox="0 0 24 24"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                >
+                  <g><path fill="gray" d="M18,9l-6,6L6,9H18z"></path></g>
+                </svg>
+              </div>
+            </div>
+            <!-- - -->
+            <div id="list_show_02" class="content_boxlist2 ocultar">
+              <div class="search_content">
+                <input
+                  class="txt_search"
+                  type="text"
+                  id="miCuadroDeTexto"
+                  placeholder="Busca el tramite que deseas"
+                  oninput="event_search()"
+                />
+                <div class="svg_search">
+                  <svg
+                    viewBox="0 0 24 24"
+                    preserveAspectRatio="xMidYMid meet"
+                    focusable="false"
+                    style="
+                      pointer-events: none;
+                      display: block;
+                      width: 100%;
+                      height: 100%;
+                    "
+                  >
+                    <g>
+                      <path
+                        d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"
+                      ></path>
+                    </g>
+                  </svg>
                 </div>
+              </div>
+              <div
+                class="procedure_content"
+                id="procedures"
+                style="overflow-y: scroll"
+              ></div>
+              <div class="close_conte">
+                <p onclick="hide_list(0)">Close</p>
+              </div>
             </div>
-
-            <div  class="from_item">
-                <p>Subir archivo pdf (opcional)</p>
-                <input type="file" id="pdf_file" name="pdf_file">
-            </div>
+            <!-- - -->
+          </div>
+        </div>
+      </div>
+      <div class="form_block">
+        <div class="from_item">
+          <div class="group">
+            <textarea id="name" name="reason" cols="30" rows="10" required>
+Motivo por defecto</textarea
+            >
+            <label id="label_def" for="name">Que por motivos de:</label>
+            <div class="bar"></div>
+          </div>
         </div>
 
-        <div class="button_block">
-            <div class="botons_display">
-                <input type="hidden" name="name" value="{{ Name }}">
-                <input type="hidden" name="program" value="{{ Program }}">
-                <input type="hidden" name="dni" value="{{ Dni }}">
-                <input type="hidden" name="cycle" value="{{ Cycle }}">
-                <input type="hidden" name="phone" value="{{ Phone }}">
-                <input type="hidden" name="email" value="{{ Email }}">
-                <input type="hidden" name="order" value="">
-                <input type="hidden" name="order_id" value="">
-
-                <button type="button" onclick="window.history.back()">Volver</button>
-                <button type="submit">Siguiente</button>
-            </div>
+        <div class="from_item">
+          <p>Subir archivo pdf (opcional)</p>
+          <input type="file" id="pdf_file" name="pdf_file" />
         </div>
+      </div>
+
+      <div class="button_block">
+        <div class="botons_display">
+          <input type="hidden" name="name" value="{{ Name }}" />
+          <input type="hidden" name="program" value="{{ Program }}" />
+          <input type="hidden" name="dni" value="{{ Dni }}" />
+          <input type="hidden" name="cycle" value="{{ Cycle }}" />
+          <input type="hidden" name="phone" value="{{ Phone }}" />
+          <input type="hidden" name="email" value="{{ Email }}" />
+          <input type="hidden" name="order" value="" />
+          <input type="hidden" name="order_id" value="" />
+
+          <button type="button" onclick="window.history.back()">Volver</button>
+          <button type="submit">Siguiente</button>
+        </div>
+      </div>
     </div>
-    </form>
+  </form>
 </div>
 <script>
-    var list_show_01 = document.getElementById("list_show_01");
-    var divContenedor = document.getElementById("boxlist");
-    var list_show_02 = document.getElementById("list_show_02");
-    var select_procedure = document.getElementById('select_procedure');
-    var form = document.getElementById('myform');
-    var message_alert = document.getElementById("alert_tramite");
+  var list_show_01 = document.getElementById("list_show_01");
+  var divContenedor = document.getElementById("boxlist");
+  var list_show_02 = document.getElementById("list_show_02");
+  var select_procedure = document.getElementById("select_procedure");
+  var form = document.getElementById("myform");
 
-    function show_list(){
-        list_show_02.classList.remove("ocultar");
-        list_show_01.classList.add("ocultar");
-        message_alert.classList.add("ocultar");
-        divContenedor.classList.add("list_activate");
-        event_search();
+  function show_list() {
+    list_show_02.classList.remove("ocultar");
+    list_show_01.classList.add("ocultar");
+
+    divContenedor.classList.add("list_activate");
+    event_search();
+  }
+  function hide_list(procedure) {
+    if (procedure == 0) {
+      // significa que esta funcion fue ejecutada con el botón 'ocultar' asi que solo copiamos el textContent de la etiqueta 'p'
+      procedure = select_procedure.textContent;
     }
-    function hide_list(procedure){
-        if(procedure == 0){// significa que esta funcion fue ejecutada con el botón 'ocultar' asi que solo copiamos el textContent de la etiqueta 'p'
-            procedure = select_procedure.textContent;
+    list_show_01.classList.remove("ocultar");
+    list_show_01.classList.remove("error_list");
+    list_show_02.classList.add("ocultar");
+
+    select_procedure.innerHTML = procedure;
+    divContenedor.classList.remove("list_activate");
+  }
+  function event_search() {
+    // Obtén el valor actual del campo de entrada
+    var texto = document.getElementById("miCuadroDeTexto").value;
+    // Muestra el valor en la consola
+    var cont_procedures = document.getElementById("procedures"); // id contenedor
+    cont_procedures.innerHTML = "";
+    //AJAX
+    $.ajax({
+      url: "/procedures_list/", // ruta en url.py para que ejecute una funcion
+      method: "GET",
+      data: {
+        tipeo: texto,
+      },
+      success: function (response) {
+        const midata = response;
+        console.log(midata);
+        for (var i = 0; i < midata["message"]["length"]; i++) {
+          if (i % 2 == 0) {
+            cont_procedures.innerHTML +=
+              "<div class='procedure color_procedure' onclick='select_proc(" +
+              midata["message"][i]["id"] +
+              ")'>" +
+              "<img src='/static/img/procedure2.png' alt=''>" +
+              "<p style='margin:auto 0px auto 10px;'>" +
+              midata["message"][i]["id"] +
+              "</p><p id='proc" +
+              midata["message"][i]["id"] +
+              "_id'>" +
+              midata["message"][i]["tipo_de_servicio"] +
+              "</p>" +
+              "</div>";
+          } else {
+            cont_procedures.innerHTML +=
+              "<div class='procedure' onclick='select_proc(" +
+              midata["message"][i]["id"] +
+              ")'>" +
+              "<img src='/static/img/procedure2.png' alt=''>" +
+              "<p style='margin:auto 0px auto 10px;'>" +
+              midata["message"][i]["id"] +
+              "</p><p id='proc" +
+              midata["message"][i]["id"] +
+              "_id'>" +
+              midata["message"][i]["tipo_de_servicio"] +
+              "</p>" +
+              "</div>";
+          }
         }
-        list_show_01.classList.remove("ocultar");
-        list_show_01.classList.remove("error_list");
-        list_show_02.classList.add("ocultar");
-
-        select_procedure.innerHTML = procedure;
-        divContenedor.classList.remove("list_activate");
-    }
-    function event_search(){
-        // Obtén el valor actual del campo de entrada
-        var texto = document.getElementById("miCuadroDeTexto").value;
-        // Muestra el valor en la consola
-        var cont_procedures = document.getElementById("procedures");// id contenedor
-        cont_procedures.innerHTML = "";
-        //AJAX
-        $.ajax({
-            url: "/procedures_list/", // ruta en url.py para que ejecute una funcion
-            method: "GET",
-            data:{
-                'tipeo':texto,
-            },
-            success: function(response){
-                const midata = response;
-                console.log(midata);
-                for (var i = 0; i < midata['message']['length']; i++) {
-                    
-                    if(i % 2 == 0){
-                        cont_procedures.innerHTML += "<div class='procedure color_procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
-                        "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p style='margin:auto 0px auto 10px;'>"+midata['message'][i]['id']+"</p><p id='proc"+midata['message'][i]['id']+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
-                        "</div>";
-                    }else{
-                        cont_procedures.innerHTML += "<div class='procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
-                        "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p style='margin:auto 0px auto 10px;'>"+midata['message'][i]['id']+"</p><p id='proc"+midata['message'][i]['id']+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
-                        "</div>";
-                    }
-                }
-            },
-            error: function() {
-                alert("Ocurrió un error al cargar el contenido.");
-            }
-        });
-    }
-    function select_proc(num){
-        var procedure = document.getElementById('proc'+num+'_id');// obtenemos el valor del procedure seleccionado
-        
-        // escribimos en el value del input oculto para que se envie el dato con el formulario
-        var orderInput = document.querySelector('input[name="order"]');
-        var orderInput_id = document.querySelector('input[name="order_id"]');
-        
-        orderInput.value = procedure.textContent;
-        orderInput_id.value = num;
-
-        hide_list(procedure.textContent);// enviamos lo que camturamos el content de la etiqueta 'p'
-    }
-
-    //Evento Prevent Para asegurarnos que se seleccione un tramite
-    form.addEventListener('submit', function(event){
-        if(select_procedure.textContent == "Seleccionar Tramite"){
-            list_show_01.classList.add("error_list");
-            message_alert.classList.remove("ocultar");
-            event.preventDefault(); // Detiene el envío del formulario
-        }
+      },
+      error: function () {
+        alert("Ocurrió un error al cargar el contenido.");
+      },
     });
-    
+  }
+  function select_proc(num) {
+    var procedure = document.getElementById("proc" + num + "_id"); // obtenemos el valor del procedure seleccionado
+
+    // escribimos en el value del input oculto para que se envie el dato con el formulario
+    var orderInput = document.querySelector('input[name="order"]');
+    var orderInput_id = document.querySelector('input[name="order_id"]');
+
+    orderInput.value = procedure.textContent;
+    orderInput_id.value = num;
+
+    hide_list(procedure.textContent); // enviamos lo que camturamos el content de la etiqueta 'p'
+  }
+
+  //Evento Prevent Para asegurarnos que se seleccione un tramite
+  form.addEventListener("submit", function (event) {
+    if (select_procedure.textContent == "Seleccionar Tramite") {
+      list_show_01.classList.add("error_list");
+      alert("Selecciona el trámite que deseas realizar");
+      event.preventDefault(); // Detiene el envío del formulario
+    }
+  });
 </script>
 {% endblock %}
 
 <!-- ----- -->
 {% block check_1 %}
 <!-- {% if name != '' %} -->
-<p style="width: 30px; text-align: center;">✅</p>
+<p style="width: 30px; text-align: center">✅</p>
 <!-- {% else %}
 {% endif %} -->
 {% endblock %}
 <!-- ----- -->
 
 <!-- ----- -->
-{% block navbaractivate_2 %}
-
-activate-f
-
-{% endblock %}
+{% block navbaractivate_2 %} activate-f {% endblock %}
 <!-- ----- -->

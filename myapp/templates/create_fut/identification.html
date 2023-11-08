@@ -5,76 +5,297 @@
 <!-- Aun no estamos usando archivos .css -->
 <!-- Los estilos base estan en 'base_from_new_fut.html' -->
 {% endblock %}
+
 {% block contentf %}
+{% comment %} <style>
+  .text_comoda {
+    width: 100%;
+    border: none;
+    color: black;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.3s ease;
+    margin: auto;
+    font-size: 15px;
+    border-radius: 3px;
+    /* background: seagreen; */
+  }
+  .text_comoda:valid ~ label {
+    top: 0;
+    font: 700 12px Roboto;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .text_comoda:focus {
+    outline: none;
+  }
+  .text_comoda:focus ~ label {
+    top: 0;
+    font: 700 12px Roboto;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .text_comoda:focus ~ .bar:before {
+    transform: translateX(0);
+  }
+  .text_comoda:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px red inset;
+    -webkit-text-fill-color: white !important;
+  }
+  label {
+    position: absolute;
+    top: 20px;
+    color: rgba(0, 0, 0, 0.664);
+    font: 400 20px Roboto;
+    font-size: 15px;
+    cursor: text;
+    margin: auto;
+    transition: 0.25s ease;
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: blueviolet; */
+  }
+  .bar {
+    background: rgba(0, 0, 255, 0.5);
+    content: "";
+    width: 100%;
+    height: 2px;
+    transition: 0.3s ease;
+    position: relative;
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .bar:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 150%;
+    background: red;
+    transform: translateX(-100%);
+  }
+  .button_block {
+    width: 100%;
+    margin: auto 0px 20px 0px;
+    display: block;
+    display: flex;
+    height: auto;
+    /* background: saddlebrown; */
+  }
+  .botons_display {
+    /* background: blue; */
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .botons_display button {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: red;
+    width: 90px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .botons_display button:hover {
+    background: rgb(196, 17, 17);
+  }
+  
+  .item-f {
+    width: 100%;
+    height: 100%;
+    background: rgb(233, 233, 233);
+    display: flex;
+  }
+  .item-ftoo {
+    /* background: pink; */
+    margin: auto;
+    display: flex;
+  }
+  .item-ftoo p {
+    color: red;
+    margin: auto;
+  }
+  .activate-f {
+    height: 92%;
+  }
+  .activate-f p {
+    margin: auto;
+    font-size: 18px;
+  }
+  @media (max-width: 990px) {
+    .bodyf {
+      width: auto;
+      right: 46px;
+      left: 35px;
+      top: 77px;
+    }
+    .thefrom {
+      /* display: flex; */
+      /* flex-direction: column; */
+      /* flex-wrap: wrap; */
+      /* padding-top: 4px; */
+      top: auto;
+      padding-right: 7px;
+    }
+    .content_form {
+      margin: auto 10px;
+    }
+    .form_block {
+      position: relative;
+      top: 4px;
+      left: 5px;
+    }
+    .from_item {
+      position: relative;
+      /* margin: 10px; */
+      /* display: flex; */
+      width: 100%;
+      max-width: 100vh;
+      /* bottom: 18px; */
+      margin-bottom: 18px;
+      margin-top: 5px;
+      /* padding-left: 4px; */
+      /* padding-bottom: 62px; */
+      /* top: -12px; */
+      margin-top: 58px;
+      bottom: 60px;
+    }
+    .group {
+      position: relative;
+      /* flex-direction: column; */
+      font-size: -5px;
+      /* font-size: 31px; */
+      width: 100%;
+      height: 100%;
+      bottom: 10px;
+    }
+    .text_comoda {
+      position: relative;
+    }
+    label {
+      display: flex;
+    }
+    .button_block {
+      top: 25px;
+      position: relative;
+      /* margin: 24px;*/
+    }
+  }
+</style> {% endcomment %}
+
 <div class="bodyf">
-    <form class="thefrom" action="{% url 'n_process' %}" method="post">
-        {% csrf_token %}
+  <form class="thefrom" action="{% url 'n_process' %}" method="post">
+    {% csrf_token %}
     <div class="content_form">
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name1" name="name" value="Edgar Aguirre" required>
-                    <label  for="name1">Nombre</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item" style="float:right">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name2" name="program" value="Informática" required>
-                    <label for="name2">Programa</label>
-                    <div class="bar"></div>
-                </div>
-                <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
-            </div>
+      <div class="form_block">
+        <div class="from_item">
+          <div class="group">
+            <input
+              class="text_comoda"
+              type="text"
+              id="name1"
+              name="name"
+              value="Edgar Aguirre"
+              required
+            />
+            <label for="name1">Nombre</label>
+            <div class="bar"></div>
+          </div>
         </div>
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name3" name="dni" value="7876356" required>
-                    <label id="label_def" for="name3">CON CÓDIGO DE CARNET O Nº D.N.I.</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item" style="float:right">
-                <div class="group nomber_long">
-                    <input class="text_comoda" class="text_comoda" type="text" id="name4" name="phone" value="982654253" required>
-                    <label for="name4">Celular</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
+        <div class="from_item" style="float: right">
+          <div class="group">
+            <input
+              class="text_comoda"
+              type="text"
+              id="name2"
+              name="program"
+              value="Informática"
+              required
+            />
+            <label for="name2">Programa</label>
+            <div class="bar"></div>
+          </div>
+          <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
         </div>
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group number">
-                    <input class="text_comoda" type="text" id="name5" name="cycle" value="6" required>
-                    <label for="name5">Ciclo</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item" style="float:right">
-                <div class="group nomber_long">
-                    <input class="text_comoda" type="text" id="name6" name="email" value="tapieese500@gmail.com" required>
-                    <label for="name6">Email</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
+      </div>
+      <div class="form_block">
+        <div class="from_item">
+          <div class="group">
+            <input
+              class="text_comoda"
+              type="text"
+              id="name3"
+              name="dni"
+              value="7876356"
+              required
+            />
+            <label id="label_def" for="name3"
+              >CON CÓDIGO DE CARNET O Nº D.N.I.</label
+            >
+            <div class="bar"></div>
+          </div>
         </div>
-        <div class="button_block">
-            <div class="botons_display">
-                <p></p> <!-- esto es solo para acomodar el botón -->
-                <button>Siguiente</button>
-            </div>
+        <div class="from_item" style="float: right">
+          <div class="group nomber_long">
+            <input
+              class="text_comoda"
+              class="text_comoda"
+              type="text"
+              id="name4"
+              name="phone"
+              value="982654253"
+              required
+            />
+            <label for="name4">Celular</label>
+            <div class="bar"></div>
+          </div>
         </div>
+      </div>
+      <div class="form_block">
+        <div class="from_item">
+          <div class="group number">
+            <input
+              class="text_comoda"
+              type="text"
+              id="name5"
+              name="cycle"
+              value="6"
+              required
+            />
+            <label for="name5">Ciclo</label>
+            <div class="bar"></div>
+          </div>
+        </div>
+        <div class="from_item" style="float: right">
+          <div class="group nomber_long">
+            <input
+              class="text_comoda"
+              type="text"
+              id="name6"
+              name="email"
+              value="tapieese500@gmail.com"
+              required
+            />
+            <label for="name6">Email</label>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="button_block">
+        <div class="botons_display">
+          <p></p>
+          <!-- esto es solo para acomodar el botón -->
+          <button>Siguiente</button>
+        </div>
+      </div>
     </div>
-    </form>
+  </form>
 </div>
 
 {% endblock %}
 
 <!-- ----- -->
-{% block navbaractivate_1 %}
-
-activate-f
-
-{% endblock %}
+{% block navbaractivate_1 %} activate-f {% endblock %}
 <!-- ----- -->
