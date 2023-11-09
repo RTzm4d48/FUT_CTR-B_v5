@@ -139,65 +139,9 @@
       .btn_save button:hover{
         background: #c70909;
       }
-      /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/
-      .pop_up_window{
-        margin: 150px auto auto auto;
-      }
-      .icon_img{
-        /*background: salmon;*/
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-      }
-      .icon_img img{
-        margin: auto;
-        height: 60px;
-      }
-      .texto_explicativo{
-        display: flex;
-        width: 80%;
-        margin: 5px auto;
-        background: #EDEDED;
-        padding: 7px;
-        height: 60px;
-        border-radius: 4px;
-      }
-      .icon_img *{
-        margin: 5px auto;
-      }
-      .input-file {
-        display: none;
-      }
 
-      .select_img_cnt{
-        /*background: green;*/
-        width: 100%;
-        height: 50px;
-        display: flex;
-        }
-
-        /* Estilos para el botón personalizado */
-        .custom_button {
-          background-color: #007BFF;
-          color: #fff;
-          padding: 10px 20px;
-          cursor: pointer;
-          margin: auto;
-          border: none;
-          border-radius: 5px;
-          top: 0px;
-          justify-content: center;
-            align-items: center;
-            display: flex;
-        
-        }
-        .custom_button img{
-            height: 20px;
-            margin: auto 5px;
-        }
-        .custom-button:hover {
-          background-color: #0056b3;
-        }
+      /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/-----------------------
+      
 </style>
 <!-- -----------Share------------- -->
 <div id="pop_windows" class="pop_up_window_content ocultar">
@@ -634,6 +578,7 @@
 
                 // Actualizar el contenido en la página
                 console.log("Finalizado");
+                window.location.href = "http://127.0.0.1:8000/form_new_fut/successful";
             },
             error: function() {
                 // Manejar errores si es necesario
@@ -641,6 +586,7 @@
         });
     }else{
         console.log("Bb");
+
     }
       // Realizar la validación
       // if (validarFormulario()) {

@@ -2,8 +2,8 @@
 
 {% load static %}
 {% block linkstyle2 %}
-<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">
-<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">
+<!--<link rel="stylesheet" href="{% static '/styles/create_fut/identification2.css' %}">-->
+<!--<link rel="stylesheet" href="{% static '/styles/create_fut/indem2.css' %}">-->
 {% endblock %}
 
 {% block contentf %}
@@ -23,8 +23,115 @@
     <p>Toda la informacion necesaria para acceder al tramite se envio a: edgar@gmail.com</p>
     <!-- PEDIR AYUDA A GPT -->
 </div>
+<script>
+    setTimeout(function() {
+        console.log("Hola Mundo");
+        var pop_windows_wait = document.getElementById("pop_windows_wait");
+        pop_windows_wait.classList.remove("ocultar");
+    }, 3000);
+</script>
 {% endblock %}
 
+{% block up_pop_space %}
+
+<style>
+    /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/-----------------------
+    .pop_up_window{
+        margin: 150px auto auto auto;
+      }
+      .icon_img{
+        /*background: salmon;*/
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+      }
+      .icon_img img{
+        margin: auto;
+        height: 60px;
+      }
+      .texto_explicativo{
+        display: flex;
+        width: 80%;
+        margin: 5px auto;
+        background: #EDEDED;
+        padding: 7px;
+        height: 60px;
+        border-radius: 4px;
+      }
+      .icon_img *{
+        margin: 5px auto;
+      }
+      .input-file {
+        display: none;
+      }
+
+      .select_img_cnt{
+        /*background: green;*/
+        width: 100%;
+        height: 50px;
+        display: flex;
+        }
+
+        /* Estilos para el botón personalizado */
+        .custom_button {
+          background-color: #007BFF;
+          color: #fff;
+          padding: 10px 20px;
+          cursor: pointer;
+          margin: auto;
+          border: none;
+          border-radius: 5px;
+          top: 0px;
+          justify-content: center;
+            align-items: center;
+            display: flex;
+        
+        }
+        .custom_button img{
+            height: 20px;
+            margin: auto 5px;
+        }
+        .custom-button:hover {
+          background-color: #0056b3;
+        }
+        .link_omitir{
+            color: #288ed1;
+            font-size: smaller;
+            cursor: pointer;
+        }
+        .link_omitir:hover{
+            text-decoration: underline;
+        }
+</style>
+
+<div id="pop_windows_wait" class="pop_up_window_content ocultar">
+  <div class="pop_up_window">
+    <!-- {# Context pop_up #} -->
+    <div class="icon_img">
+        <img src="{% static 'img/icon03.png' %}">
+        <h2>Realize el pago</h2>
+        <div class="texto_explicativo">
+            <p>Aproximece a un cajero <strong>BCP</strong> y realice el pago a la siguiente cuenta <strong>3456 4567 4567 4523</strong>
+            que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al ticked y suba la foto aqui para su evaluación</p>
+        </div>
+        <div class="select_img_cnt">
+          <input type="file" id="pdf_file" name="pdf_file" class="input-file" accept=".png, .jpg">
+
+          <label for="pdf_file" class="custom_button">Seleccionar Imagen <img src="{% static 'img/img_icon.png' %}"></label>
+        </div>
+        <p onclick="omitir()" class="link_omitir">omitir por ahora</p>
+    </div>
+    <!-- {#/Context pop_up #} -->
+  </div>
+</div>
+
+<script>
+    function omitir(){
+        pop_windows_wait.classList.add("ocultar");
+    }
+</script>
+
+{% endblock %}
 
 <!-- ----- -->
 {% block check_1 %}

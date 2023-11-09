@@ -15,17 +15,22 @@ def proceedings(request):
     dni = str(object['dni'][:3])
     #Email process
     email = str(object['email'])
-    e = email[0]
-    l = email[-11]
-    nummail = len(email)
-    nummail = nummail-12 # (10 de @gmail.com) (2 de los dos digitos que si se ven)
+    
+    if(email == 'null'):
+        email_code = "- - -"
+    else:
+        print("PUES ES NULL")
+        e = email[0]
+        l = email[-11]
+        nummail = len(email)
+        nummail = nummail-12 # (10 de @gmail.com) (2 de los dos digitos que si se ven)
 
-    #generamos los asteriscos
-    asterisk = []
-    for i in range(nummail):
-        asterisk.append('*')
-    asterisk_Str = ''.join(asterisk)
-    email_code = e+asterisk_Str+l+'@gmail.com'
+        #generamos los asteriscos
+        asterisk = []
+        for i in range(nummail):
+            asterisk.append('*')
+        asterisk_Str = ''.join(asterisk)
+        email_code = e+asterisk_Str+l+'@gmail.com'
 
     # My params for css
     progressbar = list(range(9)) # for progress bar lines
