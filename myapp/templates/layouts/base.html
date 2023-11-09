@@ -430,13 +430,8 @@ body{
     {% block up_pop_space %}
     {% endblock %}
 
-    <div class="content_definitive">
-      {% block content %}
-      {% endblock %}
-    </div>
-
     <script>
-      activation('inicio');
+      // activation('inicio');
       function activation(position){
         var minav1 = document.getElementById('nav1');
         var minav2 = document.getElementById('nav2');
@@ -457,6 +452,11 @@ body{
         }
       }
     </script>
+    
+    <div class="content_definitive">
+      {% block content %}
+      {% endblock %}
+    </div>
 
     <script>
       var pop_windows = document.getElementById("pop_windows");

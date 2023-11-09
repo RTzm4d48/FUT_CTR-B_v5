@@ -1,3 +1,4 @@
 (DONE)- Crear la interfaz de 'create_fut_wait'
-- Arreglar las funciones de 'views' y organizarlo todo
-- Orgarnizar 'myapp/views.py'
+(DONE)- Arreglar las funciones de 'views' y organizarlo todo
+(DONE)- Orgarnizar 'myapp/views.py'
+- acer el cuadro pop-up de carga

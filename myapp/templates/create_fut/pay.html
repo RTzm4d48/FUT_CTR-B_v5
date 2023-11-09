@@ -273,20 +273,17 @@
   </div>
 </div>
 
-{# ------------------------------------------ #}
+<!-- {# ------------------------------------------ #} -->
 
-<div id="pop_windows_wait" class="pop_up_window_content">
+<div id="pop_windows_wait" class="pop_up_window_content ">
   <div class="pop_up_window">
-    <div onclick="close_pop_up()" class="close" style="right: 15px;">
-      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
-    </div>
-    {# Context pop_up #}
+    <!-- {# Context pop_up #} -->
     <div class="icon_img">
         <img src="{% static 'img/icon03.png' %}">
         <h2>Realize el pago</h2>
         <div class="texto_explicativo">
-            <p>Aproximece a un cajero BCP y realice el pago a la siguiente cuenta <strong>3456 4567 4567 4523</strong>
-            que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al tiked y suba la foto aqui para su evaluación</p>
+            <p>Aproximece a un cajero <strong>BCP</strong> y realice el pago a la siguiente cuenta <strong>3456 4567 4567 4523</strong>
+            que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al ticked y suba la foto aqui para su evaluación</p>
         </div>
         <div class="select_img_cnt">
           <input type="file" id="pdf_file" name="pdf_file" class="input-file">
@@ -295,9 +292,58 @@
         </div>
         <a href="">omitir por ahora</a>
     </div>
-    {#/Context pop_up #}
+    <!-- {#/Context pop_up #} -->
   </div>
 </div>
+
+<!-- -------------------------------------------------- -->
+
+<div id="pop_loader" class="pop_up_window_content ocultar">
+  
+    <!-- {# Context pop_up #} -->
+    <style>
+        /* Estilos de la ventana de carga */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader-text {
+            color: white;
+            margin: 0px 5px;
+        }
+
+        /* Estilos para la animación de carga (puedes personalizarlos según tus necesidades) */
+        .loader-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #3498db;
+            border-top: 4px solid red;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <div class="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Cargando...</div>
+    </div>
+    <!-- {#/Context pop_up #} -->
+  
+</div>
+
 {% endblock %}
 
 
@@ -418,7 +464,7 @@
 </style>
 
 <div class="bodyf">
-    <form class="thefrom" action="{% url 'n_end' %}" method="post">
+    <form id="id_form_pay" class="thefrom" action="{% url 'n_end' %}" method="post">
         {% csrf_token %}
     <div class="content_form">
         <div class="form_block">
@@ -447,10 +493,10 @@
                         <div class="column1">
                             <p>metodo de pago:</p>
                             <div class="pay_content">
-                                <div class="radio"><input name="typepay" type="radio" value="0" checked="checked" onclick="capturarValor(this)"/></div> Presencial por caja
+                                <div class="radio"><input class="opcion" name="typepay" type="radio" value="0" checked="checked" onclick="capturarValor(this)"/></div> Presencial por caja
                             </div>
                             <div class="pay_content">
-                                <div class="radio"><input name="typepay" type="radio" value="5" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
+                                <div class="radio"><input class="opcion" name="typepay" type="radio" value="5" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
                                 <img src="{% static 'img/visa.png' %}" alt="">
                             </div>
                         </div>
@@ -519,7 +565,7 @@
                 <input type="hidden" name="reason" value="{{Reason}}">
                 <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}">
                 <button type="button" onclick="window.history.back()">Volver</button>
-                <button type="submit">Siguiente</button>
+                <button type="submit">Finalizar</button>
             </div>
         </div>
     </div>
@@ -531,6 +577,34 @@
     var monto = "{{Monto}}";
 </script>
 <script>
+    document.getElementById("id_form_pay").addEventListener("submit", function (event) {
+    // Prevenir el envío del formulario por defecto
+    event.preventDefault();
+
+    // OBTENEMOS EL RADIO
+    const radios = document.querySelectorAll(".opcion"); // Seleccionar todos los radios con la clase "opcion"
+    let opcionSeleccionada;
+    for (const radio of radios) {
+        if (radio.checked) {
+            opcionSeleccionada = radio.value;
+            break;
+        }
+    }
+    console.log("el valor es:"+opcionSeleccionada);
+    if (opcionSeleccionada == 0){
+        //ABRIMOS POP-UP WAIT
+        console.log("A");
+        pop_windows_wait = document.getElementById("pop_windows_wait");
+        pop_windows_wait.classList.remove("ocultar")
+    }else{
+        console.log("B");
+    }
+      // Realizar la validación
+      // if (validarFormulario()) {
+      //   // Envía el formulario si la validación es exitosa
+      //   this.submit();
+      // }
+    });
     function capturarValor(radio) {
         var esp_cargo = "Cargo por Pasarela: S/. ";
         var esp_total = "S/. ";
@@ -546,7 +620,6 @@
             document.getElementById("p_cargo").textContent = esp_cargo+valor;
             document.getElementById("p_total").textContent = esp_total + (taria + valor_int);
             if(valor!=0){
-                console.log(valor);
                 f_p_0.classList.add('ocultar');
                 f_p_1.classList.remove('ocultar');
                 f_p_2.classList.add('ocultar');

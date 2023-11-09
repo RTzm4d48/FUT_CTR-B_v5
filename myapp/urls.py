@@ -30,4 +30,5 @@ urlpatterns = [
     path('my_fut/in-progress', vws_view_fut.view_fut_in_progress, name='n_in_progress'),
     path('my_fut/finished', vws_view_fut.view_fut_finished, name='n_finished'),
     
+    path('loader', views.view_loader, name='n_loader'),
 ]

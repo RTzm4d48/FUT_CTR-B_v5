@@ -255,13 +255,14 @@
             </div>
         </div>
     </div>
+    {% block contentf %}
+    {% endblock %}
     <script>
-        //La funcion esta en 'base.html'
+        //La funcion está en 'base.html'
         //es para el navbar
         activation('nuevo_tramite');
     </script>
-        {% block contentf %}
-        {% endblock %}
+        
 </div>
 
 {% endblock %}

@@ -230,7 +230,7 @@ def name_admin(position):
     objs = Admins.objects.filter(position=position).values('name', 'fullname').first()
     name = objs['name']+' '+objs['fullname']
     return name
-
+    
 
 async def finisher(request):
     if request.method == 'POST':
@@ -331,3 +331,7 @@ def create_fut_wait(request):
         })
     else:
         return HttpResponse("<h1>404 Not Found :(</h1>")
+
+
+def view_loader(request):
+    return render(request,'loader.html')
