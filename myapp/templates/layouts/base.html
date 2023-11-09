@@ -67,16 +67,23 @@ body{
 }
 .content_definitive{
   position: relative;
-  top:100px;
+  width:100%;
+  min-height:100vh;
+  height:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   /* background: orange; */
 }
 .mynavbar2{
-    width: 70%;
+    width: 100%;
+    max-width:1200px;
     height: calc(100px - 3px);
     margin: 0px auto;
     /* background: darkcyan; */
     display: flex;
     justify-content: space-between;
+    align-items:center;
 }
 .logo_ils{
   /* background: salmon; */
@@ -96,6 +103,7 @@ body{
 /*  background: forestgreen;*/
   display: flex;
   align-items: center;
+  padding-right:1em;
 }
 .mi_nav{
   font-size: 16px;
@@ -110,12 +118,12 @@ body{
 }
 .nav{
   /* background: rgb(107, 107, 46); */
+  width:auto;
   margin: auto 5px;
-  align-items: center;
-  align-content: center;
   text-decoration: none;
+  text-align: center;
   color: white;
-  padding: 5px 15px;
+  padding: 5px 15px 5px 15px !important;
   opacity: 90%;
   border-radius: 15px;
 }
@@ -164,43 +172,33 @@ body{
 }
 
   /*esto se agrego */
+  @media (max-width: 900px){
+    .nav {
+      font-size:0.8em;
+  }
+}
+
 @media (max-width:655px){
-  body{
+  .mynavbar{   
     position: relative;
   }
-  .mynavbar{
-  align-items: center;
-}
-.logo_ils{
-  position: relative;
-  right: 114px;
-}
-
-.mi_nav{
-    display: none;
-
-  }
-  .mi_nav li a {
-    font-size: 1.5em;
-    margin: 10px 0;
-    display: inline-block;
-  }
-  .mi_nav.active {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #476aa7;
+  .mynavbar2{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
   }
-
-  .toggle {
-    position: relative;
-    width: 32px;
+  .logo_ils{
+  position: absolute;
+  left:-1.5em;
+}
+.ellogo{
+  height:50px;
+}
+.content_mavbar{
+  padding: 15px;
+}
+.toggle {
+    position: absolute;
+    right:1em;
+    width: 30px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -229,7 +227,7 @@ body{
   }
   .toggle.active {
     position: fixed;
-    right: 40px;
+    right:1em;
   }
   .toggle.active::before {
     transform: translateY(0px) rotate(45deg);
@@ -238,6 +236,32 @@ body{
   .toggle.active::after {
     transform: translateY(0px) rotate(-45deg);
   }
+  .mi_nav{
+  display: none;
+}
+  .mi_nav  a {
+  font-size: 1.5em;
+}
+.mi_nav_active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100vh;
+  background: #476aa7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap:2em;
+}
+
+.nav{
+  margin:0;
+}
+
+
+
 }
 /*fin lo que se agreto*/
 </style>
@@ -350,16 +374,21 @@ body{
           <div class="toggle"></div>
           <div class="mi_nav">
             <a id="nav1" class="nav" href="{% url 'n_home' %}">Inicio</a>
-          </div>
-          <div class="mi_nav">
+
             <a id="nav2" class="nav" href="{% url 'n_new_fut' %}">Nuevo tramite</a>
-          </div>
-          <div class="mi_nav">
             <a id="nav3" class="nav" href="{% url 'n_in_progress' %}">Consultar tramites</a>
-          </div>
-          <div class="mi_nav">
             {# <a id="nav4" class="nav" href="">Acerca de</a> #}
             <p id="nav4" class="nav" onclick="acerca_de()" style="cursor: pointer;">Acerca de</p>
+          </div>
+          <div class="mi_nav">
+            <!--<a id="nav2" class="nav" href="{% url 'n_new_fut' %}">Nuevo tramite</a>-->
+          </div>
+          <div class="mi_nav">
+            <!--<a id="nav3" class="nav" href="{% url 'n_in_progress' %}">Consultar tramites</a>-->
+          </div>
+          <div class="mi_nav">
+          <!-- {# <a id="nav4" class="nav" href="">Acerca de</a> #}
+            <p id="nav4" class="nav" onclick="acerca_de()" style="cursor: pointer;">Acerca de</p>-->
           </div>
           {% if request.user.is_authenticated %}
             <div id="cont_user" class="mi_nav user_space user_space_color_1" onclick="user_options()">
@@ -411,6 +440,74 @@ body{
         padding: 10px 10px;
         position: relative;
       }
+      #pop_windows_2{
+        margin: 150px auto auto auto;
+      }
+      .pop_up_window p{
+        /* margin: 20px 10px; */
+        opacity: 70%;
+        font-size: smaller;
+      }
+      .area_title{
+        width: 100%;
+        height: auto;
+        /* background: gray; */
+        display: flex;
+        flex-direction: column;
+      }
+      .area_title h3{
+        margin: 5px auto;
+        font-size: medium;
+      }
+      .save_inf{
+        /* background: salmon; */
+        display: flex;
+        justify-content: center;
+        height: auto;
+      }
+      .save_inf *{
+        /* background: gold; */
+        margin: 1px 2px;
+        padding: 1px;
+        color: #09AD72;
+        height: 15px;
+      }
+
+      .area{
+        width: 100%;
+        /* background: #2c86da; */
+        margin: 20px 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .area input[type="text"]{
+        /* background: gold; */
+        outline: 1px solid #838383;
+        padding: 10px 5px;
+        border-radius: 8px;
+        border: none;
+      }
+      .text_1{
+        width: calc(50% - 20px);
+      }
+      .area input[type="text"]:focus{
+        outline: 1px solid #7679FA;
+      }
+      .buttons{
+        display: flex;
+        justify-content: space-between;
+      }
+      .buttons button{
+        font-family: 'myfont_robot_bold';
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #3D9FF8;
+      }
+      .buttons button:hover{
+        color: #2c86da;
+      }
       .ocultar{
         display: none;
       }
@@ -426,43 +523,443 @@ body{
       .close:hover{
         opacity: 1;
       }
+      .new_card{
+        display: flex;
+        /* background: pink; */
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid #3838385d;
+        cursor: pointer;
+      }
+      .new_card:hover{
+        background: #0000000c;
+      }
+      .imagecard{
+        height: 15px;
+        margin: 3px auto 6px 5px;
+      }
+      .cont_card{
+        /* background: greenyellow; */
+        display: flex;
+        flex-direction: column;
+      }
+      .card{
+        display: flex;
+        /* background: green; */
+      }
+      .card img{
+        width: auto;
+        height: 15px;
+        margin: auto 2px;
+      }
+      .card p{
+        margin: 5px 0px;
+        font-family: 'myfont_robot_bold';
+      }
+      .warning{
+        width: 100%;
+        display: flex;
+        background: #FFF7F4;
+        padding: 15px 0px;
+        border-radius: 7px;
+      }
+      .warning *{
+        margin: 0px 5px;
+        height: 15px;
+
+      }
+      .btn_save{
+        margin: auto;
+      }
+      .btn_save button{
+        padding: 5px 15px;
+        border-radius: 5px;
+        border: none;
+        background: red;
+        color: white;
+        font-family: 'myfont_robot_bold';
+        cursor: pointer;
+      }
+      .btn_save button:hover{
+        background: #c70909;
+      }
     </style>
-    {% block up_pop_space %}
-    {% endblock %}
+
+    <!-- ----------POP WINDOWS LOGIN---------- -->
+    <style>
+      .pop_up_window_login{
+        background: #5f668188;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 4;
+      }
+      .pop_up_login{
+        width: 350px;
+        background: white;
+        margin: 250px auto auto auto;
+        border-radius: 5px;
+        padding: 30px;
+        position: relative;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+      }
+      .ils_p{
+        height: 50px;
+      }
+      .acount{
+        background: none;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 4px;
+        padding: 5px 0px;
+        cursor: pointer;
+        margin: 5px 0px;
+      }
+      .acount:hover{
+        background: #CDCDCD;
+      }
+      .credentials{
+        display: flex;
+      }
+      .options{
+        /* background: darkcyan; */
+        display: flex;
+        margin: auto 7px;
+        opacity: 70%;
+        cursor:pointer;
+      }
+      .options img{
+        height: 15px;
+        margin: auto;
+      }
+      .options:hover{
+        opacity: 1;
+      }
+      .credentials img{
+        height: 40px;
+        background: #E6E6E6;
+        padding: 2px;
+        border-radius: 50%;
+        margin: auto 5px;
+        opacity: 80%;
+      }
+      .credentials p{
+        font-size: small;
+        opacity: 70%;
+      }
+      .no_scroll{
+        overflow: hidden;
+      }
+      /* ------Other----- */
+      .acound_b{
+        display: flex;
+        font-size: small;
+        opacity: 80%;
+        /* background: salmon; */
+        margin: 10px 0px 0px 0px;
+      }
+      .acound_b img{
+        height: 15px;
+        margin: auto 4px;
+        cursor: pointer;
+        position: relative;
+        
+      }
+      .acound_b img:hover{
+        transition-duration: 0.9s;
+        left: -3px;
+      }
+      .acound_b p{
+        margin: 0px;
+      }
+      .pass_cont{
+        /* background: darkcyan; */
+        width: 100%;
+      }
+      .pass_cont input[type="password"]{
+        width: 100%;
+        padding: 5px 0px;
+        background: none;
+        border: none;
+      }
+      .pop_up_login h3{
+        margin: 10px 0px;
+      }
+      .pass_cont input[type="password"]:focus{
+        outline: none;
+      }
+      .pass_cont hr{
+        margin: 0px 0px 20px 0px;
+      }
+      .pop_up_login a{
+        margin: 20px 0px;
+        font-size: small;
+        text-decoration: none;
+        color: #2c86da;
+      }
+      .button_acound_b{
+        /* background: darkkhaki; */
+        width: 100%;
+        margin: 20px 0px 0px 0px;
+        display: flex;
+      }
+      .button_acound_b button{
+        margin: 0px 0px 0px auto;
+        background: #EF0033;
+        border: none;
+        color: #ffffffec;
+        padding: 7px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .button_acound_b button:hover{
+        background: #b4052b;
+      }
+      .img_qr{
+        /* background: darkgreen; */
+        width: 100%;
+      }
+      .img_qr img{
+        width: 100%;
+      }
+      .link_cont{
+        background: gray;
+        margin: 10px 0px;
+        padding: 5px 0px;
+        border-radius: 10px;
+      }
+      .link_cont input[type="text"]{
+        margin: 0px 5px 0px 10px;
+        padding: 5px 0px;
+        width: calc(100% - 90px);
+        background: none;
+        border: none;
+        color: white;
+      }
+      .link_cont input[type="text"]:focus{
+        outline: none;
+      }
+      .link_cont button{
+        background: #EF0033;
+        border: none;
+        width: 60px;
+        padding: 5px 0px;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      .link_cont button:hover{
+        background: #c4062f;
+      }
+
+      
+    </style>
+    <div id="pop_windows" class="pop_up_window_content ocultar">
+      <div id="pop_windows_1" class="pop_up_window">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <div class="area_title">
+          <h3>Método de pago</h3>
+          <div class="save_inf">
+            <img src="{% static 'img/tps.png' %}" alt="">
+            <p>tu información de pago está segura con nosotros</p>
+          </div>
+        </div>
+        <div class="area">
+          <div class="new_card" onclick="new_card()">
+            <div class="radio">
+              <input name="type_pay" type="radio" value="0" checked="checked"/>
+            </div>
+            <div class="cont_card">
+              <div class="card"><img src="{% static 'img/card.png' %}" alt=""><p>Añadir una nueva targeta</p></div>
+              <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
+            </div>
+
+          </div>
+        </div>
+        <div class="buttons ocultar">
+          <button onclick="close_pop_up()">Descartar Tramite</button>
+          <button onclick="close_pop_up()">Cancelar</button>
+        </div>
+      </div>
+      <!-- - -->
+      <div id="pop_windows_2" class="pop_up_window ocultar">
+        <div onclick="new_card_back()" class="close" style="left: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M166.218667 471.285333l1.888-1.984 331.157333-331.157333a32 32 0 0 1 46.698667 43.722667l-1.44 1.536L247.146667 480.768h594.752a32 32 0 0 1 1.877333 63.946667l-1.877333 0.053333H247.146667l297.386666 297.376a32 32 0 0 1 1.429334 43.722667l-1.44 1.536a32 32 0 0 1-43.722667 1.44l-1.536-1.44L168.106667 556.234667a61.472 61.472 0 0 1-1.888-84.949334z"></path></svg>
+        </div>
+        <div class="area_title">
+          <h3>Proporcionar más información</h3>
+          <div class="save_inf">
+            <img src="{% static 'img/tps.png' %}" alt="">
+            <p>tu información de pago está segura con nosotros</p>
+          </div>
+        </div>
+        <div class="area">
+          <div class="warning">
+            <img src="{% static 'img/card.png' %}" alt="">
+            <p>Añade una nueva tarjeta</p>
+            <img class="imagecard" src="{% static 'img/visa.png' %}" alt="">
+          </div>
+        </div>
+        <div class="area">
+          <input type="text" name="" class="text_1" placeholder='Número de tarjeta'>
+          <input type="text" name="" class="text_1" placeholder='Nombre del titular de targeta' value="{{Name}}" id="">
+        </div>
+        <div class="area">
+          <div class="subarea text_1" style="display: flex; justify-content: space-between;">
+            <input type="text" name="" class="text_1" placeholder='MM'>
+            <p style="margin: auto 0px;">/</p>
+            <input type="text" name="" class="text_1" placeholder='YY'>
+          </div>
+
+          <input type="text" name="" class="text_1" placeholder='CVV'>
+        </div>
+        <div class="area">
+          <div style="display: flex;">
+            <div class="radio">
+              <input name="type_pay" type="radio" value="0" checked="checked"/>
+            </div>
+            <p>Guardar esta targeta</p>
+          </div>
+        </div>
+        <div class="area">
+          <div class="btn_save">
+            <button onclick="save_and_continue()">Guardar y continuar</button>
+          </div>
+        </div>
+        <div class="buttons ocultar">
+          <button onclick="close_pop_up()">Descartar Tramite</button>
+          <button onclick="close_pop_up()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    <!-- -----------LOGIN------------- -->
+    <div id="pop_windows_login" class="pop_up_window_login ocultar">
+      <div id="windows_log_1" class="pop_up_login ocultar">
+        <div onclick="close_for_login()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
+        <h3>Seleccione una cuenta</h3>
+        <!-- ----- -->
+        <div class="acount" onclick="log_acount_exist()">
+          <div class="credentials">
+            <img src="{% static 'img/Sample_User_Icon.png' %}" alt="">
+            <p>edgar.mani@ils.edu.pe</p>
+          </div>
+          <div class="options">
+            <img src="{% static 'img/options.png' %}" alt="">
+          </div>
+        </div>
+        <!-- ----- -->
+        <div class="acount">
+          <div class="credentials">
+            <img src="{% static 'img/Sample_User_Icon.png' %}" alt="">
+            <p>unsuaruio@ils.edu.pe</p>
+          </div>
+          <div class="options">
+            <img src="{% static 'img/options.png' %}" alt="">
+          </div>
+        </div>
+        <!-- ----- -->
+        <div class="acount">
+          <div class="credentials">
+            <img src="{% static 'img/plus_user.png' %}" alt="">
+            <p>Usar Otra Cuenta</p>
+          </div>
+          <div class="options">
+
+          </div>
+        </div>
+        <!-- ----- -->
+      </div>
+      <!-- ---------Other--------- -->
+      <div id="windows_log_2" class="pop_up_login ocultar">
+        <div onclick="close_for_login()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
+        <div class="acound_b">
+          <img src="{% static 'img/atras.png' %}" alt="" onclick="retourn_acount_exist()">
+          <p>edgar.mani@ils.edu.pe</p>
+        </div>
+        <h3>Escribir Contraseña</h3>
+        <!-- ----- -->
+        <div class="pass_cont">
+          <input type="password" placeholder='Password'>
+          <hr>
+        </div>
+        <a href="">He olvidado mi contraseña</a>
+        <div class="button_acound_b">
+          <button>Iniciar Sesión</button>
+        </div>
+      </div>
+      <!-- -----------LOGIN UP------------- -->
+      <div id="windows_log_3" class="pop_up_login">
+        <div onclick="close_for_login()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <img class="ils_p" src="{% static 'img/img_logo_ils.png' %}" alt="">
+        <h3>Iniciar Sesión</h3>
+        <!-- ----- -->
+        <div class="pass_cont">
+          <input type="password" placeholder='Password'>
+          <hr>
+        </div>
+        <a href="">He olvidado mi contraseña</a>
+        <div class="button_acound_b">
+          <button>Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+  <!-- -----------Share------------- -->
+    <div id="pop_windows_share" class="pop_up_window_login ocultar">
+      <div id="share_qr" class="pop_up_login">
+        <div onclick="close_for_share()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <h3>Compartir</h3>
+        <div class="img_qr">
+          <img src="{% static 'tmp/79XNZxF1cuAqrcode.png' %}" alt="">
+        </div>
+        <div class="link_cont">
+          <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
+          <button>Copiar</button>
+        </div>
+        
+      </div>
+    </div>
 
     <div class="content_definitive">
+      <script>
+        activation('inicio');
+        function activation(position){
+          var minav1 = document.getElementById('nav1');
+          var minav2 = document.getElementById('nav2');
+          var minav3 = document.getElementById('nav3');
+          var minav4 = document.getElementById('nav4');
+          minav1.classList.remove("active");
+          minav2.classList.remove("active");
+          minav3.classList.remove("active");
+          minav4.classList.remove("active");
+          if(position == 'inicio'){
+            minav1.classList.add("active");
+          }else if(position == 'nuevo_tramite'){
+            minav2.classList.add("active");
+          }else if(position == 'consultar_tramite'){
+            minav3.classList.add("active");
+          }else{
+            minav4.classList.add("active");
+          }
+        }
+      </script>
       {% block content %}
       {% endblock %}
     </div>
-
-    <script>
-      activation('inicio');
-      function activation(position){
-        var minav1 = document.getElementById('nav1');
-        var minav2 = document.getElementById('nav2');
-        var minav3 = document.getElementById('nav3');
-        var minav4 = document.getElementById('nav4');
-        minav1.classList.remove("active");
-        minav2.classList.remove("active");
-        minav3.classList.remove("active");
-        minav4.classList.remove("active");
-        if(position == 'inicio'){
-          minav1.classList.add("active");
-        }else if(position == 'nuevo_tramite'){
-          minav2.classList.add("active");
-        }else if(position == 'consultar_tramite'){
-          minav3.classList.add("active");
-        }else{
-          minav4.classList.add("active");
-        }
-      }
-    </script>
-
     <script>
       var pop_windows = document.getElementById("pop_windows");
       var pop_windows_1 = document.getElementById("pop_windows_1");
-      var pop_windows_wait = document.getElementById("pop_windows_wait"); //LA VENTANA EMERGENTE PARA EL WAIT
-
       var pop_windows_2 = document.getElementById("pop_windows_2");
       // ----
       var f_p_1 = document.getElementById("f_p_1");
@@ -476,7 +973,7 @@ body{
       var pop_windows_share = document.getElementById('pop_windows_share');
 
       function close_pop_up(){
-        pop_windows_wait.classList.add("ocultar");
+        pop_windows.classList.add("ocultar");
       }
       function new_card_back(){
         pop_windows_1.classList.remove("ocultar");
@@ -534,49 +1031,49 @@ body{
         const menutoggle = document.querySelector('.toggle');
         const navigation = document.querySelector('.mi_nav');
         menutoggle.onclick=function(){
-          menutoggle.classList.toggle('active')
-          navigation.classList.toggle('active')
-        }
+        menutoggle.classList.toggle('active')
+        navigation.classList.toggle('mi_nav_active')
+    }
 
-      function user_options(){
-        const settings_user = document.getElementById("settings_user");
-        const cont_user = document.getElementById("cont_user");
+    function user_options(){
+      const settings_user = document.getElementById("settings_user");
+      const cont_user = document.getElementById("cont_user");
 
-        var clases = settings_user.classList;
+      var clases = settings_user.classList;
 
-        // Convierte las clases a un array si necesitas manipularlas como tal
-        var clasesArray = Array.from(clases);
+      // Convierte las clases a un array si necesitas manipularlas como tal
+      var clasesArray = Array.from(clases);
 
-        // Itera a través del array de clases
-        for (var i = 0; i < clasesArray.length; i++) {
-            if(clasesArray[i] == "ocultar"){
-              settings_user.classList.remove("ocultar")
-              cont_user.classList.remove("user_space_color_1");
-              cont_user.classList.add("user_space_color_2");
-            }else{
-              settings_user.classList.add("ocultar")
-              cont_user.classList.add("user_space_color_1");
-              cont_user.classList.remove("user_space_color_2");
-            }
-        }
+      // Itera a través del array de clases
+      for (var i = 0; i < clasesArray.length; i++) {
+          if(clasesArray[i] == "ocultar"){
+            settings_user.classList.remove("ocultar")
+            cont_user.classList.remove("user_space_color_1");
+            cont_user.classList.add("user_space_color_2");
+          }else{
+            settings_user.classList.add("ocultar")
+            cont_user.classList.add("user_space_color_1");
+            cont_user.classList.remove("user_space_color_2");
+          }
       }
-      //Evento Scroll 
-      //Aqui cerraremos los setings
-      window.addEventListener('scroll', function() {
-        const settings_user = document.getElementById("settings_user");
-        settings_user.classList.add("ocultar");
+    }
+    //Evento Scroll 
+    //Aqui cerraremos los setings
+    window.addEventListener('scroll', function() {
+      const settings_user = document.getElementById("settings_user");
+      settings_user.classList.add("ocultar");
+    });
+    //botón 'acerca de' del navbar
+    function acerca_de(){
+      // Obtén la posición exacta a la que deseas desplazarte
+      const posicionExacta = 560; // Cambia esto a la posición que desees
+
+      // Realiza el desplazamiento suave
+      window.scrollTo({
+          top: posicionExacta,
+          behavior: "smooth"
       });
-      //botón 'acerca de' del navbar
-      function acerca_de(){
-        // Obtén la posición exacta a la que deseas desplazarte
-        const posicionExacta = 560; // Cambia esto a la posición que desees
-
-        // Realiza el desplazamiento suave
-        window.scrollTo({
-            top: posicionExacta,
-            behavior: "smooth"
-        });
-      }
+    }
     </script>
     <script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 </body>

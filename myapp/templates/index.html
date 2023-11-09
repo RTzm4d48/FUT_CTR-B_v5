@@ -1,460 +1,692 @@
-{% extends 'layouts/base.html' %}
-{% load static %}
+{% extends 'layouts/base.html' %} 
+{% load static %} 
 {% block linkstyle %}
 <!-- <link rel="stylesheet" href="{% static '/styles/Home.css' %}"> -->
 <!-- <link rel="stylesheet" href="static/styles/index.css"> -->
 <!-- <link rel="stylesheet" href="static/styles/indexx.css"> -->
-{% endblock %}
+{% endblock %} 
 {% block content %}
 
 <!-- ----------SOLO ESTILOS DE LA PAGINA INDEX.HTML---------- -->
 <style>
-    .points{
-        display: flex;
-    }
-    .qr {
-        margin: auto;
-        width: 500px;
-        /* background: seagreen; */
-    }
-    section {
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        top: 0;
-        left: 0;
-        /* background: darkcyan; */
-    }
-    .content_h{
-        position: relative;
-        width: 100%;
-        height: calc(500px + 100px);
-        color: black;
-        display: flex;
-        flex-direction: column;
-        background: rgb(89, 134, 212);
-        margin: auto;
-        background: radial-gradient(circle at center, #6a98e6, #3c5ca1);
-        background-position: left 200px center;
-        background-size: 1000px 1000px; /* Tamaño inicial */
-        animation: gradientAnimation 6s linear infinite;
-    }
-    .subcontent {
-        width: 70%;
-        height: 100%;
-        margin: 0px auto;
-        /* background: green; */
-        align-items: center;
-        display: flex;
-    }
-    .subcont2{
-        width: 50%;
-        height: 100%;
-        /* background: pink; */
-        display: flex;
-        
-    }
-    .subcont3{
-/*         background: slateblue;*/
-        margin: 100px auto;
-        display: flex;
-        flex-direction: column;
-    }
-    .flotar_imagen{
-        animation: floatUpDown 3s ease-in-out infinite;
-        /* background: red; */
-    }
-    @keyframes floatUpDown {
-        0%, 100% {
+          * {
+              box-sizing: border-box;
+            }
+            body {
+              margin: 0 auto;
+              width: 100%;
+              height: 100%;
+              min-width: 360px;
+              font-family: 'Roboto', sans-serif;
+              background-color: var(--body-white);
+              letter-spacing: 0.2px;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            p,
+            ul {
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+
+            ul,
+            li,
+            :link {
+              list-style: none;
+              padding-left: 0;
+              text-decoration: none;
+            }
+
+            img {
+              display: block;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+
+            input {
+              outline: none;
+              font-family: inherit;
+            }
+
+
+        .points {
+          display: flex;
+        }
+        .qr {
+          margin: auto;
+          width: 30em;
+          /* background: seagreen; */
+        }
+        section {
+            width:100%;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          top: 0;
+          left: 0;
+          overflow:hidden;
+          /* background: darkcyan; */
+        }
+        .content_h {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          min-height: 100%;
+          max-height: 1000px !important;
+          color: black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: radial-gradient(circle at center, #6a98e6, #3c5ca1);
+          background-position: left 200px center;
+          background-size: 1000px 1000px; /* Tamaño inicial */
+          animation: gradientAnimation 6s linear infinite;
+        }
+        .subcontent {
+          width: 80%;
+          max-width:1200px;
+          height: 100%;
+          /* background: green; */
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+        }
+        .subcont2 {
+          width: 50%;
+          min-width: 350px;
+          /* background: pink; */
+          display: flex;
+          justify-content: start;
+          align-items: center;
+        }
+        .subcont3 {
+          /*         background: slateblue;*/
+          display: flex;
+          flex-direction: column;
+          gap:1.5em;
+        }
+        .flotar_imagen {
+          animation: floatUpDown 3s ease-in-out infinite;
+          /* background: red; */
+          width:25em;
+          margin:auto;
+        }
+        @keyframes floatUpDown {
+          0%,
+          100% {
             transform: translateY(0);
-        }
-        50% {
+          }
+          50% {
             transform: translateY(-10px);
+          }
         }
-    }
-    .subcont2 img{
-        height: 400px;
-        margin: auto;
-    }
-    .index_title{
-        display: flex;
-/*        background: salmon;*/
-        margin: 90px 0px 0px 0px;
-    }
-    .blue{
-        color: #EF0033;
-    }
-    .red{
-        color: #fff;
-    }
-    .fw-light {
-        font-size: 60px;
-        /* background: salmon; */
-        margin: 0px 5px;
-        opacity: 90%;
-    }
-    .coment{
-        color: white;
-        width: 80%;
-        opacity: 80%;
-    }
-    .mybuttons{
-        /* background: darkgreen; */
-        height: auto;
-        display: flex;
-    }
-    .procedure{
-        background: #EF0033;
-        color: white;
-        padding: 10px 25px;
-        font-family: 'myfont_robot_bold';
-        border-radius: 100px;
-        text-decoration: none;
-        margin: auto 5px auto 0px;
-    }
-    .consult{
-        padding: 10px 25px;
-        border-radius: 100px;
-        margin: auto 5px auto 0px;
-        display: flex;
-        /* background: #EF0033; */
-    }
-    .consult img{
-        width: 25px;
-        height: 25px;
-        margin: auto 5px;
-    }
-    .consult a{
-        text-decoration: none;
-        color: white;
-        margin: auto;
-    }
-    .consult:hover{
-        opacity: 0.5; /* La imagen de hover estará oculta inicialmente */
-        transition: opacity 0.3s;
-    }
-    .procedure:hover{
-        transition-duration: 0.4s;
-        opacity: 100%;
-        background: #b8032a;
-        color: white;
-    }
-    .content2-h {
-        width: 70%;
-        margin: 10px auto 50px auto;
-        color: black;
-        display: block;
-        /* background: green; */
-    }
-    .cuestions{
-        width: 45%;
-        margin: 10px auto;
-        display: flex;
-        flex-direction: column;
-        /* background: blue; */
-    }
-    .cuestions h5 {
-        color: red;
-        font-size: medium;
-        /* background: forestgreen; */
-        margin: 0px;
-    }
-    .cuestions p {
-        opacity: 70%;
-        text-align: justify;
-    }
-    .cuestions a{
-        color:  #476aa7;
-        width: 150px;
-        text-decoration: none;
-        text-align: center;
-        padding: 10px 30px;
-        border-radius: 5px;
-        border: 3px solid #476aa7;
-        /* margin: auto 0px auto auto; */
-        margin: auto;
-        display: inline-block;
-    }
-    .more{
-        opacity: 100%;
-        color:  #476aa7;
-        padding: 10px 40px;
-        border-radius: 5px;
-        border: 3px solid #476aa7;
-        /* margin: auto 0px auto auto; */
-        margin: auto;
-        cursor: pointer;
-    }
-    .more:hover{
-        background: rgb(72, 107, 168);
-        color: white;
-    }
-    .line{
-        opacity: 0;
-    }
-    .color_nav{
-        background: rgba(72, 107, 168, 0);
-    }
-    .title_content{
-        width: 100%;
-        /* background: yellow; */
-        padding: 100px 0px 60px 0px;
-        display: flex;
-    }
-    .title{
-        /* background: red; */
-        margin: auto;
-    }
-    .title h1{
-        font-size: 22px;
-        font-family: 'myfont_robot_bold';
-        color: #EF0033;
-    }
-    .title_line1{
-        width: 200px;
-        height: 3px;
-        background: #EF0033;
-        margin: 0px auto;
-    }
-    .title_line2{
-        width: 80%;
-        margin: 0px auto;
-        height: 1px;
-        background: rgb(190, 190, 190);
-    }
-    .content_cuestions{
-        display: flex;
-        /* background: hotpink; */
-    }
-    .content_complete{
-        background: #F3F5FA;
-        width: 100%;
-        padding: 30px 0px;
-        display: flex;
-    }
-    .ques_a{
-        /* background: gray; */
-        margin: 0px 0px auto auto;
-    }
-    .ques_b{
-        /* background: gray; */
-        width: 35%;
-        margin: auto auto auto 0px;
-    }
-    .footer{
-        width: 100%;
-        height: 200px;
-        background: #476aa7;
-        display: flex;
-    }
-    .reasons{
-        background: white;
-        display: flex;
-        flex-direction: column;
-        padding: 10px 0px;
-        margin: 10px 0px;
-    }
-    .reasons p{
-        margin: 0px 10px;
-        /* background: green; */
-    }
-    .reason_title{
-        color: #EF0033;
-        font-family: 'myfont_robot_bold';
-    }
-    .developer{
-        margin: auto;
-        display: flex;
-    }
-    .developer p{
-        margin: 0px;
-        color: white;
-        margin: auto 2px;
-    }
-    .developer a{
-        text-decoration: none;
-        color: #48adf0;
-        margin: auto 2px;
-    }
-    .developer a:hover{
-        color: #58d8ff;
-        /* text-decoration: underline; */
-        transition-duration: 0.4s;
-    }
-     /*    
-    @media (max-width: 700px){
-        section{
-            position: relative;
-            flex-direction: column;
-            margin: auto;
+        .subcont2 img {
+          /*height: 400px;*/
+          height:100%;
+
         }
-        section .subcont3{
-            right: 10px;
-            
+        .index_title {
+          width:100%;
+          display: flex;
+          /*        background: salmon;*/
+          gap:1em;
         }
-        section .fw-light{
-            padding: 20px;
-            text-align: center;
+        .blue {
+          color: #ef0033;
         }
-        section .coment{
-            line-height: 40px;
-            text-align: center;
+        .red {
+          color: #fff;
         }
-        section .mybuttons{
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            
-            
+        .fw-light {
+          font-size: 4em;
+          /* background: salmon; */
+          opacity: 90%;
+        }
+        .coment {
+          color: white;
+          width: 80%;
+          opacity: 80%;
+        }
+        .mybuttons {
+          width:100%;
+          /* background: darkgreen; */
+          height: auto;
+          display: flex;
+          gap: 1.5em;
+
+        }
+        .procedure {
+          background: #ef0033;
+          color: white;
+          padding: 10px 25px;
+          font-family: "myfont_robot_bold";
+          border-radius: 100px;
+          text-decoration: none;
+        }
+        .consult {
+          border-radius: 100px;
+          display: flex;
+          /* background: #EF0033; */
+        }
+        .consult img {
+          width: 25px;
+          height: 25px;
+          margin: auto 5px;
+        }
+        .consult a {
+          text-decoration: none;
+          color: white;
+          margin: auto;
+        }
+        .consult:hover {
+          opacity: 0.5; /* La imagen de hover estará oculta inicialmente */
+          transition: opacity 0.3s;
+        }
+        .procedure:hover {
+          transition-duration: 0.4s;
+          opacity: 100%;
+          background: #b8032a;
+          color: white;
+        }
+        {% comment %} .content2-h  {% endcomment %}
+        .content2-h {
+          width: 100%;
+          color: black;
+          display: flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          padding-bottom:5em;
+          /* background: green; */
+        }
+        .cuestions {
+          width: 45%;
+          min-width:330px;
+          display: flex;
+          flex-direction: column;
+          padding:0.5em;
+          /* background: blue; */
+        }
+        .cuestions h5 {
+          color: red;
+          font-size: medium;
+          /* background: forestgreen; */
+          margin: 0px;
+        }
+        .cuestions p {
+          opacity: 70%;
+          text-align: justify;
+          font-size:1em;
+        }
+        .cuestions a {
+          color: #476aa7;
+          width: 150px;
+          text-decoration: none;
+          text-align: center;
+          padding: 10px 30px;
+          border-radius: 5px;
+          border: 3px solid #476aa7;
+          /* margin: auto 0px auto auto; */
+          margin: auto;
+          display: inline-block;
+        }
+        .parrafo1{
+          padding-bottom:1em;
+        }
+        .more {
+          opacity: 100%;
+          color: #476aa7;
+          padding: 10px 40px;
+          border-radius: 5px;
+          border: 3px solid #476aa7;
+          /* margin: auto 0px auto auto; */
+          margin: auto;
+          cursor: pointer;
+        }
+        .more:hover {
+          background: rgb(72, 107, 168);
+          color: white;
+        }
+        .line {
+          opacity: 0;
+        }
+        .color_nav {
+          background: rgba(72, 107, 168, 0);
+        }
+        .title_content {
+          width: 100%;
+          max-width:1200px;
+          /* background: yellow; */
+          padding: 100px 0px 60px 0px;
+          display: flex;
+        }
+        .title {
+          /* background: red; */
+          margin: auto;
+        }
+        .title h1 {
+          font-size: 1.5em;
+          font-family: "myfont_robot_bold";
+          color: #ef0033;
+        }
+        .title_line1 {
+          width: 80%;
+          height: 3px;
+          background: #ef0033;
+          margin: 0px auto;
+        }
+        .title_line2 {
+          width: 80%;
+          margin: 0px auto;
+          height: 1px;
+          background: rgb(190, 190, 190);
+        }
+        .content_cuestions {
+          width: 100%;
+          max-width:1200px;
+          display: flex;
+          flex-wrap:wrap;
+          justify-content:space-around;
+          align-items:start;
+          gap:2em
+          /* background: hotpink; */
+        }
+        .content_complete {
+          background: #f3f5fa;
+          width: 100%;
+          padding: 30px 0px;
+          display: flex;
+          justify-content:center;
+          align-items:center;
+        }
+        .subContent_complete{
+          width: 100%;
+          max-width:1200px;
+          display: flex;
+          flex-wrap:wrap;
+          justify-content:space-around;
+          gap:2em
+        }
+        .ques_a {
+          /* background: gray; */
+          width: 45%;
+          {% comment %} margin: 0px 0px auto auto; {% endcomment %}
+        }
+        .ques_b {
+          /* background: gray; */
+          width: 45%;
+          display: flex;
+          justify-content:center;
+          align-items:center;
+        }
+        .footer {
+          width: 100%;
+          height: 200px;
+          background: #476aa7;
+          display: flex;
+        }
+        .reasons {
+          background: white;
+          display: flex;
+          flex-direction: column;
+          padding: 10px 0px;
+          margin: 10px 0px;
+        }
+        .reasons p {
+          margin: 0px 10px;
+          /* background: green; */
+        }
+        .reason_title {
+          color: #ef0033;
+          font-family: "myfont_robot_bold";
+        }
+        .developer {
+          margin: auto;
+          display: flex;
+        }
+        .developer p {
+          margin: 0px;
+          color: white;
+          margin: auto 2px;
+        }
+        .developer a {
+          text-decoration: none;
+          color: #48adf0;
+          margin: auto 2px;
+        }
+        .developer a:hover {
+          color: #58d8ff;
+          /* text-decoration: underline; */
+          transition-duration: 0.4s;
+        }
+        @media (max-width: 900px){
+          .subcontent {
+            padding-top:6em
+        }
         }
 
+        @media (max-width: 650px){
+          .subcontent {
+              width:100%;
+              padding-top:6em
+          }
+          .index_title{
+              width:90%;
+          }
+          .subcont3{
+              justify-content:center;
+              align-items:center;
+          }
+          .fw-light{
+            font-size:2.5em;
+          }
+          .coment{
+            width:90%;
+          }
+          .mybuttons{
+              width:90%;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+          }
+          .procedure{
+              width:200px
+          }
+          .consult{
+              width:200px
+          }
+          .flotar_imagen{
+              width:20em;
+          }
+          .title_content{
+              width:90%;
+          }
+          .title h1{
+              text-align:center;
+          }
+          .content_cuestions{
+              width:100%;
+          }
+          .cuestions{
+              width:90%;
+          }
+
+          .qr{
+              width:20em;
+          }
+    }
+
+    @media (max-height: 500px){
+        .content_h{
+            min-height:100vh;
+            height:auto;
+        }
+      .subcontent {
+          width:100%;
+          padding-top:4em
+      }
+      .index_title{
+          width:90%;
+      }
+      .subcont3{
+          justify-content:center;
+          align-items:center;
+      }
+      .fw-light{
+        font-size:2.5em;
+      }
+      .coment{
+        width:90%;
+      }
+      .mybuttons{
+          width:90%;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+      }
+      .procedure{
+          width:200px
+      }
+      .consult{
+          width:200px
+      }
+      .flotar_imagen{
+          width:20em;
+      }
+      .title_content{
+          width:90%;
+      }
+      .title h1{
+          text-align:center;
+      }
+      .content_cuestions{
+          width:100%;
+      }
+      .cuestions{
+          width:90%;
+      }
+
+      .qr{
+          width:20em;
+      }
+  }
         /*
-        section .subcont2{
-            bottom: 10px;
-            position: absolute;
-            width: auto;
-            font-size: 10px;
-            
-            
-        }
-        section .subcont2 .flotar_imagen{
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            object-fit: cover;
-            
-            
-            
-        }
-        */
-        
-        @media (max-width: 991px){
-        section{
+            {% comment %} @media (max-width: 700px){ {% endcomment %}
+                section{
+                    position: relative;
+                    flex-direction: column;
+                    margin: auto;
+                }
+                section .subcont3{
+                    right: 10px;
+
+                }
+                section .fw-light{
+                    padding: 20px;
+                    text-align: center;
+                }
+                section .coment{
+                    line-height: 40px;
+                    text-align: center;
+                }
+                section .mybuttons{
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+
+
+                }
+
+                /*
+                section .subcont2{
+                    bottom: 10px;
+                    position: absolute;
+                    width: auto;
+                    font-size: 10px;
+
+
+                }
+                section .subcont2 .flotar_imagen{
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1000;
+                    object-fit: cover;
+
+
+
+                }
+                */
+
+        {% comment %} @media (max-width: 991px) {
+          section {
             flex-direction: column;
             margin-left: auto;
             margin-right: auto;
             justify-content: center;
-        }
-        .content_h{
+          }
+          .content_h {
             padding: 25px;
             /* bottom: 136px; */
             /* min-height: 100vh; */
             /* position: relative; */
             /* align-items: center;*/
-        }
-        .subcontent{
+          }
+          .subcontent {
             left: 20px;
             top: 22px;
             display: flex;
-        }
-        .subcont3{
+          }
+          .subcont2 {
+            /* margin-bottom: 73px; */
+            width: auto;
+            left: 12px;
+            height: 320px;
+            margin-right: -100px;
+            margin-top: 297px;
+            font-size: 16px;
+            bottom: 367px;
+            /*position: relative;*/
+          }
+          .subcont3 {
             position: absolute;
-            right: 38px;
+            right: 45px;
             display: flex;
             flex-wrap: wrap;
-            bottom: 277px;
+            bottom: 281px;
             justify-content: center;
             align-items: center;
-            margin: 2px;
+            margin: -17px;
             left: 6px;
-        }
-        .fw-light{
+          }
+          .index_title {
+            margin-left: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            font-weight: 17px;
+            width: 100%;
+            height: 99px;
+            /* bottom: 218px; */
+            /* font-size: 29px; */
+            /* top: 39px; */
+            padding-left: 35px;
+            /* margin-top: 34px; */
+          }
+          .fw-light {
+            /*text-align: center;
+                    font-size: 60px;
+                    left: 64px;
+                    bottom: 34px;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    margin: 28px;
+                    margin-left: 34px;*/
             text-align: center;
-            font-size: 60px;
-            left: 64px;
-            bottom: 34px;
-            align-items: center;
-            justify-content: center;
+            bottom: 10px;
+            /*align-items: center;*/
+            /*justify-content: center;*/
             display: flex;
-            margin: 28px;
-            margin-left: 34px;
-        }
-        .coment{
+            /*margin: 58px;*
+                    /*margin-left: 9px;*/
+          }
+          .blue {
+            font-size: 47px;
+            left: 47px;
+            position: relative;
+            bottom: 11px;
+          }
+          .red {
+            position: absolute;
+            left: 30px;
+            font-size: 41px;
+            bottom: 200px;
+          }
+          .coment {
             text-align: center;
             position: relative;
-            bottom: 38px;
-            right: 0px;
+            bottom: 35px;
+            right: 23px;
             display: flex;
-            font-size: 17px;
-
-        }
-        .mybuttons{
-            margin: -8px;
+            font-size: 15px;
+            margin-bottom: 29px;
+            /* padding: 2px; */
+            width: 277px;
+            /* left: -25px;*/
+          }
+          .mybuttons {
+            margin: -13px;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
             /* top: 200px; */
-            gap: 15px
-        }
-        .procedure{
-            bottom: 29px;
+            /* gap: 18px;*/
+          }
+          .procedure {
+            bottom: 42px;
             display: flex;
             position: relative;
-            /* justify-content: center; */
-            /* right: 0px; */
-            /* align-items: center;*/
-        }
-        .consult{
-            top: -31px;
+            justify-content: center;
+            right: 22px;
+          }
+          .consult {
+            bottom: 38px;
             position: relative;
-            bottom: 21px;
-            right: 8px;
+            /* bottom: 91px; */
+            right: 33px;
             display: flex;
-        }
-        .subcont2{
-            margin-bottom: 26px;
-            width: auto;
-            left: 12px;
-            height: 302px;
-            margin-right: -100px;
-            margin-top: 297px;
-            font-size: 16px;
-        }
-        .flotar_imagen{
-            width: 90%;
-            height: 70%;
+          }
+          .flotar_imagen {
+            position: relative;
+            width: 83%;
+            /* height: 70%; */
             z-index: 1000;
             overflow: hidden;
-            top: 30%;
-            left: -3%;
-        }
-        .content2-h{
+            top: 7%;
+            left: 4%;
+            /* font-size: 94px;*/
+          }
+          .content2-h {
             position: relative;
             align-items: center;
             justify-content: center;
             text-align: center;
             bottom: 100px;
-        }
-        .title_content{
+          }
+          .title_content {
             display: flex;
-        }
-        .title{
+          }
+          .title {
             display: block;
-        }
-        h1{
+          }
+          h1 {
             position: static;
             /* display: flex; */
             /* text-align: center; */
-        }
-        .content_cuestions{
+          }
+          .content_cuestions {
             position: relative;
-        }
-        .parrafo1{
+          }
+          .parrafo1 {
             position: fixed;
             text-align: center;
             top: 200px;
             left: 20px;
             width: 91%;
-        }
-        .cuestions{
+          }
+          .cuestions {
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             padding-top: 20px;
             z-index: 1000;
-        }
-        .more{
+          }
+          .more {
             position: absolute;
             top: 145px;
             left: 53px;
@@ -463,9 +695,8 @@
             flex-wrap: wrap;
             width: 59%;
             right: 9px;
-            
-        }
-        .titulo1{
+          }
+          .titulo1 {
             /*top: -39px; */
             /* right: 77px; */
             width: 419px;
@@ -476,28 +707,27 @@
             padding: 230px;
             bottom: 40px;
             position: relative;
-        }
-        .points{
+          }
+          .points {
             position: relative;
             align-items: center;
             text-align: center;
             width: 233%;
             padding-right: 166px;
             bottom: 233px;
-        }
-        p{
+          }
+          p {
             margin: 20px 0;
-        }
-        .content_complete{
+          }
+          .content_complete {
             display: flex;
             position: relative;
             align-items: center;
             right: 13px;
             bottom: 400px;
             width: 150%;
-                
-        }
-        .qr{
+          }
+          .qr {
             position: absolute;
             display: block;
             width: 320px;
@@ -507,223 +737,273 @@
             display: block;
             margin: 10px auto;
             right: 175px;
-        }
-        .footer{
+          }
+          .footer {
             position: absolute;
             width: 100%;
             display: flex;
-            
             justify-content: space-between;
             align-items: flex-end;
-        }
-        
-    }
-    }
-    
-
+          }
+        } {% endcomment %}
 </style>
 
 <!-- ----------ESTILOS DE TRANCICIÓN DE OPACIDAD AL CARGAR LA PAGINA--------- -->
 
 <style>
-    .dynamic {
-        opacity: 0;
-        transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
-        transition: opacity 1s ease, transform 1s ease;
-    }
-    .dynamic2 {
-        opacity: 0;
-        transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
-        transition: opacity 1s ease, transform 1s ease;
-    }
-    .dynamic3 {
-        opacity: 0;
-        transform: translateY(20px); /* Puedes ajustar la distancia de desplazamiento vertical */
-        transition: opacity 1s ease, transform 1s ease;
-    }
-    /* Aplica la animación cuando el elemento está en el viewport */
-    .show {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  .dynamic {
+    opacity: 0;
+    transform: translateY(
+      20px
+    ); /* Puedes ajustar la distancia de desplazamiento vertical */
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .dynamic2 {
+    opacity: 0;
+    transform: translateY(
+      20px
+    ); /* Puedes ajustar la distancia de desplazamiento vertical */
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .dynamic3 {
+    opacity: 0;
+    transform: translateY(
+      20px
+    ); /* Puedes ajustar la distancia de desplazamiento vertical */
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  /* Aplica la animación cuando el elemento está en el viewport */
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
 
 <!-- -----Una pequeña modificacion para que por temas de navbar---- -->
 <style>
-    .content_definitive{
-        position: relative;
-        top:0px;
-        /* background: orange; */
-    }
-    .relleno{
-        width: 100%;
-        height: 100px;
-        /* background: goldenrod; */
-    }
+  .content_definitive {
+    position: relative;
+    width: 100%;
+    top: 0px;
+    /* background: orange; */
+  }
+  .relleno {
+    width: 100%;
+    height: 100px;
+    /* background: goldenrod; */
+  }
 </style>
 <section>
-<div class="content_h">
+  <div class="content_h">
     <!--<div class="relleno"></div>-->
     <div class="subcontent dynamic">
-        <div class="subcont2">
-            <div class="subcont3">
-                <div class="index_title">
-                    <h1 class="fw-light blue">ILS</h1>
-                    <h1 class="fw-light red">TRAMITES</h1>
-                </div>
-                <p class="coment">ILS TRAMITES es una plataforma donde podrás realizar todos tus tramites academicos de la institucion educativa ILS. </p>
-                <div class="mybuttons">
-                    <a class="procedure" href="form_new_fut/identification">Realizar un Tramite</a>
-                    <div class="consult">
-                        <img src="/static/img/procedure.png" alt="">
-                        <a href="my_fut">Consultar Tramites</a>
-                    </div>
-                </div>
+      <div class="subcont2">
+        <div class="subcont3">
+          <div class="index_title">
+            <h1 class="fw-light blue">ILS</h1>
+            <h1 class="fw-light red">TRAMITES</h1>
+          </div>
+          <p class="coment">
+            ILS TRAMITES es una plataforma donde podrás realizar todos tus
+            tramites academicos de la institucion educativa ILS.
+          </p>
+          <div class="mybuttons">
+            <a class="procedure" href="form_new_fut/identification"
+              >Realizar un Tramite</a
+            >
+            <div class="consult">
+              <img src="/static/img/procedure.png" alt="" />
+              <a href="my_fut">Consultar Tramites</a>
             </div>
+          </div>
         </div>
-        <div class="subcont2">
-            <img class="flotar_imagen" src="/static/img/front_img.png" alt="">
-        </div>
+      </div>
+      <div class="subcont2">
+        <img class="flotar_imagen" src="/static/img/front_img.png" alt="" />
+      </div>
     </div>
-</div>
-<div class="content2-h dynamic2">
+  </div>
+  <div class="content2-h dynamic2">
     <div class="title_content">
-        <div class="title">
-            <h1>¿POR QUE HACER UN TRAMITE VIRTUAL?</h1>
-            <div class="title_line1"></div>
-            <div class="title_line2"></div>
-        </div>
+      <div class="title">
+        <h1>¿POR QUE HACER UN TRAMITE VIRTUAL?</h1>
+        <div class="title_line1"></div>
+        <div class="title_line2"></div>
+      </div>
     </div>
     <div class="content_cuestions">
-        <div class="cuestions">
-            <p class="parrafo1">Hacer trámites virtuales simplifica la vida de los estudiantes al eliminar desplazamientos, reducir tiempos de espera y minimizar el uso de papel. La inclusión de códigos QR asegura la autenticidad de los documentos y la plataforma proporciona seguimiento en tiempo real, mejorando la experiencia del usuario.</p>
-            <p onclick="topscrolll()" class="more">Saber Más</p>
+      <div class="cuestions">
+        <p class="parrafo1">
+          Hacer trámites virtuales simplifica la vida de los estudiantes al
+          eliminar desplazamientos, reducir tiempos de espera y minimizar el uso
+          de papel. La inclusión de códigos QR asegura la autenticidad de los
+          documentos y la plataforma proporciona seguimiento en tiempo real,
+          mejorando la experiencia del usuario.
+        </p>
+        <p onclick="topscrolll()" class="more">Saber Más</p>
+      </div>
+      <div class="cuestions">
+        <p class="titulo1" style="font-family: 'myfont_robot_bold'">
+          Algúnas ventajas tambien pueden ser:
+        </p>
+        <div class="points">
+          <p>
+            Eficiencia: Los trámites virtuales ahorran tiempo al evitar
+            desplazamientos y permitir envíos instantáneos de documentos.
+          </p>
         </div>
-        <div class="cuestions">
-            <p class="titulo1" style="font-family: 'myfont_robot_bold';">Algúnas ventajas tambien pueden ser:</p>
-            <div class="points">
-                <p>Eficiencia: Los trámites virtuales ahorran tiempo al evitar desplazamientos y permitir envíos instantáneos de documentos.</p>
-            </div>
-            <div class="points">
-                <p>Ahorro de recursos: La reducción del uso de papel beneficia al medio ambiente y reduce costos.</p>
-            </div>
-            <div class="points">
-                <p>Accesibilidad: Los estudiantes pueden realizar trámites desde cualquier lugar con conexión a internet.</p>
-            </div>
-
+        <div class="points">
+          <p>
+            Ahorro de recursos: La reducción del uso de papel beneficia al medio
+            ambiente y reduce costos.
+          </p>
         </div>
+        <div class="points">
+          <p>
+            Accesibilidad: Los estudiantes pueden realizar trámites desde
+            cualquier lugar con conexión a internet.
+          </p>
+        </div>
+      </div>
     </div>
-</div>
-<div class="content_complete content dynamic3">
-    <div class="cuestions ques_a">
+  </div>
+  <div class="content_complete content dynamic3">
+    <div class="subContent_complete">
+      <div class="cuestions ques_a">
         <h5>¿Que es el codigo QR?</h5>
-        <p>Un código QR (Quick Response) es un código de barras bidimensional que almacena información, como enlaces web o datos. Se escanea con un dispositivo para acceder a esa información.</p>
+        <p>
+          Un código QR (Quick Response) es un código de barras bidimensional que
+          almacena información, como enlaces web o datos. Se escanea con un
+          dispositivo para acceder a esa información.
+        </p>
 
         <h5>¿Por que tener un certificado con QR?</h5>
-        <p>Un certificado con código QR es conveniente, seguro y ecológico. Facilita el acceso, verifica la autenticidad y ahorra tiempo y recursos.</p>
+        <p>
+          Un certificado con código QR es conveniente, seguro y ecológico.
+          Facilita el acceso, verifica la autenticidad y ahorra tiempo y
+          recursos.
+        </p>
 
         <div class="reasons">
-            <p class="reason_title">1.- Verificación rápida</p>
-            <p>Los códigos QR permiten verificar la autenticidad de un certificado de manera instantánea.</p>
+          <p class="reason_title">1.- Verificación rápida</p>
+          <p>
+            Los códigos QR permiten verificar la autenticidad de un certificado
+            de manera instantánea.
+          </p>
         </div>
         <div class="reasons">
-            <p class="reason_title">2.- Seguridad mejorada</p>
-            <p>Los certificados con códigos QR son difíciles de falsificar, proporcionando confiabilidad.</p>
+          <p class="reason_title">2.- Seguridad mejorada</p>
+          <p>
+            Los certificados con códigos QR son difíciles de falsificar,
+            proporcionando confiabilidad.
+          </p>
         </div>
         <div class="reasons">
-            <p class="reason_title">3.- Facilita el acceso</p>
-            <p>Facilita el acceso a información adicional o detalles específicos relacionados con el certificado.</p>
+          <p class="reason_title">3.- Facilita el acceso</p>
+          <p>
+            Facilita el acceso a información adicional o detalles específicos
+            relacionados con el certificado.
+          </p>
         </div>
+      </div>
+      <div class="cuestions ques_b">
+        <img class="qr" src="{% static 'img/illustration_qr.png' %}" alt="" />
+      </div>
     </div>
-    <div class="cuestions ques_b">
-        <img class="qr" src="{% static 'img/illustration_qr.png' %}" alt="">
-    </div>
-</div>
+  </div>
 
-<div class="footer">
+  <div class="footer">
     <div class="developer">
-        <p>Developer by</p>
-        <a href="https://github.com/Edgar-ae" target="_blank">Edgar Aguirre</a>
+      <p>Developer by</p>
+      <a href="https://github.com/Edgar-ae" target="_blank">Edgar Aguirre</a>
     </div>
-</div>
+  </div>
 </section>
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const dynamic = document.querySelector(".dynamic");
-        const dynamic2 = document.querySelector(".dynamic2");
-        const dynamic3 = document.querySelector(".dynamic3");
-        const line = document.querySelector(".line");
-        const color_nav = document.querySelector(".color_nav");
+  document.addEventListener("DOMContentLoaded", function () {
+    const dynamic = document.querySelector(".dynamic");
+    const dynamic2 = document.querySelector(".dynamic2");
+    const dynamic3 = document.querySelector(".dynamic3");
+    const line = document.querySelector(".line");
+    const color_nav = document.querySelector(".color_nav");
 
-        window.addEventListener("scroll", function () {
-            // Calcula la opacidad en función de la posición de desplazamiento
-            const scrollPosition = window.scrollY;
-            const maxOpacityScroll = 300; // Ajusta este valor según nuestra preferencia
+    window.addEventListener("scroll", function () {
+      // Calcula la opacidad en función de la posición de desplazamiento
+      const scrollPosition = window.scrollY;
+      const maxOpacityScroll = 300; // Ajusta este valor según nuestra preferencia
 
-            // Ajusta la opacidad en función de la posición de desplazamiento
-            const progress = (scrollPosition / maxOpacityScroll);
-            
-            //-------------------------------------------Color
-            // Define los colores inicial y final
-            const initialColor = "rgba(89, 134, 212, 0)"; // Color inicial con opacidad 0
-            const finalColor = "rgba(89, 134, 212, 0.999)";   // Color final con opacidad 1
+      // Ajusta la opacidad en función de la posición de desplazamiento
+      const progress = scrollPosition / maxOpacityScroll;
 
-            const intermediateColor = interpolateColors(initialColor, finalColor, progress);         
+      //-------------------------------------------Color
+      // Define los colores inicial y final
+      const initialColor = "rgba(89, 134, 212, 0)"; // Color inicial con opacidad 0
+      const finalColor = "rgba(89, 134, 212, 0.999)"; // Color final con opacidad 1
 
-            // Establece el color de fondo y la opacidad del elemento color_nav
-            
-            //--------------------------------------------/Color
+      const intermediateColor = interpolateColors(
+        initialColor,
+        finalColor,
+        progress
+      );
 
-            // Aignamos lo calculado a las clases
-            line.style.opacity = progress > 1 ? 1 : progress;
-            color_nav.style.backgroundColor = intermediateColor;
-        });
+      // Establece el color de fondo y la opacidad del elemento color_nav
 
-        // Función para interpolar entre dos colores RGBA
-        function interpolateColors(color1, color2, progress) {
-            const rgba1 = color1.substring(5, color1.length - 1).split(', ');
-            const rgba2 = color2.substring(5, color2.length - 1).split(', ');
+      //--------------------------------------------/Color
 
-            const interpolatedRGBA = [];
-            for (let i = 0; i < 4; i++) {
-                interpolatedRGBA[i] = Math.round(
-                parseFloat(rgba1[i]) + progress * (parseFloat(rgba2[i]) - parseFloat(rgba1[i]))
-                );
-            }
-            // Interpolación del canal alfa
-            interpolatedRGBA[3] = parseFloat(rgba1[3]) + progress * (parseFloat(rgba2[3]) - parseFloat(rgba1[3]));
-
-            return `rgba(${interpolatedRGBA.join(', ')})`;
-        }
-        // ----------------------------
-        function checkScroll() {
-            const windowHeight = window.innerHeight;
-
-            const contentTop = dynamic.getBoundingClientRect().top;
-            const contentTop2 = dynamic2.getBoundingClientRect().top;
-            const contentTop3 = dynamic3.getBoundingClientRect().top;
-
-            if (contentTop < windowHeight * 0.75) {
-                dynamic.classList.add("show");
-                //window.removeEventListener("scroll", checkScroll);
-            }
-            if (contentTop2 < windowHeight * 0.75) {
-                dynamic2.classList.add("show");
-                // window.removeEventListener("scroll", checkScroll);
-            }
-            if (contentTop3 < windowHeight * 0.75) {
-                dynamic3.classList.add("show");
-                window.removeEventListener("scroll", checkScroll);
-            }
-        }
-        window.addEventListener("scroll", checkScroll);
-        checkScroll(); // Comprueba el estado inicial
+      // Aignamos lo calculado a las clases
+      line.style.opacity = progress > 1 ? 1 : progress;
+      color_nav.style.backgroundColor = intermediateColor;
     });
-    function topscrolll(){
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+
+    // Función para interpolar entre dos colores RGBA
+    function interpolateColors(color1, color2, progress) {
+      const rgba1 = color1.substring(5, color1.length - 1).split(", ");
+      const rgba2 = color2.substring(5, color2.length - 1).split(", ");
+
+      const interpolatedRGBA = [];
+      for (let i = 0; i < 4; i++) {
+        interpolatedRGBA[i] = Math.round(
+          parseFloat(rgba1[i]) +
+            progress * (parseFloat(rgba2[i]) - parseFloat(rgba1[i]))
+        );
+      }
+      // Interpolación del canal alfa
+      interpolatedRGBA[3] =
+        parseFloat(rgba1[3]) +
+        progress * (parseFloat(rgba2[3]) - parseFloat(rgba1[3]));
+
+      return `rgba(${interpolatedRGBA.join(", ")})`;
     }
+    // ----------------------------
+    function checkScroll() {
+      const windowHeight = window.innerHeight;
+
+      const contentTop = dynamic.getBoundingClientRect().top;
+      const contentTop2 = dynamic2.getBoundingClientRect().top;
+      const contentTop3 = dynamic3.getBoundingClientRect().top;
+
+      if (contentTop < windowHeight * 0.75) {
+        dynamic.classList.add("show");
+        //window.removeEventListener("scroll", checkScroll);
+      }
+      if (contentTop2 < windowHeight * 0.75) {
+        dynamic2.classList.add("show");
+        // window.removeEventListener("scroll", checkScroll);
+      }
+      if (contentTop3 < windowHeight * 0.75) {
+        dynamic3.classList.add("show");
+        window.removeEventListener("scroll", checkScroll);
+      }
+    }
+    window.addEventListener("scroll", checkScroll);
+    checkScroll(); // Comprueba el estado inicial
+  });
+  function topscrolll() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 </script>
 {% endblock %}

@@ -5,20 +5,31 @@
 
 {# ---------NAVBAR STYLES--------- #}
 <style>
-  .fut_conteiner{
+  .Allcontent_f{
+    width:100%;
+    min-height:100vh;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+  .fut_conteiner {
     background: whitesmoke;
-    width: 70%;
-    margin: 50px auto 0px auto;
-    display: flex;
-    flex-direction: column;
+    width: 90%;
+    height: auto;     
+    max-width:1000px;  
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
   }
-  .fut_navbar{
+  .fut_navbar {
     width: 100%;
     height: 50px;
-    background: #E9E9E9;
+    background: #e9e9e9;
     display: flex;
   }
-  ul{
+  ul {
     list-style: none;
     display: flex;
     /*    background: blue;*/
@@ -26,46 +37,46 @@
     margin: 0px;
     padding: 0px;
   }
-  .fut_navbar li{
+  .fut_navbar li {
     /*    background: salmon;*/
-    
+
     height: 100%;
     margin: auto 20px;
     display: flex;
     flex-direction: column;
   }
-  .navbar_a{
+  .navbar_a {
     margin: 15px auto auto auto;
     color: black;
     text-decoration: none;
     opacity: 80%;
     /*    background: yellow;*/
   }
-  .navbar_a:hover{
+  .navbar_a:hover {
     opacity: 100%;
   }
-  .fut_line{
+  .fut_line {
     width: 100%;
     height: 2px;
     margin: auto 0px 0px 0px;
   }
-  .fl_activate{
+  .fl_activate {
     background: black;
   }
 </style>
 
 {# -----------ESTILOS SOLO DEL CUADRO DE FUT------------ #}
 <style>
-  .cont_fut{
+  .cont_fut {
     width: calc(100% - 30px);
-    height: 130px;
+    height: auto;
     background: white;
     border: 1px solid gray;
     margin: 15px auto;
     display: flex;
     border-radius: 3px;
   }
-  .cont_information{
+  .cont_information {
     width: calc(80% - 30px);
     height: calc(100% - 30px);
     /*    background: salmon;*/
@@ -73,29 +84,29 @@
     display: flex;
     flex-direction: column;
   }
-  .cont_information h3{
+  .cont_information h3 {
     margin: 0px 0px 5px 0px;
   }
-  .cont_img{
+  .cont_img {
     width: 20%;
-    height: 100%;
-    background: #D1D1D1;
+    min-width:100px;
+    background: #d1d1d1;
     display: flex;
   }
-  .info_fut{
+  .info_fut {
     /*    background: violet;*/
   }
-  .info_fut p{
+  .info_fut p {
     margin: 0px;
     font-size: smaller;
   }
-  .pay_fut{
+  .pay_fut {
     display: flex;
   }
-  .pay_fut p{
+  .pay_fut p {
     margin: 0px 5px 0px 0px;
   }
-  .viewfut{
+  .viewfut {
     background: red;
     color: white;
     padding: 2px 20px;
@@ -106,29 +117,58 @@
     text-align: center;
     text-decoration: none;
   }
-  .viewfut:hover{
-    background: #E40000;
+  .viewfut:hover {
+    background: #e40000;
   }
-  .cont_img img{
-    width: 80px;
+  .cont_img img {
+    width: 70px;
     margin: auto;
   }
+
+  @media (max-width: 650px){
+    .Allcontent_f{
+        align-items:start;
+        padding-top:10em;
+        padding-bottom:3em;
+    }
+    .cont_information h3{
+      font-size:0.9em;
+    }
+}
+@media (max-height: 650px){
+    .Allcontent_f{
+        align-items:start;
+        padding-top:10em;
+        padding-bottom:3em;
+    }
+    .cont_information h3{
+      font-size:0.9em;
+    }
+
+}
 </style>
+<div class="Allcontent_f">
 <div class="fut_conteiner">
   <nav class="fut_navbar">
-      <ul>
-          <li><a class="navbar_a" href="{% url 'n_in_progress' %}">FUTs en proceso</a><div id="fut_line1" class="fut_line"></div></li>
-          <li><a class="navbar_a" href="{% url 'n_finished' %}">FUTs Finalizados</a><div id="fut_line2" class="fut_line"></div></li>
-      </ul>
+    <ul>
+      <li>
+        <a class="navbar_a" href="{% url 'n_in_progress' %}">FUTs en proceso</a>
+        <div id="fut_line1" class="fut_line"></div>
+      </li>
+      <li>
+        <a class="navbar_a" href="{% url 'n_finished' %}">FUTs Finalizados</a>
+        <div id="fut_line2" class="fut_line"></div>
+      </li>
+    </ul>
   </nav>
-  
-  {% block content_fut %}
-  {% endblock %}
+
+  {% block content_fut %} {% endblock %}
+</div>
 </div>
 
 <script>
   //La funcion está en 'base.html'
   //es para el navbar
-  activation('consultar_tramite');
+  activation("consultar_tramite");
 </script>
 {% endblock %}
