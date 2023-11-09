@@ -499,8 +499,8 @@ padding: 0px 0px 50px 0px;
             <div class="data_person">
                 <img src="{% static 'img/icon_student.png' %}" alt="" class="icon_pers">
                 <img src="{% static 'img/profile_user_test.jpg' %}" alt="" class="profil_person">
-                <p class="name">Juan Edgar</p>
-                <p class="fullname">Aguirre Mamani</p>
+                <p class="name">{{ user.username }}</p>
+                <p class="fullname">UnApellido</p>
             </div>
             <div class="content_tools">
                 <div class="share" onclick="open_for_share()">
