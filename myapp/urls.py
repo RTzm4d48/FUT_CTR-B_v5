@@ -12,8 +12,9 @@ urlpatterns = [
     path('form_new_fut/identification', views.form_new_fut, name="n_new_fut"),
     path('form_new_fut/processtd', views.create_fut_process, name="n_process"),
     path('form_new_fut/pay', views.create_fut_pay, name="n_pay"),
-    path('form_new_fut/finisher', views.finisher, name="n_end"),
+    path('form_new_fut/finisher/', views.finisher, name="n_end"),
     path('form_new_fut/successful', views.successful, name="n_successful"),
+    path('async-data/', views.async_data, name="n_test"),
 
     # vws_createfut_process AQUI GESTIONAMOS TODO SOBRE LA CREACION DEL FUT
     path('my_fut/proceedings', vws_createfut_process.proceedings, name="n_proceedings"),

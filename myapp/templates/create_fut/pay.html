@@ -186,6 +186,14 @@
           border: none;
           border-radius: 5px;
           top: 0px;
+          justify-content: center;
+            align-items: center;
+            display: flex;
+        
+        }
+        .custom_button img{
+            height: 20px;
+            margin: auto 5px;
         }
         .custom-button:hover {
           background-color: #0056b3;
@@ -275,7 +283,7 @@
 
 <!-- {# ------------------------------------------ #} -->
 
-<div id="pop_windows_wait" class="pop_up_window_content ">
+<div id="pop_windows_wait" class="pop_up_window_content ocultar">
   <div class="pop_up_window">
     <!-- {# Context pop_up #} -->
     <div class="icon_img">
@@ -286,11 +294,11 @@
             que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al ticked y suba la foto aqui para su evaluación</p>
         </div>
         <div class="select_img_cnt">
-          <input type="file" id="pdf_file" name="pdf_file" class="input-file">
-          <label for="pdf_file" class="custom_button">Seleccionar archivo</label>
-          {# <button for="pdf_file" class="custom_button">Seleccionar archivo</button> #}
+          <input type="file" id="pdf_file" name="pdf_file" class="input-file" accept=".png, .jpg">
+
+          <label for="pdf_file" class="custom_button">Seleccionar Imagen <img src="{% static 'img/img_icon.png' %}"></label>
         </div>
-        <a href="">omitir por ahora</a>
+        <a href="http://127.0.0.1:8000/my_fut/proceedings?code=VvGodejkMHA">omitir por ahora</a>
     </div>
     <!-- {#/Context pop_up #} -->
   </div>
@@ -299,7 +307,6 @@
 <!-- -------------------------------------------------- -->
 
 <div id="pop_loader" class="pop_up_window_content ocultar">
-  
     <!-- {# Context pop_up #} -->
     <style>
         /* Estilos de la ventana de carga */
@@ -314,12 +321,10 @@
             justify-content: center;
             align-items: center;
         }
-
         .loader-text {
             color: white;
             margin: 0px 5px;
         }
-
         /* Estilos para la animación de carga (puedes personalizarlos según tus necesidades) */
         .loader-spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
@@ -330,7 +335,6 @@
             height: 40px;
             animation: spin 2s linear infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -341,12 +345,9 @@
         <div class="loader-text">Cargando...</div>
     </div>
     <!-- {#/Context pop_up #} -->
-  
 </div>
 
 {% endblock %}
-
-
 {% block contentf %}
 <!-- ------SOLO ESTILOS DEL CUADRO DE PAGO------ -->
 <style>
@@ -564,6 +565,7 @@
                 <input type="hidden" name="order" value="{{Order}}">
                 <input type="hidden" name="reason" value="{{Reason}}">
                 <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}">
+
                 <button type="button" onclick="window.history.back()">Volver</button>
                 <button type="submit">Finalizar</button>
             </div>
@@ -575,11 +577,12 @@
     // -----Variables
     var name_order = "{{Order}}";
     var monto = "{{Monto}}";
+    var pop_windows_wait = document.getElementById("pop_windows_wait");
+    var pop_loader = document.getElementById("pop_loader");
 </script>
 <script>
     document.getElementById("id_form_pay").addEventListener("submit", function (event) {
-    // Prevenir el envío del formulario por defecto
-    event.preventDefault();
+    event.preventDefault();//prevenimos el envio
 
     // OBTENEMOS EL RADIO
     const radios = document.querySelectorAll(".opcion"); // Seleccionar todos los radios con la clase "opcion"
@@ -594,10 +597,50 @@
     if (opcionSeleccionada == 0){
         //ABRIMOS POP-UP WAIT
         console.log("A");
-        pop_windows_wait = document.getElementById("pop_windows_wait");
-        pop_windows_wait.classList.remove("ocultar")
+        pop_loader.classList.remove("ocultar");
+        //AREMOS UNA PETICION AJAX --------------------------
+        //VARIABLES
+        var nameValue = document.getElementsByName("name")[0].value;
+        var programValue = document.getElementsByName("program")[0].value;
+        var dniValue = document.getElementsByName("dni")[0].value;
+        var phoneValue = document.getElementsByName("phone")[0].value;
+        var cycleValue = document.getElementsByName("cycle")[0].value;
+        var emailValue = document.getElementsByName("email")[0].value;
+
+        var myrequest = document.getElementsByName("myrequest")[0].value;
+        var order = document.getElementsByName("order")[0].value;
+        var reason = document.getElementsByName("reason")[0].value;
+        var emailValue = document.getElementsByName("pdf_binary_encoded")[0].value;
+        console.log("el nombre es:"+ nameValue);
+        $.ajax({
+            type: 'GET',
+            url: '/async-data/',  // Reemplaza con la URL de tu vista de carga de datos
+            data: {
+                'name': nameValue,
+                'program': programValue,
+                'dni': dniValue,
+                'phone': phoneValue,
+                'cycle': cycleValue,
+                'email': emailValue,
+                'myrequest': myrequest,
+                'order': order,
+                'reason': reason,
+                // Agrega más variables según sea necesario
+            },
+            success: function(data) {
+                // Ocultar la ventana de carga
+                pop_loader.classList.add("ocultar");
+                pop_windows_wait.classList.remove("ocultar");
+
+                // Actualizar el contenido en la página
+                console.log("Finalizado");
+            },
+            error: function() {
+                // Manejar errores si es necesario
+            }
+        });
     }else{
-        console.log("B");
+        console.log("Bb");
     }
       // Realizar la validación
       // if (validarFormulario()) {

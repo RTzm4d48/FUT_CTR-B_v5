@@ -32,6 +32,8 @@ import yagmail
 #para saber el dia y la hora actual
 from datetime import datetime
 
+import random, qrcode
+
 def index(request):
     return render(request,'index.html')
 
@@ -133,9 +135,9 @@ async def generate_code():
     return code
 
 @sync_to_async
-def save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, pdf_bytes, exp_, pas_, code_, qrimg_bytes):
+def save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, exp_, pas_, code_, qrimg_bytes):
 
-    my_objet = fut(name=name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, pdf_binary=pdf_bytes, proceeding=exp_, password=pas_, code=code_, qrimg_binary=qrimg_bytes)
+    my_objet = fut(name=name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, proceeding=exp_, password=pas_, code=code_, qrimg_binary=qrimg_bytes)
     my_objet.save()
     new_id = my_objet.id
     return new_id
@@ -230,27 +232,33 @@ def name_admin(position):
     objs = Admins.objects.filter(position=position).values('name', 'fullname').first()
     name = objs['name']+' '+objs['fullname']
     return name
-    
+
+# para generear el expediente
+async def generate_proceedings():
+    # Genramos el número de Expediente
+    Expediente = random.sample(range(0, 9),5)
+    exp_ = ''.join(map(str, Expediente))
+    # Generamos la contraseña
+    Contraseña = random.sample(range(0, 9),4)
+    pas_ = ''.join(map(str, Contraseña))
+
+    return exp_, pas_
+
 
 async def finisher(request):
-    if request.method == 'POST':
-         # identification
-        name = request.POST.get('name')
-        program = request.POST.get('program')
-        dni = request.POST.get('dni')
-        phone = request.POST.get('phone')
-        cycle = request.POST.get('cycle')
-        email = request.POST.get('email')
+    if request.method == 'GET':
+        name = request.GET.get('name')
+        program = request.GET.get('program')
+        dni = request.GET.get('dni')
+        phone = request.GET.get('phone')
+        cycle = request.GET.get('cycle')
+        email = request.GET.get('email')
         # process
-        myrequest = request.POST.get('myrequest')
-        order = request.POST.get('order')
-        reason = request.POST.get('reason')
-        pdf_memoryview = request.POST.get('pdf_binary_encoded')
+        myrequest = request.GET.get('myrequest')
+        order = request.GET.get('order')
+        reason = request.GET.get('reason')
         
-        if pdf_memoryview == 'null':
-            pdf_bytes = bytes()
-        else:
-            pdf_bytes = pdf_memoryview.encode("utf-8")
+
 
         now_date = date.today()
         
@@ -261,7 +269,7 @@ async def finisher(request):
         print('LOCURA_02')
         # nnn = await generate_email(email, name, exp_, pas_)
         print('LOCURA_03')
-        new_id = await save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, pdf_bytes, exp_, pas_, code_, qrimg_bytes)
+        new_id = await save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, exp_, pas_, code_, qrimg_bytes)
         print('LOCURA_04')
         # CRUD en el modelo 'Process'
         #obtener the date
@@ -335,3 +343,48 @@ def create_fut_wait(request):
 
 def view_loader(request):
     return render(request,'loader.html')
+
+#CREAMOS UNA VISTA DE PRUEBA PARA LA FINALIZACION DE CREATE FUT
+from django.http import JsonResponse
+
+def async_data(request):
+
+    if request.method == 'GET':
+         # identification
+        name = request.GET.get('name')
+        program = request.GET.get('program')
+        dni = request.GET.get('dni')
+        phone = request.GET.get('phone')
+        cycle = request.GET.get('cycle')
+        email = request.GET.get('email')
+        # process
+        myrequest = request.GET.get('myrequest')
+        order = request.GET.get('order')
+        reason = request.GET.get('reason')
+        #pdf_memoryview = request.POST.get('pdf_binary_encoded')
+        
+        #if pdf_memoryview == 'null':
+         #   pdf_bytes = bytes()
+        #else:
+         #   pdf_bytes = pdf_memoryview.encode("utf-8")
+
+
+        print(name);
+        print(program);
+        print(dni);
+        print(phone);
+        print(cycle);
+        print(email);
+        print(myrequest);
+        print(order);
+        print(reason);
+    # Simula la carga de datos (reemplaza esto con tu lógica de carga de datos)
+    import time
+    time.sleep(3)
+
+    data = {
+        'message': 'Datos cargados exitosamente',
+        'content': 'Contenido de tus datos aquí',
+    }
+
+    return JsonResponse(data)

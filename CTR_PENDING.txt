@@ -2,3 +2,4 @@
 (DONE)- Arreglar las funciones de 'views' y organizarlo todo
 (DONE)- Orgarnizar 'myapp/views.py'
 - acer el cuadro pop-up de carga
+- aprender sobre Fetch
