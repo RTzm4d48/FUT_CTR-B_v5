@@ -225,31 +225,6 @@
   </div>
 </div>
 
-<!-- {# ------------------------------------------ #} -->
-
-<div id="pop_windows_wait" class="pop_up_window_content ocultar">
-  <div class="pop_up_window">
-    <!-- {# Context pop_up #} -->
-    <div class="icon_img">
-        <img src="{% static 'img/icon03.png' %}">
-        <h2>Realize el pago</h2>
-        <div class="texto_explicativo">
-            <p>Aproximece a un cajero <strong>BCP</strong> y realice el pago a la siguiente cuenta <strong>3456 4567 4567 4523</strong>
-            que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al ticked y suba la foto aqui para su evaluación</p>
-        </div>
-        <div class="select_img_cnt">
-          <input type="file" id="pdf_file" name="pdf_file" class="input-file" accept=".png, .jpg">
-
-          <label for="pdf_file" class="custom_button">Seleccionar Imagen <img src="{% static 'img/img_icon.png' %}"></label>
-        </div>
-        <a href="http://127.0.0.1:8000/my_fut/proceedings?code=VvGodejkMHA">omitir por ahora</a>
-    </div>
-    <!-- {#/Context pop_up #} -->
-  </div>
-</div>
-
-<!-- -------------------------------------------------- -->
-
 <div id="pop_loader" class="pop_up_window_content ocultar">
     <!-- {# Context pop_up #} -->
     <style>
@@ -521,7 +496,6 @@
     // -----Variables
     var name_order = "{{Order}}";
     var monto = "{{Monto}}";
-    var pop_windows_wait = document.getElementById("pop_windows_wait");
     var pop_loader = document.getElementById("pop_loader");
 </script>
 <script>
@@ -558,7 +532,7 @@
         console.log("el nombre es:"+ nameValue);
         $.ajax({
             type: 'GET',
-            url: '/async-data/',  // Reemplaza con la URL de tu vista de carga de datos
+            url: '/form_new_fut/finisher/',
             data: {
                 'name': nameValue,
                 'program': programValue,
@@ -569,30 +543,19 @@
                 'myrequest': myrequest,
                 'order': order,
                 'reason': reason,
-                // Agrega más variables según sea necesario
             },
             success: function(data) {
-                // Ocultar la ventana de carga
                 pop_loader.classList.add("ocultar");
-                pop_windows_wait.classList.remove("ocultar");
-
-                // Actualizar el contenido en la página
-                console.log("Finalizado");
                 window.location.href = "http://127.0.0.1:8000/form_new_fut/successful";
             },
             error: function() {
-                // Manejar errores si es necesario
+                // Manejar errores
             }
         });
     }else{
         console.log("Bb");
 
     }
-      // Realizar la validación
-      // if (validarFormulario()) {
-      //   // Envía el formulario si la validación es exitosa
-      //   this.submit();
-      // }
     });
     function capturarValor(radio) {
         var esp_cargo = "Cargo por Pasarela: S/. ";
