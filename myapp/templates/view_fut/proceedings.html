@@ -491,11 +491,37 @@ padding: 0px 0px 50px 0px;
     font-weight: bold;
     margin: 0px 5px;
 }
+.content_advertencia{
+    background: #ff000075;
+    position: absolute;/*importante*/
+    width: 70%;
+    margin: auto;
+    top: 0px;
+    left: calc(50% - 35%);
+    color: white;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content_advertencia p{
+    margin: 0px 5px;
+}
+.content_advertencia a{
+    font-size: small;
+}
 </style>
 
 <div class="mycontent" >
     <div class="content_dos" >
         <div class="personcontent">
+
+            <div class="content_advertencia">
+                <p>Advertencia usted aun no hizo el pago del trámite</p>
+                <a href="">más información</a>
+            </div>
+
             <div class="data_person">
                 <img src="{% static 'img/icon_student.png' %}" alt="" class="icon_pers">
                 <img src="{% static 'img/profile_user_test.jpg' %}" alt="" class="profil_person">
