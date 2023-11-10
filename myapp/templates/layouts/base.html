@@ -400,16 +400,20 @@ body{
         top: 100px;
         width: 100%;
         height: calc(100% - 100px);
-        display: flex;
+/*        display: flex;*/
         z-index: 3;
+        display: flex; /*IMPORTANTE*/
+        justify-content: center; /*IMPORTANTE*/
+        align-items: center; /*IMPORTANTE*/
       }
       .pop_up_window{
+        margin: 0px;
         width: 700px;
         background: white;
-        margin: 250px auto auto auto;
-        border-radius: 10px;
+        border-radius: 5px;
         padding: 10px 10px;
         position: relative;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
       }
       .ocultar{
         display: none;
