@@ -30,7 +30,7 @@
     .content_h{
         position: relative;
         width: 100%;
-        height: calc(500px + 100px);
+        height: calc(400px + 60px);
         color: black;
         display: flex;
         flex-direction: column;
@@ -45,22 +45,21 @@
         width: 70%;
         height: 100%;
         margin: 0px auto;
-        /* background: green; */
+        /*background: green;*/
         align-items: center;
         display: flex;
     }
     .subcont2{
         width: 50%;
         height: 100%;
-        /* background: pink; */
-        display: flex;
-        
+        /*background: pink;*/
+        display: flex; /*IMPORTANTE*/
+        justify-content: center; /*IMPORTANTE*/
+        align-items: center; /*IMPORTANTE*/
     }
     .subcont3{
-/*         background: slateblue;*/
-        margin: 100px auto;
-        display: flex;
-        flex-direction: column;
+        /*background: slateblue;*/
+        width: 500px;
     }
     .flotar_imagen{
         animation: floatUpDown 3s ease-in-out infinite;
@@ -75,13 +74,18 @@
         }
     }
     .subcont2 img{
-        height: 400px;
-        margin: auto;
+        height: 300px;
+        /*background: darkgray;*/
     }
     .index_title{
         display: flex;
-/*        background: salmon;*/
-        margin: 90px 0px 0px 0px;
+        /*background: salmon;*/
+        margin: 0px;
+    }
+    .index_title h1{
+        font-size: 50px;
+        margin: 0px;
+        /*background: green;*/
     }
     .blue{
         color: #EF0033;
@@ -99,6 +103,8 @@
         color: white;
         width: 80%;
         opacity: 80%;
+        font-size: smaller;
+        /*background: yellow;*/
     }
     .mybuttons{
         /* background: darkgreen; */
@@ -119,7 +125,7 @@
         border-radius: 100px;
         margin: auto 5px auto 0px;
         display: flex;
-        /* background: #EF0033; */
+        /*background: #EF0033;*/
     }
     .consult img{
         width: 25px;
@@ -200,11 +206,12 @@
     .title_content{
         width: 100%;
         /* background: yellow; */
-        padding: 100px 0px 60px 0px;
+        padding: 50px 0px 60px 0px;
         display: flex;
+        flex-direction: column;
     }
     .title{
-        /* background: red; */
+        /*background: #FF00FC;*/
         margin: auto;
     }
     .title h1{
@@ -562,8 +569,18 @@
         /* background: goldenrod; */
     }
 </style>
-
-
+<style>
+    .arrow{
+        /*background: salmon;*/
+        display: flex;
+        justify-content: center; /*IMPORTANTE*/
+        margin: 0px 0px 50px 0px;
+    }
+    .arrow svg{
+        margin: 0px;
+        /*background: yellow;*/
+    }
+</style>
 <section>
 <div class="content_h">
     <!--<div class="relleno"></div>-->
@@ -591,6 +608,11 @@
 </div>
 <div class="content2-h dynamic2">
     <div class="title_content">
+        <div class="arrow">
+            <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="50" data-view-component="true">
+                <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#EF0033"></path>
+            </svg>
+        </div>
         <div class="title">
             <h1>¿POR QUE HACER UN TRAMITE VIRTUAL?</h1>
             <div class="title_line1"></div>
