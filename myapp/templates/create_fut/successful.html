@@ -23,17 +23,9 @@
     <p>Toda la informacion necesaria para acceder al tramite se envio a: edgar@gmail.com</p>
     <!-- PEDIR AYUDA A GPT -->
 </div>
-<script>
-    setTimeout(function() {
-        console.log("Hola Mundo");
-        var pop_windows_wait = document.getElementById("pop_windows_wait");
-        pop_windows_wait.classList.remove("ocultar");
-    }, 1000);
-</script>
 {% endblock %}
 
 {% block up_pop_space %}
-
 <style>
 /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/-----------------------
 .pop_up_window{
@@ -152,11 +144,18 @@
 </div>
 
 <script>
+    var pop_windows_wait = document.getElementById("pop_windows_wait");
     function omitir(){
         pop_windows_wait.classList.add("ocultar");
     }
 </script>
 
+<script>
+    setTimeout(function() {
+        console.log("Hola Mundo");
+        pop_windows_wait.classList.remove("ocultar");
+    }, 1000);
+</script>
 {% endblock %}
 
 <!-- ----- -->

@@ -26,79 +26,101 @@
 <!--WAIT POP-UP ADVERTENCIA FALTA DE PAGO-->
 
 <style>
-    /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/-----------------------
-    .pop_up_window{
-        margin: 150px auto auto auto;
-      }
-      .icon_img{
-        /*background: salmon;*/
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-      }
-      .icon_img img{
-        margin: auto;
-        height: 60px;
-      }
-      .texto_explicativo{
-        display: flex;
-        width: 80%;
-        margin: 5px auto;
-        background: #EDEDED;
-        padding: 7px;
-        height: 60px;
-        border-radius: 4px;
-      }
-      .icon_img *{
-        margin: 5px auto;
-      }
-      .input-file {
-        display: none;
-      }
+/*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/-----------------------
+.pop_up_window{
 
-      .select_img_cnt{
-        /*background: green;*/
-        width: 100%;
-        height: 50px;
-        display: flex;
-        }
+}
+.icon_img{
+    /*background: salmon;*/
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.icon_img img{
+    margin: auto;
+    height: 60px;
+}
+.texto_explicativo{
+    display: flex;
+    width: 80%;
+    margin: 5px auto;
+    background: #EDEDED;
+    padding: 7px;
+    height: 60px;
+    border-radius: 4px;
+    font-size: smaller;
+}
+.icon_img *{
+    margin: 5px auto;
+}
+.input-file {
+    display: none;
+}
 
-        /* Estilos para el botón personalizado */
-        .custom_button {
-          background-color: #007BFF;
-          color: #fff;
-          padding: 10px 20px;
-          cursor: pointer;
-          margin: auto;
-          border: none;
-          border-radius: 5px;
-          top: 0px;
-          justify-content: center;
-            align-items: center;
-            display: flex;
-        
-        }
-        .custom_button img{
-            height: 20px;
-            margin: auto 5px;
-        }
-        .custom-button:hover {
-          background-color: #0056b3;
-        }
-        .link_omitir{
-            color: #288ed1;
-            font-size: smaller;
-            cursor: pointer;
-        }
-        .link_omitir:hover{
-            text-decoration: underline;
-        }
+.select_img_cnt{
+    /*background: green;*/
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+/* Estilos para el botón personalizado */
+.custom_button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    top: 0px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.custom_button img{
+    height: 20px;
+    margin: auto 5px;
+}
+.custom-button:hover {
+    background-color: #0056b3;
+}
+.link_omitir{
+    color: #288ed1;
+    font-size: smaller;
+    cursor: pointer;
+}
+.link_omitir:hover{
+    text-decoration: underline;
+}
+.alert_message{
+    background: #F8D6DA;
+    color: #9D1426;
+    border: 1px solid #FFBAC2;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center; 
+}
+.alert_message img{
+    height: 30px;
+    margin: auto 5px;
+}
+.alert_message p{
+    font-size: smaller;
+    margin: auto 5px;
+}
 </style>
 
 <div id="pop_windows_wait" class="pop_up_window_content ocultar">
   <div class="pop_up_window">
     <!-- {# Context pop_up #} -->
     <div class="icon_img">
+        <div class="alert_message">
+            <img src="{% static 'img/advertencia.png' %}" alt="">
+            <p>Advertencia: su tramite aún no fue procesado, necesita hacer el pago para iniciar su proceso.</p>            
+        </div>
         <img src="{% static 'img/icon03.png' %}">
         <h2>Realize el pago</h2>
         <div class="texto_explicativo">
@@ -106,13 +128,13 @@
             que se encuentra a nombre de <strong>Felipe Gonzales</strong> y luego tomele una foto al ticked y suba la foto aqui para su evaluación</p>
         </div>
         <div class="texto_explicativo" style="flex-direction: column;">
-            <p>Tramite: Certificado de Estudios</p>
-            <p>Monto a pagar: S/.30</p>
+          <p><strong>Tramite:</strong> Certificado de Estudios</p>
+          <p><strong>Monto a pagar:</strong> S/.30</p>
         </div>
         <div class="select_img_cnt">
           <input type="file" id="pdf_file" name="pdf_file" class="input-file" accept=".png, .jpg">
 
-          <label for="pdf_file" class="custom_button">Seleccionar Imagen del Baucher <img src="{% static 'img/img_icon.png' %}"></label>
+          <label for="pdf_file" class="custom_button">Seleccionar Imagen del Baucher<img src="{% static 'img/img_icon.png' %}"></label>
         </div>
         <p onclick="omitir()" class="link_omitir">omitir por ahora</p>
     </div>
@@ -135,8 +157,6 @@
         pop_windows_wait.classList.remove("ocultar");
     }, 3000);
 </script>
-
-
 {% endblock %}
 
 {% block content %}
@@ -607,21 +627,28 @@ padding: 0px 0px 50px 0px;
     margin: 0px 5px;
 }
 .content_advertencia{
-    background: #ff000075;
+    background: #F8D6DA;
     position: absolute;/*importante*/
     width: 70%;
     margin: auto;
     top: 0px;
     left: calc(50% - 35%);
-    color: white;
+    color: #9D1426;
+    border: 1px solid #FFBAC2;
     border-radius: 5px;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 5px 0px;
+}
+.content_advertencia img{
+    height: 30px;
+    margin: auto 5px;
 }
 .content_advertencia p{
     margin: 0px 5px;
+    font-size: smaller;
 }
 .content_advertencia a{
     font-size: small;
@@ -633,6 +660,7 @@ padding: 0px 0px 50px 0px;
         <div class="personcontent">
 
             <div class="content_advertencia">
+                <img src="{% static 'img/advertencia.png' %}" alt="">
                 <p>Advertencia usted aun no hizo el pago del trámite</p>
                 <a href="">más información</a>
             </div>
