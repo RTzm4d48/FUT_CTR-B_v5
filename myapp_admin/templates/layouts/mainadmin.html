@@ -19,7 +19,7 @@
         }
         .navbar{
             width: 100%;
-            height: 70px;
+            height: 60px;
             background: #396bad;
             border: none;
             top: 0px;
@@ -33,10 +33,11 @@
             padding: 0px;
             margin: auto 30px;
             display: flex;
+            font-size: smaller;
         }
-        .content1 h1{
+        .content1 h3{
             padding: 0px;
-            font-size: medium;
+            font-size: small ;
             color: #e2e2e2;
         }
         .contend{
@@ -53,9 +54,8 @@
             
         }
         .logout{
-            width: 30px;
-            height: 30px;
-            /* background: pink; */
+            height: 40%;
+            /*background: pink;*/
             margin: auto 30px;
             cursor: pointer;
         }
@@ -65,11 +65,11 @@
 
     </style>
     <div class="navbar">
-        <div class="content1" ><h1>ILS - ADMIN</h1>
+        <div class="content1" ><h3>ILS - ADMIN</h3>
             {% block position %}
             {% endblock %}
         </div>
-        <div onclick="longout()" class="logout"><img src="{% static 'img/longout.png' %}" width="30px" alt=""></div>
+        <div onclick="longout()" class="logout"><img src="{% static 'img/longout.png' %}" height="100%" alt=""></div>
     </div>
     <div class="contend">
         {% block content %}
