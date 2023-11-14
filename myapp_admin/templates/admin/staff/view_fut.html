@@ -154,18 +154,22 @@
     .buttons_view_fut{
         display: flex;
         /*background: #B5C224;*/
-        height: 9%;
+        height: 7%;
+        color: black;
+        padding: 0px;
+        margin: auto 20px 20px 20px;
     }
     .send_button{
-        height: 80%;
+        height: calc(100% - 2px);/*RESTAMOS EL BORDER*/
         text-align: center;
-        border: 2px solid gray;
+        border: 1px solid #989898;
         border-radius: 30px;
-        margin: auto 5px;
         padding: 0px 10px;
         display: flex;
         opacity: 90%;
         justify-content: center;
+        margin: 0px 5px 0px 0px;
+        opacity: 80%;
     }
     .send_button p{
         margin: auto 5px;
@@ -173,13 +177,12 @@
         font-size: small;
     }
     .send_button img{
-        width: 20px;
-        height: 20px;
+        height: 50%;
         margin: auto;
     } 
     .send_button:hover{
         cursor: pointer;
-        background: gray;
+        background: #CECECE;
     }
     /* -------------------- */
     .form_poput {
@@ -201,7 +204,6 @@
     background: #f34040;
     padding: 10px 0px;
     color: white;
-    
     }
     .window_title h1{
         font-size: 25px;
@@ -309,7 +311,7 @@
         /*background: green;*/
     }
     .fut_cont_A{
-        height: calc(100% - 40px);/*RESTAMOS EL MARGIN VERTICAL*/
+        height: calc(100% - 20px);/*RESTAMOS EL MARGIN VERTICAL*/
         overflow: hidden;
     }
     .fut_cont_B{
@@ -376,9 +378,10 @@
             <p class="p_name">{{objs.name}}</p>
             <p class="p_mail">-{{objs.email}}-</p>
         </div>
-        <div class="contFUT">
+        <div id="id_contFUT_p" class="contFUT">
+            <div style="height: 1px;margin: 10px auto;"></div><!--add space-->
             <div id="id_delhiden" class="delhiden"><!--Este contenedor soluciona un problema del hiden-->
-                <div id="id_cont_fut" class="fut_cont fut_cont_A" style="margin: 20px auto;">
+                <div id="id_cont_fut" class="fut_cont fut_cont_A">
                     <div id="id_colorFuncion" class="capa_color" onclick="Show_FUTs()"></div><!--Capa Color y funcion-->
                     <div id="desplegable_show" class="desplegable">
                         <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
@@ -498,7 +501,116 @@
                     </div>
                 </div>
             </div>
+            <!-- ----------TICKET STYLES---------- -->
+            <style>
+                .ticket_conteiner{
+/*                    background: salmon;*/
+                    width: calc(100% - 40px);
+                    height: 200px;
+                    margin: 0px auto 20px auto;
+                    display: flex;
+                    color: black;
+                }
+                .img_admin{
+                    background: white;
+                    height: 35px;
+                    border-radius: 50%;
+                    padding: 5px;
+                    margin: 5px 0px;
+                }
+                .contticket{
+                    width: calc((100% - 35px) - 15px);
+                    height: 100%;
+                    background: white;
+                    border-radius: 10px;
+                    border: 1px solid #A3A3A3;
+                    margin: 0px 0px 0px 5px;
+                    box-shadow: 0px 0px 5px 1px #C9C9C9; /* Sombras */
+                    display: flex;
+                    flex-direction: column;
+                }
+                .head_ticket{
+                    display: flex;
+                    /* background: gray;*/
+                    height: 30px;
+                    opacity: 80%;
+                }
+                .head_ticket img{
+                    height: 60%;
+                    margin: auto 5px;
+                }
+                .head_ticket p{
+                    font-size: small;
+                    margin: auto 5px;
+                }
+                .head_ticket .deleted{
+                    height: 50%;
+                    margin: auto 10px auto auto;
+                    cursor: pointer;
+                }
+                .head_ticket .deleted:hover{
+                    opacity: 80%;
+                }
+                .contticket textarea{
+                    margin: 10px auto;
+                    width: calc(100% - 20px);
+                    padding: 0px;
+                    border: none;
+                    color: #444444;
+                    font-family: 'sans_italic';
+                    /*background: #DFDFDF;*/
+                }
+                .contticket textarea:focus{
+                    outline: none;
+                }
+                .space_buttons_ticket{
+                    display: flex;
+                    margin: 0px 0px 10px 5px;
+                    height: 30px;
+                }
+                .space_buttons_ticket button{
+                    background: red;
+                    color: white;
+                    border: none;
+                    margin: 0px 5px;
+                    padding: 5px 10px;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    height: 100%;
+                }
+                ..space_buttons_ticket button:hover{
+                    background: #CE0D0D;
+                }
+                .space_buttons_ticket img{
+                    height: 50%;
+                    margin: auto 5px;
+                    cursor: pointer;
+                    opacity: 80%;
+                }
+                .ocultar{
+                    display: none;
+                }
+            </style>
             <!-- ------------------------/OTRO CONT------------------------ -->
+            <div id="id_cont_ticket" class="ticket_conteiner ocultar">
+                <img class="img_admin" src="{% static 'img/admin_icon.png' %}" alt="">
+                <div class="contticket">
+                    <div class="head_ticket">
+                        <img src="{% static 'img/pngegg.png' %}" alt="">
+                        <p><strong>De</strong> Área Tesorería <strong>Para</strong> 70165345@ils.edu.pe</p>
+                        <p>|</p>
+                        <p style="opacity: 60%;">N°78924</p>
+                        <img class="deleted" src="{% static 'img/deleted.png' %}" alt="" onclick="DeletedTicket()">
+                    </div>
+                    <textarea placeholder='' id="name" name="reason" cols="30" rows="10" required></textarea>
+                    <div class="space_buttons_ticket">
+                        <button type=""><strong>Enviar</strong></button>
+                        <img src="{% static 'img/adjuntar.png' %}" alt="">
+                        <img src="{% static 'img/img_ad.png' %}" alt="">
+                        <img src="{% static 'img/link_ad.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
             <div class="fut_cont ocultar">
                 <div class="logoils">
                     <img src="{% static 'img/logoils.png' %}" alt="">
@@ -566,19 +678,21 @@
                     <p class="finishh" style="margin: 0px; color: blue;">Arequipa, {{objs.date}}</p>
                 </div>
             </div>
+            <!-- -------------BOTÓNES------------ -->
+            <div class="buttons_view_fut ">
+                {% if position == 'treasury' %}
+                    <div class="send_button" onclick="send_fut()"><p>Enviar</p><img src="{% static 'img/sendbutton-16.png' %}" alt=""></div>
+                    <div class="send_button" onclick="pending()"><p>Pendiente de pago</p><img src="{% static 'img/icon03-09.png' %}" alt=""></div>
+                    <div class="send_button" onclick="OpenTicket()"><p>Abrir Ticket</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
+                {% elif position == 'secretary' %}
+                    <div class="send_button" onclick="issued_certificate()"><img src="{% static 'img/sendbutton.png' %}" alt=""><p>Emitir certificado</p></div>
+                {% elif position == 'direction' %}
+                    <div class="send_button" onclick="direction_download()"><img src="{% static 'img/download.png' %}" alt=""><p>Descargar</p></div>
+                    <div class="send_button" onclick="issued_document()"><img src="{% static 'img/public.png' %}" alt=""><p>Publicar Certificado</p></div>
+                {% endif %}
+            </div>
+            <!-- -------------/BOTÓNES------------ -->
         </div>
-        <div class="buttons_view_fut ocultar">
-            {% if position == 'treasury' %}
-                <div class="send_button" onclick="send_fut()"><p>Enviar</p><img src="{% static 'img/sendbutton.png' %}" alt=""></div>
-                <div class="send_button" onclick="pending()"><img src="{% static 'img/icon03_white.png' %}" alt=""><p>Pendiente de pago</p></div>
-            {% elif position == 'secretary' %}
-                <div class="send_button" onclick="issued_certificate()"><img src="{% static 'img/sendbutton.png' %}" alt=""><p>Emitir certificado</p></div>
-            {% elif position == 'direction' %}
-                <div class="send_button" onclick="direction_download()"><img src="{% static 'img/download.png' %}" alt=""><p>Descargar</p></div>
-                <div class="send_button" onclick="issued_document()"><img src="{% static 'img/public.png' %}" alt=""><p>Publicar Certificado</p></div>
-            {% endif %}
-        </div>
-        
     </div>
 </div>
 
@@ -861,6 +975,16 @@
         id_delhiden2.classList.remove("fut_cont_B");
         //QUITAMOS EL COLOR_CONT  OCULTO Y QUITAMOS EL LLAMADO A LA FUNCIÓN
         id_colorFuncion2.classList.remove("ocultar");
+    }
+    var id_cont_ticket = document.getElementById("id_cont_ticket");
+    function OpenTicket(){
+        id_cont_ticket.classList.remove("ocultar");
+        
+        var miElemento = document.getElementById('id_contFUT_p');
+        miElemento.scrollTop = miElemento.scrollHeight;
+    }
+    function DeletedTicket(){
+        id_cont_ticket.classList.add("ocultar");
     }
 </script>
 
