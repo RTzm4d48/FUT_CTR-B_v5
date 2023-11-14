@@ -73,6 +73,7 @@
         flex-direction: column;
         overflow-y: scroll;
         border-radius: 5px;
+        transition: scroll-behavior 20s ease-in-out;
     }
     .baricon{
         cursor: pointer;
@@ -487,11 +488,48 @@
                         <p>Ocultar Información de Pago</p>
                     </div>
                     <!-- --------------------VIEW PAY------------------- -->
-                    <h1>PAY CONT</h1>
-                    <h1>PAY CONT</h1>
-                    <h1>PAY CONT</h1>
-                    <h1>PAY CONT</h1>
-                    <h1>PAY CONT</h1>
+                    <!-- -------STYLE PAY CONT------- -->
+                    <style>
+                        .myhr{
+                            width: calc(100% - 20px);
+                            opacity: 50%;
+                        }
+                        .pay_pay{
+                            display: flex;
+                        }
+                        .pay_pay hr{
+                            margin: 0px 5px;
+                            opacity: 50%;
+                        }
+                        .pay_pay_cont{
+                            margin: 0px;
+                        }
+                        .pay_pay_cont p{
+                            font-size: small;
+                            margin: 0px 0px 5px 0px;
+                        }
+                        .pay_pay_cont img{
+                            width: 25%;
+                        }
+                        .pay_pay_cont hr{
+                            margin: 10px 5px 10px 0px;
+                        }
+                    </style>
+                    <hr class="myhr">
+                    <div class="pay_pay">
+                        <hr>
+                        <div class="pay_pay_cont">
+                            <p><strong>Alumno:</strong> Juan Edgar Aguirre Mamani</p>
+                            <p><strong>Enviado El:</strong> jueves, 23 de febrero de 2023 17:00</p>
+                            <br>
+                            <p>Buenas tardes, aqui le envio la foto del ticket de pago que realice por medio de BCP.</p>
+                            <br>
+                            <p>Atte.</p>
+                            <p>Edgar Aguirre</p>
+                            <hr>
+                            <img src="{% static 'tmp/foto_ticket.jpg' %}" alt="">
+                        </div>
+                    </div>
                     <!-- --------------------/VIEW PAY------------------- -->
                     <div class="desplegable" onclick="Hiden_PAY()">
                         <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
@@ -953,6 +991,7 @@
         //AGREGAMOS EL COLOR_CONT  OCULTO Y AGREGAMOS EL LLAMADO A LA FUNCIÓN
         id_colorFuncion.classList.remove("ocultar");
     }
+    Show_PAY();
     //PAY FUNCTIONS
     function Show_PAY(){
         id_cont_pay.classList.remove("fut_cont_A");
@@ -981,7 +1020,11 @@
         id_cont_ticket.classList.remove("ocultar");
         
         var miElemento = document.getElementById('id_contFUT_p');
-        miElemento.scrollTop = miElemento.scrollHeight;
+        miElemento.scrollTo({
+            // top: 0, //Hace scroll hacia arriba
+            top: miElemento.scrollHeight, // Hace scroll hacia abajo
+            behavior: 'smooth'
+        });
     }
     function DeletedTicket(){
         id_cont_ticket.classList.add("ocultar");
