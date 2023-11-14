@@ -115,7 +115,6 @@
     }
     .orderils{
         width: calc(100% - 160px);
-        background: white;
         margin: 0px auto 10px auto;
         display: flex;
         justify-content: flex-end;
@@ -294,28 +293,27 @@
 <!-- NUEVOS ESTILOS DEL VIEW FUT -->
 <style>
     .fut_cont{
-        width: calc(100% - 40px);/* -margin */
+        width: 100%;
         background: white;
-        margin: 20px auto;
         border-radius: 5px;
-        border: 1px solid #EBEBEB;
+        border:1px solid #e0e0e0;
         box-shadow: 2px 2px 10px #DEDDDD; /* Sombras */
-        cursor: pointer;
+        margin: 0px auto 20px auto;
+        position: relative; /*importante*/
+    }
+    .delhiden{
+        display: flex;
+        width: calc(100% - 40px);/* -margin */
+        height: 30%;
+        margin: 0px auto;
+        /*background: green;*/
     }
     .fut_cont_A{
-        height: 25%;
+        height: calc(100% - 40px);/*RESTAMOS EL MARGIN VERTICAL*/
         overflow: hidden;
     }
     .fut_cont_B{
-        height: 2000px;
-    }
-    .fut_cont_A:hover{
-        /*COLOR*/
-        background-image: linear-gradient(to bottom, white, #AEAEAE); /*gradiente de dos colores*/
-        background-size: 100% 100%; /*para asegurarnos que el fondo gradiente ocuper el 100% del ancho y largo*/
-        background-attachment: fixed; /*para que el fondo cupe todo el ancho y largo de la pagina*/
-        background-repeat: no-repeat; /*especifica de que un fondo no se puede repetir o clonar*/
-        border: none;
+        height: auto;
     }
     .desplegable{
         color: red;
@@ -335,6 +333,27 @@
     }
     .ocultar{
         display: none;
+    }
+    .capa_color{
+        position: absolute;/*importante*/
+        cursor: pointer;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        /*COLOR*/
+        background-image: linear-gradient(to bottom, #ffffff00, white); /*gradiente de dos colores*/
+        background-size: 100% 100%; /*para asegurarnos que el fondo gradiente ocuper el 100% del ancho y largo*/
+        /*background-attachment: fixed; /*para que el fondo cupe todo el ancho y largo de la pagina*/
+        background-repeat: no-repeat; /*especifica de que un fondo no se puede repetir o clonar*/
+        border-radius: 5px;
+    }
+    .capa_color:hover{
+        /*COLOR*/
+        background-image: linear-gradient(to bottom, #adadad36, #cccccc80); /*gradienrgb(206, 206, 206) dos colores*/
+        background-size: 100% 100%; /*para asegurarnos que el fondo gradiente ocuper el 100% del ancho y largo*/
+        /*background-attachment: fixed; /*para que el fondo cupe todo el ancho y largo de la pagina*/
+        background-repeat: no-repeat; /*especifica de que un fondo no se puede repetir o clonar*/
     }
 </style>
 
@@ -358,93 +377,128 @@
             <p class="p_mail">-{{objs.email}}-</p>
         </div>
         <div class="contFUT">
-            <div id="id_cont_fut" class="fut_cont fut_cont_A" onclick="Show_FUTs()">
-                <div id="desplegable_show" class="desplegable">
-                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
-                        <path class="st0" d="M5.3,3.1c0.3-0.3,0.8-0.3,1.1,0c0,0,0,0,0,0l4.3,4.2c0.3,0.3,0.3,0.8,0,1.1c0,0,0,0,0,0l-4.2,4.3  c-0.3,0.3-0.8,0.3-1.1,0s-0.3-0.8,0-1.1l3.7-3.7L5.3,4.2C5,3.9,5,3.4,5.3,3.1C5.3,3.1,5.3,3.1,5.3,3.1z" fill="red"></path>
-                    </svg>
-                    <p>Mostrar FUT</p>
-                </div>
-                <div id="desplegable_hiden" class="desplegable ocultar">
-                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
-                        <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="red"></path>
-                    </svg>
-                    <p>Ocultar FUT</p>
-                </div>
-                <!-- ------------VIEW FUT------------- -->
-                <div class="logoils">
-                    <img src="{% static 'img/logoils.png' %}" alt="">
-                    <div class="celd">
-                        <label style="color: red;" for="">Num:</label>
-                        <div class="text" style="width: 60px;"><p>Nº{{objs.id}}</p></div>
+            <div id="id_delhiden" class="delhiden"><!--Este contenedor soluciona un problema del hiden-->
+                <div id="id_cont_fut" class="fut_cont fut_cont_A" style="margin: 20px auto;">
+                    <div id="id_colorFuncion" class="capa_color" onclick="Show_FUTs()"></div><!--Capa Color y funcion-->
+                    <div id="desplegable_show" class="desplegable">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path class="st0" d="M5.3,3.1c0.3-0.3,0.8-0.3,1.1,0c0,0,0,0,0,0l4.3,4.2c0.3,0.3,0.3,0.8,0,1.1c0,0,0,0,0,0l-4.2,4.3  c-0.3,0.3-0.8,0.3-1.1,0s-0.3-0.8,0-1.1l3.7-3.7L5.3,4.2C5,3.9,5,3.4,5.3,3.1C5.3,3.1,5.3,3.1,5.3,3.1z" fill="red"></path>
+                        </svg>
+                        <p>Mostrar FUT</p>
                     </div>
-                </div>
-                <!--  -->
-                <div class="orderils">
-                    <div class="celd2">
-                        <label for="">SOLICITO:</label>
-                        <div class="text" style="width: 300px;"><p>{{objs.myrequest}}</p></div>
+                    <div id="desplegable_hiden" class="desplegable ocultar" onclick="Hiden_FUTs()">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="red"></path>
+                        </svg>
+                        <p>Ocultar FUT</p>
                     </div>
-                </div>
-                <!--  -->
-                <div class="datails">
-                    <p style="font-weight: bold;">SEÑOR DIRECTOR(A) DEL INSTITUTO LATINOAMERICANO SIGLO XXI-ILS</p>
-                    <div class="celd" style="margin: auto 0px 10px 10px;">
-                        <label for="">YO:</label>
-                        <div class="text" style="width: 500px;"><p>{{objs.name}}</p></div>
-                    </div>
-                    <div class="celd" style="margin: auto 0px 10px 10px;">
-                        <label for="">PROGAMA:</label>
-                        <div class="text" style="width: 440px;"><p>{{objs.program}}</p></div>
-                    </div>
-                    <div style="display: flex;">
-                        <div class="celd" style="margin: auto 0px 10px 10px;">
-                            <label for="">CELULAR:</label>
-                            <div class="text" style="width: 200px;"><p>{{objs.phone}}</p></div>
-                        </div>
-                        <div class="celd" style="margin: auto 0px 10px 10px;">
-                            <label for="">FUT ID:</label>
-                            <div class="text" style="width: 40px;"><p>{{objs.id}}</p></div>
+                    <!-- ------------VIEW FUT------------- -->
+                    <div class="logoils">
+                        <img src="{% static 'img/logoils.png' %}" alt="">
+                        <div class="celd">
+                            <label style="color: red;" for="">Num:</label>
+                            <div class="text" style="width: 60px;"><p>Nº{{objs.id}}</p></div>
                         </div>
                     </div>
-                    <div style="display: flex;">
-                        <div class="celd" style="margin: auto 0px 10px 10px;">
-                            <label for="">CON CODIGO DE CARNET O Nº D.N.I:</label>
-                            <div class="text" style="width: 200px;"><p>{{objs.dni}}</p></div>
+                    <!--  -->
+                    <div class="orderils">
+                        <div class="celd2">
+                            <label for="">SOLICITO:</label>
+                            <div class="text" style="width: 300px;"><p>{{objs.myrequest}}</p></div>
                         </div>
                     </div>
-                    <div class="celd" style="margin: auto 0px 10px 10px;">
-                        <label for="">DEL:</label>
-                        <div class="text" style="width: 40px;"><p>{{objs.cycle}}</p></div>
-                        <label for="">CICLO, CON TODO RESPETO ME PRESENTO Y EXPONGO:</label>
-                    </div>
-                    <div class="celd2" style="display: block;">
-                        <label for="">QUE POR MOTIVO DE:</label>
-                        <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.reason}}</p></div>
-                    </div>
-                    <div class="celd2" style="display: block;">
-                        <label for="">SOLICITO A SU RESPETABLE AUTORIDAD , SE SIRVA A ORDENAR:</label>
-                        <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.order}}</p></div>
-                    </div>
-                    {% if position == 'treasury' %}
+                    <!--  -->
+                    <div class="datails">
+                        <p style="font-weight: bold;">SEÑOR DIRECTOR(A) DEL INSTITUTO LATINOAMERICANO SIGLO XXI-ILS</p>
+                        <div class="celd" style="margin: auto 0px 10px 10px;">
+                            <label for="">YO:</label>
+                            <div class="text" style="width: 500px;"><p>{{objs.name}}</p></div>
+                        </div>
+                        <div class="celd" style="margin: auto 0px 10px 10px;">
+                            <label for="">PROGAMA:</label>
+                            <div class="text" style="width: 440px;"><p>{{objs.program}}</p></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="celd" style="margin: auto 0px 10px 10px;">
+                                <label for="">CELULAR:</label>
+                                <div class="text" style="width: 200px;"><p>{{objs.phone}}</p></div>
+                            </div>
+                            <div class="celd" style="margin: auto 0px 10px 10px;">
+                                <label for="">FUT ID:</label>
+                                <div class="text" style="width: 40px;"><p>{{objs.id}}</p></div>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="celd" style="margin: auto 0px 10px 10px;">
+                                <label for="">CON CODIGO DE CARNET O Nº D.N.I:</label>
+                                <div class="text" style="width: 200px;"><p>{{objs.dni}}</p></div>
+                            </div>
+                        </div>
+                        <div class="celd" style="margin: auto 0px 10px 10px;">
+                            <label for="">DEL:</label>
+                            <div class="text" style="width: 40px;"><p>{{objs.cycle}}</p></div>
+                            <label for="">CICLO, CON TODO RESPETO ME PRESENTO Y EXPONGO:</label>
+                        </div>
+                        <div class="celd2" style="display: block;">
+                            <label for="">QUE POR MOTIVO DE:</label>
+                            <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.reason}}</p></div>
+                        </div>
+                        <div class="celd2" style="display: block;">
+                            <label for="">SOLICITO A SU RESPETABLE AUTORIDAD , SE SIRVA A ORDENAR:</label>
+                            <div class="text" style="width: 600px; margin: 5px 0px;"><p>{{objs.order}}</p></div>
+                        </div>
+                        {% if position == 'treasury' %}
 
-                    {% else %}
-                    <div class="celd" style="margin: auto 0px 10px 10px;">
-                        <label for="">Ticket:</label>
-                        <div class="text" style="width: 100px;"><p>{{objs.n_ticket}}</p></div>
+                        {% else %}
+                        <div class="celd" style="margin: auto 0px 10px 10px;">
+                            <label for="">Ticket:</label>
+                            <div class="text" style="width: 100px;"><p>{{objs.n_ticket}}</p></div>
+                        </div>
+                        {% endif %}
+                        <p class="finishh" style="margin: 0px;">POR LO EXPUESTO A USTED, SEÑOR DIRECTOR(A), RUEGO SE SIRVA ACCEDER A MI PETICIÓN POR SER DE JUSTICIA</p>
+                        <p class="finishh" style="margin: 0px; color: blue;">Arequipa, {{objs.date}}</p>
                     </div>
-                    {% endif %}
-                    <p class="finishh" style="margin: 0px;">POR LO EXPUESTO A USTED, SEÑOR DIRECTOR(A), RUEGO SE SIRVA ACCEDER A MI PETICIÓN POR SER DE JUSTICIA</p>
-                    <p class="finishh" style="margin: 0px; color: blue;">Arequipa, {{objs.date}}</p>
-                </div>
-                <!-- ------------VIEW FUT------------- -->
-                <div class="desplegable">
-                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
-                        <path xmlns="http://www.w3.org/2000/svg" class="st0" d="M3.2,10.6c-0.3-0.3-0.3-0.8,0-1.1l0,0l4.2-4.3c0.3-0.3,0.8-0.3,1.1,0l0,0l4.3,4.2c0.3,0.3,0.3,0.8,0,1.1  c-0.3,0.3-0.8,0.3-1.1,0L8,6.8l-3.7,3.8C4,10.9,3.5,10.9,3.2,10.6L3.2,10.6z" fill="red"></path>
-                    </svg>
-                    <p>Ocultar FUT</p>
+                    <!-- ------------/VIEW FUT------------- -->
+                    <div class="desplegable" onclick="Hiden_FUTs()">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path xmlns="http://www.w3.org/2000/svg" class="st0" d="M3.2,10.6c-0.3-0.3-0.3-0.8,0-1.1l0,0l4.2-4.3c0.3-0.3,0.8-0.3,1.1,0l0,0l4.3,4.2c0.3,0.3,0.3,0.8,0,1.1  c-0.3,0.3-0.8,0.3-1.1,0L8,6.8l-3.7,3.8C4,10.9,3.5,10.9,3.2,10.6L3.2,10.6z" fill="red"></path>
+                        </svg>
+                        <p>Ocultar FUT</p>
+                    </div>
                 </div>
             </div>
+            <!-- ------------------------OTRO CONT------------------------ -->
+            <div id="id_delhiden2" class="delhiden"><!--Este contenedor soluciona un problema del hiden-->
+                <div id="id_cont_pay" class="fut_cont fut_cont_A" style="color: black;">
+                    <div id="id_colorFuncion2" class="capa_color" onclick="Show_PAY()"></div><!--Capa Color y funcion-->
+                    <div id="desplegable_show2" class="desplegable">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path class="st0" d="M5.3,3.1c0.3-0.3,0.8-0.3,1.1,0c0,0,0,0,0,0l4.3,4.2c0.3,0.3,0.3,0.8,0,1.1c0,0,0,0,0,0l-4.2,4.3  c-0.3,0.3-0.8,0.3-1.1,0s-0.3-0.8,0-1.1l3.7-3.7L5.3,4.2C5,3.9,5,3.4,5.3,3.1C5.3,3.1,5.3,3.1,5.3,3.1z" fill="red"></path>
+                        </svg>
+                        <p>Mostrar Información de Pago</p>
+                    </div>
+                    <div id="desplegable_hiden_2" class="desplegable ocultar" onclick="Hiden_PAY()">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="red"></path>
+                        </svg>
+                        <p>Ocultar Información de Pago</p>
+                    </div>
+                    <!-- --------------------VIEW PAY------------------- -->
+                    <h1>PAY CONT</h1>
+                    <h1>PAY CONT</h1>
+                    <h1>PAY CONT</h1>
+                    <h1>PAY CONT</h1>
+                    <h1>PAY CONT</h1>
+                    <!-- --------------------/VIEW PAY------------------- -->
+                    <div class="desplegable" onclick="Hiden_PAY()">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path xmlns="http://www.w3.org/2000/svg" class="st0" d="M3.2,10.6c-0.3-0.3-0.3-0.8,0-1.1l0,0l4.2-4.3c0.3-0.3,0.8-0.3,1.1,0l0,0l4.3,4.2c0.3,0.3,0.3,0.8,0,1.1  c-0.3,0.3-0.8,0.3-1.1,0L8,6.8l-3.7,3.8C4,10.9,3.5,10.9,3.2,10.6L3.2,10.6z" fill="red"></path>
+                        </svg>
+                        <p>Ocultar FUT</p>
+                    </div>
+                </div>
+            </div>
+            <!-- ------------------------/OTRO CONT------------------------ -->
             <div class="fut_cont ocultar">
                 <div class="logoils">
                     <img src="{% static 'img/logoils.png' %}" alt="">
@@ -750,32 +804,63 @@
 
     //});
 
+    //VARIABLES DE VIEW FUTs
+    var id_cont_fut = document.getElementById("id_cont_fut");
+    var desplegable_hiden = document.getElementById("desplegable_hiden");
+    var desplegable_show = document.getElementById("desplegable_show");
+    var id_delhiden = document.getElementById("id_delhiden");
+    var id_colorFuncion = document.getElementById("id_colorFuncion");
+    //VARIABLES DE VIEW PAY
+    var id_cont_pay = document.getElementById("id_cont_pay");
+    var id_colorFuncion2 = document.getElementById("id_colorFuncion2");
+    var desplegable_show2 = document.getElementById("desplegable_show2");
+    var desplegable_hiden_2 = document.getElementById("desplegable_hiden_2");
+    var id_delhiden2 = document.getElementById("id_delhiden2");
+
     function Show_FUTs(){
-        var id_cont_fut = document.getElementById("id_cont_fut");
-        var desplegable_hiden = document.getElementById("desplegable_hiden");
-        var desplegable_show = document.getElementById("desplegable_show");
-
-        var clases = id_cont_fut.classList;
-
-        // Convierte las clases a un array si necesitas manipularlas como tal
-        var clasesArray = Array.from(clases);
-
-        // Itera a través del array de clases
-        for (var i = 0; i < clasesArray.length; i++) {
-            if(clasesArray[i] == "fut_cont_A"){
-              id_cont_fut.classList.remove("fut_cont_A");
-              id_cont_fut.classList.add("fut_cont_B");
-              //DESPLEGABLES
-              desplegable_show.classList.add("ocultar");
-              desplegable_hiden.classList.remove("ocultar");
-            }else if(clasesArray[i] == "fut_cont_B"){
-              id_cont_fut.classList.add("fut_cont_A");
-              id_cont_fut.classList.remove("fut_cont_B");
-              //DESPLEGABLES
-              desplegable_show.classList.remove("ocultar");
-              desplegable_hiden.classList.add("ocultar");
-            }
-        }
+        id_cont_fut.classList.remove("fut_cont_A");
+        id_cont_fut.classList.add("fut_cont_B");
+        //DESPLEGABLES
+        desplegable_show.classList.add("ocultar");
+        desplegable_hiden.classList.remove("ocultar");
+        //REPARACION DEL HIDEN
+        id_delhiden.classList.add("fut_cont_B")
+        //QUITAMOS EL COLOR_CONT  OCULTO Y QUITAMOS EL LLAMADO A LA FUNCIÓN
+        id_colorFuncion.classList.add("ocultar");
+    }
+    function Hiden_FUTs(){
+        id_cont_fut.classList.add("fut_cont_A");
+        id_cont_fut.classList.remove("fut_cont_B");
+        //DESPLEGABLES
+        desplegable_show.classList.remove("ocultar");
+        desplegable_hiden.classList.add("ocultar");
+        //REPARACION DEL HIDEN
+        id_delhiden.classList.remove("fut_cont_B")
+        //AGREGAMOS EL COLOR_CONT  OCULTO Y AGREGAMOS EL LLAMADO A LA FUNCIÓN
+        id_colorFuncion.classList.remove("ocultar");
+    }
+    //PAY FUNCTIONS
+    function Show_PAY(){
+        id_cont_pay.classList.remove("fut_cont_A");
+        id_cont_pay.classList.add("fut_cont_B");
+        //DESPLEGABLES
+        desplegable_show2.classList.add("ocultar");
+        desplegable_hiden_2.classList.remove("ocultar");
+        //REPARACION DEL HIDEN
+        id_delhiden2.classList.add("fut_cont_B");
+        //QUITAMOS EL COLOR_CONT  OCULTO Y QUITAMOS EL LLAMADO A LA FUNCIÓN
+        id_colorFuncion2.classList.add("ocultar");
+    }
+    function Hiden_PAY(){
+        id_cont_pay.classList.add("fut_cont_A");
+        id_cont_pay.classList.remove("fut_cont_B");
+        //DESPLEGABLES
+        desplegable_show2.classList.remove("ocultar");
+        desplegable_hiden_2.classList.add("ocultar");
+        //REPARACION DEL HIDEN
+        id_delhiden2.classList.remove("fut_cont_B");
+        //QUITAMOS EL COLOR_CONT  OCULTO Y QUITAMOS EL LLAMADO A LA FUNCIÓN
+        id_colorFuncion2.classList.remove("ocultar");
     }
 </script>
 
