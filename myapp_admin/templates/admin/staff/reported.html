@@ -1,0 +1,47 @@
+{% extends 'admin/staff_treasury.html' %}
+{% load static %}
+{% block fut %}
+
+{% if Len_list_data != 0 %}
+<style>
+    .tittle_{
+        /* background: red; */
+        margin: 0px 0px 10px 0px;
+        padding: 15px 10px;
+        border-bottom: 3px solid rgb(233, 239, 255);
+        opacity: 80%;
+    }
+    .ayelash{
+        background: #A24444;
+    }
+</style>
+<h1 class="tittle_">Reportados</h1>
+<!-- pesttañas -->
+{% for i in Object %}
+<a href="{% url 'n_view_fut' %}?code={{i.code}}&mode=2" class="ayelash">
+    <div class="filauno"><img width="25px" height="25px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt=""><p>{{i.menssage}}</p></div>
+    <div class="filados"><p>{{i.description}}</p><p>-</p><p>{{i.fut_id_id}}</p></div>
+</a>
+{% endfor %}
+<!-- fin-pestañas -->
+
+{% else %}
+
+
+<style>
+    .empty{
+        /* background: red; */
+        display: block;
+        text-align: center;
+        margin: 200px auto;
+    }
+</style>
+
+<div class="empty">
+    <img src="{% static 'img/empty.png' %}" alt="">
+    <h1>No Hay Datos</h1>
+</div>
+
+{% endif %}
+
+{% endblock %}

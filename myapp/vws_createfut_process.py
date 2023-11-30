@@ -55,6 +55,7 @@ def proceedings(request):
 
     left = 20 # css left details picture
     return render(request, 'view_fut/proceedings.html', {
+        'fut_id': object['id'],
         'Name': object['name'],
         'Dni': dni,
         'Order': object['order'],
@@ -201,3 +202,8 @@ def procedures_list(request):
     objs = tupa.objects.filter(tipo_de_servicio__startswith=tipeo).order_by('id').values('id', 'tipo_de_servicio')
     result_list = list(objs)
     return JsonResponse({'message': result_list})
+
+def tupa_validation(request):
+    id_tupa = request.GET.get("id_tupa")
+    objs = tupa.objects.filter(id=id_tupa).values('require_attach', 'tipo_de_servicio', 'procedimiento').first()
+    return JsonResponse({'data': objs})

@@ -11,6 +11,10 @@
         font-family: 'sans_italic';
         src: url('/static/fonts/OpenSans_SemiCondensed-Regular.ttf') format('truetype')
     }
+    @font-face {
+        font-family: 'myfont_robot_normal';
+        src: url('/static/fonts/Roboto-Regular.ttf') format('truetype')
+    }
     /*@font-face {
         font-family: 'sans_italic_Bold';
         src: url('/static/fonts/OpenSans_SemiCondensed-SemiBold.ttf') format('truetype')
@@ -233,6 +237,13 @@
         font-weight: bold;
         color: #27b627;
     }
+    .report{
+        font-weight: bold;
+        color: red;
+        background: #7F3C3C;
+        padding: 5px 10px;
+        border-radius: 3px;
+    }
 </style>
 <div class="block_container">
     <div class="block_bloker">
@@ -247,7 +258,8 @@
                 {% if Data_log.position_admin1 == 'Tesorera' %}
                     <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03_white.png' %}" alt="">Pendientes</a>
                 {% endif %}
-                <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/send.png' %}" alt="">Enviados</a>
+                <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/send.png' %}" alt="">Procesados</a>
+                <a href="{% url 'n_reported' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/direction.png' %}" alt="">Reportados</a>
             </div>
         </div>
         <div class="block_two" id="miContenedor">
@@ -288,7 +300,22 @@
                         <p>{{i.order}}</p>
                     </div>
                     <div class='filados'>
-                        <p>{{i.reason}}</p><p>-</p><p>{{i.name}}</p>{% if i.view == 0 %}<p class='new'>/Nuevo</p>{% endif %}{% if i.stage == 1 %}<p class='data_fut' style='color: orange; margin: auto 20px auto auto;'>/Pospuesto - {{i.date}}</p> {% elif i.stage == 2 %} <p class='data_fut' style='color: skyblue; margin: auto 20px auto auto;'>/Pendiente - {{i.date}}</p>{% else %}<p class='data_fut' style='margin: auto 20px auto auto;'>{{i.date}}</p>{% endif %}
+                        <p>{{i.reason}}</p>
+                        <p>-</p>
+                        <p>{{i.name}}</p>
+                        {% if i.report_state != False %}
+                        <p class='report'>Reportado</p>
+                        {% endif %}
+
+                        {% if i.view == 0 %}
+                        <p class='new'>/Nuevo</p>
+                        {% endif %}{% if i.stage == 1 %}
+                        <p class='data_fut' style='color: orange; margin: auto 20px auto auto;'>/Pospuesto - {{i.date}}</p>
+                        {% elif i.stage == 2 %}
+                        <p class='data_fut' style='color: skyblue; margin: auto 20px auto auto;'>/Pendiente - {{i.date}}</p>
+                        {% else %}
+                        <p class='data_fut' style='margin: auto 20px auto auto;'>{{i.date}}</p>
+                        {% endif %}
                     </div>
                 </a>
             {% endfor %}
@@ -348,10 +375,10 @@ var role = "{{role}}";
         document.getElementById("login-form-popup").style.display = "none";
     }
     function next(){
-        chanel_page('next');
+        //chanel_page('next');
     }
     function before(){
-        chanel_page('before');
+        //chanel_page('before');
     }
     function chanel_page(action){
         event.preventDefault(); // Evita que se siga el enlace por defecto
@@ -411,4 +438,182 @@ var role = "{{role}}";
         });
     }
 </script>
+{% endblock %}
+
+{% block up_pop_space %}
+<!-- -------------STYLES OF POP UP REPORTAR----------- -->
+<style>
+    .pop_up_window{
+        width: 500px;
+    }
+    .report_content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .report_content{
+/*        background: blueviolet;*/
+        padding: 10px 0px;
+        margin: 10px;
+    }
+    .report_content h3{
+        margin: 5px 0px 10px 0px;
+    }
+    .report_content label{
+        font-size: smaller;
+        opacity: 80%;
+        margin: 3px;
+    }
+    .report_content textarea{
+        background: #D8D8D8;
+        height: 60px;
+        min-height: 60px;
+        max-height: 60px;
+        min-width: calc(100% - 14px);
+        max-width: calc(100% - 14px);
+        padding: 7px;
+        border-radius: 4px;
+        border: none;
+        font-family: 'arial';
+
+    }
+    .report_content textarea:focus {
+        outline: none;
+    }
+    .report_content input[type="text"]{
+        background: #D8D8D8;
+        
+        padding: 7px;
+        border-radius: 4px;
+        border: none;
+        font-family: 'arial';
+    }
+    .report_content input[type="text"]:focus{
+        outline: none;
+    }
+    .report_content button{
+        margin: 25px auto 0px auto;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background: red;
+        color: white;
+        cursor: pointer;
+    }
+    .report_content button:hover{
+        background: #D90000;
+    }
+    #id_admins_r{
+        border: 1px solid gray;
+    }
+    #id_admins_r:focus{
+        outline: none;
+    }
+</style>
+
+<div id="id_report_content" class="pop_up_window ocultar">
+    <div onclick="close_pop_up()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    <div class="report_content">
+        <h3>Reportar</h3>
+        <label>Título:</label>
+        <input id="tittlee" value="" type="text" placeholder="Ingrese un Título" name="">
+
+        <label>Descripción:</label>
+        <textarea id="description" placeholder='Ingrese una Descripción' name=""></textarea>
+
+        <label for="frutas">Cambiar ruta de Reporte:</label>
+        <select id="id_admins_r" name="admins">
+          <!-- <option value="manzana">Manzana</option> -->
+        </select>
+
+        <button onclick="reportar()">Reportar</button>
+    </div>
+</div>
+
+<div id="id_send_baucher" class="pop_up_window ocultar">
+    <div onclick="close_pop_up()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    <div class="report_content">
+        <h3>Enviar FUT</h3>
+        <label>Numero del Baucher:</label>
+        <input id="num_boleta" value="3456543" type="text" placeholder="Ingrese el número de la Baucher" name="">
+
+        <button id="id_process_btn">Procesar</button>
+    </div>
+</div>
+<script>
+    function reportar(){
+        const tittle = document.getElementById("tittlee").value;
+        const description = document.getElementById("description").value;
+        const id_fut = fut_id;// Esta variable fue creda en 'view_fut.html'
+        const admin_destino = document.getElementById("id_admins_r").value;
+        const id_admin_origen = admin_id; // Esta variable fue creda en 'view_fut.html'
+
+        // console.log(tittle);
+        // console.log(description);
+        // console.log(id_fut);
+        // console.log(admin_destino);
+        // console.log(id_admin_origen);
+
+        //AJAX
+        $.ajax({
+            url: "/create_report_path/", // ruta en url.py para que ejecute una funcion
+            method: "GET",
+            data:{
+                'menssage':tittle,
+                'description':description,
+                'fut_id':id_fut,
+                'admin_destino':admin_destino,
+                'id_origen_admin':id_admin_origen,
+            },
+            success: function(response){
+                const midata = response; //en response esta recibiendo el return de la funcion
+                //NOS REDIRECCIONAMOS
+                window.location.href = "http://127.0.0.1:8000/ils_admin/staff_treasury";
+            },
+            error: function() {
+                alert("Ocurrió un error al cargar el contenido.");
+            }
+        });
+
+    }
+    
+    function adminsReporte(){
+        //Los Admins que existen son: "treasury", "secretary", "direction"
+        var adminArray = [];
+        var nombres_es = [];
+
+        if(chargeAdmin == "Tesorera"){
+            adminArray = ['direction'];
+            nombres_es = ['Dirección'];
+        }else if(chargeAdmin == "Director"){
+            adminArray = ['treasury', 'secretary'];
+            nombres_es = ['Tesorería', 'Secretaría'];
+        }else{
+            adminArray = ['treasury', 'direction'];
+            nombres_es = ['Tesorería', 'Dirección'];
+        }
+
+        const id_admins_r = document.getElementById("id_admins_r");
+        id_admins_r.innerHTML = "";// RESETEAMOS
+        // Agregar opciones al elemento select usando un bucle for
+        for (var i = 0; i < adminArray.length; i++) {
+            var opcion = document.createElement("option");
+            opcion.text = nombres_es[i];
+            opcion.value = adminArray[i];
+            id_admins_r.add(opcion);
+        }
+    }
+    // ENVIAR NUMERO DE BAUCHER FUNCTIONS
+    function send_baucher_number(){
+        console.log("Enviando Baucher");
+        const num_boleta = document.getElementById("num_boleta").value;
+        console.log(num_boleta);
+    }
+</script>
+
+<script src="/static/scripts/admin/script_module.js?" type="module" charset="utf-8" async defer></script>
 {% endblock %}

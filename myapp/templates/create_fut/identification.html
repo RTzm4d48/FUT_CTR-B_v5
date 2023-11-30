@@ -6,64 +6,236 @@
 <!-- Los estilos base estan en 'base_from_new_fut.html' -->
 {% endblock %}
 {% block contentf %}
+<!-- ------------DISTRIBUCIÓN DE LOS CONTENEDORES---------- -->
+<style>
+    .bodyf{
+        width: 100%;
+        height: calc(100% - 50px); /*restamos el espacio del nav bar*/
+        /* background: gold; */
+        /* opacity: 20%; */
+        background: white;
+
+    }
+    .thefrom{
+        /* background: darkcyan; */
+        height: 100%;
+        display: flex;
+    }
+    .content_form{
+        background: green; 
+        width: 90%;
+        height: calc(100% - 30px);
+        margin: 30px auto 0px auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .form_block{
+        /* background: pink; */
+        width: 100%;
+        height: 100px;
+        margin: 20px 0px 0px 0px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .from_item{
+        /* background: skyblue; */
+        width: 45%;
+        height: 100%;
+        float: left;
+        display: flex;
+        flex-direction: column;
+    }
+    .from_item label{
+        margin: auto 10px;
+    }
+    .group {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      /* background: salmon; */
+    }
+    .button_block{
+        width: 100%;
+        margin: auto 0px 20px 0px;
+        display: block;
+        display: flex;
+        height: auto;
+        /* background: saddlebrown; */
+    }
+    .botons_display{
+        /* background: blue; */
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .botons_display button{
+        border: none;
+        border-radius: 5px;
+        color:white;
+        background: red;
+        width: 90px;
+        height: 30px;
+        cursor: pointer;
+    }
+    .botons_display button:hover{
+        background: rgb(196, 17, 17);
+    }
+</style>
+<style>
+    .ocultar{
+        display: none;
+    }
+</style>
 <div class="bodyf">
     <form class="thefrom" action="{% url 'n_process' %}" method="post">
         {% csrf_token %}
-    <div class="content_form">
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name1" name="name" value="{{ user.username }}" required>
-                    <label  for="name1">Nombre</label>
-                    <div class="bar"></div>
-                </div>
+    <!-- --------------------NUEVO FORM-------------------- -->
+    <style>
+        .content2_form{
+            width: 80%;
+            margin: 0px auto;
+/*            background: yellow;*/
+            display: flex; /*IMPORTANTE*/
+            flex-direction: column;
+        }
+        .content2_form .TheTitle{
+            font-size: large;
+            margin: 15px auto 5px auto;
+        }
+        .content2_form p{
+            margin: 0px auto;
+        }
+        .fila_form{
+            width: 70%;
+            margin: 30px auto 0px auto;
+/*            background: salmon;*/
+            display: flex;
+            justify-content: space-between;
+        }
+        .unEspacio_mediano{
+            width: calc(50% - 10px);
+/*            background: red;*/
+            display: flex;
+            position: relative; /*importante*/
+        }
+        .unEspacio_mediano input[type="text"]{
+            width: calc(100% - 20px);/*MENOS EL PADDING DEL inpur text*/
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .unEspacio_mediano input[type="text"]:focus{
+            outline: none;
+        }
+        .unEspacio_mediano label{
+            position: absolute;/*importante*/
+            top: -8px;
+            background: white;
+            color: gray;
+            left: 15px;
+            padding: 0px 5px;
+        }
+        .unEspacio_entero{
+            width: 100%;
+/*            background: red;*/
+            display: flex;
+            position: relative; /*importante*/
+        }
+        .unEspacio_entero input[type="text"]{
+            width: 100%;
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .unEspacio_entero input[type="text"]:focus{
+            outline: none;
+        }
+        .unEspacio_entero label{
+            position: absolute;/*importante*/
+            top: -8px;
+            background: white;
+            color: gray;
+            left: 15px;
+            padding: 0px 5px;
+        }
+        .cont_buttons_form{
+/*            background: purple;*/
+            width: 50%;
+            margin: 30px auto 0px auto;
+        }
+        .cont_buttons_form button{
+            height: 30px;
+            background: #E1004D;
+            color: white;
+            border: none;
+            display: flex;
+            justify-content: center; /*IMPORTANTE*/
+            align-items: center; /*IMPORTANTE*/
+            padding: 2px 10px;
+            border-radius: 40px;
+            margin: 0px 0px 0px auto;
+            cursor: pointer;
+        }
+        .cont_buttons_form button:hover{
+            background: #B90B47;
+        }
+        .cont_buttons_form img{
+            height: 50%;
+            margin: auto 5px;
+        }
+    </style>
+    <div class="content2_form">
+        <p class="TheTitle">Información Personal</p>
+        <p>Por favor ingrese sus datos personales para poder continuar con el proceso de tramite.</p>
+        <div class="fila_form" style="margin: 50px auto 0px auto;">
+            <div class="unEspacio_mediano">
+                <input type="text" name="name" value="{{ user.username }}" placeholder="Ingrese su nombre">
+                <label>Nombres</label>
             </div>
-            <div class="from_item" style="float:right">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name2" name="program" value="Informática" required>
-                    <label for="name2">Programa</label>
-                    <div class="bar"></div>
-                </div>
-                <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <div class="unEspacio_mediano">
+                <input type="text" name="full_name" value="Romero Tomás" placeholder="Ingrese sus apellidos">
+                <label>Apellidos</label>
             </div>
         </div>
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name3" name="dni" value="7876356" required>
-                    <label id="label_def" for="name3">CON CÓDIGO DE CARNET O Nº D.N.I.</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item" style="float:right">
-                <div class="group nomber_long">
-                    <input class="text_comoda" class="text_comoda" type="text" id="name4" name="phone" value="982654253" required>
-                    <label for="name4">Celular</label>
-                    <div class="bar"></div>
-                </div>
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_entero">
+                <input type="text" name="email" value="BertoRomaro@gmail.com" placeholder="Ingrese su Email personal">
+                <label>Email</label>
             </div>
         </div>
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group number">
-                    <input class="text_comoda" type="text" id="name5" name="cycle" value="6" required>
-                    <label for="name5">Ciclo</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item" style="float:right">
-                <div class="group nomber_long">
-                    <input class="text_comoda" type="text" id="name6" name="email" value="tapieese500@gmail.com" required>
-                    <label for="name6">Email</label>
-                    <div class="bar"></div>
-                </div>
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_entero">
+                <input type="text" name="phone" value="958746567" placeholder="Ingrese su número de celular">
+                <label>Número Celular</label>
             </div>
         </div>
-        <div class="button_block">
-            <div class="botons_display">
-                <p></p> <!-- esto es solo para acomodar el botón -->
-                <button>Siguiente</button>
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_mediano">
+                <input type="text" name="dni" value="7847565" placeholder="Ingrese el Num. de nu documento DNI">
+                <label>Documento D.N.I</label>
             </div>
+            <div class="unEspacio_mediano">
+                <input type="text" name="cycle" value="7" placeholder="Ingrese el Num. del ciclo en el que se encuentra">
+                <label>Ciclo de estudios</label>
+            </div>
+        </div>
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_entero">
+                <input type="text" name="program" value="Informática" placeholder="Ingrese el Programa al que pertenece">
+                <label>Programa</label>
+            </div>
+        </div>
+        <!-- - -->
+        <div class="cont_buttons_form">
+            <button type="submit">Siguiente<img src="{% static 'img/next_form.png' %}" alt=""></button>
         </div>
     </div>
     </form>

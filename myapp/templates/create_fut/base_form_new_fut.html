@@ -11,12 +11,16 @@
 <!-- ------ESTILOS BASE QUE INCLUYE NAVBAR Y CONTAINER PRINCIPAL----- -->
 <style>
     .content_f{
-        /* background: salmon; */
+/*         background: salmon; */
         /* opacity: 20%; */
-        width: 70%;
-        height: 600px;
-        margin: 0px auto;
+        width: 60%;
+        height: 550px;
         margin: 50px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #DDDDDD;
+        font-size: smaller;
+        box-shadow: 5px 5px 10px #D8D8D8; /* Sombras */
     }
     .navbar-f{
         width: 100%;
@@ -31,7 +35,7 @@
     .item-f{
         width: 100%;
         height: 100%;
-        background: rgb(233, 233, 233);
+        background: #3C5BAE;
         display: flex;
     }
     .item-ftoo{
@@ -40,18 +44,17 @@
         display: flex;
     }
     .item-ftoo p{
-        color: red;
+        color: white;
         margin: auto;
 
     }
     .activate-f{
-        height: 92%;
+        height: calc(100% - 3px);
     }
     .activate-f p{
         margin: auto;
-        font-size: 18px;
     }
-@media (max-width:990px){
+/*@media (max-width:990px){
     .content_f{
         padding: 10px;
         font-size: 20px;
@@ -63,85 +66,10 @@
     p{
         text-align: center;
     }
-}
+}*/
 </style>
 
-<!-- ------------DISTRIBUCIÓN DE LOS CONTENEDORES---------- -->
-<style>
-    .bodyf{
-        width: 100%;
-        height: calc(100% - 50px); /*restamos el espacio del nav bar*/
-        /* background: gold; */
-        /* opacity: 20%; */
-        background: #ECF2F9;
-    }
-    .thefrom{
-        /* background: darkcyan; */
-        height: 100%;
-        display: flex;
-    }
-    .content_form{
-        /* background: green; */
-        width: 90%;
-        height: calc(100% - 30px);
-        margin: 30px auto 0px auto;
-        display: flex;
-        flex-direction: column;
-    }
-    .form_block{
-        /* background: pink; */
-        width: 100%;
-        height: 100px;
-        margin: 20px 0px 0px 0px;
-        display: flex;
-        justify-content: space-between;
-    }
-    .from_item{
-        /* background: skyblue; */
-        width: 45%;
-        height: 100%;
-        float: left;
-        display: flex;
-        flex-direction: column;
-    }
-    .from_item label{
-        margin: auto 10px;
-    }
-    .group {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-      /* background: salmon; */
-    }
-    .button_block{
-        width: 100%;
-        margin: auto 0px 20px 0px;
-        display: block;
-        display: flex;
-        height: auto;
-        /* background: saddlebrown; */
-    }
-    .botons_display{
-        /* background: blue; */
-        width: 100%;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-    }
-    .botons_display button{
-        border: none;
-        border-radius: 5px;
-        color:white;
-        background: red;
-        width: 90px;
-        height: 30px;
-        cursor: pointer;
-    }
-    .botons_display button:hover{
-        background: rgb(196, 17, 17);
-    }
-</style>
+
     
 <!-- ------------ESTILOS Y COMPORTAMIENTOS DE LOS LABELS Y TEXTBOX---------- -->
 <style>
@@ -227,12 +155,22 @@
         flex-direction: column;
       }
     }
+    .item-ftoo .numeration{
+        background: #CCCBCC;
+        padding: 5px;
+        border-radius: 50%;
+        margin: auto 5px;
+    }
+    .item-ftoo .num_ckeck{
+        background: #E1004D;
+    }
 </style>
 <div class="content_f">
     <div class="navbar-f">
         <div class="navbar-f-item" >
             <div class="item-f {% block navbaractivate_1 %} {% endblock %}">
                 <div class="item-ftoo">
+                    <p class="numeration num_ckeck">01</p>
                     <p>Identificación</p>
                     <span>{% block check_1 %} {% endblock %}</span>
                 </div>
@@ -241,6 +179,7 @@
         <div class="navbar-f-item">
             <div class="item-f {% block navbaractivate_2 %} {% endblock %}">
                 <div class="item-ftoo">
+                    <p class="numeration">02</p>
                     <p>Tramite</p>
                     <span> {% block check_2 %} {% endblock %} </span>
                 </div>
@@ -249,6 +188,7 @@
         <div class="navbar-f-item">
             <div class="item-f {% block navbaractivate_3 %} {% endblock %}">
                 <div class="item-ftoo">
+                    <p class="numeration">03</p>
                     <p>Pago</p>
                     <span>{% block check_3 %} {% endblock %}</span>
                 </div>

@@ -7,17 +7,93 @@
 {% endblock %}
 
 {% block contentf %}
+<!-- ------------DISTRIBUCIÓN DE LOS CONTENEDORES---------- -->
+<style>
+    .bodyf{
+        width: 100%;
+        height: calc(100% - 50px); /*restamos el espacio del nav bar*/
+        /* background: gold; */
+        /* opacity: 20%; */
+        background: white;
 
+    }
+    .thefrom{
+        /* background: darkcyan; */
+        height: 100%;
+        display: flex;
+    }
+    .content_form{
+/*        background: green; */
+        width: 90%;
+        height: calc(100% - 30px);
+        margin: 30px auto 0px auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .form_block{
+        /* background: pink; */
+        width: 100%;
+        height: 100px;
+        margin: 20px 0px 0px 0px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .from_item{
+        /* background: skyblue; */
+        width: 45%;
+        height: 100%;
+        float: left;
+        display: flex;
+        flex-direction: column;
+    }
+    .from_item label{
+        margin: auto 10px;
+    }
+    .group {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      /* background: salmon; */
+    }
+    .button_block{
+        width: 100%;
+        margin: auto 0px 20px 0px;
+        display: block;
+        display: flex;
+        height: auto;
+        /* background: saddlebrown; */
+    }
+    .botons_display{
+        /* background: blue; */
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .botons_display button{
+        border: none;
+        border-radius: 5px;
+        color:white;
+        background: red;
+        width: 90px;
+        height: 30px;
+        cursor: pointer;
+    }
+    .botons_display button:hover{
+        background: rgb(196, 17, 17);
+    }
+</style>
 <!-- ------------SOLO ESTILOS DEL 'LIST' PARA SELECCIONAR LOS TRAMITES---------- -->
 <style>
     .content_boxlist{
         display: flex;
         width: 100%;
         justify-content: space-between;
-        border-radius: 5px;
+        border-radius: 10px;
         height: 50px;
         color: gray;
-        border: 2px solid #7679FA;
+        border: 1px solid gray;
         cursor: pointer;
         margin: 0px 0px auto auto;
     }
@@ -27,32 +103,36 @@
         display: flex;
         justify-content: space-between;
         background: #E9E9E9;
-        border-radius: 5px;
+        border-radius: 10px;
+    }
+    .boxlist_inner p{
+        margin: auto 5px;
     }
     .content_boxlist:hover{
-        border: 2px solid #272ae4;
+        border: 1px solid black;
     }
     .content_boxlist p{
         margin: auto 10px;
         color: black;
+        
     }
     .icono{
         height: 30px;
         margin: auto 10px;
     }
     .list_activate{
-        border: 0px solid #7679FA;
+        border: 0px solid red;
     }
     .list_activate:hover{
-        border: 0px solid #7679FA;
+        border: 0px solid red;
     }
     .content_boxlist2{
-        background: #ECF2F9;
+        background: #E9E9E9;
         width: 100%;
         height: 310px;
         z-index: 2;
-        border-radius: 5px;
-        border: 2px solid #7679FA;
+        border-radius: 10px;
+        border: 1px solid gray;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
     }
     .search_content{
@@ -157,25 +237,18 @@
       font-family: Arial, Helvetica, sans-serif;
       transition: 0.3s ease;
       margin: auto;
-      font-size: 15px;
+      font-size: small;
       height: 95%;
       border-radius: 3px;
     }
     textarea:valid ~ label {
-      top: 0;
-      font: 700 12px Roboto;
-      color: rgba(0, 0, 0, 0.5);
-      font-family: Arial, Helvetica, sans-serif;
-      /* background: sandybrown; */
+      color: black;
     }
     textarea:focus {
       outline: none;
     }
     textarea:focus ~ label {
-      top: 0;
-      font: 700 12px Roboto;
-      color: red;
-      font-family: Arial, Helvetica, sans-serif;
+      color: black;
     }
     textarea:focus ~ .bar:before {
       transform: translateX(0);
@@ -192,16 +265,155 @@
 <div class="bodyf">
     <form id="myform" class="thefrom" action="{% url 'n_pay' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    <div class="content_form">
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <input class="text_comoda" type="text" id="name1" name="myrequest" value="Solicitud por defecto" required>
-                    <label for="name1">Solicito:</label>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div class="from_item">
+    <!-- NUEVO CONTENEDOR FORM---------------- -->
+    <style>
+        .content2_form{
+            width: 80%;
+            margin: 0px auto;
+/*            background: yellow;*/
+            display: flex; /*IMPORTANTE*/
+            flex-direction: column;
+        }
+        .content2_form .TheTitle{
+            font-size: large;
+            margin: 15px auto 5px auto;
+        }
+        .content2_form p{
+/*            margin: 0px auto;*/
+        }
+        .fila_form{
+            width: 70%;
+            margin: 30px auto 0px auto;
+/*            background: salmon;*/
+            display: flex;
+            justify-content: space-between;
+        }
+        .unEspacio_mediano{
+            width: calc(50% - 10px);
+/*            background: red;*/
+            display: flex;
+            position: relative; /*importante*/
+        }
+        .unEspacio_mediano input[type="text"]{
+            width: calc(100% - 0px);/*MENOS EL PADDING DEL inpur text*/
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .unEspacio_mediano input[type="text"]:focus{
+            outline: none;
+        }
+        .unEspacio_mediano label{
+            position: absolute;/*importante*/
+            top: -8px;
+            background: white;
+            color: gray;
+            left: 15px;
+            padding: 0px 5px;
+        }
+        .unEspacio_entero{
+            width: 100%;
+/*            background: red;*/
+            display: flex;
+            position: relative; /*importante*/
+        }
+        .unEspacio_entero input[type="text"]{
+            width: 100%;
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .unEspacio_entero input[type="text"]:focus{
+            outline: none;
+        }
+        .unEspacio_entero label{
+            position: absolute;/*importante*/
+            top: -8px;
+            background: white;
+            color: gray;
+            left: 15px;
+            padding: 0px 5px;
+        }
+        .cont_buttons_form{
+/*            background: purple;*/
+            width: 50%;
+            margin: 30px auto 0px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .cont_buttons_form button{
+            height: 30px;
+            background: #E1004D;
+            color: white;
+            border: none;
+            display: flex;
+            justify-content: center; /*IMPORTANTE*/
+            align-items: center; /*IMPORTANTE*/
+            padding: 2px 10px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .cont_buttons_form button:hover{
+            background: #B90B47;
+        }
+        .cont_buttons_form img{
+            height: 50%;
+            margin: auto 5px;
+        }
+        .ocultar{
+            display: none;
+        }
+    </style>
+    <!-- ----STILOS DE AGREGADO SOLO PARA PROCESS--- -->
+    <style>
+        .unEspacio_entero textarea{
+            width: 100%;
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .select_img_cnt{
+            width: 100%;
+/*            background: yellow;*/
+            height: 100%;
+        }
+        .select_img_cnt input{
+            display: none;
+        }
+        .select_img_cnt label{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center; /*IMPORTANTE*/
+            align-items: center; /*IMPORTANTE*/
+            border-radius: 10px;
+            color: black;
+            top: 0px;
+            left: 0px;
+            background: #E9E9E9;
+            border: 1px solid gray;
+            font-size: small;
+        }
+        .select_img_cnt label img{
+            height: 15px;
+            margin: auto 5px;
+        }
+        .select_img_cnt .red_class{
+            background: #F8D6DA;
+            
+        }
+    </style>
+    <div class="content2_form">
+        <p class="TheTitle">Proceso Tramite</p>
+        <p style="margin: 0px auto;">Por favor indique el tramite que realizara y los motivos.</p>
+        <p id="id_pross_advertencia" class="ocultar" style="margin: 0px auto; color: red;"></p>
+        <!-- - -->
+        <div class="fila_form" style="height: 40px;">
+            <div class="unEspacio_mediano" style="flex-direction: column;">
+                <!-- -SELECCIONAR TRAMITE- -->
                 <div class="content_boxlist" id='boxlist' style="margin:0px">
                     <!-- - -->
                     <div id="list_show_01" class='boxlist_inner' onclick='show_list()'>
@@ -226,38 +438,49 @@
                     </div>
                     <!-- - -->
                 </div>
-                <p id="alert_tramite" style="color:red; margin: 0px;" class="ocultar">*Seleccione un tramite antes de continuar</p>
+                <p id="alert_tramite" style="color:red; margin: 0px;padding: 0px;" class="ocultar">*Seleccione un tramite antes de continuar</p>
+                <!-- -/- -->
             </div>
-        </div>
-        <div class="form_block">
-            <div class="from_item">
-                <div class="group">
-                    <textarea id="name" name="reason" cols="30" rows="10" required>Motivo por defecto</textarea>
-                    <label id="label_def" for="name">Que por motivos de:</label>
-                    <div class="bar"></div>
+            <div class="unEspacio_mediano">
+                <div class="select_img_cnt">
+                    <input type="file" id="attachfile" name="attach_file"  accept=".png, .jpg, .pdf">
+                    <label id="id_attach_label" class="" for="attachfile">Adjuntar Archivo (opcional)<img src="{% static 'img/adjuntar.png' %}"></label>
                 </div>
             </div>
-
-            <div  class="from_item">
-                <p>Subir archivo pdf (opcional)</p>
-                <input type="file" id="pdf_file" name="pdf_file">
+        </div>
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_entero">
+                <textarea id="name" name="reason" cols="10" rows="5" placeholder="Ingrese el motivo por el que esta haciendo esta solicitud." required></textarea>
+                <label>Que por motivos de:</label>
             </div>
         </div>
-
-        <div class="button_block">
-            <div class="botons_display">
-                <input type="hidden" name="name" value="{{ Name }}">
-                <input type="hidden" name="program" value="{{ Program }}">
-                <input type="hidden" name="dni" value="{{ Dni }}">
-                <input type="hidden" name="cycle" value="{{ Cycle }}">
-                <input type="hidden" name="phone" value="{{ Phone }}">
-                <input type="hidden" name="email" value="{{ Email }}">
-                <input type="hidden" name="order" value="">
-                <input type="hidden" name="order_id" value="">
-
-                <button type="button" onclick="window.history.back()">Volver</button>
-                <button type="submit">Siguiente</button>
+        <!-- - -->
+        
+        <div class="fila_form">
+            <div class="unEspacio_entero">
+                <input id="id_solicito" type="text" name="myrequest" value="" placeholder="Especifique que es lo que quiere solicitar" disabled>
+                <label>Solicito</label>
             </div>
+        </div>
+       
+        
+        <div class="cont_buttons_form">
+            <!-- LO QUE RECIBIMOS DE IDENTIFICACIÓN -->
+            <input type="hidden" name="name" value="{{ Name }}">
+            <input type="hidden" name="full_name" value="{{ Full_name }}">
+            <input type="hidden" name="email" value="{{ Email }}">
+            <input type="hidden" name="phone" value="{{ Phone }}">
+            <input type="hidden" name="dni" value="{{ Dni }}">
+            <input type="hidden" name="cycle" value="{{ Cycle }}">
+            <input type="hidden" name="program" value="{{ Program }}">
+            
+            <input type="hidden" name="order" value="">
+            <input type="hidden" name="order_id" value="">
+
+            <button onclick="window.history.back()"><img src="{% static 'img/former_form.png' %}" alt="">Anterior</button>
+            <p></p>
+            <button type="submit">Siguiente<img src="{% static 'img/next_form.png' %}" alt=""></button>
         </div>
     </div>
     </form>
@@ -324,6 +547,36 @@
             }
         });
     }
+
+    function validacion_proccess(midata){
+        if(midata['data']['tipo_de_servicio'] == "Otros"){
+            document.getElementById("id_solicito").disabled = false;
+        }else if(midata['data']['require_attach'] == true){
+            let te_pros = midata['data']['procedimiento'];
+            document.getElementById("id_pross_advertencia").innerHTML = te_pros;
+        }
+        console.log(midata['data']['procedimiento']);
+        window.valid_attach = midata['data']['require_attach'];
+    }
+
+    function get_tupa_validation(num){
+        //AJAX
+        $.ajax({
+            url: "/tupa_validation_path/",
+            method: "GET",
+            data:{
+                'id_tupa': num,
+            },
+            success: function(response){
+                const midata = response; //en response esta recibiendo el return de la funcion
+                validacion_proccess(midata);
+            },
+            error: function() {
+                alert("Ocurrió un error al cargar el contenido.");
+            }
+        });
+    }
+
     function select_proc(num){
         var procedure = document.getElementById('proc'+num+'_id');// obtenemos el valor del procedure seleccionado
         
@@ -333,6 +586,7 @@
         
         orderInput.value = procedure.textContent;
         orderInput_id.value = num;
+        get_tupa_validation(num);
 
         hide_list(procedure.textContent);// enviamos lo que camturamos el content de la etiqueta 'p'
     }
@@ -342,6 +596,10 @@
         if(select_procedure.textContent == "Seleccionar Tramite"){
             list_show_01.classList.add("error_list");
             message_alert.classList.remove("ocultar");
+            event.preventDefault(); // Detiene el envío del formulario
+        }else if(window.valid_attach == true){
+            document.getElementById("id_pross_advertencia").classList.remove("ocultar");
+            document.getElementById("id_attach_label").classList.add("red_class");
             event.preventDefault(); // Detiene el envío del formulario
         }
     });

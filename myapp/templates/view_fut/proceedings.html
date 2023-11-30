@@ -13,7 +13,7 @@
     </div>
     <h3>Compartir</h3>
     <div class="img_qr">
-      <img src="{% static 'tmp/79XNZxF1cuAqrcode.png' %}" alt="">
+      <img src="{% static 'tmp/1CGoTAwEZzKqrcode.png' %}" alt="">
     </div>
     <div class="link_cont">
       <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
@@ -148,7 +148,7 @@
         document.body.style.overflow = 'visible';
     }
 </script>
-<script>
+<!-- <script>
     setTimeout(function() {
         console.log("Hola Mundo");
         document.body.style.overflow = 'hidden';
@@ -156,7 +156,7 @@
         var pop_windows_wait = document.getElementById("pop_windows_wait");
         pop_windows_wait.classList.remove("ocultar");
     }, 3000);
-</script>
+</script> -->
 {% endblock %}
 
 {% block content %}
@@ -251,7 +251,7 @@
 .route{
     width: 100%;
     height: 50px;
-    /* background: skyblue; */
+/*     background: skyblue; */
     margin: auto;
     display: flex;
 }
@@ -263,7 +263,7 @@
 .ProgressBar{
     width: calc((100% - 250px) / 4);
     height: 3px;
-    /* background: gold; */
+/*     background: gold; */
     margin: auto 0px;
     display: flex;
     justify-content: space-between;
@@ -287,7 +287,7 @@
 }
 .route_content{
     width: 100%;
-    /* background: gold; */
+/*    background: gold;*/
 }
 .tracking{
     width: 700px;
@@ -627,14 +627,14 @@ padding: 0px 0px 50px 0px;
     margin: 0px 5px;
 }
 .content_advertencia{
-    background: #F8D6DA;
+    background: #D4EEDA;
     position: absolute;/*importante*/
     width: 70%;
     margin: auto;
     top: 0px;
     left: calc(50% - 35%);
-    color: #9D1426;
-    border: 1px solid #FFBAC2;
+    color: #165925;
+    border: 1px solid #C3E8CB;
     border-radius: 5px;
     height: 40px;
     display: flex;
@@ -652,6 +652,7 @@ padding: 0px 0px 50px 0px;
 }
 .content_advertencia a{
     font-size: small;
+    color: #064113;
 }
 </style>
 
@@ -660,8 +661,8 @@ padding: 0px 0px 50px 0px;
         <div class="personcontent">
 
             <div class="content_advertencia">
-                <img src="{% static 'img/advertencia.png' %}" alt="">
-                <p>Advertencia usted aun no hizo el pago del trámite</p>
+                <img src="{% static 'img/process_icon.png' %}" alt="">
+                <p>Su tramite aún esta en proceso, cuando finalice lo podrá descargar y compartir.</p>
                 <a href="">más información</a>
             </div>
 
@@ -710,103 +711,14 @@ padding: 0px 0px 50px 0px;
                 <div class="student_content" style="height: auto;">
                     <div class="route_tittle"><h4>Ruta de Tramite</h4></div>
                     <!-- Todo esto es tuta de tramites -->
-                    <div class="route">
-                        <div class="circle on">
-                            <img width="100%" src="{% static 'img/process/P_01-on.png' %}" alt="">
-                        </div>
-                        <div class="ProgressBar">
-                            {% for i in Progressbar %}
-                            <div class="progre on"></div>
-                            {% endfor %}
-                        </div>
-                        <div class="circle on">
-                            <img width="100%" src="{% static 'img/process/P_02-on.png' %}" alt="">
-                        </div>
-                        {% if Num_process >= 3 %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre on"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_03-on.png' %}" alt="">
-                            </div>
-                        {% else %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre off"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_03-off.png' %}" alt="">
-                            </div>
-                        {% endif %}
-                        {% if Num_process >= 4 %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre on"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_04-on.png' %}" alt="">
-                            </div>
-                        {% else %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre off"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_04-off.png' %}" alt="">
-                            </div>
-                        {% endif %}
-                        {% if Num_process >= 5 %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre on"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_05-on.png' %}" alt="">
-                            </div>
-                        {% else %}
-                            <div class="ProgressBar">
-                                {% for i in Progressbar %}
-                                <div class="progre off"></div>
-                                {% endfor %}
-                            </div>
-                            <div class="circle off">
-                                <img width="100%" src="{% static 'img/process/P_05-off.png' %}" alt="">
-                            </div>
-                        {% endif %}
+                    <div id="id_cont_route" class="route">
+                        <!-- ----------------LA RUTA SE GENERA EN script.js------------------ -->
                     </div>
-                    <!-- --------- -->
                 </div>
                 <div class="student_content" style="height: auto;">
                     <div class="route_tittle"><h4>Detalles de Seguimiento</h4></div>
-                    <div class="route_content">
-                        {% for i in Data %}
-                            <div class="tracking" style="left: {{i.num}}px; width: calc(700px - {{i.num}}px);"> <!----'i' variables iteradas Details--->
-                                <div class="tra_info">
-                                    <h4> {{i.tittle}} </h4>
-                                    <p> {{i.name}} </p>
-                                    <hr>
-                                    <p>{{i.reception}}</p>
-                                    <p>{{i.exit}}</p>
-                                </div>
-                                {% if i.exit == none %}
-                                <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #464646;opacity: 60%;"><h6>PENDIENTE</h6><img width="30px" src="{% static 'img/pending.png' %}" alt=""></div>
-                                {% else %}
-                                <div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #42AF15;"><h6>PROCESADO</h6><img width="30px" src="{% static 'img/check.png' %}" alt=""></div>
-                                {% endif %}
-                            </div>
-                            {% if i.num <= 80 %}
-                                <div class="arrow" style="left: {{i.num|add:10}}px;"><!---variable iterada y le agregamos 10px mas---->
-                                    <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 83.44 83.44"><defs><style>.cls-1{fill:#ef0033;}</style></defs><title>Captura de pantalla 2023-04-28 155958</title><path class="cls-1" d="M4.77,24.1l3.9-3.91a3.86,3.86,0,0,1,5.48,0l24.55,25a3.86,3.86,0,0,0,5.48,0L69.29,20.17a3.84,3.84,0,0,1,5.45,0l3.93,3.93a3.85,3.85,0,0,1,0,5.48L44.43,63.29a3.86,3.86,0,0,1-5.42,0L4.79,29.58A3.85,3.85,0,0,1,4.77,24.1Z"/></svg>
-                                </div>
-                            {% endif %}
-
-                        {% endfor %}
+                    <div id="id_route_content" class="route_content">
+                       <!-- EL DETALLE SE GENERA EN script.js -->
                     </div>
                 </div>
             </div>
@@ -890,6 +802,8 @@ padding: 0px 0px 50px 0px;
     const formDownload = document.getElementById('F_download');
     const passInput = document.getElementById('passInput')
     const errorPass = document.getElementById('error2')
+    //NEW VARIABLES
+    var id_fut = "{{ fut_id }}"
 
 
     function openLoginForm() {
@@ -948,5 +862,5 @@ padding: 0px 0px 50px 0px;
         document.getElementById("Forgetp").style.display = "none";
     }
 </script>
-
+<script src="/static/scripts/view_fut/script.js" type="module" charset="utf-8" async defer></script>
 {% endblock %}

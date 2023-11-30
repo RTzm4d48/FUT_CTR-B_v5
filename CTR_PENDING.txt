@@ -1,5 +1,39 @@
 (DONE)- Crear la interfaz de 'create_fut_wait'
 (DONE)- Arreglar las funciones de 'views' y organizarlo todo
 (DONE)- Orgarnizar 'myapp/views.py'
-- acer el cuadro pop-up de carga
+(DONE)- hacer el cuadro pop-up de carga
 - aprender sobre Fetch
+
+(DONE)- crear el content del ticket
+(DONE)- Model - crear un espaio bolean en el modelo FUT para la opción de 'reportar a dirección' (he creado un modelo aparte, es mejor)
+(DONE)- Funciones de interfazt para reportar a dirección.
+
+(DONE)- hacer las migraciones de los modelos de tickets
+(DONE)- crear un ticket mediante la interfaz
+(DONE)- (model) implementar el id del usuario como foreing key
+- actualizar el otro content del ticket en la interfaz cuando se haya creado el ticket
+(DONE)- hay que implementar los cambios de la ojita azul numero (1)
+- obtener el desarrollo del ticket
+(DONE)- implementar toda la logia al subir la foto del baucher en el form pago.
+
+(DONE)- crear una condicional que determine si hay o no un attach file, y si no enviaremos un byte vacio.
+
+- insertar a notification cuando se reporte, procece.
+
+- insertar los tickets con la id real de los usuarios
+
+(DONE)- arreglar lo del required para el File Foto baucher (hacerlo con js)
+- crear un modelo para las notificaciones de los tickets
+- algunos tramires te piden adjuntar archivos (ojo con eso)
+
+
+- tenemos que obtener el nombre del admin origen y mostrarlo en view fut
+- mostrar la fecha en la ventana de reporte
+
+- arreglar el proceso de enviado del fur entre los admins
+
+- reparar el proces del fut de cada administrador hasta que el tramite finalice.
+
+- FINALIZAR EL TRAMITE DE Secretaria Y Dirección.
+
+-crear un modelo 'secretary_send_process' para cuando la secretaria procece se guarde el pdf y un comentario

@@ -8,7 +8,83 @@
 
 {# ESTO LO ESTAMOS HEREDANDO DE BASE.HTML #}
 {% block up_pop_space %}
+<!-- ------------DISTRIBUCIÓN DE LOS CONTENEDORES---------- -->
+<style>
+    .bodyf{
+        width: 100%;
+        height: calc(100% - 50px); /*restamos el espacio del nav bar*/
+        /* background: gold; */
+        /* opacity: 20%; */
+        background: white;
 
+    }
+    .thefrom{
+        /* background: darkcyan; */
+        height: 100%;
+        display: flex;
+    }
+    .content_form{
+/*        background: green; */
+        width: 90%;
+        height: calc(100% - 30px);
+        margin: 30px auto 0px auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .form_block{
+        /* background: pink; */
+        width: 100%;
+        height: 100px;
+        margin: 20px 0px 0px 0px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .from_item{
+        /* background: skyblue; */
+        width: 45%;
+        height: 100%;
+        float: left;
+        display: flex;
+        flex-direction: column;
+    }
+    .from_item label{
+        margin: auto 10px;
+    }
+    .group {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      /* background: salmon; */
+    }
+    .button_block{
+        width: 100%;
+        margin: auto 0px 20px 0px;
+        display: block;
+        display: flex;
+        height: auto;
+        /* background: saddlebrown; */
+    }
+    .botons_display{
+        /* background: blue; */
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .botons_display button{
+        border: none;
+        border-radius: 5px;
+        color:white;
+        background: red;
+        width: 90px;
+        height: 30px;
+        cursor: pointer;
+    }
+    .botons_display button:hover{
+        background: rgb(196, 17, 17);
+    }
+</style>
 <style>
     /*ESTOS SON LOS ESTILOS DEL POPUP PAY*/
     #pop_windows_2{
@@ -267,6 +343,7 @@
 </div>
 
 {% endblock %}
+<!-- aqui termina el pup-op -->
 {% block contentf %}
 <!-- ------SOLO ESTILOS DEL CUADRO DE PAGO------ -->
 <style>
@@ -279,13 +356,13 @@
         padding: 5px 0px;
     }
     .block{
-        width: 95%;
+        width: 100%;
         /* background: salmon; */
         display: flex;
         margin: 5px auto;
     }
     .column1{
-        width: 70%;
+        width: 100%;
         height: auto;
         padding: 5px 0px;
         /* background: #5add26; */
@@ -320,7 +397,7 @@
         display: flex;        
         margin: 5px 0px;
         padding: 10px 0px;
-        width: 80%;
+        width: 100%;
         border-radius: 10px;
     }
     .pay_content img{
@@ -356,140 +433,287 @@
         text-decoration: underline;
     }
     .num_cuneta_cont{
-        background: #80808038;
+        background: #CFCFCF;
         display: flex;
-        width: auto;
+        width: 100%;
+        border: none;
         margin: 5px auto;
         padding: 8px;
         border-radius: 7px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .num_cuneta_cont:hover{
+        opacity: 80%;
     }
     .num_cuneta_cont img{
         height: 15px;
         margin: auto 0px;
-        cursor: pointer;
-    }
-    .num_cuneta_cont img:hover{
-        opacity: 70%;
-    }
-    .num_cuneta_cont p{
-        margin: auto 5px;
-        font-size: 15px;
     }
     .persona_cuenta{
         display: flex;
     }
     .persona_cuenta p{
-        margin: auto 10px auto 0px;
+        color: ;
+        margin: 5px 10px auto 0px;
+        color: #288ed1;
+        cursor: pointer;
+    }
+    .persona_cuenta p:hover{
+        text-decoration: underline;
+    }
+    .ocultar{
+        display: none;
     }
 </style>
 
 <div class="bodyf">
-    <form id="id_form_pay" class="thefrom" action="{% url 'n_end' %}" method="post">
+    <form id="id_form_pay" class="thefrom" action="{% url 'n_end' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    <div class="content_form">
-        <div class="form_block">
-            <div class="from_item">
-                <!-- - -->
-                <div class="content_form2 expandir">
-                    <div class="block">
-                        <div class="column1">
-                            <img class="img_ctr" src="{% static 'img/fut_ctr-b.png' %}" alt="">
-                            <p>Tarifa gestion: {{Monto}} PEN</p>
-                        </div>
-                        <div class="column2">
-                        </div>
+        <!-- antiguo -->
+    
+    <!-- --------NUEVO FORM ---------- -->
+    <!-- ----------STILOS DEL NUEVO FORM-------- -->
+    <style>
+        .content2_form{
+            width: 80%;
+            margin: 0px auto;
+/*            background: yellow;*/
+            display: flex; /*IMPORTANTE*/
+            flex-direction: column;
+        }
+        .content2_form .TheTitle{
+            font-size: large;
+            margin: 15px auto 5px auto;
+        }
+        .content2_form p{
+/*            margin: 0px auto;*/
+        }
+        .fila_form{
+            width: 70%;
+            margin: 30px auto 0px auto;
+/*            background: salmon;*/
+            display: flex;
+            justify-content: space-between;
+        }
+        .unEspacio_mediano{
+            width: calc(50% - 10px);
+/*            background: red;*/
+            display: flex;
+            position: relative; /*importante*/
+        }
+        .unEspacio_mediano input[type="text"]{
+            width: calc(100% - 0px);/*MENOS EL PADDING DEL inpur text*/
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .unEspacio_mediano input[type="text"]:focus{
+            outline: none;
+        }
+        .unEspacio_mediano label{
+            position: absolute;/*importante*/
+            top: -8px;
+            background: white;
+            color: gray;
+            left: 15px;
+            padding: 0px 5px;
+        }
+        .unEspacio_entero{
+            width: 100%;
+/*            background: red;*/
+            display: flex;
+            position: relative; /*importante*/
+        }
+        .unEspacio_entero input[type="text"]{
+            width: 100%;
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        .unEspacio_entero input[type="text"]:focus{
+            outline: none;
+        }
+        .unEspacio_entero label{
+            position: absolute;/*importante*/
+            top: -8px;
+            background: white;
+            color: gray;
+            left: 15px;
+            padding: 0px 5px;
+        }
+        .cont_buttons_form{
+/*            background: purple;*/
+            width: 50%;
+            margin: 30px auto 0px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .cont_buttons_form button{
+            height: 30px;
+            background: #E1004D;
+            color: white;
+            border: none;
+            display: flex;
+            justify-content: center; /*IMPORTANTE*/
+            align-items: center; /*IMPORTANTE*/
+            padding: 2px 10px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .cont_buttons_form button:hover{
+            background: #B90B47;
+        }
+        .cont_buttons_form img{
+            height: 50%;
+            margin: auto 5px;
+        }
+        .ocultar{
+            display: none;
+        }
+    </style>
+    <!-- ----STILOS DE AGREGADO SOLO PARA PROCESS--- -->
+    <style>
+        .unEspacio_entero textarea{
+            width: 100%;
+            padding: 8px 10px;
+            margin: 0px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+    </style>
+    <!-- //ARREGLOS DE STYLES -->
+    <style>
+        .resumen{
+            width: 100%;
+        }
+        .resumen p{
+            margin: 2px 0px;
+            opacity: 80%;
+        }
+        .select_img_cnt{
+            width: 100%;
+/*            background: yellow;*/
+            height: 30px;
+        }
+        .select_img_cnt input{
+/*            display: none;*/
+        }
+        .select_img_cnt label{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center; /*IMPORTANTE*/
+            align-items: center; /*IMPORTANTE*/
+            border-radius: 10px;
+            color: black;
+            position: static;/*importante*/
+            background: #E9E9E9;
+            border: 1px solid gray;
+            font-size: small;
+            cursor: pointer;
+        }
+        .select_img_cnt label img{
+            height: 15px;
+            margin: auto 5px;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+    <div class="content2_form">
+        <p class="TheTitle">Facturación del Tramite</p>
+        <p style="margin: 0px auto;">Por favor realice el pago del tramite, ya sea por pasarela o deposito.</p>
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_mediano" style="flex-direction: column;">
+                <!-- aqui aqui -->
+                <div class="column1">
+                    <p>metodo de pago:</p>
+                    <div class="pay_content">
+                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="deposito" checked="checked" onclick="capturarValor(this)"/></div> Deposito
                     </div>
-                    <hr>
-                    <div class="block">
-                        <div class="column1">
-                            <p style="font-weight: bold;">Hola, {{Name}}:</p>
-                            <p>Solo un paso más para realizar tu tramite.</p>
-                        </div>
-                        <div class="column2">
-                            <a href="">mas información sobre metodos de pago</a>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="column1">
-                            <p>metodo de pago:</p>
-                            <div class="pay_content">
-                                <div class="radio"><input class="opcion" name="typepay" type="radio" value="0" checked="checked" onclick="capturarValor(this)"/></div> Presencial por caja
-                            </div>
-                            <div class="pay_content">
-                                <div class="radio"><input class="opcion" name="typepay" type="radio" value="5" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
-                                <img src="{% static 'img/visa.png' %}" alt="">
-                            </div>
-                        </div>
-                        <div class="column2"></div>
+                    <div class="pay_content">
+                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="pasarela" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
+                        <img src="{% static 'img/visa.png' %}" alt="">
                     </div>
                 </div>
-                <!-- - -->
             </div>
-            <div class="from_item">
-                <!-- - -->
-                <div class="content_form2 expandir">
-                    <div class="block">
-                        <div class="column1 expandir">
-                            <h2>Resumen</h2>
-                            <p style="font-weight: bold;">Solicitud de {{Order}}</p>
-                            <p>Costo Tramite: S/. {{Monto}}</p>
-                            <p id="p_cargo">Cargo por Pasarela: S/. 0</p>
-                            <hr>
-                            <div class="dato_other">
-                                <p>Total:</p>
-                                <p id="p_total">S/. {{Monto}}</p>
-                            </div>
+            <div class="unEspacio_mediano">
+                <!-- lo otro -->
+                <div class="block">
+                    <div id="f_p_0" class="column1">
+                        <p id="baucher_warning">Subir foto del Baucher</p>
+                        <div class="select_img_cnt">
+                            <input type="file" id="photo_id" style="display: none;" name="img_pay" accept=".png, .jpg">
+                            <label id="txt_photo" for="photo_id">Subir Foto <img src="{% static 'img/img_ad.png' %}"></label>
+                        </div>
+                        <div class="persona_cuenta">
+                            <p>Más Información</p>
                         </div>
                     </div>
-                </div>
-                <div class="content_form2 expandir">
-                    <div class="block">
-                        <div id="f_p_0" class="column1">
-                            <h2 >Número de cuenta:</h2>
-                            <div class="num_cuneta_cont">
-                                <img src="{% static 'img/copy_icon.png' %}" alt="">
-                                <p class="num_cuenta">9004 9954 7344 1030</p>
-                            </div>
-                            <div class="persona_cuenta">
-                                <p style="font-family: 'myfont_robot_bold';" >Nombre:</p>
-                                <p>Francisco Najar Delgado</p>
-                            </div>
+                    <div id="f_p_1" class="column1 ocultar">
+                        <h2>Forma de pago</h2>
+                        <p onclick="add_pay_card()" style="margin: 10px 0px 0px 0px;" class='paycard'>Seleccione forma de pago</p>
+                    </div>
+                    <div id="f_p_2" class="column1 ocultar">
+                        <div style="display: flex;">
+                            <img class="visa" src="{% static 'img/visa_sello.jpg' %}" alt="">
+                            <h2>4557 88** **** 9055</h2>
                         </div>
-                        <div id="f_p_1" class="column1 ocultar">
-                            <h2>Forma de pago</h2>
-                            <p onclick="add_pay_card()" style="margin: 10px 0px 0px 0px;" class='paycard'>Seleccione forma de pago</p>
-                        </div>
-                        <div id="f_p_2" class="column1 ocultar">
-                            <div style="display: flex;">
-                                <img class="visa" src="{% static 'img/visa_sello.jpg' %}" alt="">
-                                <h2>4557 88** **** 9055</h2>
-                            </div>
-                            <p onclick="add_pay_card()" style="margin: 10px 0px 0px 10px;" class='paycard'>Cambiar forma de pago</p>
-                        </div>
+                        <p onclick="add_pay_card()" style="margin: 10px 0px 0px 10px;" class='paycard'>Cambiar forma de pago</p>
                     </div>
                 </div>
-                <!-- - -->
             </div>
         </div>
-        <div class="button_block">
-            <div class="botons_display">
-                <input type="hidden" name="name" value="{{Name}}">
-                <input type="hidden" name="program" value="{{Program}}">
-                <input type="hidden" name="dni" value="{{Dni}}">
-                <input type="hidden" name="phone" value="{{Phone}}">
-                <input type="hidden" name="cycle" value="{{Cycle}}">
-                <input type="hidden" name="email" value="{{Email}}">
+        <!-- - -->
+        <div class="fila_form">
+            <div class="unEspacio_entero">
+                <div class="resumen">
+                <h3>Resumen</h3>
 
-                <input type="hidden" name="myrequest" value="{{Myrequest}}">
-                <input type="hidden" name="order" value="{{Order}}">
-                <input type="hidden" name="reason" value="{{Reason}}">
-                <input type="hidden" name="pdf_binary_encoded" value="{{Pdf_binary_encoded}}">
-
-                <button type="button" onclick="window.history.back()">Volver</button>
-                <button type="submit">Finalizar</button>
+                <p style="font-weight: bold;">Solicitud de {{Order}}</p>
+                <p>Costo Tramite: S/. {{Monto}}</p>
+                <p id="p_cargo">Cargo por Pasarela: S/. 0</p>
+                <hr>
+                <div class="dato_other">
+                    <p>Total:</p>
+                    <p id="p_total">S/. {{Monto}}</p>
+                </div>
             </div>
+            </div>
+        </div>
+       
+        
+        <div class="cont_buttons_form">
+            <!-- LO QUE RECIBIMOS DE IDENTIFICACIÓN -->
+            <input type="hidden" name="name" value="{{ Name }}">
+            <input type="hidden" name="full_name" value="{{ Full_name }}">
+            <input type="hidden" name="email" value="{{ Email }}">
+            <input type="hidden" name="phone" value="{{ Phone }}">
+            <input type="hidden" name="dni" value="{{ Dni }}">
+            <input type="hidden" name="cycle" value="{{ Cycle }}">
+            <input type="hidden" name="program" value="{{ Program }}">
+            <!-- Siguiente Ronda -->
+            <input type="hidden" name="myrequest" value="{{ Myrequest }}">
+            <input type="hidden" name="order" value="{{ Order }}">
+            <input type="hidden" name="order_id" value="{{ Order_id }}">
+            <input type="hidden" name="monto" value="{{ Monto }}">
+            <input type="hidden" name="reason" value="{{ Reason }}">
+            <input type="hidden" name="attach_file_name" value="{{ Attach_file_name }}">
+            <input type="hidden" name="user" value="{{ user.id }}">
+            <input id="mybaucher" type="hidden" name="baucher" value="">
+
+            <button onclick="window.history.back()"><img src="{% static 'img/former_form.png' %}" alt="">Anterior</button>
+            <p></p>
+            <button type="submit">Siguiente<img src="{% static 'img/next_form.png' %}" alt=""></button>
         </div>
     </div>
+
     </form>
 </div>
 <script>
@@ -500,63 +724,14 @@
 </script>
 <script>
     document.getElementById("id_form_pay").addEventListener("submit", function (event) {
-    event.preventDefault();//prevenimos el envio
-
-    // OBTENEMOS EL RADIO
-    const radios = document.querySelectorAll(".opcion"); // Seleccionar todos los radios con la clase "opcion"
-    let opcionSeleccionada;
-    for (const radio of radios) {
-        if (radio.checked) {
-            opcionSeleccionada = radio.value;
-            break;
+        if (document.getElementById("mybaucher").value == "") {
+            event.preventDefault();//prevenimos el envio
+            const warning_baucher = document.getElementById("baucher_warning");
+            warning_baucher.classList.add("red");
+            warning_baucher.innerHTML = "*Subir foto del Baucher (obligatorio)";
         }
-    }
-    console.log("el valor es:"+opcionSeleccionada);
-    if (opcionSeleccionada == 0){
-        //ABRIMOS POP-UP WAIT
-        console.log("A");
-        pop_loader.classList.remove("ocultar");
-        //AREMOS UNA PETICION AJAX --------------------------
-        //VARIABLES
-        var nameValue = document.getElementsByName("name")[0].value;
-        var programValue = document.getElementsByName("program")[0].value;
-        var dniValue = document.getElementsByName("dni")[0].value;
-        var phoneValue = document.getElementsByName("phone")[0].value;
-        var cycleValue = document.getElementsByName("cycle")[0].value;
-        var emailValue = document.getElementsByName("email")[0].value;
-
-        var myrequest = document.getElementsByName("myrequest")[0].value;
-        var order = document.getElementsByName("order")[0].value;
-        var reason = document.getElementsByName("reason")[0].value;
-        var emailValue = document.getElementsByName("pdf_binary_encoded")[0].value;
-        console.log("el nombre es:"+ nameValue);
-        $.ajax({
-            type: 'GET',
-            url: '/form_new_fut/finisher/',
-            data: {
-                'name': nameValue,
-                'program': programValue,
-                'dni': dniValue,
-                'phone': phoneValue,
-                'cycle': cycleValue,
-                'email': emailValue,
-                'myrequest': myrequest,
-                'order': order,
-                'reason': reason,
-            },
-            success: function(data) {
-                pop_loader.classList.add("ocultar");
-                window.location.href = "http://127.0.0.1:8000/form_new_fut/successful";
-            },
-            error: function() {
-                // Manejar errores
-            }
-        });
-    }else{
-        console.log("Bb");
-
-    }
     });
+
     function capturarValor(radio) {
         var esp_cargo = "Cargo por Pasarela: S/. ";
         var esp_total = "S/. ";
@@ -586,6 +761,36 @@
         console.log("pay card");
         //var pop_windows fue creado en base.html
         pop_windows.classList.remove("ocultar");
+    }
+    //SUBIR BAUCHER-----
+    var photo_id = document.getElementById("photo_id");
+    photo_id.addEventListener('change', function(event){
+        // Obtener la lista de archivos seleccionados
+        var archivos = event.target.files;
+
+        // Hacer algo con los archivos seleccionados
+        for (var i = 0; i < archivos.length; i++) {
+            const name = archivos[i].name;
+            const tipo = archivos[i].type;
+            console.log(tipo);
+            document.getElementById("txt_photo").innerHTML = paint_file(name);
+            document.getElementById('mybaucher').value = 'true';
+        }
+    });
+    function paint_file(name){
+        if (name.length > 20) {
+            if(name.length > 24){
+                var shortened_name = name.substring(0, 20);
+                var tipo = name.substring(name.length - 3);
+                return shortened_name+'...'+tipo;
+            }else{
+                var shortened_name = name.substring(0, 16);
+                var tipo = name.substring(name.length - 3);
+                return shortened_name+'...'+tipo;
+            }
+        }else{
+            return name;
+        }
     }
 </script>
 {% endblock %}

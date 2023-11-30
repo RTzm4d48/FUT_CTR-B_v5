@@ -71,6 +71,57 @@
         </div>
         <div onclick="longout()" class="logout"><img src="{% static 'img/longout.png' %}" height="100%" alt=""></div>
     </div>
+    <!-- ------POP-UP CONTENT------- -->
+    <style>
+        .cont_pop{
+            position: absolute;/*importante*/
+            background: #68686888;
+            width: 100%;
+            height: calc(100% - 60px);
+            z-index: 1;
+            margin: 0px;
+            display: flex; /*IMPORTANTE*/
+            justify-content: center; /*IMPORTANTE*/
+            align-items: center; /*IMPORTANTE*/
+        }
+        .pop_up_window{
+            margin: 0px;
+            width: 700px;
+            background: white;
+            border-radius: 5px;
+            padding: 10px 10px;
+            position: relative;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+            color: black;
+          }
+          .ocultar{
+            display: none;
+          }
+          .close{
+            position: absolute;
+            top: 10px;
+            cursor: pointer;
+            opacity: 60%;
+            width: 20px;
+            height: auto;
+            /* background: salmon; */
+          }
+          .close:hover{
+            opacity: 1;
+          }
+    </style>
+    <div id="pop_windows_report" class="cont_pop ocultar">
+        {% block up_pop_space %}
+        {% endblock %}
+    </div>
+    <script>
+        function close_pop_up(){
+            document.getElementById("pop_windows_report").classList.add("ocultar");
+            document.getElementById("id_report_content").classList.add("ocultar");
+            document.getElementById("id_send_baucher").classList.add("ocultar");
+        }
+    </script>
+    <!-- ------/POP-UP CONTENT------- -->
     <div class="contend">
         {% block content %}
         {% endblock %}

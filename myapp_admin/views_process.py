@@ -8,7 +8,7 @@ import io
 from django.core.files.base import ContentFile
 from io import BytesIO
 
-from myapp_admin.views import send_definity
+from myapp_admin.views import send_definity, log_verifying
 
 def direction_download(request):
     id = request.GET.get('id')
@@ -24,50 +24,6 @@ def direction_download(request):
 
     message = 'sussesfull'
     return JsonResponse({'message': message})
-
-def log_verifying(log_position):
-    # VARIABLES GENERALES
-    #comprueb si la sesión esta iniciada
-    Name_admin = 'none'
-    Position_admin1 = 'none'
-    Position_admin2 = 'none'
-    
-    # list_data = []
-    diccionary={}
-    
-    if log_position == 'treasury' or log_position == 'secretary' or log_position == 'direction':
-
-        objs = Admins.objects.filter(position=log_position).values('name', 'fullname').first()
-        Name_admin = objs['name']
-        diccionary['admin_name'] = Name_admin
-            
-        if log_position == 'treasury':
-            diccionary['position_admin1'] = 'Tesorera'
-            diccionary['position_admin2'] = 'Tesoreria' 
-            diccionary['send_position'] = 'secretary'
-            diccionary['stage_send'] = 1
-        elif log_position == 'secretary':
-            diccionary['position_admin1'] = 'Secretaria'
-            diccionary['position_admin2'] = 'Secretaría' 
-            diccionary['send_position'] = 'direction'
-            diccionary['stage_send'] = 2
-        else:
-            diccionary['position_admin1'] = 'Director'
-            diccionary['position_admin2'] = 'Dirección'
-            diccionary['send_position'] = 'fut_finished'
-            diccionary['stage_send'] = 3
-            
-            
-        num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=log_position).count()
-        diccionary['num_futs'] = num_futs_total
-        
-        # list_data.append(diccionary)
-        return diccionary
-
-    else:
-        #Mostramos la pagina de login
-        #No borraremos la cookie por que no pude hacerlo :3
-        return 'fail'
 
 def fut_data(Position):
     objs = fut.objects.exclude(stage__exact=3).filter(route=Position).values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view')

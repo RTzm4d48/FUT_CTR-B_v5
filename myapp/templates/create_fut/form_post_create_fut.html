@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario POST</title>
+</head>
+<body>
+    <form id="formulario" action="{% url 'n_successful' %}" method="post">
+        {% csrf_token %}
+            <input type="hidden" name="id_value" value="{{ Fut_id }}">
+        <input style="display: none;" type="submit" value="Enviar">
+    </form>
+
+    <script>
+        // Enviar automáticamente el formulario al cargar la página
+        document.getElementById('formulario').submit();
+    </script>
+</body>
+</html>

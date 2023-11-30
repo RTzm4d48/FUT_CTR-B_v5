@@ -1,5 +1,6 @@
 from django.db import models
 from myapp.models import fut
+from django.contrib.auth.models import User
 
 import random
 import string
@@ -55,3 +56,97 @@ class document(models.Model):
     def __str__(self):
         num_id = str(self.fut_id.id)
         return self.tittle+" - "+num_id
+
+#FUT Y FUNCIONES
+class reportes(models.Model):
+    menssage = models.CharField(max_length=200)
+    description = models.TextField()
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE, db_constraint=False)# EL db_constraint=False ES PARA COLOCAR CUALQUIER NÚMERO EN EL id Y NO VALIDARLO
+    id_destino_admin = models.IntegerField() #Id admin al que se le evviara el reporte
+    id_origen_admin = models.ForeignKey(Admins, on_delete=models.CASCADE, db_constraint=False) #id admin del que envia el reporte
+    date = models.DateField(null=True)
+
+    def __str__(self):
+        the_fut = str(self.fut_id.id)
+        return f"ID: {self.id} - {self.menssage} - {the_fut}"
+
+# MODELOS PARA LA CREACION Y GESTION DE TICKETS
+class ticket(models.Model):
+    name_creator = models.CharField(max_length=60)
+    charge = models.CharField(max_length=60) #CARGO ejem. (tesorera), (alumno)
+    tittle = models.CharField(max_length=150)
+    state = models.BooleanField(default=False) #NOS SIRVE PARA EL TEMA DE ACTIVACIÓN DEL TICKET
+    num_ticket = models.IntegerField()
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
+    admin_id = models.ForeignKey(Admins, on_delete=models.CASCADE) #ADMIN ID
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE) #USER ID
+    view = models.BooleanField(default=False)
+    def __str__(self):
+        the_fut_id = str(self.fut_id.id)
+        the_admin_id = str(self.admin_id.id)
+        the_user_id = str(self.user_id.id)
+        return f"ID: {self.id} - {self.name_creator} - {self.num_ticket} - {the_fut_id} - {self.state}"
+
+class ticket_desarrollo(models.Model):
+    name = models.CharField(max_length=60)
+    desarrollo = models.TextField()
+    charge = models.CharField(max_length=60) #CARGO ejem. (tesorera), (alumno)
+    date = models.DateTimeField(null=True)
+    ticket_id = models.ForeignKey(ticket, on_delete=models.CASCADE)
+    def __str__(self):
+        the_ticket_id = str(self.ticket_id.id)
+        return f"ID: {self.id} - {self.name} - {self.charge} - {the_ticket_id}"
+
+class ticket_attach_file(models.Model):
+    name = models.CharField(max_length=60)
+    the_type = models.CharField(max_length=10)
+    the_size = models.IntegerField()
+    the_file = models.BinaryField(default=b'')
+    desarrollo_id = models.ForeignKey(ticket_desarrollo, on_delete=models.CASCADE)
+    def __str__(self):
+        the_desarrollo_id = str(self.desarrollo_id.id)
+        return f"ID: {self.id} - {self.name} - {self.the_type} - {the_desarrollo_id}"
+
+class ticket_url(models.Model):
+    name = models.CharField(max_length=60)
+    url = models.CharField(max_length=200)
+    desarrollo_id = models.ForeignKey(ticket_desarrollo, on_delete=models.CASCADE)
+    def __str__(self):
+        the_desarrollo_id = str(self.desarrollo_id.id)
+        return f"ID: {self.id} - {self.name} - {the_desarrollo_id}"
+
+class notification(models.Model):
+    tittle = models.CharField(max_length=150)# IRA EL TITULO DE LOS REPORTE O ACLARACIONES DE PROCESADOS
+    date = models.DateTimeField(null=True)
+    emitido = models.CharField(max_length=60)# AQUI IRA EL NOMBRE DEL ADMINISTRADOR QUE GENERO ESTA NOTIficación
+    tipo = models.CharField(max_length=150)# AQUI ACLARAREMOS EL TIPO DE LA NOTI ('procesado', 'reportado a tesoreria', 'reportado a direción', 'finalizacion de tramite')
+    view = models.BooleanField(default=False)
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE) #USER ID
+
+    def __str__(self):
+        return f"ID: {self.id} - {self.tittle}"
+
+class ticket_notififcation(models.Model):
+    tittle = models.CharField(max_length=150)# IRA EL TITULO DE LOS REPORTE O ACLARACIONES DE PROCESADOS
+    desarrollo = models.TextField()
+    date = models.DateTimeField(null=True)
+    emitido = models.CharField(max_length=60)# AQUI IRA EL NOMBRE DEL ADMINISTRADOR QUE GENERO ESTA NOTIficación
+    charge = models.CharField(max_length=60) #CARGO ejem. (tesorera), (alumno)
+    view = models.BooleanField(default=False)
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE) #USER ID
+
+    def __str__(self):
+        return f"ID: {self.id} - {self.tittle}"
+
+class ruta_tramite(models.Model):
+    tittle = models.CharField(max_length=40)
+    name = models.CharField(max_length=40)
+    reception = models.DateTimeField()
+    exit = models.DateTimeField(null=True)
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        num_id = str(self.fut_id.id)
+        return self.tittle+" - "+self.name+" - "+num_id

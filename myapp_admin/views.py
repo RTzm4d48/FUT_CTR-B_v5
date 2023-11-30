@@ -8,13 +8,15 @@ from myapp_admin.models import process, Admins, document
 from datetime import datetime
 from datetime import date
 
+# IMPORTAR VISTAS
+from myapp_admin.views_report import OBTAIN_REPORTS
 
 # Create your views here.
 def ilsadmin(request):
     return render(request, 'ils_admin.html')
 
 
-def log_verifying(log_position):
+def log_verifying(log_position, id_admin):
     # VARIABLES GENERALES
     #comprueb si la sesión esta iniciada
     Name_admin = 'none'
@@ -26,8 +28,10 @@ def log_verifying(log_position):
     
     if log_position == 'treasury' or log_position == 'secretary' or log_position == 'direction':
 
-        objs = Admins.objects.filter(position=log_position).values('name', 'fullname').first()
+        objs = Admins.objects.filter(position=log_position).values('id', 'name', 'fullname').first()
         Name_admin = objs['name']
+        Id_admin = objs['id']
+        diccionary['admin_id'] = Id_admin
         diccionary['admin_name'] = Name_admin
             
         if log_position == 'treasury':
@@ -47,7 +51,7 @@ def log_verifying(log_position):
             diccionary['stage_send'] = 3
             
             
-        num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=log_position).count()
+        num_futs_total = fut.objects.filter(id_admin_turn=id_admin).count()
         diccionary['num_futs'] = num_futs_total
         
         # list_data.append(diccionary)
@@ -72,6 +76,7 @@ def staff_view_data(objs, page):
         diccionary['stage'] = i['stage']
         diccionary['view'] = i['view']
         diccionary['date'] = i['date']
+        diccionary['report_state'] = i['report_state']
         diccionary['num'] = num
         if page == 1 and num <=12:
             list_data.append(diccionary)
@@ -92,8 +97,9 @@ def staff_treasury(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
   
-    Data_log = log_verifying(Position)
+    Data_log = log_verifying(Position, id_admin)
     
     if login == None:
         return render(request, 'ils_admin.html')
@@ -103,8 +109,8 @@ def staff_treasury(request):
     # (/AQUÍ)(ESTO_SE_REPITE)
 
     
-    objs = fut.objects.exclude(stage__exact=3).filter(route=Position).order_by('date').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view', 'date')[::-1]# esto -> [::-1] es para invertir el orden del resultado
-    num_futs_total = fut.objects.exclude(stage__exact=3).filter(route=Position).count()
+    objs = fut.objects.exclude(stage__exact=3).filter(id_admin_turn=id_admin).order_by('date').values('id', 'order', 'reason', 'name', 'dni', 'code', 'stage', 'view', 'date', 'report_state')[::-1]# esto -> [::-1] es para invertir el orden del resultado
+    num_futs_total = fut.objects.exclude(stage__exact=3).filter(id_admin_turn=id_admin).count()
 
     # aquí contabilizamos el número de paginas que debe de haber
     role=1
@@ -138,8 +144,9 @@ def view_fut(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
   
-    Data_log = log_verifying(Position)
+    Data_log = log_verifying(Position, id_admin)
     
     if login == None:
         return render(request, 'ils_admin.html')
@@ -151,7 +158,7 @@ def view_fut(request):
     # el 'mode' es para determinar que botones mostrar
     mode = request.GET.get('mode')
 
-    objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date','n_ticket').first()
+    objs = fut.objects.filter(code=code_).values('id', 'myrequest', 'name', 'program', 'phone', 'dni', 'cycle', 'reason', 'email', 'order', 'date','n_ticket','user_id_id', 'report_state').first()
 
     # actualizamos el campo view
     up_register = fut.objects.get(code=code_)
@@ -179,8 +186,9 @@ def send_inssued(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
   
-    Data_log = log_verifying(Position)
+    Data_log = log_verifying(Position, id_admin)
     
     if login == None:
         return render(request, 'ils_admin.html')
@@ -261,8 +269,9 @@ def postulated(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
   
-    Data_log = log_verifying(Position)
+    Data_log = log_verifying(Position, id_admin)
     
     if login == None:
         return render(request, 'ils_admin.html')
@@ -293,8 +302,9 @@ def pending(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
   
-    Data_log = log_verifying(Position)
+    Data_log = log_verifying(Position, id_admin)
     
     if login == None:
         return render(request, 'ils_admin.html')
@@ -323,8 +333,9 @@ def send(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
   
-    Data_log = log_verifying(Position)
+    Data_log = log_verifying(Position, id_admin)
     
     if login == None:
         return render(request, 'ils_admin.html')
@@ -373,6 +384,31 @@ def send(request):
     return render(request, 'admin/staff/send.html', {
         'Object': list_data,
         'Data_log':Data_log
+    })
+
+def reported(request):
+    # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
+    login = request.COOKIES.get('log_admin')
+    Position = request.COOKIES.get('log_position')
+    id_admin = request.COOKIES.get('id_admin')
+  
+    Data_log = log_verifying(Position, id_admin)
+    
+    if login == None:
+        return render(request, 'ils_admin.html')
+    elif Data_log == 'fail':
+        return render(request, 'ils_admin.html')
+    
+    # (/AQUÍ)(ESTO_SE_REPITE)
+    # objs = fut.objects.filter(stage=1, route=Position).values('order', 'reason', 'name', 'dni', 'code')
+
+    obj_report, num_report_total = OBTAIN_REPORTS(id_admin);
+
+    
+        
+    return render(request, 'admin/staff/reported.html', {
+        'Object': obj_report,
+        'Data_log':Data_log,
     })
 
 def name_admin(position):
@@ -480,6 +516,7 @@ def admin_login(request):
             response = JsonResponse(answer)
             response.set_cookie('log_admin', 'true')
             response.set_cookie('log_position', theposition)
+            response.set_cookie('id_admin', objs_pass['id'])
             return response
     
     return JsonResponse(answer)
