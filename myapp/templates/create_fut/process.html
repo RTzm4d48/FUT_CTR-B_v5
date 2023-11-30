@@ -405,6 +405,9 @@
             background: #F8D6DA;
             
         }
+        .red_c{
+            border: 1px solid red;
+        }
     </style>
     <div class="content2_form">
         <p class="TheTitle">Proceso Tramite</p>
@@ -456,10 +459,9 @@
             </div>
         </div>
         <!-- - -->
-        
         <div class="fila_form">
-            <div class="unEspacio_entero">
-                <input id="id_solicito" type="text" name="myrequest" value="" placeholder="Especifique que es lo que quiere solicitar" disabled>
+            <div id="espace_solicito" class="unEspacio_entero">
+                <input id="id_solicito" type="text" class="red_c" name="myrequest" value="" placeholder="Especifique que es lo que quiere solicitar" disabled>
                 <label>Solicito</label>
             </div>
         </div>
@@ -477,6 +479,8 @@
             
             <input type="hidden" name="order" value="">
             <input type="hidden" name="order_id" value="">
+
+            <input id="input_attach" type="hidden" name="input_attach" value="">
 
             <button onclick="window.history.back()"><img src="{% static 'img/former_form.png' %}" alt="">Anterior</button>
             <p></p>
@@ -551,12 +555,19 @@
     function validacion_proccess(midata){
         if(midata['data']['tipo_de_servicio'] == "Otros"){
             document.getElementById("id_solicito").disabled = false;
-        }else if(midata['data']['require_attach'] == true){
+            window.solicito = true;
+        }else{
+            document.getElementById("id_solicito").disabled = true;
+            window.solicito = false;
+        }
+        if(midata['data']['require_attach'] == true){
             let te_pros = midata['data']['procedimiento'];
             document.getElementById("id_pross_advertencia").innerHTML = te_pros;
+            window.valid_attach = true
+            console.log(midata['data']['procedimiento']);
+        }else{
+            window.valid_attach = false
         }
-        console.log(midata['data']['procedimiento']);
-        window.valid_attach = midata['data']['require_attach'];
     }
 
     function get_tupa_validation(num){
@@ -586,20 +597,46 @@
         
         orderInput.value = procedure.textContent;
         orderInput_id.value = num;
+        document.getElementById("id_solicito").value = '';
         get_tupa_validation(num);
+
 
         hide_list(procedure.textContent);// enviamos lo que camturamos el content de la etiqueta 'p'
     }
 
+    //window.solicito
+
+    //SUBIR BAUCHER-----
+    var attachfile = document.getElementById("attachfile");
+    attachfile.addEventListener('change', function(event){
+        // Obtener la lista de archivos seleccionados
+        var archivos = event.target.files;
+
+        // Hacer algo con los archivos seleccionados
+        for (var i = 0; i < archivos.length; i++) {
+            const name = archivos[i].name;
+
+            document.getElementById("id_attach_label").innerHTML = "File Adjunted"
+            document.getElementById('input_attach').value = 'true';
+        }
+    });
+
+
     //Evento Prevent Para asegurarnos que se seleccione un tramite
     form.addEventListener('submit', function(event){
+        var text_solicito = document.getElementById("id_solicito").value;
+        var text_attach = document.getElementById("input_attach").value;
+      
         if(select_procedure.textContent == "Seleccionar Tramite"){
             list_show_01.classList.add("error_list");
             message_alert.classList.remove("ocultar");
             event.preventDefault(); // Detiene el envío del formulario
-        }else if(window.valid_attach == true){
+        }else if(text_attach == '' && window.valid_attach == true){
             document.getElementById("id_pross_advertencia").classList.remove("ocultar");
             document.getElementById("id_attach_label").classList.add("red_class");
+            event.preventDefault(); // Detiene el envío del formulario
+        }else if(text_solicito == "" && window.solicito == true){
+            document.getElementById("espace_solicito").classList.add("red_c");
             event.preventDefault(); // Detiene el envío del formulario
         }
     });

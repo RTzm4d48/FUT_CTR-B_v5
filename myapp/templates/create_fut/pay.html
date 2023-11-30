@@ -792,6 +792,14 @@
             return name;
         }
     }
+    tramite_otros();
+    function tramite_otros(){
+        var theorder = "{{ Order }}";
+        if (theorder == 'Otros') {
+            document.getElementById("f_p_0").classList.add("ocultar");
+            document.getElementById("mybaucher").value = "completed";
+        }
+    }
 </script>
 {% endblock %}
 
