@@ -1,0 +1,206 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{# ---------NAVBAR STYLES--------- #}
+<style>
+  .fut_conteiner{
+    background: whitesmoke;
+    width: 70%;
+    margin: 50px auto 0px auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .fut_navbar{
+    width: 100%;
+    height: 50px;
+    background: #E9E9E9;
+    display: flex;
+  }
+  ul{
+    list-style: none;
+    display: flex;
+    /*    background: blue;*/
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  .fut_navbar li{
+    /*    background: salmon;*/
+    
+    height: 100%;
+    margin: auto 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .navbar_a{
+    margin: 15px auto auto auto;
+    color: black;
+    text-decoration: none;
+    opacity: 80%;
+    /*    background: yellow;*/
+  }
+  .navbar_a:hover{
+    opacity: 100%;
+  }
+  .fut_line{
+    width: 100%;
+    height: 2px;
+    margin: auto 0px 0px 0px;
+  }
+  .fl_activate{
+    background: black;
+  }
+</style>
+
+{# -----------ESTILOS SOLO DEL CUADRO DE FUT------------ #}
+<style>
+  .cont_fut{
+    width: calc(100% - 30px);
+    height: 130px;
+    background: white;
+    border: 1px solid gray;
+    margin: 15px auto;
+    display: flex;
+    border-radius: 3px;
+  }
+  .cont_information{
+    width: calc(80% - 30px);
+    height: calc(100% - 30px);
+    /*    background: salmon;*/
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  .cont_information h3{
+    margin: 0px 0px 5px 0px;
+  }
+  .cont_img{
+    width: 20%;
+    height: 100%;
+    background: #D1D1D1;
+    display: flex;
+  }
+  .info_fut{
+    /*    background: violet;*/
+  }
+  .info_fut p{
+    margin: 0px;
+    font-size: smaller;
+  }
+  .pay_fut{
+    display: flex;
+  }
+  .pay_fut p{
+    margin: 0px 5px 0px 0px;
+  }
+  .viewfut{
+    background: red;
+    color: white;
+    padding: 2px 20px;
+    border: none;
+    border-radius: 3px;
+    margin: 5px 0px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .viewfut:hover{
+    background: #E40000;
+  }
+  .cont_img img{
+    width: 80px;
+    margin: auto;
+  }
+  .content_first{
+/*    background: salmon;*/
+  }
+</style>
+<div class="fut_conteiner">
+  <nav class="fut_navbar">
+      <ul>
+          <li><a class="navbar_a" href="{% url 'n_fut_all' %}">TODOS</a><div id="fut_line1" class="fut_line"></div></li>
+          <li><a class="navbar_a" href="{% url 'n_fut_process' %}">FUTs En Proceso</a><div id="fut_line2" class="fut_line"></div></li>
+          <li><a class="navbar_a" href="{% url 'n_fut_finish' %}">FUTs Finalizados</a><div id="fut_line3" class="fut_line"></div></li>
+      </ul>
+  </nav>
+  <script>
+  var user_id = "{{ user.id }}";
+  
+  function get_futs(allOrOne, finich_state){
+    return new Promise(function (resolve, reject){
+      //AJAX
+      $.ajax({
+          url: "/my_fut/fut_consult_path/",
+          method: "GET",
+          data:{
+              'user_id': user_id,
+              'allOrOne': allOrOne,// ESTO ES PARA DETERMINAR (todos, enproceso o finalizados)
+              'finich_state': finich_state,
+          },
+          success: function(response){
+              const midata = response;
+              resolve(midata['data']);
+          },
+          error: function() {
+              alert("Ocurrió un error al cargar el contenido.");
+          }
+      });
+    });
+  }
+  function paint_fut_init(data){
+    console.log(data);
+    for (var i = 0; i < data['length']; i++) {
+      var estado = 'none';
+      estado = (data[i]['finisher_state'] == false) ? estado = `<p style="color: red;">En Proceso</p>` : estado = `<p style="color: green;">Finalizado</p>`;
+      var html_fut = `
+        <div class="cont_fut">
+          <div class="cont_information">
+            <h3>${data[i]['order']}</h3>
+            <div class="info_fut">
+              <p>Numero de expediente: ${data[i]['proceeding']}_${data[i]['id']}</p>
+              <p>Emitido el: ${data[i]['date']}</p>
+              <div class="pay_fut"><p>Estado de tramite:</p>${estado}</div>
+            </div>
+            <a class="viewfut" href="proceedings?code=${data[i]['code']}">View</a>
+          </div>
+          <div class="cont_img">
+            <img src="{% static 'img/doc.png' %}">
+          </div>
+        </div>           
+      `;
+      document.getElementById("fits_content_first").innerHTML += html_fut;
+    }
+  }
+  async function paint_futs(allOrOne, finich_state){
+    // OBTENEMOS LA DATA DE FUTS POR MEDIO DE AJAX
+    data = await get_futs(allOrOne, finich_state);
+    // PINTAMOS TODOS LOS FUTS EN LA PANTALLA
+    paint_fut_init(data);
+  }
+  function cambir_linea(seleccionado){
+    // MODIFICAMOS LOS ESTILOS DEL SELECT DEL DAV BAR
+    document.getElementById("fut_line1").classList.remove("fl_activate");
+    document.getElementById("fut_line2").classList.remove("fl_activate");
+    document.getElementById("fut_line3").classList.remove("fl_activate");
+    if(seleccionado == 1){
+      document.getElementById("fut_line1").classList.add("fl_activate");
+    }else if(seleccionado == 2){
+      document.getElementById("fut_line2").classList.add("fl_activate");
+    }else{
+      document.getElementById("fut_line3").classList.add("fl_activate");
+    }
+  }
+</script>
+  
+    {% block content_fut %}
+    {% endblock %}
+  
+</div>
+<script>
+  //La funcion está en 'base.html'
+  //es para el navbar
+  activation('consultar_tramite');
+</script>
+{% endblock %}

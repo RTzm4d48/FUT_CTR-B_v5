@@ -8,7 +8,7 @@ export function create_pop_notifi(){
               Notificaciones
               </div>
               <div class="lado">
-                <img class="closeImg" src="/static/img/close.png">
+                <img class="closeImg" src="/static/img/close2.png">
               </div>
           </div>
           <div id="content_not_princip2" class="content_Desp">
@@ -60,7 +60,7 @@ function paint_noti(midata){
 
     let pendiente = "";
     if(midata['data'][i]['view'] == false){
-      pendiente = "style='background:gray;'";
+      pendiente = "style='background:#E8F5FD;'";
     }else{
       pendiente = "";
     }
@@ -93,7 +93,7 @@ function paint_noti_2(midata){
     let date = calcularTiempoTranscurrido(midata['data'][i]['date']);
     let pendiente = "";
     if(midata['data'][i]['view'] == false){
-      pendiente = "style='background:gray;'";
+      pendiente = "style='background:#CCE4F3;'";
     }else{
       pendiente = "";
     }

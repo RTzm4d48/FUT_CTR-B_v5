@@ -91,9 +91,8 @@ def loading_ticket(request):
 def moreloading_ticket(request):
 	id_ticket = request.GET.get('id_ticket')
 	# AQUI OBTENEMOS LOS DATOS DEL MODELO DESARROLLO
-	
-	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('desarrollo', 'charge', 'date').first()
-	
-	print("TRISTE")
-	
-	return JsonResponse({'more_tickets':desarrollo})
+	print("TICKET DESARROLLO");
+	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('name', 'desarrollo', 'charge', 'date')#.first()
+	resultados_json = list(desarrollo)
+	print(resultados_json)
+	return JsonResponse({'more_tickets':resultados_json})

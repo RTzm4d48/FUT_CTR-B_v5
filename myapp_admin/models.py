@@ -13,6 +13,10 @@ def generate_code():
     code = ''.join(random.choice(characters) for _ in range(7))
     return code
 
+def generate_code_2():
+    letras_permitidas = 'abcdfghijkmnopqrstuvwyz12345667890ABCDFGHIJKMNOPQRSTUVWYZ'  # 'abcdefghijk'
+    return ''.join(random.choice(letras_permitidas) for _ in range(6))
+
 class Admins(models.Model):
     AREA_OPTIONS = [
         ('treasury', 'Tesoreria'),
@@ -81,6 +85,8 @@ class ticket(models.Model):
     admin_id = models.ForeignKey(Admins, on_delete=models.CASCADE) #ADMIN ID
     user_id = models.ForeignKey(User, on_delete=models.CASCADE) #USER ID
     view = models.BooleanField(default=False)
+    # NEW DATES
+    code = models.CharField(max_length=6, default=generate_code_2)
     def __str__(self):
         the_fut_id = str(self.fut_id.id)
         the_admin_id = str(self.admin_id.id)
@@ -93,6 +99,7 @@ class ticket_desarrollo(models.Model):
     charge = models.CharField(max_length=60) #CARGO ejem. (tesorera), (alumno)
     date = models.DateTimeField(null=True)
     ticket_id = models.ForeignKey(ticket, on_delete=models.CASCADE)
+    img_identify = models.BinaryField(default=b'')# imagen sello de identificacion solo para admins
     def __str__(self):
         the_ticket_id = str(self.ticket_id.id)
         return f"ID: {self.id} - {self.name} - {self.charge} - {the_ticket_id}"
@@ -150,3 +157,25 @@ class ruta_tramite(models.Model):
     def __str__(self):
         num_id = str(self.fut_id.id)
         return self.tittle+" - "+self.name+" - "+num_id
+
+# ESTE MODELO ES PARA CUANDO SECRETARIA PROCESE LE DOCUMENTO ENVIANDOSELO A DIRECCIÓN
+class secretary_send_document(models.Model):
+    tittle = models.CharField(max_length=300)# Aqui iral el order, lo que se esta solicitando en el fut
+    the_file = models.BinaryField(default=b'')# PDF
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
+    coment = models.TextField()
+
+    def __str__(self):
+        id_fut = str(self.fut_id.id)
+        return id_fut+" - "+self.tittle
+
+# ESTE MODELO ES PARA CUANDO DIRECCION PUBLIQUE EL DOCUMENTO
+class direction_public_document(models.Model):
+    tittle = models.CharField(max_length=300)# Aqui iral el order, lo que se esta solicitando en el fut
+    the_file = models.BinaryField(default=b'')# PDF
+    fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
+    expediente = models.CharField(max_length=50)
+
+    def __str__(self):
+        id_fut = str(self.fut_id.id)
+        return id_fut+" - "+self.tittle

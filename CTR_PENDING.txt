@@ -18,22 +18,38 @@
 
 (DONE)- crear una condicional que determine si hay o no un attach file, y si no enviaremos un byte vacio.
 
-- insertar a notification cuando se reporte, procece.
+(DONE)- insertar a notification cuando se reporte, procece.
 
-- insertar los tickets con la id real de los usuarios
+(DONE)- insertar los tickets con la id real de los usuarios
 
 (DONE)- arreglar lo del required para el File Foto baucher (hacerlo con js)
-- crear un modelo para las notificaciones de los tickets
-- algunos tramires te piden adjuntar archivos (ojo con eso)
+(DONE)- crear un modelo para las notificaciones de los tickets
+(DONE)- algunos tramires te piden adjuntar archivos (ojo con eso)
 
 
 - tenemos que obtener el nombre del admin origen y mostrarlo en view fut
 - mostrar la fecha en la ventana de reporte
 
-- arreglar el proceso de enviado del fur entre los admins
+(DONE)- arreglar el proceso de enviado del fut entre los admins
 
-- reparar el proces del fut de cada administrador hasta que el tramite finalice.
+(DONE)- reparar el proces del fut de cada administrador hasta que el tramite finalice.
 
-- FINALIZAR EL TRAMITE DE Secretaria Y Dirección.
+(DONE)- FINALIZAR EL TRAMITE DE Secretaria Y Dirección.
 
--crear un modelo 'secretary_send_process' para cuando la secretaria procece se guarde el pdf y un comentario
+(DONE)- crear un modelo 'secretary_send_document' para cuando la secretaria procece se guarde el pdf y un comentario
+(DONE)- lo mismo con dirección, crear un modelo para cuando publique el documento de tramite.
+
+- agregar el reporte entre adminis a la ruta de tramite
+(DONE)- extraer de la base de datos las imagenes del baucher y mostrarlo en el viw fut de los admins.
+(DONE)- al seleccionar un archivo se tiene que guardar en tmp (para que la secretaria procece). (se hizo con un form)
+
+(DONE)- completar el process de la secretaria y luego seguir el la publicación de dirección.
+- descargar el documento procesado por recretaria en dirección.
+
+(DONE)- abrir los ticket, agregar funcionalidades
+(DONE)- Arreglar el formulario del metodo de pago
+- crear la interfaz para observaciones
+
+- Averiguar como enviar datos json por render desde el servidor a el usuario
+
+- colocar un show dentro de observation_admin y otro show, dentro de observation/tickets

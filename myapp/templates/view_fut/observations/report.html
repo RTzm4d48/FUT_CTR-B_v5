@@ -1,0 +1,25 @@
+{% extends 'view_fut/observations.html' %}
+{% load static %}
+
+{% block linkstyle %}
+{% endblock %}
+
+
+{% block content_2 %}
+
+<div id="cont_register">
+	<h3 class="empty">La lista de reportes esta bacia...</h3>
+</div>
+<script type="module">
+	import { open_observations, style_navbar, manage_rute } from "{% static 'scripts/view_fut/observations/script.js' %}";
+	import { obtenerValorCookie } from '/static/scripts/cookies.js';
+	// open_observations();
+	style_navbar("report");
+
+	//OBTNEMROS LA COOKIE ORDER
+	let fut_order = obtenerValorCookie('fut_order');
+	// -----
+	let list_name = [fut_order, "Reportes"];
+	manage_rute(list_name);
+</script>
+{% endblock %}

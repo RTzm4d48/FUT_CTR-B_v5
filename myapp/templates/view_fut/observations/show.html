@@ -1,0 +1,110 @@
+{% extends 'view_fut/observations/observation_admin.html' %}
+<!-- {% load static %} -->
+
+
+{% block content_3 %}
+<style>
+	.cont_message{
+		background: white;
+		width: calc(100% - 20px);
+		margin: 0px auto;
+		height: calc(100vh - 200px);
+		overflow-y: scroll;
+	}
+	.davbbar{
+		width: calc(100% - 20px);
+		background: #E2E2E2;
+		padding: 10px;
+		border-radius: 7px 7px 0px 0px;
+		display: flex;
+		align-items: center; /*IMPORTANTE*/
+	}
+	.davbbar p{
+		margin: 0px;
+		padding: 0px;
+		font-weight: bold;
+		font-size: smaller;
+	}
+	.davbbar img{
+		height: 20px;
+		margin: auto 5px;
+	}
+	.atras{
+		cursor: pointer;
+	}
+	.atras:hover{
+		opacity: 80%;
+	}
+	.block{
+		display: flex;
+/*		background: yellow;*/
+	  	align-items: center; /*IMPORTANTE*/
+	  	margin: 5px 0px;
+	}
+	.cont_main_message{
+		padding: 15px;
+	}
+	.user_img{
+		height: 40px;
+		border-radius: 50%;
+		margin: 0px 5px;
+		background: red;
+	}
+	.block h4{
+		margin: 0px;
+		padding: 0px;
+	}
+	.block p{
+		white-space: pre-line;
+		font-size: small;
+	}
+	.text_space{
+/*		background: green;*/
+		width: calc(100% - 100px);
+		margin: 0px auto;
+	}
+	.img_identification{
+		height: 70px;
+	}
+	.respoder{
+		color: red;
+		margin: 5px 10px 20px 10px;
+		background: none;
+		border: none;
+		align-items: center; /*IMPORTANTE*/
+		display: flex;
+		cursor: pointer;
+	}
+	.respoder img{
+		height: 20px;
+		margin: 0px 5px;
+	}
+	.respoder:hover{
+		opacity:80%;
+	}
+</style>
+
+<script type="text/javascript">
+	function create_desarrollo(){
+		console.log("EMBAPE_22");
+		console.log("{{ id_ticket }}");
+		var id_ticket = "{{ id_ticket }}";
+		document.getElementById("pop_windows_create_desarrollo").classList.remove("ocultar");
+		document.getElementById("form_id_ticket2").value = id_ticket;
+		
+	}
+</script>
+
+<!-- AQUI VA EL CONTENT PARA EL MESSAGE -->
+<script type="module">
+	import { style_navbar, messages_ticket, manage_rute } from "{% static 'scripts/view_fut/observations/script.js' %}";
+	// COOKIE MANAGE
+	import { obtenerValorCookie } from '/static/scripts/cookies.js';
+	messages_ticket("{{ id_ticket }}");
+	//OBTNEMROS LA COOKIE ORDER
+	let fut_order = obtenerValorCookie('fut_order');
+	// ESCRIBIMOS LA RUTA
+	let list_name = [fut_order, "Observaciones", "Se adjunto la foto del bauche..."];
+	manage_rute(list_name);
+</script>
+{% endblock %}

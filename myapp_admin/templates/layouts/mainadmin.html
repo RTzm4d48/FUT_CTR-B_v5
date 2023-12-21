@@ -110,15 +110,15 @@
             opacity: 1;
           }
     </style>
-    <div id="pop_windows_report" class="cont_pop ocultar">
+    
         {% block up_pop_space %}
         {% endblock %}
-    </div>
+    
     <script>
         function close_pop_up(){
-            document.getElementById("pop_windows_report").classList.add("ocultar");
-            document.getElementById("id_report_content").classList.add("ocultar");
-            document.getElementById("id_send_baucher").classList.add("ocultar");
+            var contenedor_pop_up = document.getElementById("pop_windows_report");
+            contenedor_pop_up.innerHTML = "";
+            contenedor_pop_up.classList.add("ocultar");
         }
     </script>
     <!-- ------/POP-UP CONTENT------- -->

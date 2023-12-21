@@ -55,7 +55,7 @@ function create_pop(){
             	Tickets
             	</div>
             	<div class="lado">
-            		<img class="closeImg" src="/static/img/close.png">
+            		<img class="closeImg" src="/static/img/close2.png">
             	</div>
         	</div>
         	<div id="content_not_princip" class="content_Desp">

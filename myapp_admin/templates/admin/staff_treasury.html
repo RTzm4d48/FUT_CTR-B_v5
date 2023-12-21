@@ -482,7 +482,7 @@ var role = "{{role}}";
     }
     .report_content input[type="text"]{
         background: #D8D8D8;
-        
+        width: calc(100% - 14px);
         padding: 7px;
         border-radius: 4px;
         border: none;
@@ -509,39 +509,150 @@ var role = "{{role}}";
     #id_admins_r:focus{
         outline: none;
     }
+    .cont_tramite{
+        width: 200px;
+        height: 30px;
+        background: #0064D6;
+        color: white;
+        border-radius: 5px;
+        display: flex;
+    }
+    .cont_tramite:hover{
+        background: #005DC8;
+    }
+    .cont_tramite label{
+/*        background: salmon;*/
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center; /*IMPORTANTE*/
+        align-items: center; /*IMPORTANTE*/
+        text-align: center;
+        opacity: 100%;
+        cursor: pointer;
+    }
+    .cont_tramite img{
+        height: 50%;
+        margin: auto 5px;
+    }
+    .report_content_img{
+        margin: auto;
+        padding: 0px;
+        height: 90%;
+    }
+    .img_pop{
+        height: 95%;
+        width: auto;
+        display: flex;
+    }
+    .img_pop img{
+        height: 100%;
+        min-width: 10%;
+        max-width: 100%;
+        margin: auto;
+    }
+    #upload_direction{
+        display: flex;
+        flex-direction: column;
+
+    }
 </style>
+<div id="pop_windows_report" class="cont_pop ocultar">
+    <div id="id_report_content" class="pop_up_window ocultar">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <div class="report_content">
+            <h3>Reportar</h3>
+            <label>Título:</label>
+            <input id="tittlee" value="" type="text" placeholder="Ingrese un Título" name="">
 
-<div id="id_report_content" class="pop_up_window ocultar">
-    <div onclick="close_pop_up()" class="close" style="right: 15px;">
-      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+            <label>Descripción:</label>
+            <textarea id="description" placeholder='Ingrese una Descripción' name=""></textarea>
+
+            <label for="frutas">Cambiar ruta de Reporte:</label>
+            <select id="id_admins_r" name="admins">
+              <!-- <option value="manzana">Manzana</option> -->
+            </select>
+
+            <button onclick="reportar()">Reportar</button>
+        </div>
     </div>
-    <div class="report_content">
-        <h3>Reportar</h3>
-        <label>Título:</label>
-        <input id="tittlee" value="" type="text" placeholder="Ingrese un Título" name="">
 
-        <label>Descripción:</label>
-        <textarea id="description" placeholder='Ingrese una Descripción' name=""></textarea>
+    <div id="id_send_baucher" class="pop_up_window ocultar">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <div class="report_content">
+            <h3>Enviar FUT</h3>
+            <label>Numero del Baucher:</label>
+            <input id="num_boleta" value="3456543" type="text" placeholder="Ingrese el número de la Baucher" name="">
 
-        <label for="frutas">Cambiar ruta de Reporte:</label>
-        <select id="id_admins_r" name="admins">
-          <!-- <option value="manzana">Manzana</option> -->
-        </select>
-
-        <button onclick="reportar()">Reportar</button>
+            <button id="id_process_btn">Procesar</button>
+        </div>
     </div>
-</div>
 
-<div id="id_send_baucher" class="pop_up_window ocultar">
-    <div onclick="close_pop_up()" class="close" style="right: 15px;">
-      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    <div id="id_publuc_direction" class="pop_up_window ocultar">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <div class="report_content">
+            <form id="upload_direction" action="{% url 'n_direction_process_doc' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3>PUBLICAR TRAMITE</h3>
+                <label>Numero de Expediente:</label>
+            
+                <input id="num_expediente" value="" type="text" placeholder="Ingrese el número de la Baucher" name="num_expediente">
+                
+                <label>Archivo de Tramite firmado:</label>
+                <div class="cont_tramite">
+                    <input type="file" id="pdf_file_direction" style="display: none;" name="file_direction" accept=".pdf">
+                    <label id="txt_pdf_direct" for="pdf_file_direction"><img src="{% static 'img/up_file.png' %}">Subir pdf</label>
+                </div>
+                <input id="select_pdf_direction" type="hidden" name="select_pdf_direction" value="">
+                <!-- DATOS DEL FUT -->
+                <input type="hidden" name="fut_id_d" value="{{ objs.id }}">
+                <input type="hidden" name="order_d" value="{{ objs.order }}">
+
+                <button id="id_btn_public">Publicar Tramite</button> 
+            </form>
+        </div>
     </div>
-    <div class="report_content">
-        <h3>Enviar FUT</h3>
-        <label>Numero del Baucher:</label>
-        <input id="num_boleta" value="3456543" type="text" placeholder="Ingrese el número de la Baucher" name="">
 
-        <button id="id_process_btn">Procesar</button>
+    <div id="id_procces_secretary" class="pop_up_window ocultar">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <div class="report_content">
+            <h3>PROCESAR TRAMITE</h3>
+            <label>Archivo de Tramite firmado:</label>
+            <form id="fileUploadForm" action="{% url 'n_secretary_process_doc' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="cont_tramite">
+                    <input type="file" id="pdf_file2_2" style="display: none;" name="file_pdf">
+                    <label id="text_pdfFile" for="pdf_file2_2"><img src="{% static 'img/up_file.png' %}">Subir pdf</label>
+                    <input id="select_pdf" type="hidden" name="reason" value="">
+                    <!-- DATOS DEL FUT -->
+                    <input type="hidden" name="fut_id_s" value="{{ objs.id }}">
+                    <input type="hidden" name="order_s" value="{{ objs.order }}">
+
+                </div>
+                <label>Descripcion General del Documento:</label>
+                <textarea id="description_general" placeholder='Especifique los requerimientos para su impresion' value="" name="secretary_descript"></textarea>
+
+                <button id="id_btn_process_secretary">Procesar</button>
+            </form>
+        </div>
+    </div>
+    <!-- IMAGEN POP-UP CONTENT -->
+    <div id="id_pop_img" class="pop_up_window img_pop ocultar">
+        <div onclick="close_pop_up()" class="close" style="right: 15px;">
+          <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+        </div>
+        <div id="id_cont_img_pop" class="report_content report_content_img">
+            <!-- AQUI VA LA IMAGEN QUE SE GENERA POR JS -->
+        </div>
     </div>
 </div>
 <script>
@@ -615,5 +726,5 @@ var role = "{{role}}";
     }
 </script>
 
-<script src="/static/scripts/admin/script_module.js?" type="module" charset="utf-8" async defer></script>
+<script src="/static/scripts/admin/script_module.js" type="module" charset="utf-8" async defer></script>
 {% endblock %}

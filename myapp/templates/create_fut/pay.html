@@ -635,10 +635,10 @@
                 <div class="column1">
                     <p>metodo de pago:</p>
                     <div class="pay_content">
-                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="deposito" checked="checked" onclick="capturarValor(this)"/></div> Deposito
+                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="0" checked="checked" onclick="capturarValor(this)"/></div> Deposito
                     </div>
-                    <div class="pay_content">
-                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="pasarela" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
+                    <div class="pay_content ocultar">
+                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="5" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
                         <img src="{% static 'img/visa.png' %}" alt="">
                     </div>
                 </div>

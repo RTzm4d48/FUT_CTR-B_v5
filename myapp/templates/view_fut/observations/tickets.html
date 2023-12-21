@@ -1,0 +1,102 @@
+{% extends 'view_fut/observations.html' %}
+{% load static %}
+
+{% block linkstyle %}
+{% endblock %}
+
+{% block content_2 %}
+
+<script type="text/javascript">
+	// ---------------
+	function createticket(){
+		console.log("EMBAPE");
+		document.getElementById("pop_windows_create_ticket").classList.remove("ocultar");
+		send_ticket();
+	}
+	// OBTENER LA COOKIE
+	function obtenerValorCookie(nombre) {
+	    // Obtiene todas las cookies del documento y las divide en un array.
+	    var cookies = document.cookie.split(';');
+
+	    // Itera sobre las cookies para buscar la que tiene el nombre específico.
+	    for (var i = 0; i < cookies.length; i++) {
+	        var cookie = cookies[i].trim();
+	        // Verifica si la cookie comienza con el nombre específico.
+	        if (cookie.indexOf(nombre + "=") === 0) {
+	            // Retorna el valor de la cookie.
+	            return cookie.substring(nombre.length + 1, cookie.length);
+	        }
+	    }
+
+	    // La cookie no fue encontrada.
+	    return null;
+	}
+	function Ramdom_string() {
+	    const caracteres = '123456789';
+	    let resultado = '';
+	    for (let i = 0; i < 5; i++) {
+	        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+	        resultado += caracteres.charAt(indiceAleatorio);
+	    }
+	    return resultado;
+	}
+	function data_for_from(data){
+		console.log("MONEYYYY");
+		console.log(data['data']);
+		// VARIABLES
+		// let name = data['name'][''];
+		let num_ticket = data['data']['num_ticket'];
+		let id_ticket = data['data']['id'];
+
+		document.getElementById("form_encavezado").innerHTML = `<strong>De</strong> Alumno <strong>Para</strong> Tesoreria | ${num_ticket}`;
+		document.getElementById("form_id_ticket").value = id_ticket;
+	}
+	function send_ticket(){
+		// VARIABLES
+		var id_fut = obtenerValorCookie("fut_id");
+		var num_ticket = Ramdom_string();
+		var user_name = "{{ user.username }}";
+		var user_id = "{{ user.id }}"
+
+		//AJAX
+		$.ajax({
+		    url: "/create_user_ticket_path/", 
+		    method: "GET",
+		    data:{
+		        'id_fut':id_fut,
+		        'num_ticket':num_ticket,
+		        'user_name':user_name,
+		        'user_id':user_id,
+		    },
+		    success: function(response){
+		        const midata = response; 
+		        data_for_from(midata);
+		    },
+		    error: function() {
+		        alert("Ocurrió un error al cargar el contenido.");
+		    }
+		});
+	}
+</script>
+
+<div id="cont_register">
+	<!-- <p class="empty">Por ahora no tiene ninguna observación</p> -->
+</div>
+<div id="cont_low_register">
+	
+</div>
+<script type="module">
+	import { open_observations, style_navbar, manage_rute, prueba_m } from "{% static 'scripts/view_fut/observations/script.js' %}";
+	import { obtenerValorCookie } from '/static/scripts/cookies.js';
+
+	open_observations('alumno');
+	style_navbar("ticket");
+
+	//OBTNEMROS LA COOKIE ORDER
+	let fut_order = obtenerValorCookie('fut_order');
+	// -----
+	let list_name = [fut_order, "Tickets"];
+	manage_rute(list_name);
+
+</script>
+{% endblock %}

@@ -1,10 +1,10 @@
 from django.urls import path, include
 from . import views # corto y pego de ./mysite/urls.py
 from . import vws_createfut_process
-from . import vws_view_fut
 from . import views_createFUT
 from . import views_notification
 from . import views_view_fut
+from . import views_observations
 
 urlpatterns = [
     path('', views.index, name="n_home"), # corto y pego de ./mysite/urls.py
@@ -31,8 +31,11 @@ urlpatterns = [
 
     # view fut
     #vws_view_fut AQUI ESTARA TODAS LAS VITAS PARA VER EL TRAMITE REALIZADO
-    path('my_fut/in-progress', vws_view_fut.view_fut_in_progress, name='n_in_progress'),
-    path('my_fut/finished', vws_view_fut.view_fut_finished, name='n_finished'),
+    path('my_fut/fut_consult_path/', views_view_fut.fut_consult, name="n_fut_consult"),
+    path('my_fut/fut_all_path', views_view_fut.fut_all, name="n_fut_all"),
+    path('my_fut/fut_process_path', views_view_fut.fut_process, name="n_fut_process"),
+    path('my_fut/fut_finish_path', views_view_fut.fut_finish, name="n_fut_finish"),
+
     
     path('loader', views.view_loader, name='n_loader'),
 
@@ -45,4 +48,17 @@ urlpatterns = [
     path('tracking_path/', views_view_fut.tracking, name="n_tracking"),
     path('pros_route_path/', views_view_fut.pros_route, name="n_pros_route"),
     path('view_fut_path/', views_view_fut.view_fut, name="n_view_fut"),
+
+    # OBSERVACIONES
+    path('my_fut/observation/', views_observations.init_observations, name="n_init_observations"),
+    path('my_fut/observation/tickets', views_observations.tickets_path, name="n_tickets_path"),
+    path('my_fut/observation/Reportes', views_observations.report_path, name="n_report_path"),
+    path('my_fut/observation/show', views_observations.show_path, name="n_show_path"),
+    path('my_fut/observation/show_redirect/<str:code>/', views_observations.redirect_show, name="n_redirect_show"),
+    # funciones
+    path('get_db_ticket_path/', views_observations.get_db_ticket, name="n_get_db_ticket"),
+    path('get_desarrollo_db_path/', views_observations.get_desarrollo_db, name="n_get_desarrollo_db"),
+    path('update_desarrollo_ticket_path/', views_observations.update_desarrollo_ticket, name="n_update_desarrollo_ticket"),
+    path('create_user_ticket_path/', views_observations.create_user_ticket, name="n_create_user_ticket"),
+
 ]

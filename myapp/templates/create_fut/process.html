@@ -452,6 +452,13 @@
             </div>
         </div>
         <!-- - -->
+        <div id="id_cont_require" class="fila_form ocultar">
+            <div id="espace_solicito" class="unEspacio_entero">
+                <input id="id_solicito" type="text" class="red_c" name="myrequest" value="" placeholder="Especifique que es lo que quiere solicitar">
+                <label>Solicito</label>
+            </div>
+        </div>
+        <!-- - -->
         <div class="fila_form">
             <div class="unEspacio_entero">
                 <textarea id="name" name="reason" cols="10" rows="5" placeholder="Ingrese el motivo por el que esta haciendo esta solicitud." required></textarea>
@@ -459,13 +466,6 @@
             </div>
         </div>
         <!-- - -->
-        <div class="fila_form">
-            <div id="espace_solicito" class="unEspacio_entero">
-                <input id="id_solicito" type="text" class="red_c" name="myrequest" value="" placeholder="Especifique que es lo que quiere solicitar" disabled>
-                <label>Solicito</label>
-            </div>
-        </div>
-       
         
         <div class="cont_buttons_form">
             <!-- LO QUE RECIBIMOS DE IDENTIFICACIÓN -->
@@ -554,10 +554,12 @@
 
     function validacion_proccess(midata){
         if(midata['data']['tipo_de_servicio'] == "Otros"){
-            document.getElementById("id_solicito").disabled = false;
+            // document.getElementById("id_solicito").disabled = false;
+            document.getElementById("id_cont_require").classList.remove("ocultar");
             window.solicito = true;
         }else{
-            document.getElementById("id_solicito").disabled = true;
+            // document.getElementById("id_solicito").disabled = true;
+            document.getElementById("id_cont_require").classList.add("ocultar");
             window.solicito = false;
         }
         if(midata['data']['require_attach'] == true){

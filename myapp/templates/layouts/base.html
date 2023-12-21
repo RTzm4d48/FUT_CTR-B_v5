@@ -360,7 +360,7 @@ body{
             <a id="nav2" class="nav" href="{% url 'n_new_fut' %}">Nuevo tramite</a>
           </div>
           <div class="mi_nav">
-            <a id="nav3" class="nav" href="{% url 'n_in_progress' %}">Consultar tramites</a>
+            <a id="nav3" class="nav" href="{% url 'n_fut_all' %}">Consultar tramites</a>
           </div>
           <div class="mi_nav">
             {# <a id="nav4" class="nav" href="">Acerca de</a> #}
@@ -406,14 +406,16 @@ body{
             }
 /*            CUADRO DESPLEGABLE- ----------------------*/
             .desplegable_content{
-              background: #474747;
+              background: #F6F7F8;
               width: 300px;
               height: 350px;
               right: -50px;
               top: 30px;
               position: absolute;/*importante*/
               border-radius: 5px;
-              color: white;
+              color: gray;
+              box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+              border: 1px solid #D6DFE5;
             }
             .desplegable{
 /*              background: gray;*/

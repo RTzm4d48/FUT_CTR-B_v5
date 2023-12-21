@@ -8,7 +8,7 @@ import io
 from django.core.files.base import ContentFile
 from io import BytesIO
 
-from myapp_admin.views import send_definity, log_verifying
+from myapp_admin.views_get_fut import send_definity, log_verifying
 
 def direction_download(request):
     id = request.GET.get('id')

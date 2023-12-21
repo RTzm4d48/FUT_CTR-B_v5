@@ -11,65 +11,68 @@ import random, qrcode
 
 def proceedings(request):
     code_ = request.GET.get('code')
-    object = fut.objects.filter(code=code_).values('id', 'name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email').first()
-    dni = str(object['dni'][:3])
-    #Email process
-    email = str(object['email'])
-    
-    if(email == 'null'):
-        email_code = "- - -"
+    if(code_ == None):
+        return HttpResponse("<h1>404 ESTA PAGINA NO EXISTE :(</h1>")
     else:
-        print("PUES ES NULL")
-        e = email[0]
-        l = email[-11]
-        nummail = len(email)
-        nummail = nummail-12 # (10 de @gmail.com) (2 de los dos digitos que si se ven)
+        object = fut.objects.filter(code=code_).values('id', 'name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email').first()
+        dni = str(object['dni'][:3])
+        #Email process
+        email = str(object['email'])
+        
+        if(email == 'null'):
+            email_code = "- - -"
+        else:
+            print("PUES ES NULL")
+            e = email[0]
+            l = email[-11]
+            nummail = len(email)
+            nummail = nummail-12 # (10 de @gmail.com) (2 de los dos digitos que si se ven)
 
-        #generamos los asteriscos
-        asterisk = []
-        for i in range(nummail):
-            asterisk.append('*')
-        asterisk_Str = ''.join(asterisk)
-        email_code = e+asterisk_Str+l+'@gmail.com'
+            #generamos los asteriscos
+            asterisk = []
+            for i in range(nummail):
+                asterisk.append('*')
+            asterisk_Str = ''.join(asterisk)
+            email_code = e+asterisk_Str+l+'@gmail.com'
 
-    # My params for css
-    progressbar = list(range(9)) # for progress bar lines
+        # My params for css
+        progressbar = list(range(9)) # for progress bar lines
 
-    details = []
-  
-    x = 20
-    for i in range(4):# aquí ponemos el numero de cuadros de detalles que habra en la interfaz
-        details.append(x)
-        x += 20
-    # LO QUE VENDRA DE UNA BASE DE DATOS:
-    my_id = 1
-    loco = []
-    
-    num_registros = process.objects.filter(fut_id_id=object['id']).count()
-    print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
+        details = []
+      
+        x = 20
+        for i in range(4):# aquí ponemos el numero de cuadros de detalles que habra en la interfaz
+            details.append(x)
+            x += 20
+        # LO QUE VENDRA DE UNA BASE DE DATOS:
+        my_id = 1
+        loco = []
+        
+        num_registros = process.objects.filter(fut_id_id=object['id']).count()
+        print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
 
-    for i in range(num_registros):
-        data = process.objects.filter(stage=i, fut_id_id=object['id']).values('tittle', 'name', 'reception', 'exit', 'num').first()
-        loco.append(data)
-    
+        for i in range(num_registros):
+            data = process.objects.filter(stage=i, fut_id_id=object['id']).values('tittle', 'name', 'reception', 'exit', 'num').first()
+            loco.append(data)
+        
 
-    left = 20 # css left details picture
-    return render(request, 'view_fut/proceedings.html', {
-        'fut_id': object['id'],
-        'Name': object['name'],
-        'Dni': dni,
-        'Order': object['order'],
-        'Proceeding': object['proceeding'],
-        'Program': object['program'],
-        'Progressbar': progressbar,
-        'Details': details,
-        'Left': left,
-        'Email_code': email_code,
-        'Email': email,
-        'Password': object['password'],
-        'Data': loco,
-        'Num_process': num_registros
-    })
+        left = 20 # css left details picture
+        return render(request, 'view_fut/proceedings.html', {
+            'fut_id': object['id'],
+            'Name': object['name'],
+            'Dni': dni,
+            'Order': object['order'],
+            'Proceeding': object['proceeding'],
+            'Program': object['program'],
+            'Progressbar': progressbar,
+            'Details': details,
+            'Left': left,
+            'Email_code': email_code,
+            'Email': email,
+            'Password': object['password'],
+            'Data': loco,
+            'Num_process': num_registros
+        })
 
 # para generear el expediente
 async def generate_proceedings():

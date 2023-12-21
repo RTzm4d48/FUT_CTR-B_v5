@@ -526,8 +526,7 @@ margin: 0px auto 40px auto;
 .sapace_user{
     width: 100%;
     display: flex;
-    
-/*background: yellowgreen;*/
+/*    background: yellowgreen;*/
 }
 .ladoB{
 /*background: salmon;*/
@@ -588,7 +587,7 @@ margin: 0px auto 40px auto;
     margin: 5px 0px 0px 0px;
     height: 70px;
 }
-.cont_of_ticket button{
+#btn_answer{
     align-items: center;
     display: flex;
     justify-content: center; /*IMPORTANTE*/
@@ -603,10 +602,10 @@ margin: 0px auto 40px auto;
     font-weight: bold;
     color: red;
 }
-.cont_of_ticket button:hover{
+#btn_answer:hover{
     opacity: 100%;
 }
-.cont_of_ticket button img{
+#btn_answer img{
     height: 15px;
     margin: auto 5px;
 }

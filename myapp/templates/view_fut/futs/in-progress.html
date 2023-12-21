@@ -1,51 +1,15 @@
-{% extends 'view_fut/fut.html' %}
+{% extends 'view_fut/fut_consult.html' %}
 {% load static %}
 
-
-{# LOS ESTILOS ESTAN EN 'view_fut/fut.html' #}
-
 {% block content_fut %}
-	{# ---- #}
-  <div class="cont_fut">
-    <div class="cont_information">
-      <h3>CERTIFICADO DE ESTUDIOS</h3>
-      <div class="info_fut">
-        <p>Numero de expediente: 45679</p>
-        <p>Emitido el: 26-10-2023</p>
-        <div class="pay_fut"><p>Estado de factura:</p><p style="color: red;">Sin pagar</p></div>
-      </div>
-      <a class="viewfut" href="proceedings?code=VvGodejkMHA">View</a>
-    </div>
-    <div class="cont_img">
-      <img src="{% static 'img/doc.png' %}">
-    </div>
-  </div>
-  {# ---- #}
-  {# ---- #}
-  <div class="cont_fut">
-    <div class="cont_information">
-      <h3>CARTA DE PRESENTACIÓN PRACTICA PRE-PROF</h3>
-      <div class="info_fut">
-        <p>Numero de expediente: 45679</p>
-        <p>Emitido el: 26-10-2023</p>
-        <div class="pay_fut"><p>Estado de factura:</p><p style="color: green;">Pagado</p></div>
-      </div>
-      <a class="viewfut" href="proceedings?code=VvGodejkMHA">View</a>
-    </div>
-    <div class="cont_img">
-      <img src="{% static 'img/doc.png' %}">
-    </div>
-  </div>
-  {# ---- #}
-  {# PARA AGREGAR Y QUITAR LA LINEA DE RESALTADO DEL NAVBAR #}
-  <script>
-  cambir_linea();
-  function cambir_linea(){
-  	const fut_line1 = document.getElementById("fut_line1");
-  	const fut_line2 = document.getElementById("fut_line2");
 
-  	fut_line1.classList.add("fl_activate");
-  	fut_line2.classList.remove("fl_activate");
-  }
-  </script>
+<div id="fits_content_first" class="content_first">
+</div>
+
+<script>
+// MODIFICAMOS LOS ESTILOS DEL SELECT DEL DAV BAR
+cambir_linea(2);
+// ESTO ES PARA GENERAR LOS FUTS EN PANTALLA
+paint_futs('one', false);
+</script>
 {% endblock %}

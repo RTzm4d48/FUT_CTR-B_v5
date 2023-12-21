@@ -37,6 +37,15 @@ function send_fut(){
     document.getElementById("id_send_baucher").classList.remove("ocultar");
     document.getElementById("pop_windows_report").classList.remove("ocultar");
 }
+function issued_document(){
+    // document.getElementById("cuestion_inssued2").style.display = "block"
+    document.getElementById("id_publuc_direction").classList.remove("ocultar");
+    document.getElementById("pop_windows_report").classList.remove("ocultar");
+}
+function process_secretary(){
+    document.getElementById("id_procces_secretary").classList.remove("ocultar");
+    document.getElementById("pop_windows_report").classList.remove("ocultar");
+}
 function clesed(){
     document.getElementById("login-form-popup").style.display = "none";
     document.getElementById("cuestion_send").style.display = "none";
@@ -76,9 +85,6 @@ function issued_certificate(){
     document.getElementById("cuestion_inssued").style.display = "block"
     console.log('emitimos el certificado')
 }
-function issued_document(){
-    document.getElementById("cuestion_inssued2").style.display = "block"
-}
 
 function cuestion_send_inssued(){
     console.log("CONFIRMAMOS LA EMISION DEL SERTIFICADO")
@@ -86,12 +92,12 @@ function cuestion_send_inssued(){
     document.getElementById("inssued").style.display = "block"
 }
 // PARA DESCARGAR EL DOCUMENTO O CERTIFICADO
-function direction_download(){
-    console.log("Descargando");
+// function direction_download(){
+//     console.log("Descargando");
 
-    $.get('/download/', {'id': '{{objs.id}}'});
+//     $.get('/download/', {'id': '{{objs.id}}'});
     
-}
+// }
 
 //VARIABLES DE VIEW FUTs
 var id_cont_fut = document.getElementById("id_cont_fut");
@@ -139,6 +145,8 @@ function Show_PAY(){
     id_delhiden2.classList.add("fut_cont_B");
     //QUITAMOS EL COLOR_CONT  OCULTO Y QUITAMOS EL LLAMADO A LA FUNCIÓN
     id_colorFuncion2.classList.add("ocultar");
+
+    process_show_img();
 }
 function Hiden_PAY(){
     id_cont_pay.classList.add("fut_cont_A");
@@ -152,6 +160,42 @@ function Hiden_PAY(){
     id_colorFuncion2.classList.remove("ocultar");
 }
 var id_cont_ticket = document.getElementById("id_cont_ticket");
+function get_and_create_img(){
+    return new Promise(function (resolve, reject){
+        //AJAX
+        $.ajax({
+            url: "/obtain_img/",
+            method: "GET",
+            data:{
+                'fut_id': fut_id,// Esta variable fue declarada en view_fut.html
+            },
+            success: function(response){
+                const midata = response;
+                resolve(midata)
+            },
+            error: function() {
+                alert("Ocurrió un error al cargar el contenido.");
+            }
+        });
+    });
+}
+
+function paint_img(){
+    document.getElementById("img_pay_cont").innerHTML = `<img onclick="img_big()" class="img_pay" src="/static/tmp/pay_photo_${fut_id}.jpg" alt="">`;
+}
+
+async function process_show_img(){
+    // OBTENEMOS LA IMG DE PAGO Y LA ESCRIBIMOS EN LA CARPETA tmp
+    await get_and_create_img();
+    // AGREGAMOS LA ETIQUTA IMG CON EL CALL CORRESPONDIENTE
+    paint_img();
+}
+
+function img_big(){
+    document.getElementById("id_cont_img_pop").innerHTML = `<img src="/static/tmp/pay_photo_${fut_id}.jpg" alt="">`;
+    document.getElementById("pop_windows_report").classList.remove("ocultar");
+    document.getElementById("id_pop_img").classList.remove("ocultar");
+}
 
 function OpenTicket(){
     id_cont_ticket.classList.remove("ocultar");
@@ -231,60 +275,29 @@ async function generarStringAleatorio() {
 }
 
 // OPEN CONTENT TICKET
-function ContOpen_Ticket(i){
+async function ContOpen_Ticket(i, ticket_id){
     document.getElementById("idFront_ticket_"+i).classList.add("ocultar");
+    console.log("OPEN: "+i);
+    console.log("ID: "+ticket_id);
     let my_html = (`
         <div id="idBody_ticket_${i}" class="body_ticket open_tick">
-                    <div class="ticket_navbar" onclick="ContClose_Ticket(${i})">
-                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
-                            <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="white"></path>
-                        </svg>
-                        <p>El pago fue realizado incorrectamente poporop</p>
-                        <p style="opacity: 70%;margin: auto 10px auto auto;">N°78924</p>
-                    </div>
-                    <!-- ----USER BAR--- -->
-                    <div class="sapace_user">
-                        <div class="user_img">
-                            <img src="{% static 'img/admin_icon.png' %}" alt="">
-                        </div>
-                        <div class="user_datecontent">
-                            <div class="user_date">
-                                <div class="ladoB">
-                                    <h4>Diana Marta</h4>
-                                    <p>(Tesorera)</p>
-                                </div>
-                                <div class="ladoB" style="margin: auto 10px;">
-                                    <p>3 may 2023, 0:36</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <!-- -----TICKET---- -->
-                            <div class="cont_of_ticket">
-                                <p>
-                                    Buenas tardes estimado Edgar:
-
-                                    El monto de el tramite que esta haciendo es de S/. 50 y usted solo deposito
-                                    S/. 20, asi que para seguir con el proceso de trmite le tengo que pedir 
-                                    que complete el faltante del monto del tramite medienate 
-                                    otro deposito por BCP y envieme el Baucher por medio de este Ticket.
-
-                                    Att.
-                                </p>
-                                <div class="attach">
-                                    <p class="naranja"><img src="{% static 'img/attach_2.png' %}" alt="">tupa de regis...pdf</p>
-                                    <p><img src="{% static 'img/img2.png' %}" alt="">Capture Imag...jpg</p>
-                                    <p><img src="{% static 'img/img2.png' %}" alt="">Capture Imag...jpg</p>
-                                </div>
-                                <img src="{% static 'img/tesoreria_identification.jpg' %}" alt="">
-                                <br>
-                                <button><img src="{% static 'img/reply_red.png' %}" alt="">Responder</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="ticket_navbar" onclick="ContClose_Ticket(${i})">
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                    <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="white"></path>
+                </svg>
+                <p>El pago fue realizado incorrectamente poporop</p>
+                <p style="opacity: 70%;margin: auto 10px auto auto;">N°78924</p>
+            </div>
+            <!-- ----USER BAR--- -->
+            <div id="space_answer_${i}">
+                <!-- ----space_answer--- -->
+            </div>
+            <button id="btn_answer"><img src="/static/img/reply_red.png" alt="">Responder</button>
+        </div>
     `);
     
     document.getElementById("id_aqui_desplegable_content_"+i).innerHTML = my_html;
+    await add_answers(i, ticket_id);
 
     //SCROLL HACIA ABAJO
     const miElemento = document.getElementById('id_contFUT_p');
@@ -294,6 +307,56 @@ function ContOpen_Ticket(i){
         behavior: 'smooth'
     });
 }
+
+async function add_answers(num_for, id_ticket){
+    console.log("ESTAMOS EN ANSWER_");
+    var data_tickets = await show_more_ticket_date(id_ticket);
+    
+    // VARIABLES
+    let length = data_tickets['more_tickets']['length'];
+
+    for (let i = 0; i < length; i++) {
+        // VARIABLES
+        let titulo = data_tickets['more_tickets'][i]['name'];
+        let desarrollo = data_tickets['more_tickets'][i]['desarrollo'];
+        let charge = data_tickets['more_tickets'][i]['charge'];
+        let date = data_tickets['more_tickets'][i]['date'];
+
+        let content_answer = (`
+            <div class="sapace_user">
+                <div class="user_img">
+                    <img src="/static/img/admin_icon.png" alt="">
+                </div>
+                <div class="user_datecontent">
+                    <div class="user_date">
+                        <div class="ladoB">
+                            <h4>${titulo}</h4>
+                            <p>(${charge})</p>
+                        </div>
+                        <div class="ladoB" style="margin: auto 10px;">
+                            <p>${date}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- -----TICKET---- -->
+                    <div class="cont_of_ticket">
+                        <p>
+                            ${desarrollo}
+                        </p>
+                        <div class="attach">
+                            <p class="naranja"><img src="/static/img/attach_2.png" alt="">tupa de regis...pdf</p>
+                            <p><img src="/static/img/img2.png" alt="">Capture Imag...jpg</p>
+                            <p><img src="/static/img/img2.png" alt="">Capture Imag...jpg</p>
+                        </div>
+                        <img src="/static/img/tesoreria_identification.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        `);
+        document.getElementById("space_answer_"+num_for).innerHTML += content_answer;
+    }
+}
+
 function ContClose_Ticket(i){
     //MOSTRAMOS EL CONTENEDOR FRONT DEL TICKET
     document.getElementById("idFront_ticket_"+i).classList.remove("ocultar");
@@ -470,18 +533,20 @@ async function show_more_ticket_date(id_ticket){
             },
             success: function (response) {
                 const midata_json = response;
-                console.log("YA ESTA ESTOOUUUU");
-                console.log(midata_json['more_tickets']['desarrollo']);
-                const desarrollo = midata_json['more_tickets']['desarrollo'];
-                const date = midata_json['more_tickets']['date'];
-                const charge = midata_json['more_tickets']['charge'];
+                console.log(midata_json);
+                console.log("DESCRIPCION: "+midata_json['more_tickets'][0]['desarrollo']);
+                // // VARABLES
+                // const desarrollo = midata_json['more_tickets']['desarrollo'];
+                // const date = midata_json['more_tickets']['date'];
+                // const charge = midata_json['more_tickets']['charge'];
+                // // const length = 
 
-                var miLista = [];
-                miLista.push(desarrollo);
-                miLista.push(date);
-                miLista.push(charge);
+                // var miLista = [];
+                // miLista.push(desarrollo);
+                // miLista.push(date);
+                // miLista.push(charge);
 
-                resolve(miLista);
+                resolve(midata_json);
             },
             error: function () {
                 reject("Ocurrió un error al cargar el contenido.");
@@ -502,16 +567,14 @@ async function show_cont_ticket(num_registros, midata_json){
         document.getElementById("content_dinamic").innerHTML = "";
 
         for (let i = 0; i < num_registros; i++) {
-            console.log("PATATAAAAAAA");
+            console.log("TICKET CREATED, ID = "+ midata_json['tickets'][i]['id']);
             let tittle = midata_json['tickets'][i]['tittle'];
             let name_creator = midata_json['tickets'][i]['name_creator'];
             let num_ticket = midata_json['tickets'][i]['num_ticket'];
             let admin_id = midata_json['tickets'][i]['admin_id_id'];
+            let ticket_id = midata_json['tickets'][i]['id'];
             //VAMOS A CARGAR DATOS EXTRA
-            console.log("LA ID DEL TICKET ES:");
-            console.log(midata_json['tickets'][i]['id']);
-
-            const lista = await show_more_ticket_date(midata_json['tickets'][i]['id']);
+            const lista = await show_more_ticket_date(ticket_id);
             let desarrollo = lista[0];
             let date = lista[1];
             let charge = "";
@@ -522,7 +585,7 @@ async function show_cont_ticket(num_registros, midata_json){
             }
             let my_html = `
             <div id="cont_dinamic2_${i}">
-                <div id="idFront_ticket_${i}" onclick="ContOpen_Ticket(${i})" class="body_ticket">
+                <div id="idFront_ticket_${i}" onclick="ContOpen_Ticket(${i}, ${ticket_id})" class="body_ticket">
                     <div class="nivel">
                         <div class="lado">
                             <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
@@ -563,7 +626,6 @@ async function Ramdom_string() {
 }
 
 // REPORT
-
 if(report_state == 'True'){
     console.log("jajaja");
     stateReport();
@@ -597,7 +659,6 @@ function stateReport(){
 
 function dataReport(midata){
     console.log(midata);
-    console.log();
     let = message = midata['menssage'];
     let = description = midata['description'];
     let html_report = `
@@ -610,4 +671,21 @@ function dataReport(midata){
     <p class="report_p">${description}</p>
     `;
     document.getElementById("contid_report").innerHTML = html_report;
+}
+function download_final(){
+    console.log("PAPADA_2");
+    $.ajax({
+        url: "/direct_download_path/",
+        method: "GET",
+        data:{
+            'id_fut': fut_id,// ESTA VARIABLE ESTA DEFINIDA EN view_fut.html
+        },
+        success: function(response){
+            const midata = response;
+            console.log(midata);
+        },
+        error: function() {
+            alert("Ocurrió un error al cargar el contenido.");
+        }
+    });
 }

@@ -13,7 +13,7 @@
     </div>
     <h3>Compartir</h3>
     <div class="img_qr">
-      <img src="{% static 'tmp/1CGoTAwEZzKqrcode.png' %}" alt="">
+      <img src="" alt="">
     </div>
     <div class="link_cont">
       <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
@@ -580,7 +580,7 @@ padding: 0px 0px 50px 0px;
     width: 65%;
 }
 .content_B{
-    /* background: yellow; */
+/*  background: yellow; */
     width: calc(35% - 20px);
     margin: 0px 0px 0px auto;
 }
@@ -594,10 +594,13 @@ padding: 0px 0px 50px 0px;
 }
 .cont_doc p{
     margin: auto;
-    color: #2984fc;
-    cursor: pointer;
+    color: gray;
 }
-.cont_doc p:hover{
+.doc_finaliced p{
+    cursor: pointer;
+    color: #2984fc;
+}
+.doc_finaliced p:hover{
     text-decoration: underline;
 }
 .state{
@@ -654,13 +657,47 @@ padding: 0px 0px 50px 0px;
     font-size: small;
     color: #064113;
 }
+.cambio_finished{
+    background: #CCE5FE;
+    border: 1px solid #B8D9FE;
+    color: #003DA3;
+}
+.cambio_finished a{
+    color: #023996;
+}
+</style>
+
+
+<!-- MENSAJE DE TRAMITE FINALIZADO -->
+<style>
+    .message_finished_cont{
+        background: #D4EEDA;
+        width: 100%;
+        margin: auto;
+        color: #165925;
+        border: 1px solid #C3E8CB;
+        border-radius: 5px;
+        text-align: center;
+        margin: 5px 0px;
+        padding: 10px 0px;
+    }
+    .message_finished_cont h3{
+        margin: 5px auto;
+    }
+    .message_finished_cont P{
+        margin: 3px auto;
+        font-size: small;
+    }
+    .message_finished_cont img{
+        height: 40px;
+    }
 </style>
 
 <div class="mycontent" >
     <div class="content_dos" >
         <div class="personcontent">
 
-            <div class="content_advertencia">
+            <div id="idadvertencia" class="content_advertencia">
                 <img src="{% static 'img/process_icon.png' %}" alt="">
                 <p>Su tramite aún esta en proceso, cuando finalice lo podrá descargar y compartir.</p>
                 <a href="">más información</a>
@@ -706,8 +743,9 @@ padding: 0px 0px 50px 0px;
                         <hr>
                     </div>
                 </div>
-                <h5>Palabras del director</h5>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum corrupti aperiam dolorem eos expedita pariatur temporibus a tempora architecto, minima soluta eaque nihil maxime corporis aspernatur tempore ex doloribus, totam velit eveniet fugiat, sapiente sequi placeat? Sint dignissimos autem maiores.</p>
+                <h3>Procedimiento</h3>
+                <p style="font-size: small;">Carta de presentación para practicas pre profesionales, Adjuntar copia de convenio.</p>
+                <p style="font-size: small;">*Este etento a las observaciones que puede llegar a tener su tramite.</p>
                 <div class="student_content" style="height: auto;">
                     <div class="route_tittle"><h4>Ruta de Tramite</h4></div>
                     <!-- Todo esto es tuta de tramites -->
@@ -724,13 +762,13 @@ padding: 0px 0px 50px 0px;
             </div>
             <div class="content_B">
                 <div class="student_content">
-                    <div class="cont_doc">
-                        <img src="{% static 'img/doc.png' %}" alt="">
+                    <div id="id_doc_download" class="cont_doc">
+                        <img src="{% static 'img/doc2.png' %}" alt="">
                         <p>Download</p>
                     </div>
-                    <div class="state">
+                    <div id="state" class="state">
                         <p>Estado</p>
-                        <p style="color: green;">Finalizado</p>
+                        <p style="color: gray;">En Proceso</p>
                     </div>
                 </div>
                 <div class="data_document">
@@ -755,6 +793,49 @@ padding: 0px 0px 50px 0px;
                         <p class="num_data_doc">pdf</p>
                     </div>
                 </div>
+                <style>
+                    .btn_create_ticket{
+/*                        width: 100%;*/
+                        padding: 20px 0px;
+                        margin: 10px auto;
+                        border: 1px solid #3273AA;
+                        background: #3279B5;
+                        color: white;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        text-decoration: none;
+                        justify-content: center; /*IMPORTANTE*/
+                    }
+                    .btn_create_ticket:hover{
+                        background: #296FAB;
+                    }
+                    .label_observation{
+                        width: 30px;
+                        height: 30px;
+                        position: absolute;/*importante*/
+                        top: -10px;
+                        right: -10px;
+                    }
+                    .label_observation img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .observation{
+                        background: #F4DFDF;
+                        cursor: pointer;
+                    }
+                    .observation:hover{
+                        background: #EFD1D1;
+                    }
+                </style>
+                <form action="{% url 'n_init_observations' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="fut_id" value="{{ fut_id }}">
+                    <input type="hidden" name="order" value="{{ Order }}">
+                </form>
+                <p id="open_observations" class="btn_create_ticket">Abrir Observaciones</p>
             </div>
         </div>
     </div>
@@ -800,10 +881,12 @@ padding: 0px 0px 50px 0px;
     const errorPara = document.getElementById('error');
     const div = document.getElementById('DivForget');
     const formDownload = document.getElementById('F_download');
-    const passInput = document.getElementById('passInput')
-    const errorPass = document.getElementById('error2')
+    const passInput = document.getElementById('passInput');
+    const errorPass = document.getElementById('error2');
     //NEW VARIABLES
-    var id_fut = "{{ fut_id }}"
+    var id_fut = "{{ fut_id }}";
+    var order_fut = "{{ Order }}";
+    const link_observation = "{% url 'n_init_observations' %}";
 
 
     function openLoginForm() {
@@ -862,5 +945,5 @@ padding: 0px 0px 50px 0px;
         document.getElementById("Forgetp").style.display = "none";
     }
 </script>
-<script src="/static/scripts/view_fut/script.js" type="module" charset="utf-8" async defer></script>
+<script src="/static/scripts/view_fut/script.js?" type="module" charset="utf-8" async defer></script>
 {% endblock %}

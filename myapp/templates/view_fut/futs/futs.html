@@ -1,0 +1,15 @@
+{% extends 'view_fut/fut_consult.html' %}
+{% load static %}
+
+{% block content_fut %}
+
+<div id="fits_content_first" class="content_first">
+</div>
+
+<script>
+// MODIFICAMOS LOS ESTILOS DEL SELECT DEL DAV BAR
+cambir_linea(1);
+// ESTO ES PARA GENERAR LOS FUTS EN PANTALLA
+paint_futs('all', true);
+</script>
+{% endblock %}

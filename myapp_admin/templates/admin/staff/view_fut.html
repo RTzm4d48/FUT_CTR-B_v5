@@ -140,16 +140,32 @@
                     <hr class="myhr">
                     <div class="pay_pay">
                         <hr>
+                        <style>
+                            .img_pay{
+                                opacity: 100%;
+                                cursor: zoom-in;
+                                margin: 1px;
+                                border-radius: 3px;
+                                background: #D2D2D2;
+                            }
+                            .img_pay:hover{
+                                margin: 0px;
+                                border: 1px solid black;
+                                opacity: 90%;
+                            }
+                        </style>
                         <div class="pay_pay_cont">
-                            <p><strong>Alumno:</strong> Juan Edgar Aguirre Mamani</p>
-                            <p><strong>Enviado El:</strong> jueves, 23 de febrero de 2023 17:00</p>
+                            <p><strong>Alumno: </strong>{{objs.name}}</p>
+                            <p><strong>Enviado El: </strong>{{objs.date}}</p>
                             <br>
-                            <p>Buenas tardes, aqui le envio la foto del ticket de pago que realice por medio de BCP.</p>
+                            <p>El Alumno elige el método de pago por depósito y aquí adjunta la imagen del baucher de pago.</p>
                             <br>
                             <p>Atte.</p>
-                            <p>Edgar Aguirre</p>
+                            <p>{{objs.name}}</p>
                             <hr>
-                            <img src="{% static 'tmp/foto_ticket.jpg' %}" alt="">
+                            <div id="img_pay_cont">
+                                <!--aqui va la imagen-->
+                            </div>
                         </div>
                     </div>
                     <!-- --------------------/VIEW PAY------------------- -->
@@ -300,13 +316,14 @@
                     <div class="send_button" onclick="open_pop_report()"><p>Reportar a Dirección</p><img src="{% static 'img/direction_black.png' %}" alt=""></div>
                     <div class="send_button" onclick="OpenTicket()"><p>Abrir Observación</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
                 {% elif position == 'secretary' %}
-                    <div class="send_button" onclick="send_fut()"><p>Procesar</p><img src="{% static 'img/sendbutton-16.png' %}" alt=""></div>
+                    <div class="send_button" onclick="process_secretary()"><p>Procesar</p><img src="{% static 'img/sendbutton-16.png' %}" alt=""></div>
                     <div class="send_button" onclick="open_pop_report()"><p>Reportar a Dirección</p><img src="{% static 'img/direction_black.png' %}" alt=""></div>
                     <div class="send_button" onclick="OpenTicket()"><p>Abrir Observación</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
                 {% elif position == 'direction' %}
-                    <div class="send_button" onclick="direction_download()"><img src="{% static 'img/download.png' %}" alt=""><p>Descargar</p></div>
                     <div class="send_button" onclick="issued_document()"><img src="{% static 'img/public.png' %}" alt=""><p>Publicar Certificado</p></div>
+                    <div id="btn_download_doc" class="send_button"><img src="{% static 'img/download.png' %}" alt=""><p>Descargar</p></div>
                     <div class="send_button" onclick="open_pop_report()"><p>Reportar FUT</p><img src="{% static 'img/direction_black.png' %}" alt=""></div>
+                    <div class="send_button" onclick="OpenTicket()"><p>Abrir Observación</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
                 {% endif %}
             </div>
             <!-- -------------/BOTÓNES------------ -->

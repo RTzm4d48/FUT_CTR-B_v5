@@ -89,7 +89,7 @@ def guardar_archivo_enTmp(pdf_file):
     print(pdf_file.name)
     return pdf_file.name
 
-@csrf_exempt  
+@csrf_exempt
 def create_fut_pay(request):
     if request.method=='POST':
         # identification
@@ -122,21 +122,6 @@ def create_fut_pay(request):
             attach_file_name = guardar_archivo_enTmp(attach_file)
         else:
             attach_file_name = "false"
-
-        # print("TEST DE SI TODO ESTA BIEN:")
-
-        # print(name)
-        # print(full_name)
-        # print(program)
-        # print(dni)
-        # print(phone)
-        # print(cycle)
-        # print(email)
-        # # process
-        # print(myrequest)
-        # print(order)
-        # print(order_id)
-        # print(reason)
 
         return render(request, 'create_fut/pay.html', {
             'Name': name,

@@ -30,7 +30,10 @@ ALLOWED_HOSTS = []
 
 # Los archivos de multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp\media')
+# Los archivos multimedia de admin
+MEDIA_ROOT_ADMIN = os.path.join(BASE_DIR, 'myapp_admin\media')
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Application definition
 
 INSTALLED_APPS = [
