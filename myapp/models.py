@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 class fut(models.Model):
     # Solicitante
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100, default='')
     program = models.CharField(max_length=200)
     dni = models.CharField(max_length=10)
     phone = models.CharField(max_length=12)

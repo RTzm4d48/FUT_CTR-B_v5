@@ -193,18 +193,18 @@
         <p>Por favor ingrese sus datos personales para poder continuar con el proceso de tramite.</p>
         <div class="fila_form" style="margin: 50px auto 0px auto;">
             <div class="unEspacio_mediano">
-                <input type="text" name="name" value="{{ user.username }}" placeholder="Ingrese su nombre">
+                <input id="name" type="text" name="name" value="" placeholder="Ingrese su nombre">
                 <label>Nombres</label>
             </div>
             <div class="unEspacio_mediano">
-                <input type="text" name="full_name" value="Romero Tomás" placeholder="Ingrese sus apellidos">
+                <input id="fullname" type="text" name="full_name" value="" placeholder="Ingrese sus apellidos">
                 <label>Apellidos</label>
             </div>
         </div>
         <!-- - -->
         <div class="fila_form">
             <div class="unEspacio_entero">
-                <input type="text" name="email" value="BertoRomaro@gmail.com" placeholder="Ingrese su Email personal">
+                <input id="email" type="text" name="email" value="BertoRomaro@gmail.com" placeholder="Ingrese su Email personal">
                 <label>Email</label>
             </div>
         </div>
@@ -221,14 +221,12 @@
                 <input type="text" name="dni" value="7847565" placeholder="Ingrese el Num. de nu documento DNI">
                 <label>Documento D.N.I</label>
             </div>
-            <div class="unEspacio_mediano">
+            <!-- <div class="unEspacio_mediano">
                 <input type="text" name="cycle" value="7" placeholder="Ingrese el Num. del ciclo en el que se encuentra">
                 <label>Ciclo de estudios</label>
-            </div>
-        </div>
-        <!-- - -->
-        <div class="fila_form">
-            <div class="unEspacio_entero">
+            </div> -->
+            <input type="hidden" name="cycle" value="0">
+            <div class="unEspacio_mediano">
                 <input type="text" name="program" value="Informática" placeholder="Ingrese el Programa al que pertenece">
                 <label>Programa</label>
             </div>
@@ -240,6 +238,29 @@
     </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    document.getElementById("name").value = primera_letra_minuscula("{{ user.first_name }}");
+    document.getElementById("fullname").value = primera_letra_minuscula("{{ user.last_name }}");
+    document.getElementById("email").value = "{{ user.username }}";
+
+    function minuscula(texto) {
+      return texto.toLowerCase();
+    }
+
+    function primera_letra_minuscula(texto) {
+      let palabras = texto.split(" "); // Dividir el texto en un array de palabras
+      let resultado = [];
+
+      for (let palabra of palabras) {
+        let primeraLetra = palabra.charAt(0).toUpperCase();
+        let restoPalabra = palabra.slice(1).toLowerCase();
+        resultado.push(primeraLetra + restoPalabra);
+      }
+
+      return resultado.join(" "); // Convertir el array de palabras de nuevo a una cadena
+    }
+</script>
 
 {% endblock %}
 

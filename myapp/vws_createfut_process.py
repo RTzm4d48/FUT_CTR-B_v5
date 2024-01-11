@@ -7,6 +7,9 @@ from django.http import HttpResponse, JsonResponse
 #pip install qrcode
 import random, qrcode
 
+
+#IMPORTAR VISTAS
+from myapp.vws_createfut_process_process import paint_qr_img
 #-----------------------------------------------------------------
 
 def proceedings(request):
@@ -14,11 +17,14 @@ def proceedings(request):
     if(code_ == None):
         return HttpResponse("<h1>404 ESTA PAGINA NO EXISTE :(</h1>")
     else:
-        object = fut.objects.filter(code=code_).values('id', 'name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email').first()
+        object = fut.objects.filter(code=code_).values('id', 'name', 'full_name', 'dni', 'order', 'proceeding', 'password', 'code', 'program', 'email', 'qrimg_binary').first()
         dni = str(object['dni'][:3])
         #Email process
         email = str(object['email'])
-        
+
+        # Extraer en tmp la imagen del qr
+        # paint_qr_img(object['id'], object['qrimg_binary']);
+
         if(email == 'null'):
             email_code = "- - -"
         else:
@@ -39,7 +45,7 @@ def proceedings(request):
         progressbar = list(range(9)) # for progress bar lines
 
         details = []
-      
+
         x = 20
         for i in range(4):# aquí ponemos el numero de cuadros de detalles que habra en la interfaz
             details.append(x)
@@ -47,19 +53,19 @@ def proceedings(request):
         # LO QUE VENDRA DE UNA BASE DE DATOS:
         my_id = 1
         loco = []
-        
+
         num_registros = process.objects.filter(fut_id_id=object['id']).count()
         print("Hay {} registros con MiModelo_id igual a 3".format(num_registros))
 
         for i in range(num_registros):
             data = process.objects.filter(stage=i, fut_id_id=object['id']).values('tittle', 'name', 'reception', 'exit', 'num').first()
             loco.append(data)
-        
 
         left = 20 # css left details picture
         return render(request, 'view_fut/proceedings.html', {
             'fut_id': object['id'],
             'Name': object['name'],
+            'Fullname': object['full_name'],
             'Dni': dni,
             'Order': object['order'],
             'Proceeding': object['proceeding'],

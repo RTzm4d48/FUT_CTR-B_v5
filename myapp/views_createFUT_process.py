@@ -118,8 +118,8 @@ async def generate_email(email, name, exp_, pas_):
 
 # ESTO ES PARA GUARDAR FUT EN LA DB
 @sync_to_async
-def save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, attach_byte, exp_, pas_, code_, qrimg_bytes, monto, id_admin_turn, img_pay, pay_type, id_user):
-    my_objet = fut(name=name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, pdf_binary=attach_byte, proceeding=exp_, password=pas_, code=code_, user_id_id=id_user, qrimg_binary=qrimg_bytes, monto=monto, id_admin_turn=id_admin_turn, img_pay=img_pay, pay_type=pay_type)
+def save_my_objet(name, full_name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, attach_byte, exp_, pas_, code_, qrimg_bytes, monto, id_admin_turn, img_pay, pay_type, id_user):
+    my_objet = fut(name=name, full_name=full_name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, pdf_binary=attach_byte, proceeding=exp_, password=pas_, code=code_, user_id_id=id_user, qrimg_binary=qrimg_bytes, monto=monto, id_admin_turn=id_admin_turn, img_pay=img_pay, pay_type=pay_type)
     my_objet.save()
     new_id = my_objet.id
     return new_id

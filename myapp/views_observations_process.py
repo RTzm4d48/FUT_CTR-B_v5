@@ -23,7 +23,7 @@ def db_obtain_ticket(charge, fut_id):
 	return resultados_json
 
 def obtain_id_ticket(code):
-	obj = ticket.objects.filter(code=code).values('id').first()
+	obj = ticket.objects.filter(code=code).values('id', 'charge').first()
 	return obj
 
 def obtain_desarrollo_ticket(id_ticket):

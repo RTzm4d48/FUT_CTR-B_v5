@@ -21,8 +21,8 @@ export async function get_db_ticket(charge, fut_id){
 	});
 }
 
-export function paint_tickets(ticket_data){
-	console.log("PAIINTER_2");
+export function paint_tickets(ticket_data, charge){
+	console.log("PAIINTER__3");
 	console.log(ticket_data['data']['length']);
 	if(ticket_data['data']['length'] == 0){
 		// var impty_html = ``;
@@ -36,12 +36,11 @@ export function paint_tickets(ticket_data){
 			//VARIABLES
 			let tittle = ticket_data['data'][i]['tittle'];
 			let code = ticket_data['data'][i]['code'];
-
 			var register_html = `
-				<a href="/my_fut/observation/show_redirect/${code}/">
+				<a href="/my_fut/observation/show_redirect/${code}/${charge}/">
 					<div class="register">
 						<img src="/static/img/rep_black.png" alt="">
-						<p>${tittle}</p>
+						<p>${tittle}__</p>
 					</div>
 				</a>
 			`;
@@ -50,7 +49,6 @@ export function paint_tickets(ticket_data){
 		document.getElementById("cont_low_register").innerHTML = `
 		<button id="btn_create_new_ticket" onclick="createticket()" class="btn_create_ticket"><img src="/static/img/plus_white.png">Crear un nuevo ticket</button>`;
 	}
-	
 }
 
 export function paint_messages_tickets(data){
@@ -62,33 +60,45 @@ export function paint_messages_tickets(data){
 					<p>Se adjunto la foto del baucher icorrectamente</p>
 				</div>
 				<div id="cont_main_message" class="cont_main_message">
-					
 				</div>
 				<button onclick="create_desarrollo()" class="respoder"><img src="/static/img/reply_red.png">Responder</button>
 			</div>
 			`;
 			document.getElementById("cont_register").innerHTML = cont_message_html;	
-	console.log("PHONK");
+	console.log("PHONK_2");
 	console.log(data);
+
 	for (var i = 0; i < data['data']['length']; i++) {
+		console.log(data['data'][i]['charge'])
 		// VARIABLES
 		let tittle = data['data'][i]['name'];
 		let desarrollo = data['data'][i]['desarrollo'];
+		let charge = data['data'][i]['charge'];
 
 		var message_html = `
 					<div class="block">
-						<img class="user_img" src="/static/img/profile_user_test.jpg">
+						<div id="id_img_space_${i}">
+							<img class="user_img" src="/static/img/admin_icon.png" alt="">
+						</div>
 						<h4>${tittle}</h4>
 					</div>
 					<div class="block text_space">
 						<p>${desarrollo}</p>
 					</div>
 					<div class="block text_space">
-						<img class="img_identification" src="/static/img/tesoreria_identification.jpg">
+						<div id="sello_${i}">
+						</div>
 					</div>
 					<hr style="margin:15px auto;">
 			`;
-			document.getElementById("cont_main_message").innerHTML += message_html;	
+			document.getElementById("cont_main_message").innerHTML += message_html;
+
+			if(charge == "(alumno)"){
+				document.getElementById("sello_"+i).innerHTML = ``;
+				document.getElementById("id_img_space_"+i).innerHTML = `<img class="user_img" src="/static/img/profile_user_test.jpg">`;
+			}else{
+				document.getElementById("sello_"+i).innerHTML = `<img class="img_identification" src="/static/img/tesoreria_identification.jpg">`;
+			}
 		}
 }
 

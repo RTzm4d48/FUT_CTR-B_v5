@@ -67,8 +67,12 @@ body{
 }
 .content_definitive{
   position: relative;
-  top:60px;
-  /* background: orange; */
+  min-height: calc(100vh - 60px);
+  max-height: 200vh;
+  top: 60px;
+  display:flex;
+  padding: 0px 0px;
+  background: #F4F4F4; 
 }
 .mynavbar2{
     width: 70%;
@@ -289,10 +293,13 @@ body{
     font-size: smaller;
     font-family: 'quicksand_light';
     text-decoration: none;
-    
+
   }
   .settings_user_cont .log_out:hover{
     background: #22262Ab9;
+  }
+  .no_scroll{
+    overflow: hidden;
   }
 </style>
 <body id="the_body">
@@ -527,7 +534,7 @@ body{
           <!-- ---------------------- -->
             <div id="cont_user" class="mi_nav user_space user_space_color_1" onclick="user_options()">
               <img src="{% static 'img/profile_user_test.jpg' %}" alt="">
-              <p>{{ user.username }}</p>
+              <p>{{ user.first_name }}</p>
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
                 <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z" fill="#ffffff"></path>
               </svg>
@@ -545,7 +552,7 @@ body{
           {% else %}
             <div class="mi_nav log">
               {# <p class="nav" onclick="login_in()" style="cursor: pointer;">Login</p> #}
-              <a id="nav4" class="nav" href="{% url 'login' %}">Login</a>
+              <a id="nav4" class="nav" href="{% url 'n_login' %}">Login</a>
             </div>
             <div id="settings_user"></div> {# ESTO LO PUSE PARA EQUILIBRAR Y NO ASI NO ME DERROR POR LA FALTA DE LA ID setting_user #}
           {% endif %}
@@ -555,6 +562,16 @@ body{
         <div class="line"></div>
       </div>
     </div>
+    <!-- BORRAR ESTE SCRIPT -->
+    <script>
+      console.log("Variables");
+      console.log("{{ user.username  }}");
+      console.log("{{ user.first_name }}");
+      console.log("{{ user.last_name }}");
+      console.log("{{ user.is_staff }}");
+      console.log("{{ user.is_superuser }}");
+      console.log("{{ user.dni  }}");
+    </script>
     <!-- ----------POP UP WINDOWS STYLE---------- -->
     <style>
       .pop_up_window_content{
@@ -619,7 +636,7 @@ body{
         }
       }
     </script>
-    
+
     <div class="content_definitive">
       {% block content %}
       {% endblock %}
@@ -682,20 +699,6 @@ body{
         windows_log_1.classList.remove('ocultar');
         windows_log_2.classList.add('ocultar');
       }
-      //----------SHARE----------
-      function open_for_share(){
-        window.scrollTo({
-            top: 0,
-        });
-        the_body.classList.add('no_scroll');
-        pop_windows_share.classList.remove('ocultar');
-      }
-      function close_for_share(){
-        pop_windows_share.classList.add('ocultar');
-        the_body.classList.remove('no_scroll');
-      }
-
-
 
         //---------esto se agrego menu de despleagable----------------
         const menutoggle = document.querySelector('.toggle');

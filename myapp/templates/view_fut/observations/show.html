@@ -1,8 +1,7 @@
-{% extends 'view_fut/observations/observation_admin.html' %}
+{% extends 'view_fut/observations.html' %}
 <!-- {% load static %} -->
 
-
-{% block content_3 %}
+{% block content_2 %}
 <style>
 	.cont_message{
 		background: white;
@@ -46,9 +45,10 @@
 	}
 	.user_img{
 		height: 40px;
+		width: 40px;
 		border-radius: 50%;
 		margin: 0px 5px;
-		background: red;
+/*		background: red;*/
 	}
 	.block h4{
 		margin: 0px;
@@ -83,7 +83,12 @@
 		opacity:80%;
 	}
 </style>
-
+<div id="cont_register">
+	<!-- AQUI ESTA LA LISTA DE TICKETS -->
+	<h3 class="empty">Esta lista esta bacia...</h3>
+</div>
+<div id="cont_low_register">
+</div>
 <script type="text/javascript">
 	function create_desarrollo(){
 		console.log("EMBAPE_22");
@@ -91,7 +96,6 @@
 		var id_ticket = "{{ id_ticket }}";
 		document.getElementById("pop_windows_create_desarrollo").classList.remove("ocultar");
 		document.getElementById("form_id_ticket2").value = id_ticket;
-		
 	}
 </script>
 
@@ -106,5 +110,10 @@
 	// ESCRIBIMOS LA RUTA
 	let list_name = [fut_order, "Observaciones", "Se adjunto la foto del bauche..."];
 	manage_rute(list_name);
+
+	// NAVBAR
+	let charge_ticket = "{{ charge_ticket }}";
+	let charge = (charge_ticket == "alumno") ? 'ticket' : 'observation';
+	style_navbar(charge);
 </script>
 {% endblock %}

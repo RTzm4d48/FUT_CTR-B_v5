@@ -65,7 +65,7 @@ async def finisher(request):
         print('STEP_02')
         # await generate_email(email, name, exp_, pas_)
         print('STEP_03')
-        new_id = await save_my_objet(name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, attach_byte, exp_, pas_, code_, qrimg_bytes, monto, 1, pay_img_binary_encoded, type_pay, id_user) #2 is treasury id
+        new_id = await save_my_objet(name, full_name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, attach_byte, exp_, pas_, code_, qrimg_bytes, monto, 1, pay_img_binary_encoded, type_pay, id_user) #2 is treasury id
         print('STEP_04')
         # INSERTAMOS UNA ruta_tramite
         await save_process('TRAMITE EN CURSO', 'INSTITUTO LATINOAMERICANO SIGLO XXI', date_format, date_format, new_id)

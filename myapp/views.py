@@ -48,6 +48,10 @@ def exit(request):
     return redirect('n_home')
 
 @login_required
+def mylogin(request):
+    return redirect('n_home')
+
+@login_required
 def form_new_fut(request):
     return render(request, 'create_fut/identification.html')
 

@@ -6,29 +6,13 @@
 
 
 {% block up_pop_space %}
-<div id="pop_windows_share" class="pop_up_window_content ocultar">
-  <div id="share_qr" class="pop_up_window">
-    <div onclick="close_for_share()" class="close" style="right: 15px;">
-      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
-    </div>
-    <h3>Compartir</h3>
-    <div class="img_qr">
-      <img src="" alt="">
-    </div>
-    <div class="link_cont">
-      <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
-      <button>Copiar</button>
-    </div>
-    
-  </div>
-</div>
 
 <!--WAIT POP-UP ADVERTENCIA FALTA DE PAGO-->
 
 <style>
 /*AQUI ESTARAN LOS ESTILOS DE POPUP WAIT*/-----------------------
 .pop_up_window{
-
+    background: red;
 }
 .icon_img{
     /*background: salmon;*/
@@ -112,7 +96,24 @@
     margin: auto 5px;
 }
 </style>
+<!-- COMPARTIR QR -->
+<div id="pop_windows_share" class="pop_up_window_content ocultar">
+  <div id="share_qr" class="pop_up_window" style="width: auto;">
+    <div onclick="close_for_share()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    <h3>Compartir</h3>
+    <div class="img_qr">
+      <img src="/static/tmp/img_14_qr.jpg" alt="">
+    </div>
+    <div class="link_cont">
+      <input type="text" value="http://127.0.0.1:8000/my_fut/proceedings?code=79XNZxF1cuA">
+      <button>Copiar</button>
+    </div>
+  </div>
+</div>
 
+<!-- --------- -->
 <div id="pop_windows_wait" class="pop_up_window_content ocultar">
   <div class="pop_up_window">
     <!-- {# Context pop_up #} -->
@@ -706,8 +707,8 @@ padding: 0px 0px 50px 0px;
             <div class="data_person">
                 <img src="{% static 'img/icon_student.png' %}" alt="" class="icon_pers">
                 <img src="{% static 'img/profile_user_test.jpg' %}" alt="" class="profil_person">
-                <p class="name">{{ user.username }}</p>
-                <p class="fullname">UnApellido</p>
+                <p class="name">{{ Name }}</p>
+                <p class="fullname">{{ Fullname }}</p>
             </div>
             <div class="content_tools">
                 <div class="share" onclick="open_for_share()">
@@ -892,6 +893,19 @@ padding: 0px 0px 50px 0px;
     function openLoginForm() {
         document.getElementById("login-form-popup").style.display = "block";
     }
+    //----------SHARE----------
+    function open_for_share(){
+        window.scrollTo({
+            top: 0,
+        });
+        the_body.classList.add('no_scroll');
+        pop_windows_share.classList.remove('ocultar');
+  }
+    function close_for_share(){
+        pop_windows_share.classList.add('ocultar');
+        the_body.classList.remove('no_scroll');
+    }
+
 
     window.onclick = function(event) {
     if (event.target == document.getElementById("login-form-popup")) {

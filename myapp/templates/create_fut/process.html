@@ -114,7 +114,6 @@
     .content_boxlist p{
         margin: auto 10px;
         color: black;
-        
     }
     .icono{
         height: 30px;
@@ -396,6 +395,13 @@
             background: #E9E9E9;
             border: 1px solid gray;
             font-size: small;
+            cursor: pointer;
+        }
+        .select_img_cnt .red_text{
+            color: #3B57AC;
+        }
+        .select_img_cnt label:hover{
+            border: 1px solid black;
         }
         .select_img_cnt label img{
             height: 15px;
@@ -403,10 +409,12 @@
         }
         .select_img_cnt .red_class{
             background: #F8D6DA;
-            
         }
         .red_c{
             border: 1px solid red;
+        }
+        .content_boxlist .blue_color{
+            color: #3B57AC;
         }
     </style>
     <div class="content2_form">
@@ -419,8 +427,8 @@
                 <!-- -SELECCIONAR TRAMITE- -->
                 <div class="content_boxlist" id='boxlist' style="margin:0px">
                     <!-- - -->
-                    <div id="list_show_01" class='boxlist_inner' onclick='show_list()'>
-                        <p id='select_procedure'>Seleccionar Tramite</p>
+                    <div id="list_show_01" title="" class='boxlist_inner' onclick='show_list()'>
+                        <p id='select_procedure' style=" display: flex; align-items: center;"><img style="height: 15px; margin: auto 5px;" src="/static/img/procedure2.png" alt=""> Seleccionar Tramite</p>
                         <div class='icono'>
                             <svg style='pointer-events: none; display: block; width: 100%; height: 100%;' viewBox='0 0 24 24' preserveAspectRatio='xMidYMid meet' focusable='false'><g><path fill='gray' d='M18,9l-6,6L6,9H18z'></path></g></svg>
                         </div>
@@ -447,7 +455,7 @@
             <div class="unEspacio_mediano">
                 <div class="select_img_cnt">
                     <input type="file" id="attachfile" name="attach_file"  accept=".png, .jpg, .pdf">
-                    <label id="id_attach_label" class="" for="attachfile">Adjuntar Archivo (opcional)<img src="{% static 'img/adjuntar.png' %}"></label>
+                    <label id="id_attach_label" class="" for="attachfile"><img src="{% static 'img/adjuntar.png' %}">Adjuntar Archivo (opcional)</label>
                 </div>
             </div>
         </div>
@@ -466,7 +474,6 @@
             </div>
         </div>
         <!-- - -->
-        
         <div class="cont_buttons_form">
             <!-- LO QUE RECIBIMOS DE IDENTIFICACIÓN -->
             <input type="hidden" name="name" value="{{ Name }}">
@@ -476,7 +483,6 @@
             <input type="hidden" name="dni" value="{{ Dni }}">
             <input type="hidden" name="cycle" value="{{ Cycle }}">
             <input type="hidden" name="program" value="{{ Program }}">
-            
             <input type="hidden" name="order" value="">
             <input type="hidden" name="order_id" value="">
 
@@ -511,8 +517,12 @@
         list_show_01.classList.remove("ocultar");
         list_show_01.classList.remove("error_list");
         list_show_02.classList.add("ocultar");
+        list_show_01.title = procedure;
 
-        select_procedure.innerHTML = procedure;
+
+        let short_procedure = paint_file2(procedure);
+        select_procedure.innerHTML = `<img style="height: 15px; margin: auto 5px;" src="/static/img/procedure2_blue.png" alt="">${short_procedure}</p>`;
+        select_procedure.classList.add("blue_color");
         divContenedor.classList.remove("list_activate");
     }
     function event_search(){
@@ -532,7 +542,7 @@
                 const midata = response;
                 console.log(midata);
                 for (var i = 0; i < midata['message']['length']; i++) {
-                    
+
                     if(i % 2 == 0){
                         cont_procedures.innerHTML += "<div class='procedure color_procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
                         "<img src='/static/img/procedure2.png' alt=''>"+
@@ -592,11 +602,11 @@
 
     function select_proc(num){
         var procedure = document.getElementById('proc'+num+'_id');// obtenemos el valor del procedure seleccionado
-        
+
         // escribimos en el value del input oculto para que se envie el dato con el formulario
         var orderInput = document.querySelector('input[name="order"]');
         var orderInput_id = document.querySelector('input[name="order_id"]');
-        
+
         orderInput.value = procedure.textContent;
         orderInput_id.value = num;
         document.getElementById("id_solicito").value = '';
@@ -618,38 +628,63 @@
         for (var i = 0; i < archivos.length; i++) {
             const name = archivos[i].name;
 
-            document.getElementById("id_attach_label").innerHTML = "File Adjunted"
+            document.getElementById("id_attach_label").classList.add("red_text");
+
+            let short_name = paint_file(name);
+            document.getElementById("id_attach_label").innerHTML = `<img src="{% static 'img/adjuntar_blue.png' %}">${short_name}`;
             document.getElementById('input_attach').value = 'true';
         }
     });
-
-
+    function paint_file(name){
+        if (name.length > 20) {
+            if(name.length > 24){
+                var shortened_name = name.substring(0, 20);
+                var tipo = name.substring(name.length - 3);
+                return shortened_name+'...'+tipo;
+            }else{
+                var shortened_name = name.substring(0, 16);
+                var tipo = name.substring(name.length - 3);
+                return shortened_name+'...'+tipo;
+            }
+        }else{
+            return name;
+        }
+    }
+    function paint_file2(name){
+        if (name.length > 30) {
+            var shortened_name = name.substring(0, 30);
+            return shortened_name+'...';
+        }else{
+            return name;
+        }
+    }
     //Evento Prevent Para asegurarnos que se seleccione un tramite
     form.addEventListener('submit', function(event){
         var text_solicito = document.getElementById("id_solicito").value;
         var text_attach = document.getElementById("input_attach").value;
-      
-        if(select_procedure.textContent == "Seleccionar Tramite"){
+        var orderInput_id = document.querySelector('input[name="order_id"]');
+
+        if(orderInput_id.value == ""){
             list_show_01.classList.add("error_list");
             message_alert.classList.remove("ocultar");
-            event.preventDefault(); // Detiene el envío del formulario
+            event.preventDefault();
         }else if(text_attach == '' && window.valid_attach == true){
             document.getElementById("id_pross_advertencia").classList.remove("ocultar");
             document.getElementById("id_attach_label").classList.add("red_class");
-            event.preventDefault(); // Detiene el envío del formulario
+            document.getElementById("id_attach_label").innerHTML = `<img src="{% static 'img/adjuntar.png' %}">Adjuntar Archivo`;
+            event.preventDefault();
         }else if(text_solicito == "" && window.solicito == true){
             document.getElementById("espace_solicito").classList.add("red_c");
             event.preventDefault(); // Detiene el envío del formulario
         }
     });
-    
 </script>
 {% endblock %}
 
 <!-- ----- -->
 {% block check_1 %}
 <!-- {% if name != '' %} -->
-<p style="width: 30px; text-align: center;">✅</p>
+<p style="margin: auto 2px;">✅</p>
 <!-- {% else %}
 {% endif %} -->
 {% endblock %}

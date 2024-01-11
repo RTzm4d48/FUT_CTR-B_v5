@@ -15,9 +15,8 @@ export async function open_observations(charge){
 	let fut_id = obtenerValorCookie('fut_id');
 	// OBTENEMOS LOS TICKETS
 	var ticket_data = await get_db_ticket(charge, fut_id);// ENVIAMOS EL CHARGE COMO PARAMETRO
-	
 	// ESCRIBIMOS EL HTML DE LOS TICKETS
-	paint_tickets(ticket_data);
+	paint_tickets(ticket_data, charge);
 }
 
 // ESTILOS DEL NAV BAR
@@ -62,7 +61,6 @@ export 	function manage_rute(route){
 export async function messages_ticket(id_ticket){
 	var data_desarrollo = await obtain_ticket_desarrollo(id_ticket);
 	paint_messages_tickets(data_desarrollo);
-	
 }
 
 

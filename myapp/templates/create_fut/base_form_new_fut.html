@@ -11,16 +11,19 @@
 <!-- ------ESTILOS BASE QUE INCLUYE NAVBAR Y CONTAINER PRINCIPAL----- -->
 <style>
     .content_f{
-/*         background: salmon; */
-        /* opacity: 20%; */
+        background: white;
         width: 60%;
-        height: 550px;
-        margin: 50px auto;
+        min-height: 550px;
+        max-height: 1500px;
+        margin: auto; auto;
+        padding: 0px 0px 30px 0px;
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid #DDDDDD;
         font-size: smaller;
         box-shadow: 5px 5px 10px #D8D8D8; /* Sombras */
+        margin: 40px auto;
+/*        overflow-y: scroll;*/
     }
     .navbar-f{
         width: 100%;
@@ -42,6 +45,8 @@
         /* background: pink; */
         margin: auto;
         display: flex;
+        justify-content: center; /*IMPORTANTE*/
+        align-items: center; /*IMPORTANTE*/
     }
     .item-ftoo p{
         color: white;
@@ -202,7 +207,6 @@
         //es para el navbar
         activation('nuevo_tramite');
     </script>
-        
 </div>
 
 {% endblock %}

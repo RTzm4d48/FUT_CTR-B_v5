@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('myapp.urls')), # <--es esto el path
     path('', include('myapp_admin.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('oauth2/', include('django_auth_adfs.urls')),
 ]

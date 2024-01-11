@@ -23,12 +23,13 @@ def tickets_path(request):
 def report_path(request):
 	return render(request, 'view_fut/observations/report.html')
 
-def redirect_show(request, code):
+def redirect_show(request, code, charge):
 	if code is None:
 		return HttpResponse("<h1>404 ESTA PAGINA NO EXISTE :(</h1>")
 	else:
 		# CONSTRUIR LA URL
-		url_destino = reverse('n_show_path')+"?i="+code
+		send_path = 'n_show_path_2' if charge == 'alumno' else 'n_show_path'
+		url_destino = reverse(send_path)+"?i="+code
 		# REDIRIGIR A LA VISTA DESTINO
 		return redirect(url_destino)
 
@@ -39,11 +40,12 @@ def show_path(request):
 		return HttpResponse("<h1>404 ESTA PAGINA NO EXISTE :(</h1>")
 	else:
 		# OBTENER EL TITULO E ID DEL TICKET
-		id_ticket = obtain_id_ticket(code_input)
-		print("LOCURON")
-		print(id_ticket)
+		data_ticket = obtain_id_ticket(code_input)
+		print("LOCURON_")
+		print(data_ticket)
 		return render(request, 'view_fut/observations/show.html', {
-			'id_ticket': id_ticket['id']
+			'id_ticket': data_ticket['id'],
+			'charge_ticket': data_ticket['charge']
 		})
 
 def get_db_ticket(request):

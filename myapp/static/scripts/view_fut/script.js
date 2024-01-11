@@ -10,7 +10,6 @@ function making_tracking_details(mydata, route_fut){
 	let left_arrow = 30;
 
 	for (var i = 0; i < mydata['length']; i++) {
-		
 		var sello_1 = `
 			<div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #42AF15;"><h6>PROCESADO</h6><img width="30px" src="/static/img/check.png" alt=""></div>
 		`;
@@ -142,7 +141,6 @@ async function get_route(){
 	// OBTENEMOS EL on Y off PARA PINTAR
 	var diccionario_circle = list_circles(route_fut);
 	var diccionario_line = list_lines(route_fut);
-	
 	// PINTAMOS RUTA DE TRAMITE
 	macking_route(diccionario_circle, diccionario_line);
 }

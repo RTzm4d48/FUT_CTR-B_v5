@@ -15,7 +15,7 @@
         height: calc(100% - 50px); /*restamos el espacio del nav bar*/
         /* background: gold; */
         /* opacity: 20%; */
-        background: white;
+/*        background: white;*/
 
     }
     .thefrom{
@@ -365,7 +365,7 @@
         width: 100%;
         height: auto;
         padding: 5px 0px;
-        /* background: #5add26; */
+/*         background: #5add26;*/
     }
     .visa{
         height: 25px;
@@ -472,7 +472,6 @@
 <div class="bodyf">
     <form id="id_form_pay" class="thefrom" action="{% url 'n_end' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <!-- antiguo -->
     
     <!-- --------NUEVO FORM ---------- -->
     <!-- ----------STILOS DEL NUEVO FORM-------- -->
@@ -499,7 +498,7 @@
             justify-content: space-between;
         }
         .unEspacio_mediano{
-            width: calc(50% - 10px);
+            width: 100%;
 /*            background: red;*/
             display: flex;
             position: relative; /*importante*/
@@ -597,7 +596,7 @@
         }
         .select_img_cnt{
             width: 100%;
-/*            background: yellow;*/
+/*            background: red;*/
             height: 30px;
         }
         .select_img_cnt input{
@@ -610,12 +609,15 @@
             justify-content: center; /*IMPORTANTE*/
             align-items: center; /*IMPORTANTE*/
             border-radius: 10px;
+            padding: 0px;
             color: black;
             position: static;/*importante*/
-            background: #E9E9E9;
+/*            background: #E9E9E9;*/
             border: 1px solid gray;
             font-size: small;
             cursor: pointer;
+            background: purple;
+            color: white;
         }
         .select_img_cnt label img{
             height: 15px;
@@ -624,71 +626,159 @@
         .red{
             color: red;
         }
+        .gasto{
+/*            background: gray;*/
+            display: flex;
+            justify-content: space-between;
+        }
+        .gasto p{
+            margin: 5px 20px;
+            font-weight: bold;
+        }
+        .pay_tipe{
+            display: flex;
+            padding: 5px 0px;
+        }
+        .pay_tipe p{
+            margin: 0px 5px;
+        }
+        .peru_pay_cont{
+            background: #E4E4E4;
+            display:flex;
+            padding: 10px 0px;
+            border-radius: 3px;
+        }
+        .peru_pay{
+/*            background: pink;*/
+            display: flex;
+            flex-direction:column;
+            margin: 0px 10px;
+        }
+        .peru_pay img{
+            border-radius: 5px;
+        }
+        .peru_check{
+            margin: 5px auto 0px auto;
+        }
+/*        --------*/
+        .form_yape{
+            display:flex;
+            flex-direction:column;
+            align-items: center; /*IMPORTANTE*/
+        }
+        .form_yape h3{
+            font-weight: bold;
+            color: purple;
+        }
+        .qr_img{
+            height: 200px;
+        }
+        .num_cel{
+/*            background: purple;*/
+            border: 3px dotted purple;
+            padding: 5px 10px;
+        }
+        .num_cel h3{
+            margin:0px;
+            font-weight: bold;
+            color: purple;
+        }
+        .total_num{
+/*            background: yellow;*/
+            margin: 15px auto;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+        }
+        .total_num p{
+            margin: 5px 0px;
+        }
+        .total_num h2{
+            margin:0px;
+        }
     </style>
     <div class="content2_form">
         <p class="TheTitle">Facturación del Tramite</p>
-        <p style="margin: 0px auto;">Por favor realice el pago del tramite, ya sea por pasarela o deposito.</p>
-        <!-- - -->
-        <div class="fila_form">
-            <div class="unEspacio_mediano" style="flex-direction: column;">
-                <!-- aqui aqui -->
-                <div class="column1">
-                    <p>metodo de pago:</p>
-                    <div class="pay_content">
-                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="0" checked="checked" onclick="capturarValor(this)"/></div> Deposito
-                    </div>
-                    <div class="pay_content ocultar">
-                        <div class="radio"><input class="opcion" name="typepay" type="radio" value="5" onclick="capturarValor(this)"/></div>Pasarela de pago virtual
-                        <img src="{% static 'img/visa.png' %}" alt="">
+        <p style="margin: 0px auto;">Por favor seleccione el motodo y realize el pago.</p>
+        <!-- -- -->
+        <div id="fila_1" class="fila_form ocultar">
+            <div class="form_yape">
+                <img src="/static/img/yape_logo2.png">
+                <p>Escanea nuesto código QR o agregue nuesto número de celular en la app Yape y relice el pago.</p>
+                <img class="qr_img" src="/static/img/miyape_qr.png">
+                <h3>Luis Román Aguirre</h3>
+                <div class="num_cel">
+                    <h3>910400159</h3>
+                </div>
+                <div class="total_num">
+                    <p>Total a pagar:</p>
+                    <h2>S/.{{Monto}}.00</h2>
+                </div>
+                <!-- ---- -->
+                <div class="unEspacio_mediano">
+                    <div class="block">
+                        <div id="f_p_0" class="column1">
+                            <p id="baucher_warning"><strong>Subir foto del Baucher</strong></p>
+                            <p id="baucher_warning">Una vez ya realizado el pago debera de tomarle una captura de pantalla a la boleta digital de pago que le genera la app yape al ya haber completado el pago.</p>
+                            <div class="select_img_cnt">
+                                <input type="file" id="photo_id" style="display: none;" name="img_pay" accept=".png, .jpg">
+                                <label id="txt_photo" for="photo_id">Subir Foto <img src="{% static 'img/img_icon_small.png' %}"></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="unEspacio_mediano">
-                <!-- lo otro -->
-                <div class="block">
-                    <div id="f_p_0" class="column1">
-                        <p id="baucher_warning">Subir foto del Baucher</p>
-                        <div class="select_img_cnt">
-                            <input type="file" id="photo_id" style="display: none;" name="img_pay" accept=".png, .jpg">
-                            <label id="txt_photo" for="photo_id">Subir Foto <img src="{% static 'img/img_ad.png' %}"></label>
-                        </div>
-                        <div class="persona_cuenta">
-                            <p>Más Información</p>
-                        </div>
-                    </div>
-                    <div id="f_p_1" class="column1 ocultar">
-                        <h2>Forma de pago</h2>
-                        <p onclick="add_pay_card()" style="margin: 10px 0px 0px 0px;" class='paycard'>Seleccione forma de pago</p>
-                    </div>
-                    <div id="f_p_2" class="column1 ocultar">
-                        <div style="display: flex;">
-                            <img class="visa" src="{% static 'img/visa_sello.jpg' %}" alt="">
-                            <h2>4557 88** **** 9055</h2>
-                        </div>
-                        <p onclick="add_pay_card()" style="margin: 10px 0px 0px 10px;" class='paycard'>Cambiar forma de pago</p>
-                    </div>
-                </div>
+                <!-- ---- -->
             </div>
         </div>
-        <!-- - -->
-        <div class="fila_form">
+        <!-- -- -->
+        <div id="fila_2" class="fila_form" style="flex-direction: column;">
+            
             <div class="unEspacio_entero">
-                <div class="resumen">
-                <h3>Resumen</h3>
-
-                <p style="font-weight: bold;">Solicitud de {{Order}}</p>
-                <p>Costo Tramite: S/. {{Monto}}</p>
-                <p id="p_cargo">Cargo por Pasarela: S/. 0</p>
-                <hr>
-                <div class="dato_other">
-                    <p>Total:</p>
-                    <p id="p_total">S/. {{Monto}}</p>
+                <div class="pay_tipe">
+                    <input class="opcion" name="typepay_" type="radio" value="none" checked disabled/> <p>QR Pagos Perú</p>
                 </div>
             </div>
+            <div class="unEsoacio_entero">
+                <div class="peru_pay_cont">
+                    <div class="peru_pay">
+                        <img src="/static/img/yape_icon.png">
+                        <input class="peru_check" name="pay_yape" type="radio" value="5" checked />
+                    </div>
+                    <div class="peru_pay">
+                        <img src="/static/img/plin_logo.png">
+                        <input class="peru_check" name="pay_yape" type="radio" value="5" disabled />
+                    </div>
+                </div>
             </div>
         </div>
-       
-        
+        <!-- --------------------- -->
+        <!-- - -->
+        <div id="fila_3" class="fila_form">
+            <div class="unEspacio_entero" style="display:block;">
+                <h3>Resumen</h3>
+                <p>{{Order}}</p>
+                <hr>
+                <div class="gasto">
+                    <p>Subtotal</p>
+                    <p>S/.{{Monto}}</p>
+                </div>
+                <hr>
+                <!-- -- -->
+                <div class="gasto">
+                    <p>Pasarela</p>
+                    <p>S/0.0</p>
+                </div>
+                <hr>
+                <!-- -- -->
+                <div class="gasto">
+                    <p>Total</p>
+                    <p>S/.{{Monto}}</p>
+                </div>
+                <hr>
+                <!-- -- -->
+            </div>
+        </div>
+        <!-- ------------- -->
         <div class="cont_buttons_form">
             <!-- LO QUE RECIBIMOS DE IDENTIFICACIÓN -->
             <input type="hidden" name="name" value="{{ Name }}">
@@ -708,6 +798,8 @@
             <input type="hidden" name="user" value="{{ user.id }}">
             <input id="mybaucher" type="hidden" name="baucher" value="">
 
+            <input type="hidden" name="typepay" value="deposito">
+
             <button onclick="window.history.back()"><img src="{% static 'img/former_form.png' %}" alt="">Anterior</button>
             <p></p>
             <button type="submit">Siguiente<img src="{% static 'img/next_form.png' %}" alt=""></button>
@@ -724,7 +816,10 @@
 </script>
 <script>
     document.getElementById("id_form_pay").addEventListener("submit", function (event) {
-        if (document.getElementById("mybaucher").value == "") {
+        if (window.view_pay !== true){
+            event.preventDefault();
+            view_pay_yape();
+        }else if (document.getElementById("mybaucher").value == "") {
             event.preventDefault();//prevenimos el envio
             const warning_baucher = document.getElementById("baucher_warning");
             warning_baucher.classList.add("red");
@@ -800,6 +895,13 @@
             document.getElementById("mybaucher").value = "completed";
         }
     }
+    function view_pay_yape(){
+        console.log("PUM");
+        document.getElementById("fila_1").classList.remove("ocultar");
+        document.getElementById("fila_2").classList.add("ocultar");
+        document.getElementById("fila_3").classList.add("ocultar");
+        window.view_pay = true;
+    }
 </script>
 {% endblock %}
 
@@ -818,7 +920,7 @@
 <!-- ----- -->
 {% block check_2 %}
 <!-- {% if name != '' %} -->
-<p style="width: 30px; text-align: center;">✅</p>
+<p style="margin: auto 2px;">✅</p>
 <!-- {% else %}
 {% endif %} -->
 {% endblock %}

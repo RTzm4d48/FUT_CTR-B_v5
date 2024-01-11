@@ -8,9 +8,7 @@ from . import views_observations
 
 urlpatterns = [
     path('', views.index, name="n_home"), # corto y pego de ./mysite/urls.py
-    
     path('my_fut', views.my_fut),
-    
     # views.py AQUI ESTAN TODAS LA DIRECCIONES PARA CREAR EL FUT
     path('form_new_fut/identification', views.form_new_fut, name="n_new_fut"),
     path('form_new_fut/processtd', views.create_fut_process, name="n_process"),
@@ -28,6 +26,7 @@ urlpatterns = [
     path('tupa_validation_path/', vws_createfut_process.tupa_validation, name="n_tupa_validation"),
     # login
     path('logout/', views.exit, name='n_exit'),
+    path('mylogin/', views.mylogin, name='n_login'),
 
     # view fut
     #vws_view_fut AQUI ESTARA TODAS LAS VITAS PARA VER EL TRAMITE REALIZADO
@@ -36,7 +35,6 @@ urlpatterns = [
     path('my_fut/fut_process_path', views_view_fut.fut_process, name="n_fut_process"),
     path('my_fut/fut_finish_path', views_view_fut.fut_finish, name="n_fut_finish"),
 
-    
     path('loader', views.view_loader, name='n_loader'),
 
     # NOTIFICACIONES
@@ -54,7 +52,8 @@ urlpatterns = [
     path('my_fut/observation/tickets', views_observations.tickets_path, name="n_tickets_path"),
     path('my_fut/observation/Reportes', views_observations.report_path, name="n_report_path"),
     path('my_fut/observation/show', views_observations.show_path, name="n_show_path"),
-    path('my_fut/observation/show_redirect/<str:code>/', views_observations.redirect_show, name="n_redirect_show"),
+    path('my_fut/observation/tickets/show', views_observations.show_path, name="n_show_path_2"),
+    path('my_fut/observation/show_redirect/<str:code>/<str:charge>/', views_observations.redirect_show, name="n_redirect_show"),
     # funciones
     path('get_db_ticket_path/', views_observations.get_db_ticket, name="n_get_db_ticket"),
     path('get_desarrollo_db_path/', views_observations.get_desarrollo_db, name="n_get_desarrollo_db"),

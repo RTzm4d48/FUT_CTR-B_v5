@@ -311,9 +311,11 @@ async function ContOpen_Ticket(i, ticket_id){
 async function add_answers(num_for, id_ticket){
     console.log("ESTAMOS EN ANSWER_");
     var data_tickets = await show_more_ticket_date(id_ticket);
-    
+    console.log("hola");
+    console.log(data_tickets);
     // VARIABLES
     let length = data_tickets['more_tickets']['length'];
+
 
     for (let i = 0; i < length; i++) {
         // VARIABLES
@@ -324,7 +326,7 @@ async function add_answers(num_for, id_ticket){
 
         let content_answer = (`
             <div class="sapace_user">
-                <div class="user_img">
+                <div id="id_img_space_${i}" class="user_img">
                     <img src="/static/img/admin_icon.png" alt="">
                 </div>
                 <div class="user_datecontent">
@@ -344,16 +346,23 @@ async function add_answers(num_for, id_ticket){
                             ${desarrollo}
                         </p>
                         <div class="attach">
-                            <p class="naranja"><img src="/static/img/attach_2.png" alt="">tupa de regis...pdf</p>
-                            <p><img src="/static/img/img2.png" alt="">Capture Imag...jpg</p>
-                            <p><img src="/static/img/img2.png" alt="">Capture Imag...jpg</p>
                         </div>
-                        <img src="/static/img/tesoreria_identification.jpg" alt="">
+                        <div id="sello_${i}">
+                            <img src="/static/img/tesoreria_identification.jpg" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
         `);
         document.getElementById("space_answer_"+num_for).innerHTML += content_answer;
+
+        if(charge == "(alumno)"){
+            document.getElementById("sello_"+i).innerHTML = ``;
+            document.getElementById("id_img_space_"+i).innerHTML = `<img src="/static/img/profile_user_test.jpg" alt="">`;
+
+        }else{
+            document.getElementById("sello_"+i).innerHTML = `<img src="/static/img/tesoreria_identification.jpg" alt="">`;
+        }
     }
 }
 

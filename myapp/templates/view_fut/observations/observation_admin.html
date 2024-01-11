@@ -11,15 +11,11 @@
 	<h3 class="empty">Esta lista esta bacia...</h3>
 </div>
 
-<!-- <a href="{% url 'n_redirect_show' code='Hh4uIc' %}">Best</a> PARA EXPLICAR-->
-
 <script type="module">
 	import { style_navbar } from "{% static 'scripts/view_fut/observations/script.js' %}";
 	// ESTILOS PARA LA NAVBAR
 	style_navbar("observation");
 </script>
-
-{% block content_3 %}
 <script type="module">
 	import { open_observations,style_navbar, manage_rute } from "{% static 'scripts/view_fut/observations/script.js' %}";
 	// COOKIE MANAGE
@@ -27,13 +23,10 @@
 
 	// GENERAMOS LA LISTA DE OBSERVACIONES
 	open_observations('admin');
-	
 	//OBTNEMROS LA COOKIE ORDER
 	let fut_order = obtenerValorCookie('fut_order');
 	// ESCRIBIMOS LA RUTA
 	let list_name = [fut_order, "Observaciones"];
 	manage_rute(list_name);
 </script>
-{% endblock %}
-
 {% endblock %}

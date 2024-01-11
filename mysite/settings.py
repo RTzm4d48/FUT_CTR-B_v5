@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+# python-dotenv
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,6 +37,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp\media')
 # Los archivos multimedia de admin
 MEDIA_ROOT_ADMIN = os.path.join(BASE_DIR, 'myapp_admin\media')
 
+STATIC = os.path.join(BASE_DIR, 'myapp\static')
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Application definition
 
@@ -45,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp', # esto es
     'myapp_admin',
+    'django_auth_adfs',
 ]
 
 MIDDLEWARE = [
@@ -161,4 +168,39 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # VARIABLES DE REDIRECCIÓN DE LOGIN Y LOGOUT
 LOGIN_REDIRECT_URL = 'n_home'
-LOGOUT_REDIRECT_URL = 'n_home'
+# LOGOUT_REDIRECT_URL = 'n_home'
+
+
+#SETTINGS FOR LOGIN WITH MICRFOSOFT
+
+AUTHENTICATION_BACKENDS = (
+    'django_auth_adfs.backend.AdfsAuthCodeBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Configure django to redirect users to the right URL for login
+LOGIN_URL = "django_auth_adfs:login"
+LOGIN_REDIRECT_URL = "/"
+
+# Client secret is not public information. Should store it as an environment variable.
+client_id = os.getenv("client_id")
+client_secret = os.getenv("client_secret")
+tenant_id = os.getenv("tenant_id")
+
+AUTH_ADFS = {
+    'AUDIENCE': client_id,
+    'CLIENT_ID': client_id,
+    'CLIENT_SECRET': client_secret,
+    'CLAIM_MAPPING': {'first_name': 'given_name',
+                      'last_name': 'family_name',
+                      'email': 'upn'},
+    'GROUPS_CLAIM': 'roles',
+    'MIRROR_GROUPS': True,
+    'USERNAME_CLAIM': 'upn',
+    'TENANT_ID': tenant_id,
+    'RELYING_PARTY_ID': client_id,
+}
+
+# CON LOS PRINTS COMPROBAREMOS SI LAS VARIABLES CONTIENEN ALGO
+print("260 IQ")
+print(client_secret)

@@ -44,12 +44,18 @@
 (DONE)- al seleccionar un archivo se tiene que guardar en tmp (para que la secretaria procece). (se hizo con un form)
 
 (DONE)- completar el process de la secretaria y luego seguir el la publicación de dirección.
-- descargar el documento procesado por recretaria en dirección.
+(DONE)- descargar el documento procesado por recretaria en dirección.
 
 (DONE)- abrir los ticket, agregar funcionalidades
 (DONE)- Arreglar el formulario del metodo de pago
-- crear la interfaz para observaciones
+(DONE)- crear la interfaz para observaciones
 
-- Averiguar como enviar datos json por render desde el servidor a el usuario
+(DONE)- Averiguar como enviar datos json por render desde el servidor a el usuario (al final no se pudo solo envie la id para poder solicitarlo con AJAX)
 
-- colocar un show dentro de observation_admin y otro show, dentro de observation/tickets
+(DONE)- colocar un show dentro de observation_admin y otro show, dentro de observation/tickets
+- hacer que el número de las notificaciones en la campanita y en observaciones sea funcional
+
+- funcion para que los admins puedan responder los tickets y reportes
+
+- terminar con la funcionalidad en el fromulario de pay
+
