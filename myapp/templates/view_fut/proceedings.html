@@ -120,7 +120,7 @@
     <div class="icon_img">
         <div class="alert_message">
             <img src="{% static 'img/advertencia.png' %}" alt="">
-            <p>Advertencia: su tramite aún no fue procesado, necesita hacer el pago para iniciar su proceso.</p>            
+            <p>Advertencia: su tramite aún no fue procesado, necesita hacer el pago para iniciar su proceso.</p>
         </div>
         <img src="{% static 'img/icon03.png' %}">
         <h2>Realize el pago</h2>
@@ -692,6 +692,12 @@ padding: 0px 0px 50px 0px;
     .message_finished_cont img{
         height: 40px;
     }
+    .cont_doc .btn_down{
+        background: #19D637;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+    }
 </style>
 
 <div class="mycontent" >
@@ -763,36 +769,23 @@ padding: 0px 0px 50px 0px;
             </div>
             <div class="content_B">
                 <div class="student_content">
+                    <!-- ---- -->
+                    <form id="formulario" action="/direct_download/" method="get" accept-charset="utf-8">
+                        <input type="hidden" name="id_fut" value="{{ fut_id }}">
+                        <input style="display: none;" type="submit" value="Enviar">
+                    </form>
+                    <!-- ---- -->
                     <div id="id_doc_download" class="cont_doc">
                         <img src="{% static 'img/doc2.png' %}" alt="">
-                        <p>Download</p>
+                        <p>Descargar</p>
                     </div>
                     <div id="state" class="state">
                         <p>Estado</p>
                         <p style="color: gray;">En Proceso</p>
                     </div>
                 </div>
-                <div class="data_document">
-                    <div class="d_document">
-                        <p>Disponibilidad de descarga:</p>
-                        <p class="num_data_doc" style="color: green;">Publico</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Origen:</p>
-                        <p class="num_data_doc">Instituto ILS</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Numero de paginas:</p>
-                        <p class="num_data_doc">5</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Tamaño:</p>
-                        <p class="num_data_doc">250KB</p>
-                    </div>
-                    <div class="d_document">
-                        <p>Formato:</p>
-                        <p class="num_data_doc">pdf</p>
-                    </div>
+                <div id="la_data_doc" class="data_document">
+                    <!-- AQUI VA LA DATA DEL DOCUMENTO -->
                 </div>
                 <style>
                     .btn_create_ticket{
@@ -957,6 +950,34 @@ padding: 0px 0px 50px 0px;
 
     function closeForm2(){
         document.getElementById("Forgetp").style.display = "none";
+    }
+</script>
+<!-- CODIGO SOLO PARA DESCARGAR EL DOCUMENTO -->
+<script>
+    function direct_download(){
+        console.log('DESCARGAMOS YA');
+        // Enviar automáticamente el formulario al cargar la página
+        document.getElementById('formulario').submit();
+    }
+    function get_file_from_db(){
+        $.ajax({
+            url: "/download_pdf_procedure/",
+            method: "GET",
+            data:{
+                'id_fut':'{{ fut_id }}',
+            },
+            success: function(response){
+                const midata = response;
+                console.log(midata);
+                direct_download();
+            },
+            error: function() {
+                alert("Ocurrió un error al cargar el contenido.");
+            }
+        });
+    }
+    function btn_download(){
+        get_file_from_db();
     }
 </script>
 <script src="/static/scripts/view_fut/script.js?" type="module" charset="utf-8" async defer></script>

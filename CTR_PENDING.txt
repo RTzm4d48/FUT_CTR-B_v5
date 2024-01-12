@@ -59,3 +59,6 @@
 
 - terminar con la funcionalidad en el fromulario de pay
 
+- solucionar la funcion de redireccionar al procesar el FUT en Tesorería (hay un error no perjudicial)
+
+- Solucionar borones de publicar, descargar entre otros de Dirección (el onclick llega a fallar)

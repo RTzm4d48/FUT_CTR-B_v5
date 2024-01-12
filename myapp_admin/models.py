@@ -153,7 +153,7 @@ class ruta_tramite(models.Model):
     reception = models.DateTimeField()
     exit = models.DateTimeField(null=True)
     fut_id = models.ForeignKey(fut, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         num_id = str(self.fut_id.id)
         return self.tittle+" - "+self.name+" - "+num_id

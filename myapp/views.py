@@ -201,14 +201,16 @@ def successful(request):
     if request.method == 'POST':
         my_id = request.POST.get('id_value')
 
-        objetos = fut.objects.filter(id=my_id).values('name', 'dni', 'order', 'proceeding', 'password', 'code').first()
+        obj = fut.objects.filter(id=my_id).values('name', 'full_name', 'dni', 'order', 'proceeding', 'password', 'code').first()
+
+        resultados_json = list(obj)
+
+        print('SUEÑOS')
+        print(resultados_json)
+        print(obj)
+
         return render(request, 'create_fut/successful.html', {
-            'Name': objetos['name'],
-            'Dni': objetos['dni'],
-            'Order': objetos['order'],
-            'Code': objetos['code'],
-            'Proceeding': objetos['proceeding'],
-            'Password': objetos['password']
+            'data': obj
         })
     else:
         return HttpResponse("<h1>404 ESTA URL NO EXISTE :(</h1>")

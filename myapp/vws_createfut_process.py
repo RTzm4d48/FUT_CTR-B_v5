@@ -10,7 +10,13 @@ import random, qrcode
 
 #IMPORTAR VISTAS
 from myapp.vws_createfut_process_process import paint_qr_img
+from myapp.vws_createfut_process_process import manage_document
 #-----------------------------------------------------------------
+
+
+import base64
+import os
+from django.conf import settings
 
 def proceedings(request):
     code_ = request.GET.get('code')
@@ -39,7 +45,7 @@ def proceedings(request):
             for i in range(nummail):
                 asterisk.append('*')
             asterisk_Str = ''.join(asterisk)
-            email_code = e+asterisk_Str+l+'@gmail.com'
+            email_code = e+asterisk_Str+l+'gmail.com' #quitamos el @
 
         # My params for css
         progressbar = list(range(9)) # for progress bar lines
@@ -216,3 +222,34 @@ def tupa_validation(request):
     id_tupa = request.GET.get("id_tupa")
     objs = tupa.objects.filter(id=id_tupa).values('require_attach', 'tipo_de_servicio', 'procedimiento').first()
     return JsonResponse({'data': objs})
+
+def download_pdf_procedure(request):
+    id_fut = request.GET.get('id_fut')
+    print(id_fut)
+
+    # OBTENEMOS EL DOCUMENTO Y LO ESCRIBIMOS EN LA CARPETA MEDIA
+    tutuloYexpediente = manage_document(id_fut)
+
+    return JsonResponse({'data': tutuloYexpediente})
+
+# ESTA FUNCIÓN FINALMENTE DESCARGA EL ARCHIVO
+def direct_download(request):
+    if request.method == 'GET':
+        fut_id = request.GET.get('id_fut')
+        file = 'doc_finisher_tramited_fut_'+str(fut_id)+'.pdf'
+        file_path = os.path.join(settings.MEDIA_ROOT, file)
+        print(file_path)
+        try:
+            with open(file_path, 'rb') as f:
+                print(file_path)
+                response = HttpResponse(f.read(), content_type='application/pdf') #image/jpeg
+                response['Content-Disposition'] = 'attachment; filename="%s"' % file
+                return response
+        except FileNotFoundError:
+            print("El archivo no existe.")
+            return HttpResponse("<h1>El archivo no existe. :(</h1>")
+        except Exception as e:
+            print(f"Ocurrió un error inesperado: {e}")
+            return HttpResponse("<h1>Ocurrió un error inesperado :(</h1>")
+    else:
+        return HttpResponse("<h1>404 Not Found :(</h1>")

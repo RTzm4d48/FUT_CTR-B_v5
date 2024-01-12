@@ -392,7 +392,7 @@
             color: black;
             top: 0px;
             left: 0px;
-            background: #E9E9E9;
+/*            background: #E9E9E9;*/
             border: 1px solid gray;
             font-size: small;
             cursor: pointer;
@@ -423,7 +423,7 @@
         <p id="id_pross_advertencia" class="ocultar" style="margin: 0px auto; color: red;"></p>
         <!-- - -->
         <div class="fila_form" style="height: 40px;">
-            <div class="unEspacio_mediano" style="flex-direction: column;">
+            <div class="unEspacio_entero" style="flex-direction: column; width: calc(100% - 40%);">
                 <!-- -SELECCIONAR TRAMITE- -->
                 <div class="content_boxlist" id='boxlist' style="margin:0px">
                     <!-- - -->
@@ -452,10 +452,11 @@
                 <p id="alert_tramite" style="color:red; margin: 0px;padding: 0px;" class="ocultar">*Seleccione un tramite antes de continuar</p>
                 <!-- -/- -->
             </div>
-            <div class="unEspacio_mediano">
+            <!-- ----------------------- -->
+            <div class="unEspacio_mediano" style="flex-direction: column; width: calc(40% - 20px);">
                 <div class="select_img_cnt">
                     <input type="file" id="attachfile" name="attach_file"  accept=".png, .jpg, .pdf">
-                    <label id="id_attach_label" class="" for="attachfile"><img src="{% static 'img/adjuntar.png' %}">Adjuntar Archivo (opcional)</label>
+                    <label id="id_attach_label" class="" for="attachfile" style="font-size: smaller;"><img src="{% static 'img/adjuntar.png' %}">Adjuntar Archivo (opcional)</label>
                 </div>
             </div>
         </div>
@@ -678,6 +679,10 @@
             event.preventDefault(); // Detiene el envío del formulario
         }
     });
+</script>
+
+<script>
+    document.getElementById("numeration2").classList.add("num_ckeck");
 </script>
 {% endblock %}
 

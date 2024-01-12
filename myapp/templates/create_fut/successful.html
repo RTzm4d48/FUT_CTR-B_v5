@@ -24,16 +24,17 @@
 <div class="bodyf" style="text-align: center;">
     <H1>FUT Creado exitosamente!</H1>
     <h2>Datos del solicitante</h2>
-    <p>Nombre: {{Name}} </p>
-    <p>DNI: {{Dni}} </p>
-    <h3>{{Order}}</h3>
+    <p>Nombre: {{data.name}} </p>
+    <p>Apellidos: {{data.full_name}} </p>
+    <p>DNI: {{data.dni}} </p>
+    <h3>{{data.order}}</h3>
     <hr style="width: 90%; margin: auto; opacity: 50%;">
-    <p>Expediente: {{Proceeding}} </p>
-    <p>Contraseña: {{Password}} </p>
-    <img src="{% static '/tmp/' %}{{Code}}qrcode.png" alt="" style="width: 200px; padding: 10px 20px;">
+    <p>Expediente: {{data.proceeding}} </p>
+    <p>Contraseña: {{data.password}} </p>
+    <img src="{% static '/tmp/' %}{{data.code}}qrcode.png" alt="" style="width: 200px; padding: 10px 20px;">
     <br>
-    <a href="http://127.0.0.1:8000/my_fut/proceedings?code={{Code}}">ir al tramite</a>
-    <p>Toda la informacion necesaria para acceder al tramite se envio a: edgar@gmail.com</p>
+    <a href="http://localhost:8000/my_fut/proceedings?code={{data.code}}">ir al tramite</a>
+    <p>Puedes acceder al trámite mediante el código QR y también puedes compartir el trámite mediante dicho código.</p>
     <!-- PEDIR AYUDA A GPT -->
 </div>
 {% endblock %}
@@ -133,7 +134,7 @@
     <div class="icon_img">
         <div class="alert_message">
             <img src="{% static 'img/advertencia.png' %}" alt="">
-            <p>Advertencia: su tramite aún no fue procesado, necesita hacer el pago para iniciar su proceso.</p>            
+            <p>Advertencia: su tramite aún no fue procesado, necesita hacer el pago para iniciar su proceso.</p>
         </div>
         <img src="{% static 'img/icon03.png' %}">
         <h2>Realize el pago</h2>
@@ -164,6 +165,8 @@
 </script>
 
 <script>
+    console.log("OTRA VEEEEZ");
+    console.log("{{ data }}");
     // setTimeout(function() {
     //     console.log("Hola Mundo");
     //     pop_windows_wait.classList.remove("ocultar");

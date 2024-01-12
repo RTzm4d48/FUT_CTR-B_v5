@@ -128,8 +128,32 @@ function estado_fut(){
 	document.getElementById("id_doc_download").classList.add("doc_finaliced");
 	document.getElementById("id_doc_download").innerHTML = `
 	<img src="/static/img/doc.png" alt="">
-	<p>Download</p>
+	<p class="btn_down" onclick="btn_download()">Descargar</p>
 	`;
+	// ---------------------------
+	let data_doc = `
+	<div class="d_document">
+        <p>Disponibilidad de descarga:</p>
+        <p class="num_data_doc" style="color: green;">Publico</p>
+    </div>
+    <div class="d_document">
+        <p>Origen:</p>
+        <p class="num_data_doc">Instituto ILS</p>
+    </div>
+    <div class="d_document">
+        <p>Numero de paginas:</p>
+        <p class="num_data_doc">1</p>
+    </div>
+    <div class="d_document">
+        <p>Tamaño:</p>
+        <p class="num_data_doc">250KB</p>
+    </div>
+    <div class="d_document">
+        <p>Formato:</p>
+        <p class="num_data_doc">pdf</p>
+    </div>
+	`;
+	document.getElementById("la_data_doc").innerHTML = data_doc;
 }
 
 get_route();
