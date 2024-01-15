@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
+import base64
 
 import json
 from datetime import date, datetime
@@ -13,6 +14,11 @@ from myapp.views_observations_process import obtain_id_admin
 from myapp.views_observations_process import create_ticket
 from myapp.views_observations_process import update_state_ticket
 from myapp.views_observations_process import insert_desarrollo
+
+# TICKET
+from myapp.views_observations_process import create_my_ticket
+from myapp.views_observations_process import insert_ticket_desarrollo
+from myapp.views_observations_process import activated_ticket
 
 def init_observations(request):
 	return render(request, 'view_fut/observations/observation_admin.html')
@@ -114,3 +120,75 @@ def create_user_ticket(request):
 		return JsonResponse({'data': new_data})
 	else:
 		return HttpResponse("<h1>404 ESTA PAGINA NO EXISTE :(</h1>")
+
+
+def crear_ticket(request):
+	print("COMO? CHIQUITO BALDOBIA")
+	# VARIABLES PARA CREAR TICKET
+	tittle = request.POST.get('tittle')
+	creator = request.POST.get('creator')
+	charge = "alumno"
+	fut_id = request.POST.get('fut_id')
+	admin_id = obtain_id_admin(int(fut_id))# EL ID DEL ADMIN QUE TIENE EL FUT
+	user_id = request.POST.get('user_id')
+	# VARIABLES PARA DESARROLLO
+	desarrollo = request.POST.get('desarrollo')
+	#DATE
+	date_ = datetime.now()
+	date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
+	# IMG
+	if 'file_miImg' in request.FILES:
+		img_file = request.FILES['file_miImg']
+		img_binary = img_file.read()
+		img_binary_encoded = base64.b64encode(img_binary)
+	else:
+		img_binary_encoded = b''# bynary bacio
+
+	# mi_diccionario = {'tittle': tittle, 'creator': creator, 'charge': charge,
+	# 'admin_id': admin_id, 'fut_id': fut_id, 'user_id': user_id, 'desarrollo': desarrollo}
+	# print("TODAS LAS VARIABLES")
+	# print(mi_diccionario)
+	# print(img_binary_encoded)
+	# print("LA IMAGEN")
+
+	print("CREATE_TICKET_1")
+	new_id_ticket = create_my_ticket(tittle, creator, charge, admin_id, fut_id, user_id)
+	print("CREATE_TICKET_2")
+	insert_ticket_desarrollo(tittle, desarrollo, charge, date_format, new_id_ticket, img_binary_encoded)
+	print("CREATE_TICKET_3")
+	activated_ticket(new_id_ticket, tittle);
+
+
+	url_destino = reverse('n_tickets_path')
+	# REDIRIGIR A LA VISTA DESTINO
+	return redirect(url_destino)
+
+def desarrollo_ticket(request):
+	tittle = request.POST.get('tittle')
+	desarrollo = request.POST.get('desarrollo')
+	charge = "alumno"
+	new_id_ticket = request.POST.get('id_ticket')
+	#DATE
+	date_ = datetime.now()
+	date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
+	# IMG
+	if 'file_miImg_r' in request.FILES:
+		img_file = request.FILES['file_miImg_r']
+		img_binary = img_file.read()
+		img_binary_encoded = base64.b64encode(img_binary)
+	else:
+		img_binary_encoded = b''# bynary bacio
+
+
+	# mi_diccionario = {'tittle': tittle, 'desarrollo': desarrollo, 'new_id_ticket': new_id_ticket}
+	# print("LOS DATOS DE DESARROLLO")
+	# print(mi_diccionario)
+	# print(img_binary_encoded)
+	# print("LA IMGEN BYG")
+
+	print("DESARROLLO INSERTADO")
+	insert_ticket_desarrollo(tittle, desarrollo, charge, date_format, new_id_ticket, img_binary_encoded)
+
+	url_destino = reverse('n_tickets_path')
+	# REDIRIGIR A LA VISTA DESTINO
+	return redirect(url_destino)

@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 	var id_process_btn = document.getElementById("id_process_btn");
+<<<<<<< HEAD
+	var id_btn_public = document.getElementById("id_btn_public");
+	var id_btn_process_secretary = document.getElementById("id_btn_process_secretary");
+
+=======
+>>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
 });
 
 import { process_fut, paint_file, get_file_fron_db } from './script_procesos.js';
@@ -37,7 +43,7 @@ document.getElementById("fileUploadForm").addEventListener('submit', function(ev
 document.getElementById("upload_direction").addEventListener('submit', function(event) {
 	let num_exp = document.getElementById("num_expediente").value;
 	let select_pdf = document.getElementById("select_pdf_direction").value;
-	
+
 	if (num_exp == "") {
 		event.preventDefault();
 		alert("Por favor ingrese el número de Expediente");
@@ -81,3 +87,8 @@ document.getElementById("btn_download_doc").addEventListener('click', function()
 	get_file_fron_db();
 });
 
+// FORMULARIO PARA CREAR UNA OBSERVACIÓN O TICKET
+document.getElementById("id_form_create_observation").addEventListener('submit', function(event){
+	event.preventDefault();
+	console.log("ESTAMOS INTENTANTO CEREAR UNA OBSERVACIÓN");
+});

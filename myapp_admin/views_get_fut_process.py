@@ -8,7 +8,7 @@ def manage_img(fut_id):
     pdf_binary = base64.b64decode(objs['img_pay'])
 
     ruta_guardar_pdf = 'myapp_admin/static/tmp/pay_photo_'+fut_id+'.jpg'
-    
+
     with open(ruta_guardar_pdf, 'wb') as output_pdf:
         output_pdf.write(pdf_binary)
 

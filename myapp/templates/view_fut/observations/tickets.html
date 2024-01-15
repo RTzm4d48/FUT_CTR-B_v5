@@ -8,10 +8,15 @@
 
 <script type="text/javascript">
 	// ---------------
+	console.log("COMOOOOOOOOO CUUL");
 	function createticket(){
 		console.log("EMBAPE");
 		document.getElementById("pop_windows_create_ticket").classList.remove("ocultar");
-		send_ticket();
+		//send_ticket(); Luego borraremos el codigo restante
+		// ASIGNAR ALGUNOS DATOS AL FORMULARIO
+		document.getElementById("id_fut").value = obtenerValorCookie("fut_id");
+		document.getElementById("user_name").value = "{{ user.first_name }}";
+		document.getElementById("user_id").value = "{{ user.id }}";
 	}
 	// OBTENER LA COOKIE
 	function obtenerValorCookie(nombre) {

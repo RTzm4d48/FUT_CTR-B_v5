@@ -28,9 +28,10 @@ urlpatterns = [
     # views_ticket AQUI ESTAN TODAS LAS URLS PARA views_ticket.py
     path('create_ticket_path/', views_tickets.create_ticket, name="n_create_ticket"),
     path('update_desarrollo_path/', views_tickets.update_desarrollo, name="n_update_desarrollo"),
+    path('pueba_path/', views_tickets.prueba, name="n_prueba"),
     path('loading_ticket_path/', views_tickets.loading_ticket, name="n_loading_ticket"),
     path('more_loading_ticket_path/', views_tickets.moreloading_ticket, name="n_more_loading_ticket"),
-
+    path('all_desarrollo_data_path/', views_tickets.all_desarrollo_data, name="n_all_desarrollo_data"),
 
     # views_report AQUI ESTAN TODAS LAS URLS PARA LAS VISTAS DE views_report.py
     path('create_report_path/', views_report.create_report, name="n_create_report"),

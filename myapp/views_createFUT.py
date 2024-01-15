@@ -48,7 +48,7 @@ async def finisher(request):
         else:
             pay_img_binary_encoded = b''# bynary bacio
 
-        # OBTENDREMOS EL ARCHIVO attach EN byte DE tmp 
+        # OBTENDREMOS EL ARCHIVO attach EN byte DE tmp
         attach_byte = await obtener_archivo_deTmp(attach_file_name);
         
         #obtener the date

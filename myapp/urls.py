@@ -60,6 +60,9 @@ urlpatterns = [
     path('get_db_ticket_path/', views_observations.get_db_ticket, name="n_get_db_ticket"),
     path('get_desarrollo_db_path/', views_observations.get_desarrollo_db, name="n_get_desarrollo_db"),
     path('update_desarrollo_ticket_path/', views_observations.update_desarrollo_ticket, name="n_update_desarrollo_ticket"),
+    path('crear_ticket_path/', views_observations.crear_ticket, name="n_crear_ticket"),
+    path('desarrollo_ticket_path/', views_observations.desarrollo_ticket, name="n_desarrollo_ticket"),
+
     path('create_user_ticket_path/', views_observations.create_user_ticket, name="n_create_user_ticket"),
 
 ]

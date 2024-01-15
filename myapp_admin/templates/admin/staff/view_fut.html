@@ -174,9 +174,7 @@
                     </div>
                 </div>
             </div>
-            
             <style>
-                
             </style>
             <div id="cont_padre_tickets" class="contMyTickets ocultar">
                 <div class="line_area">
@@ -185,58 +183,72 @@
                 </div>
                 <div class="contMyTicket">
                     <div class="ticket_tittle">
-                        <p>OBSERVACIONES</p>    
+                        <p>OBSERVACIONES</p>
                     </div>
                     <div id="content_dinamic" class="content_dinamico">
                         <!-- AQUI VAN LOS TICKETS -->
 
                         <!-- Y LOS CONTENEDOR DE TICKETS ABIERTOS (CON ID idBody_ticket -->
-
                     </div>
-                    
                     <style>
 
                     </style>
                     <!-- EL CONTENEDOR CON ID: --- ESTABA AQUI -->
                 </div>
             </div>
-            
             <style>
 
             </style>
             <!-- ------------------------/OTRO CONT------------------------ -->
+            <!-- FORMULARIO PARA CREAR UNA OBSERVACION O TICKET -->
             <div id="id_cont_ticket" class="ticket_conteiner ocultar">
                 <img class="img_admin" src="{% static 'img/admin_icon.png' %}" alt="">
                 <div class="contticket">
-                    <div class="head_ticket">
-                        <img src="{% static 'img/pngegg.png' %}" alt="">
-                        <p><strong>De</strong> Área Tesorería <strong>Para</strong> 70165345@ils.edu.pe</p>
-                        <p>|</p>
-                        <p id="id_num_ticket" style="opacity: 60%;">...</p>
-                        <img class="deleted" src="{% static 'img/deleted.png' %}" alt="" onclick="DeletedTicket()">
-                    </div>
-                    <input id="id_titulo" type="text" value="" placeholder='Título' name="">
-                    <hr>
-                    <textarea id="id_desarrollo" placeholder='Desarrollo' name="reason" cols="30" rows="10" required></textarea>
-                    <div id="id_file_add_cont">
-                        <!-- -- -->
-                    </div>
-                    <div class="space_buttons_ticket">
-                        <button type="" onclick="sendTicket()"><strong>Enviar</strong></button>
-                        <div class="adjunt_img ocultar">
-                          <input type="file" id="pdf_file" name="pdf_file" class="input-file" accept="*">
-                          <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
+                    <form id="id_form_create_observation" action="{% url 'n_prueba' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="head_ticket">
+                            <img src="{% static 'img/pngegg.png' %}" alt="">
+                            <p><strong>De</strong> Área Tesorería <strong>Para</strong> 70165345@ils.edu.pe</p>
+                            <p>|</p>
+                            <p id="id_num_ticket" style="opacity: 60%;">...</p>
+                            <img class="deleted" src="{% static 'img/deleted.png' %}" alt="" onclick="DeletedTicket()">
                         </div>
-                        <!-- - -->
-                        <div class="adjunt_img ocultar">
-                          <input type="file" id="pdf_file2" name="pdf_file" class="input-file" accept=".png, .jpg">
-                          <label for="pdf_file2" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                        <input id="id_titulo" type="text" value="" placeholder='Título' name="tittle">
+                        <hr>
+                        <textarea id="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
+                        <div id="id_file_add_cont">
+                            <!-- -- -->
                         </div>
-                        <!-- - -->
-                        <div class="adjunt_img ocultar">
-                          <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
+                        <div class="space_buttons_ticket">
+                            <!-- VARIABLES QUE TAMBIEN SE DEBERAN DE ENVIAR -->
+                            <input type="hidden" name="creator" value="{{ Data_log.admin_name }}"><!-- -NameAdmin- -->
+                            <!-- name=state -->
+                            <input type="hidden" name="charge" value="{{ Data_log.position_admin1 }}"><!-- -ChargeAdmin- -->
+                            <!-- name=numTicket (un numero random) -->
+                            <input type="hidden" name="admin_id" value="{{ Data_log.admin_id }}"><!-- -IdAdmin- -->
+                            <input type="hidden" name="fut_id" value="{{ objs.id }}"><!-- -Fut_id- -->
+                            <input type="hidden" name="user_id" value="{{ objs.user_id_id }}"><!-- -User_id- -->
+
+                            <!-- VARIABLES PARA VOLVER AL VIEW DEL TICKET -->
+                            <input type="hidden" name="code" value="{{ code }}">
+                            <input type="hidden" name="mode" value="{{ mode }}">
+
+                            <button type="" onclick="sendTicket()"><strong>Enviar</strong></button>
+                            <div class="adjunt_img ocultar">
+                              <input type="file" id="pdf_file__" name="pdf_file" class="input-file" accept="*">
+                              <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
+                            </div>
+                            <!-- - -->
+                            <div class="adjunt_img">
+                              <input type="file" id="pdf_file" name="pdf_file_miImg" class="input-file" accept=".png, .jpg">
+                              <label for="pdf_file" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                            </div>
+                            <!-- - -->
+                            <div class="adjunt_img ocultar">
+                              <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="fut_cont ocultar">

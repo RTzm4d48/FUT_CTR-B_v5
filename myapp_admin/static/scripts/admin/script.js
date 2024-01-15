@@ -199,6 +199,7 @@ function img_big(){
 }
 
 
+// ESTO ABRE OBSERVACIÓN Y CARGA EL NUMERO DE TIKET
 function OpenTicket(){
     id_cont_ticket.classList.remove("ocultar");
     
@@ -210,7 +211,7 @@ function OpenTicket(){
         behavior: 'smooth'
     });
     //CREAMOS EL TICKET
-    CREAR_TICKET();
+    //CREAR_TICKET();
 }
 function DeletedTicket(){
     id_cont_ticket.classList.add("ocultar");
@@ -297,7 +298,7 @@ async function ContOpen_Ticket(i, ticket_id){
             <button id="btn_answer"><img src="/static/img/reply_red.png" alt="">Responder</button>
         </div>
     `);
-    
+
     document.getElementById("id_aqui_desplegable_content_"+i).innerHTML = my_html;
     await add_answers(i, ticket_id);
 
@@ -310,28 +311,37 @@ async function ContOpen_Ticket(i, ticket_id){
     });
 }
 
+function verificarArchivoExistente(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', url, false);
+    xhr.send();
+
+    return xhr.status === 200;
+}
+
 async function add_answers(num_for, id_ticket){
     console.log("ESTAMOS EN ANSWER_");
-    var data_tickets = await show_more_ticket_date(id_ticket);
-    console.log("hola");
-    console.log(data_tickets);
+    var data_tickets = await all_data_desarrollo(id_ticket);
     // VARIABLES
     let length = data_tickets['more_tickets']['length'];
 
-
     for (let i = 0; i < length; i++) {
         // VARIABLES
+        let id = data_tickets['more_tickets'][i]['id'];
         let titulo = data_tickets['more_tickets'][i]['name'];
         let desarrollo = data_tickets['more_tickets'][i]['desarrollo'];
         let charge = data_tickets['more_tickets'][i]['charge'];
         let date = data_tickets['more_tickets'][i]['date'];
 
+        let existencia_url = verificarArchivoExistente(`/static/tmp/desarrollo_attach_${id}.jpg`) ? `<img src="/static/tmp/desarrollo_attach_${id}.jpg">` : '';
+        console.log(existencia_url);
         let content_answer = (`
             <div class="sapace_user">
                 <div id="id_img_space_${i}" class="user_img">
                     <img src="/static/img/admin_icon.png" alt="">
                 </div>
                 <div class="user_datecontent">
+                    <hr>
                     <div class="user_date">
                         <div class="ladoB">
                             <h4>${titulo}</h4>
@@ -347,6 +357,7 @@ async function add_answers(num_for, id_ticket){
                         <p>
                             ${desarrollo}
                         </p>
+                        ${existencia_url}
                         <div class="attach">
                         </div>
                         <div id="sello_${i}">
@@ -358,7 +369,7 @@ async function add_answers(num_for, id_ticket){
         `);
         document.getElementById("space_answer_"+num_for).innerHTML += content_answer;
 
-        if(charge == "(alumno)"){
+        if(charge == "alumno"){
             document.getElementById("sello_"+i).innerHTML = ``;
             document.getElementById("id_img_space_"+i).innerHTML = `<img src="/static/img/profile_user_test.jpg" alt="">`;
 
@@ -377,7 +388,8 @@ function ContClose_Ticket(i){
 
 //FUNCIONES PARA ENVIAR EL TICKET------
 function sendTicket(){
-    TICKET_ACTUALIZAR_DESARROLLO();
+    //TICKET_ACTUALIZAR_DESARROLLO();
+    console.log("Se canceló esto (borrar rastros de codigo)");
 }
 
 //TICKET FUNCTIONS ------------------
@@ -430,7 +442,7 @@ async function TICKET_ACTUALIZAR_DESARROLLO(){
     if(titulo !== "" && desarrollo !== "" && existeCookie('id_ticket')){ //ESTO VALIDA SI NO EXISTE LA COOKIE 'id_ticket'
         //ACTUALIZAMOS LA BD TIKET
         //HE INSERTAMOS UN DESARROLLO EN LA DB
-        
+
         //AJAX
         $.ajax({
             url: "/update_desarrollo_path/", // ruta en url.py para que ejecute una funcion
@@ -483,12 +495,12 @@ function LOADING_TICKET(){
     });
 }
 //la explicación esta en Apuuntes_Markdown
-function establecerCookie(nombre, valor) {
-    var fechaExpiracion = new Date();
-    fechaExpiracion.setDate(fechaExpiracion.getDate() + 1); // 1 día
-    var cookieString = nombre + "=" + valor + "; expires=" + fechaExpiracion.toUTCString() + "; path=/";
-    document.cookie = cookieString;
-}
+// function establecerCookie(nombre, valor) {
+//     var fechaExpiracion = new Date();
+//     fechaExpiracion.setDate(fechaExpiracion.getDate() + 1); // 1 día
+//     var cookieString = nombre + "=" + valor + "; expires=" + fechaExpiracion.toUTCString() + "; path=/";
+//     document.cookie = cookieString;
+// }
 function eliminarCookie(nombre) {
     var fechaExpiracion = new Date();
     fechaExpiracion.setFullYear(fechaExpiracion.getFullYear() - 1);
@@ -544,19 +556,29 @@ async function show_more_ticket_date(id_ticket){
             },
             success: function (response) {
                 const midata_json = response;
-                console.log(midata_json);
-                console.log("DESCRIPCION: "+midata_json['more_tickets'][0]['desarrollo']);
-                // // VARABLES
-                // const desarrollo = midata_json['more_tickets']['desarrollo'];
-                // const date = midata_json['more_tickets']['date'];
-                // const charge = midata_json['more_tickets']['charge'];
-                // // const length = 
+                resolve(midata_json);
 
-                // var miLista = [];
-                // miLista.push(desarrollo);
-                // miLista.push(date);
-                // miLista.push(charge);
+            },
+            error: function () {
+                reject("Ocurrió un error al cargar el contenido.");
+            }
+        });
+    });
+}
 
+// OBTENER EL DESARROLLO DEL TICKET
+async function all_data_desarrollo(id_ticket){
+    await new Promise(resolve => setTimeout(resolve, 100)); // 10000 milisegundos = 10 segundos
+    return new Promise((resolve, reject) => {
+        // AJAX
+        $.ajax({
+            url: "/all_desarrollo_data_path/",
+            method: "GET",
+            data: {
+                'id_ticket': id_ticket
+            },
+            success: function (response) {
+                const midata_json = response;
                 resolve(midata_json);
             },
             error: function () {
@@ -571,7 +593,7 @@ async function show_cont_ticket(num_registros, midata_json){
         //LITERALMENTE NO HACEMOS NADA
     }else{
         document.getElementById("cont_padre_tickets").classList.remove("ocultar");
-        
+
         console.log(midata_json['tickets'][0]);
 
         //limpiamos
@@ -589,7 +611,7 @@ async function show_cont_ticket(num_registros, midata_json){
             let desarrollo = lista[0];
             let date = lista[1];
             let charge = "";
-            if(lista[2] == "("+chargeAdmin+")"){
+            if(lista[2] == chargeAdmin){
                 charge = "<p style='background: #8FBED2;' class='received'>Enviado</p>";
             }else{
                 charge = "<p style='background: #7BE47B;' class='received'>Recibido</p>";
@@ -633,7 +655,7 @@ async function Ramdom_string() {
         const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
         resultado += caracteres.charAt(indiceAleatorio);
     }
-    return resultado;
+    return 88888;
 }
 
 // REPORT

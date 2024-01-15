@@ -100,6 +100,7 @@ class ticket_desarrollo(models.Model):
     date = models.DateTimeField(null=True)
     ticket_id = models.ForeignKey(ticket, on_delete=models.CASCADE)
     img_identify = models.BinaryField(default=b'')# imagen sello de identificacion solo para admins
+    img_attach = models.BinaryField(default=b'')# SI DESEA ADJUNTAR UNA IMAGEN
     def __str__(self):
         the_ticket_id = str(self.ticket_id.id)
         return f"ID: {self.id} - {self.name} - {self.charge} - {the_ticket_id}"

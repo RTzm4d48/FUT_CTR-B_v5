@@ -142,9 +142,10 @@
     		<div class="main_content_form">
     			<div class="encavezado">
     				<img src="/static/img/pngegg.png">
-    				<p id="form_encavezado"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
+    				Crear .<p id="form_encavezado"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
     			</div>
-    			<form class="etiqueta_form" method="post" action="{% url 'n_update_desarrollo_ticket' %}" enctype="multipart/form-data">
+    			<!-- FORMULARIO PARA CREAR TICKET -->
+    			<form class="etiqueta_form" method="post" action="{% url 'n_crear_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
     				<input id="id_titulo" class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
                     <hr>
@@ -153,22 +154,36 @@
                         <!-- -- -->
                     </div>
                     <div class="space_buttons_ticket">
-                    	<!-- ID TICKET -->
+                    	<!-- 	VARIABLES-->
                     	<input id="form_id_ticket" type="hidden" name="id_ticket" value="">
-                    	<input type="hidden" name="desarrollo_type" value="new">
+                    	<input id="id_fut" type="hidden" name="fut_id" value="">
+                    	<input id="user_name" type="hidden" name="creator" value="">
+                    	<input id="user_id" type="hidden" name="user_id" value="">
+
 
                       <button><strong>Enviar</strong></button>
+<<<<<<< HEAD
+
+                      <div class="adjunt_img ocultar">
+                        <input type="file" id="pdf_file__" name="pdf_file" class="input-file ocultar" accept="*">
+=======
                       <!--<div class="adjunt_img">
                         <input type="file" id="pdf_file" name="pdf_file" class="input-file ocultar" accept="*">
+>>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
                         <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
                       </div>
                       
                       <div class="adjunt_img">
-                        <input type="file" id="pdf_file2" name="pdf_file" class="input-file ocultar" accept=".png, .jpg">
-                        <label for="pdf_file2" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                        <input type="file" id="pdf_file" name="file_miImg" class="input-file ocultar" accept=".png, .jpg">
+                        <label for="pdf_file" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
                       </div>
+<<<<<<< HEAD
+                      <!-- - -->
+                      <div class="adjunt_img ocultar">
+=======
                       
                       <div class="adjunt_img">
+>>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
                         <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
                       </div>-->
                     </div>
@@ -193,9 +208,9 @@
     		<div class="main_content_form">
     			<div class="encavezado">
     				<img src="/static/img/pngegg.png">
-    				<p id="form_encavezado2"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
+    				Responder .<p id="form_encavezado2"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
     			</div>
-    			<form class="etiqueta_form" method="post" action="{% url 'n_update_desarrollo_ticket' %}" enctype="multipart/form-data">
+    			<form class="etiqueta_form" method="post" action="{% url 'n_desarrollo_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
     				<input class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
                     <hr>
@@ -204,21 +219,20 @@
                         <!-- -- -->
                     </div>
                     <div class="space_buttons_ticket">
-                    	<!-- ID TICKET -->
+                    	<!-- VARIABLES -->
                     	<input id="form_id_ticket2" type="hidden" name="id_ticket" value="">
-                    	<input type="hidden" name="desarrollo_type" value="old">
                       <button><strong>Enviar</strong></button>
-                      <div class="adjunt_img">
+                      <div class="adjunt_img ocultar">
                         <input type="file" id="pdf_file2" name="pdf_file" class="input-file ocultar" accept="*">
                         <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
                       </div>
                       <!-- - -->
                       <div class="adjunt_img">
-                        <input type="file" id="pdf_file22" name="pdf_file" class="input-file ocultar" accept=".png, .jpg">
-                        <label for="pdf_file2" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                        <input type="file" id="img_file_r" name="file_miImg_r" class="input-file ocultar" accept=".png, .jpg">
+                        <label for="img_file_r" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
                       </div>
                       <!-- - -->
-                      <div class="adjunt_img">
+                      <div class="adjunt_img ocultar">
                         <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
                       </div>
                     </div>

@@ -63,4 +63,8 @@
 
 - Solucionar borones de publicar, descargar entre otros de Dirección (el onclick llega a fallar)
 
+<<<<<<< HEAD
+- actualizar el número de ticket cuando la tesorera procesa el fut
+=======
 - arrehar el localhost de la redireccion de las notificaiones en la campanita
+>>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b

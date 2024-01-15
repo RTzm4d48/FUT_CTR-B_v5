@@ -57,7 +57,7 @@ export function paint_messages_tickets(data){
 				<div class="davbbar">
 					<img class="atras" src="/static/img/atras.png">
 					<img src="/static/img/rep_black.png">
-					<p>Se adjunto la foto del baucher icorrectamente</p>
+					<p>Se adjunto la foto del baucher icorrectamente _</p>
 				</div>
 				<div id="cont_main_message" class="cont_main_message">
 				</div>
