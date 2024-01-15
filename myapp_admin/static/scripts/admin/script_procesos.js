@@ -1,6 +1,8 @@
 // ENVIAMOS EL FUT AL SIGUIENTE ADMIN Y ACTUALIZAMOS LO NECESARIO
-export function process_fut(route){
+export function process_fut(route, num_boleta){
   //AJAX
+  console.log("queeee:");
+  console.log(num_boleta);
   $.ajax({
       url: "/process_fut_path/",
       method: "GET",
@@ -8,7 +10,8 @@ export function process_fut(route){
           'fut_id': fut_id,// fut_id ESTA DECLARADO EN view_fut.html
           'admin_id': admin_id,// fut_id ESTA DECLARADO EN view_fut.html
           'user_id': user_id,// fut_id ESTA DECLARADO EN view_fut.html
-          'route': route// para actualizar el fut
+          'route': route,// para actualizar el fut
+          'num_boleta': num_boleta
       },
       success: function(response){
           const midata = response; //en response esta recibiendo el return de la funcion

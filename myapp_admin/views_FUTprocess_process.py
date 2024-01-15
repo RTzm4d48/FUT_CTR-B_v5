@@ -59,11 +59,13 @@ def get_next_admin(next_charge, obj):
 	return 'fail'
 
 # ACTUALIZAMOS LA TABLA FUT
-def update_fut(fut_id, new_rute, route):
+def update_fut(fut_id, new_rute, route, num_boleta):
 	up_data = fut.objects.get(id=fut_id)
 	up_data.id_admin_turn = new_rute
 	up_data.report_state = False
 	up_data.view = False
+	up_data.stage = 0
+	if num_boleta != "None": up_data.n_ticket = num_boleta
 	up_data.route = route
 	up_data.save()
 	return "successfull"

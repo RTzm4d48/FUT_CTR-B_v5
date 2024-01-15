@@ -62,3 +62,5 @@
 - solucionar la funcion de redireccionar al procesar el FUT en Tesorería (hay un error no perjudicial)
 
 - Solucionar borones de publicar, descargar entre otros de Dirección (el onclick llega a fallar)
+
+- arrehar el localhost de la redireccion de las notificaiones en la campanita

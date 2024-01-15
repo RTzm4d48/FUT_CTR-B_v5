@@ -12,9 +12,6 @@
         </a>
         {% if mode == '1' %}
             <img onclick="postponed()"class="baricon" src="{% static 'img/icon02.png' %}" alt="">
-            {% if position == 'treasury' %}
-                <img onclick="pending()"class="baricon" src="{% static 'img/icon03_white.png' %}" alt="">
-            {% endif %}
         {% endif %}
     </div>
     <div class="principaldiv">
@@ -226,17 +223,17 @@
                     </div>
                     <div class="space_buttons_ticket">
                         <button type="" onclick="sendTicket()"><strong>Enviar</strong></button>
-                        <div class="adjunt_img">
+                        <div class="adjunt_img ocultar">
                           <input type="file" id="pdf_file" name="pdf_file" class="input-file" accept="*">
                           <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
                         </div>
                         <!-- - -->
-                        <div class="adjunt_img">
+                        <div class="adjunt_img ocultar">
                           <input type="file" id="pdf_file2" name="pdf_file" class="input-file" accept=".png, .jpg">
                           <label for="pdf_file2" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
                         </div>
                         <!-- - -->
-                        <div class="adjunt_img">
+                        <div class="adjunt_img ocultar">
                           <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
                         </div>
                     </div>
@@ -313,17 +310,17 @@
             <div class="buttons_view_fut">
                 {% if position == 'treasury' %}
                     <div class="send_button" onclick="send_fut()"><p>Procesar</p><img src="{% static 'img/sendbutton-16.png' %}" alt=""></div>
-                    <div class="send_button" onclick="open_pop_report()"><p>Reportar a Dirección</p><img src="{% static 'img/direction_black.png' %}" alt=""></div>
+                    <!-- <div class="send_button" onclick="open_pop_report()"><p>Reportar a Dirección</p><img src="{% static 'img/direction_black.png' %}" alt=""></div> -->
                     <div class="send_button" onclick="OpenTicket()"><p>Abrir Observación</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
                 {% elif position == 'secretary' %}
                     <div class="send_button" onclick="process_secretary()"><p>Procesar</p><img src="{% static 'img/sendbutton-16.png' %}" alt=""></div>
-                    <div class="send_button" onclick="open_pop_report()"><p>Reportar a Dirección</p><img src="{% static 'img/direction_black.png' %}" alt=""></div>
+                    <!-- <div class="send_button" onclick="open_pop_report()"><p>Reportar a Dirección</p><img src="{% static 'img/direction_black.png' %}" alt=""></div> -->
                     <div class="send_button" onclick="OpenTicket()"><p>Abrir Observación</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
                 {% elif position == 'direction' %}
-                    <div class="send_button" onclick="issued_document()"><img src="{% static 'img/public.png' %}" alt=""><p>Publicar Certificado</p></div>
-                    <div id="btn_download_doc" class="send_button"><img src="{% static 'img/download.png' %}" alt=""><p>Descargar</p></div>
-                    <div class="send_button" onclick="open_pop_report()"><p>Reportar FUT</p><img src="{% static 'img/direction_black.png' %}" alt=""></div>
-                    <div class="send_button" onclick="OpenTicket()"><p>Abrir Observación</p><img src="{% static 'img/pngegg.png' %}" alt=""></div>
+                    <div class="send_button" onclick="issued_document()"><img src="{% static 'img/public_black.png' %}" alt=""><p>Publicar Certificado</p></div>
+                    <div id="btn_download_doc" class="send_button"><img src="{% static 'img/download_black.png' %}" alt=""><p>Descargar</p></div>
+                    <!-- <div class="send_button" onclick="open_pop_report()"><p>Reportar FUT</p><img src="{% static 'img/direction_black.png' %}" alt=""></div> -->
+                    <div class="send_button" onclick="OpenTicket()"><img src="{% static 'img/pngegg.png' %}" alt=""><p>Abrir Observación</p></div>
                 {% endif %}
             </div>
             <!-- -------------/BOTÓNES------------ -->
@@ -407,6 +404,8 @@
     var fut_id = "{{objs.id}}";
     //Report
     var report_state = "{{objs.report_state}}";
+    //MI DIRECTORIO BASE
+
 </script>
 
 <!-- <script src="/static/scripts/admin/script.js" type="module" charset="utf-8" async defer></script> -->

@@ -1,20 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
 	var id_process_btn = document.getElementById("id_process_btn");
-	var id_btn_public = document.getElementById("id_btn_public");
-	var id_btn_process_secretary = document.getElementById("id_btn_process_secretary");
-	
 });
 
 import { process_fut, paint_file, get_file_fron_db } from './script_procesos.js';
 
 // TESORERIA - PROCESAR TRAMITE
 id_process_btn.addEventListener("click", function(){
-	const num_boleta = document.getElementById("num_boleta");// NUMERO DEL BAUCHER
-
-	if (num_boleta.value == '') {
+	const num_boleta = document.getElementById("num_boleta").value;// NUMERO DEL BAUCHER
+	console.log("ancud");
+	if (num_boleta == '') {
 		alert("Ingrese el número del Baucher")
 	}else{
-		process_fut('secretary');// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
+		console.log("Se envió el formulario a SECRETARÍA");
+		process_fut('secretary', num_boleta);// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
+		window.location.href = "http://localhost:8000/ils_admin/staff_treasury?order=treasury";
 	}
 })
 
@@ -30,7 +29,7 @@ document.getElementById("fileUploadForm").addEventListener('submit', function(ev
 		alert("Seleccione un archivo pdf.");
 	}else{
 		console.log("SE ENVIO EL FORMULARIO");
-		process_fut('direction');// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
+		// process_fut('direction');// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
 	}
 });
 
@@ -47,7 +46,7 @@ document.getElementById("upload_direction").addEventListener('submit', function(
 		alert("Por favor seleccione el documento pdf firmado.");
 	}else{
 		console.log("SE ENVIO EL FORMULARIO en dirección");
-		process_fut('finished');// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
+		// process_fut('finished');// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
 	}
 });
 

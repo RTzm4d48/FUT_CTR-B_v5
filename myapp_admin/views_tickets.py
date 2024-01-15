@@ -70,16 +70,13 @@ def update_desarrollo(request):
 
 def loading_ticket(request):
 	my_id = request.GET.get('id_fut');
-	print("LA IDE ES ESTO:")
-	print(my_id)
+	print("LA IDE ES ESTO: "+ str(my_id))
 	num_registros = ticket.objects.filter(fut_id_id=my_id, state=True).count()
-	print(num_registros)
+	print("NUM TICKETS: "+ str(num_registros))
 
 	resultados = ticket.objects.filter(fut_id_id=my_id, state=True).values('id', 'tittle', 'admin_id_id', 'num_ticket', 'name_creator')[:num_registros]
     # Convierte los resultados a una lista de diccionarios
 	resultados_json = list(resultados)
-	print("BADABADABUM")
-	print(resultados_json)
 	if(resultados_json == []):
 		print("Bacio")
 
@@ -94,5 +91,5 @@ def moreloading_ticket(request):
 	print("TICKET DESARROLLO");
 	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('name', 'desarrollo', 'charge', 'date')#.first()
 	resultados_json = list(desarrollo)
-	print(resultados_json)
+
 	return JsonResponse({'more_tickets':resultados_json})

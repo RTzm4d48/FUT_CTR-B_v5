@@ -1,11 +1,12 @@
 //BOTÓN BOSPONER
 function postponed(){
     var variable = 'Edgar';
-    $.get('/viewsend/', {'id': '{{objs.id}}', 'stage': 1});
-
+    $.get('/viewsend/', {'id': fut_id, 'stage': 1}); // fut_id LA DECLARAMOS EN view_fut.html
+    
     //redireccionamos a la pagina anterior
     setTimeout(function() {
         location.replace("/ils_admin/staff_treasury");
+        console.log("fernan crack");
         //location.reload(true);
     }, 100);
 }
@@ -30,7 +31,7 @@ function open_pop_report(){
 // import { saludar } from './script_procesos.js';
 // saludar("pedro");
 
-    
+
 // MOSTRAR EL POP-UP DE ENVIAR FUT
 function send_fut(){
     //document.getElementById("login-form-popup").style.display = "block";
@@ -196,6 +197,7 @@ function img_big(){
     document.getElementById("pop_windows_report").classList.remove("ocultar");
     document.getElementById("id_pop_img").classList.remove("ocultar");
 }
+
 
 function OpenTicket(){
     id_cont_ticket.classList.remove("ocultar");

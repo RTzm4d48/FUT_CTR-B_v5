@@ -21,11 +21,11 @@ from myapp_admin.views_FUTprocess_process import save_public_direction
 from myapp_admin.views_FUTprocess_process import manage_document
 
 def process_fut(request):
-	message = 'sussesfull'
 	fut_id = request.GET.get("fut_id")
 	admin_id = request.GET.get("admin_id")
 	user_id = request.GET.get("user_id")
 	route = request.GET.get("route");
+	num_boleta = request.GET.get("num_boleta");
 
 	print('FUTprocess_01')
 	id_next_admin = next_admin(admin_id)
@@ -33,15 +33,14 @@ def process_fut(request):
 	#ACTUALIZAR EL CAMPO EXIT DE LA RUTA
 	update_route_exit(fut_id);
 	print('FUTprocess_03')
-	update_fut(fut_id, id_next_admin, route)
+	update_fut(fut_id, id_next_admin, route, num_boleta)
 	print('FUTprocess_04')
 	insert_tracking(fut_id, admin_id, id_next_admin)
 	print('FUTprocess_05')
 	insert_notification('Procesado', admin_id, fut_id, user_id)
 
-
-	return JsonResponse({'message': 'successfull'})
-
+	success_url = reverse("n_staff_treasury")
+	return HttpResponseRedirect(success_url)
 
 def write_myFile(request):
 	if request.method == 'POST':
@@ -50,8 +49,6 @@ def write_myFile(request):
 
 		print(description)
 
-	print("ESTAMOS AQUI COMPADREYYYYY")
-	
 	return JsonResponse({'message': 'successfull'})
 
 def secretary_process_doc(request):
@@ -59,6 +56,12 @@ def secretary_process_doc(request):
 		coment = request.POST.get("secretary_descript")
 		fut_id = request.POST.get("fut_id_s")
 		order = request.POST.get("order_s")
+
+		# VARIABLES PARA process_fut
+		admin_id = request.POST.get("admin_id_s")
+		user_id = request.POST.get("user_id_s")
+		route = "direction";
+		num_boleta = "None";
 
 		# Validando si se envio el pdf
 		if 'file_pdf' in request.FILES:
@@ -70,8 +73,9 @@ def secretary_process_doc(request):
 
 		print("SAVE SECRETARY PROCESS")
 		save_process_secretary(order, pdf_binary_encoded, coment, fut_id)
-
-		success_url = reverse("n_staff_treasury")
+		print("NOS REDIRECCIONAMOS A OTRA VISTA PARA PROCESAR FUT")
+		success_url = reverse("n_process_fut") + f'?fut_id={fut_id}&admin_id={admin_id}&user_id={user_id}&route={route}&num_boleta={num_boleta}'
+		print(success_url)
 		return HttpResponseRedirect(success_url)
 	else:
 		return HttpResponse("<h1>404 Not Found :(</h1>")
@@ -83,6 +87,12 @@ def direction_process_doc(request):
 		fut_id = request.POST.get("fut_id_d")
 		order = request.POST.get("order_d")
 
+		# VARIABLES PARA process_fut
+		admin_id = request.POST.get("admin_id_d")
+		user_id = request.POST.get("user_id_d")
+		route = "finished";
+		num_boleta = "None";
+
 		# Validando si se envio el pdf
 		if 'file_direction' in request.FILES:
 			file_pdf = request.FILES['file_direction']
@@ -93,8 +103,9 @@ def direction_process_doc(request):
 
 		print("SAVE DIRECTION PUBLIC")
 		save_public_direction(num_expediente, fut_id, order, pdf_binary_encoded)
-
-		success_url = reverse("n_staff_treasury")
+		print("NOS REDIRECCIONAMOS A OTRA VISTA PARA PROCESAR FUT")
+		success_url = reverse("n_process_fut") + f'?fut_id={fut_id}&admin_id={admin_id}&user_id={user_id}&route={route}&num_boleta={num_boleta}'
+		print(success_url)
 		return HttpResponseRedirect(success_url)
 	else:
 		return HttpResponse("<h1>404 Not Found :(</h1>")

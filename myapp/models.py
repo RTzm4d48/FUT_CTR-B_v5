@@ -26,7 +26,7 @@ class fut(models.Model):
     stage = models.IntegerField(default=0)
     #view es pa que en la interfas figure si el registro fue abrierto o no
     view = models.BooleanField(default=False)
-    n_ticket = models.CharField(max_length=30, default='0000000000')
+    n_ticket = models.CharField(max_length=30, default='0000000000')# EL NÚMERO DE FACTURA O NÚMERO DE OPERACIÓN
     #la ruta en la que se encuentra(tersoreria, secretaria...)
     route = models.CharField(max_length=50, default='treasury')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1) #USER ID

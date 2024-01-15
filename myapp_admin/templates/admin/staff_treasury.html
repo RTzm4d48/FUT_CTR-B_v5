@@ -255,11 +255,7 @@
             <div class="label">
                 <a href="{% url 'n_staff_treasury' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/procedure.png' %}" alt="">Todos</a>
                 <a href="{% url 'n_postulated' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon02.png' %}" alt="">Pospuestos</a>
-                {% if Data_log.position_admin1 == 'Tesorera' %}
-                    <a href="{% url 'n_pending' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/icon03_white.png' %}" alt="">Pendientes</a>
-                {% endif %}
                 <a href="{% url 'n_send' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/send.png' %}" alt="">Procesados</a>
-                <a href="{% url 'n_reported' %}" class="label1"><img width="20px" height="20px" style="margin: auto 7px;" src="{% static 'img/direction.png' %}" alt="">Reportados</a>
             </div>
         </div>
         <div class="block_two" id="miContenedor">
@@ -587,7 +583,7 @@ var role = "{{role}}";
         <div class="report_content">
             <h3>Enviar FUT</h3>
             <label>Numero del Baucher:</label>
-            <input id="num_boleta" value="3456543" type="text" placeholder="Ingrese el número de la Baucher" name="">
+            <input id="num_boleta" value="" type="text" placeholder="Ingrese el número de la Baucher" name="">
 
             <button id="id_process_btn">Procesar</button>
         </div>
@@ -614,8 +610,10 @@ var role = "{{role}}";
                 <!-- DATOS DEL FUT -->
                 <input type="hidden" name="fut_id_d" value="{{ objs.id }}">
                 <input type="hidden" name="order_d" value="{{ objs.order }}">
-
-                <button id="id_btn_public">Publicar Tramite</button> 
+                <!-- ----- -->
+                <input type="hidden" name="admin_id_d" value="{{ Data_log.admin_id }}">
+                <input type="hidden" name="user_id_d" value="{{ objs.user_id_id }}">
+                <button>Publicar Tramite</button> 
             </form>
         </div>
     </div>
@@ -630,18 +628,19 @@ var role = "{{role}}";
             <form id="fileUploadForm" action="{% url 'n_secretary_process_doc' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="cont_tramite">
-                    <input type="file" id="pdf_file2_2" style="display: none;" name="file_pdf">
+                    <input type="file" id="pdf_file2_2" style="display: none;" name="file_pdf" accept=".pdf">
                     <label id="text_pdfFile" for="pdf_file2_2"><img src="{% static 'img/up_file.png' %}">Subir pdf</label>
                     <input id="select_pdf" type="hidden" name="reason" value="">
                     <!-- DATOS DEL FUT -->
                     <input type="hidden" name="fut_id_s" value="{{ objs.id }}">
                     <input type="hidden" name="order_s" value="{{ objs.order }}">
-
+                    <!-- ---- -->
+                    <input type="hidden" name="admin_id_s" value="{{ Data_log.admin_id }}">
+                    <input type="hidden" name="user_id_s" value="{{ objs.user_id_id }}">
                 </div>
                 <label>Descripcion General del Documento:</label>
                 <textarea id="description_general" placeholder='Especifique los requerimientos para su impresion' value="" name="secretary_descript"></textarea>
-
-                <button id="id_btn_process_secretary">Procesar</button>
+                <button>Procesar</button>
             </form>
         </div>
     </div>
