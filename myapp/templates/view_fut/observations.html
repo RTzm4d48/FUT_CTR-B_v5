@@ -142,9 +142,8 @@
     		<div class="main_content_form">
     			<div class="encavezado">
     				<img src="/static/img/pngegg.png">
-    				Crear .<p id="form_encavezado"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
+    				<p id="form_encavezado"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
     			</div>
-    			<!-- FORMULARIO PARA CREAR TICKET -->
     			<form class="etiqueta_form" method="post" action="{% url 'n_crear_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
     				<input id="id_titulo" class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
@@ -160,13 +159,12 @@
                     	<input id="user_name" type="hidden" name="creator" value="">
                     	<input id="user_id" type="hidden" name="user_id" value="">
 
-
                       <button><strong>Enviar</strong></button>
-
                       <div class="adjunt_img">
                         <input type="file" id="pdf_file" name="file_miImg" class="input-file ocultar" accept=".png, .jpg">
                         <label for="pdf_file" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
                       </div>
+                    </div>
     			</form>
     		</div>
     	</div>
@@ -201,20 +199,13 @@
                     <div class="space_buttons_ticket">
                     	<!-- VARIABLES -->
                     	<input id="form_id_ticket2" type="hidden" name="id_ticket" value="">
-                      <button><strong>Enviar</strong></button>
-                      <div class="adjunt_img ocultar">
-                        <input type="file" id="pdf_file2" name="pdf_file" class="input-file ocultar" accept="*">
-                        <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
-                      </div>
+                    	 <button><strong>Enviar</strong></button>
                       <!-- - -->
                       <div class="adjunt_img">
                         <input type="file" id="img_file_r" name="file_miImg_r" class="input-file ocultar" accept=".png, .jpg">
                         <label for="img_file_r" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
                       </div>
                       <!-- - -->
-                      <div class="adjunt_img ocultar">
-                        <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
-                      </div>
                     </div>
     			</form>
     		</div>
@@ -374,13 +365,7 @@
 				<hr>
 			</div>
 			<div class="cont_base">
-		
-				<script>
-					console.log("LOCURA AL ENTRAR")
-				</script>
 				{% block content_2 %}
-
-
 				{% endblock %}
 			</div>
 		</div>
@@ -388,7 +373,7 @@
 </div>
 <script type="text/javascript">
 	document.getElementById("id_item_1").addEventListener('click', function(){
-		console.log("PAPDA____");
+		console.log("PAPDA");
 	})
 </script>
 <script src="/static/scripts/view_fut/observations/script.js?" type="module" charset="utf-8" async defer></script>
