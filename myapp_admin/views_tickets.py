@@ -121,7 +121,6 @@ def moreloading_ticket(request):
 	print("TICKET DESARROLLO");
 	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('id','name', 'desarrollo', 'charge', 'date')#.first()
 	resultados_json = list(desarrollo)
-<<<<<<< HEAD
 	# print(resultados_json)
 	return JsonResponse({'more_tickets':resultados_json})
 
@@ -145,7 +144,4 @@ def all_desarrollo_data(request):
 	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('id','name', 'desarrollo', 'charge', 'date')#.first()
 	resultados_json = list(desarrollo)
 	# print(resultados_json)
-=======
-
->>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
 	return JsonResponse({'more_tickets':resultados_json})

@@ -1,0 +1,396 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block linkstyle %}
+{% endblock %}
+
+{% block up_pop_space %}
+<style type="text/css">
+	.pop_up_window{
+		padding: 10px 30px;
+	}
+	.cont_form{
+/*		background: salmon;*/
+		width: 100%;
+		display: flex;
+		margin: 30px 0px 10px 0px;
+	}
+	.lado_1{
+		width: 50px;
+		height:100%;
+/*		background: blue;*/
+	}
+	.lado_1 img{
+		width: 50px;
+		border-radius: 50%;
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+	}
+	.lado_2{
+		width: calc(100% - 50px);
+		height:100%;
+/*		background: pink;*/
+	}
+	.main_content_form{
+		width: calc(100% - 20px);
+		height: 100%;
+		margin: 0px 10px;
+		background: white;
+		border-radius: 5px;
+		border: 1px solid gray;
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Sombras */
+	}
+	.encavezado{
+		background: #D1D1D1;
+		display: flex;
+		align-items: center; /*IMPORTANTE*/
+		padding: 5px;
+		border-radius: 5px 5px 0px 0px;
+	}
+	.encavezado img{
+		height: 20px;
+		margin: 0px 5px 0px 0px;
+	}
+	.encavezado p{
+		margin:0px;
+		font-size: small;
+	}
+	.etiqueta_form{
+/*		background: gainsboro;*/
+		width: 100%;
+		display:flex;
+		flex-direction: column;
+	}
+	.etiqueta_form hr{
+		margin: 0px auto;
+		width: 98%;
+	}
+	.id_titulo{
+		border: none;
+		margin: 20px 10px 5px 10px;
+		width: calc(100% - 20px);
+		font-weight: bold;
+	}
+	.id_titulo:focus{
+		outline: none;
+	}
+	.id_desarrollo{
+		border: none;
+		margin: 5px 10px 5px 10px;
+		max-width: calc(100% - 20px);
+		min-width: calc(100% - 20px);
+		min-height: 70px;
+		max-height: 70px;
+		font-family: arial,helvetica;
+	}
+	.id_desarrollo:focus{
+		outline: none;
+	}
+/*	-------SPACE BUTTON----------*/
+	.space_buttons_ticket{
+	    display: flex;
+	    margin: 5px 0px 10px 5px;
+	    height: 30px;
+	}
+	.space_buttons_ticket button{
+	    background: red;
+	    color: white;
+	    border: none;
+	    margin: 0px 5px;
+	    padding: 5px 10px;
+	    border-radius: 30px;
+	    cursor: pointer;
+	    height: 100%;
+	}
+	.space_buttons_ticket button:hover{
+	    background: #CE0D0D;
+	}
+	.adjunt_img{
+	    /*background: salmon;*/
+	    height: 100%;
+	    margin: 0px 5px;
+	}
+	.adjunt_img input{
+	    display: none;
+	}
+	.adjunt_img label{
+	    height: 100%;
+	    display: flex;
+	}
+	.adjunt_img label img{
+	    height: 50%;
+	    margin: auto;
+	    cursor: pointer;
+	    opacity: 80%;
+	}
+	.adjunt_img label img:hover{
+	    opacity: 60%;
+	}
+	.ocultar{
+	    display: none;
+	}
+</style>
+<div id="pop_windows_create_ticket" class="pop_up_window_content ocultar">
+  <div id="share_qr" class="pop_up_window">
+    <div onclick="close_create_ticket()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    <div class="cont_form">
+    	<div class="lado_1">
+    		<img src="/static/img/profile_user_test.jpg">
+    	</div>
+    	<div class="lado_2">
+    		<div class="main_content_form">
+    			<div class="encavezado">
+    				<img src="/static/img/pngegg.png">
+    				Crear .<p id="form_encavezado"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
+    			</div>
+    			<!-- FORMULARIO PARA CREAR TICKET -->
+    			<form class="etiqueta_form" method="post" action="{% url 'n_crear_ticket' %}" enctype="multipart/form-data">
+    				{% csrf_token %}
+    				<input id="id_titulo" class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
+                    <hr>
+                    <textarea id="id_desarrollo" class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
+                    <div id="id_file_add_cont">
+                        <!-- -- -->
+                    </div>
+                    <div class="space_buttons_ticket">
+                    	<!-- 	VARIABLES-->
+                    	<input id="form_id_ticket" type="hidden" name="id_ticket" value="">
+                    	<input id="id_fut" type="hidden" name="fut_id" value="">
+                    	<input id="user_name" type="hidden" name="creator" value="">
+                    	<input id="user_id" type="hidden" name="user_id" value="">
+
+
+                      <button><strong>Enviar</strong></button>
+
+                      <div class="adjunt_img">
+                        <input type="file" id="pdf_file" name="file_miImg" class="input-file ocultar" accept=".png, .jpg">
+                        <label for="pdf_file" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                      </div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
+  </div>
+</div>
+
+<!-- OTRO FORMULARIO EXCLUSIVAMENTE PARA CREAR DESARROLLOS -->
+<div id="pop_windows_create_desarrollo" class="pop_up_window_content ocultar">
+  <div class="pop_up_window">
+    <div onclick="close_create_ticket()" class="close" style="right: 15px;">
+      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+    </div>
+    <div class="cont_form">
+    	<div class="lado_1">
+    		<img src="/static/img/profile_user_test.jpg">
+    	</div>
+    	<div class="lado_2">
+    		<div class="main_content_form">
+    			<div class="encavezado">
+    				<img src="/static/img/pngegg.png">
+    				Responder .<p id="form_encavezado2"><strong>De</strong> Alumno <strong>Para</strong> Tesoreria | 98376</p>
+    			</div>
+    			<form class="etiqueta_form" method="post" action="{% url 'n_desarrollo_ticket' %}" enctype="multipart/form-data">
+    				{% csrf_token %}
+    				<input class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
+                    <hr>
+                    <textarea class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
+                    <div id="id_file_add_cont2">
+                        <!-- -- -->
+                    </div>
+                    <div class="space_buttons_ticket">
+                    	<!-- VARIABLES -->
+                    	<input id="form_id_ticket2" type="hidden" name="id_ticket" value="">
+                      <button><strong>Enviar</strong></button>
+                      <div class="adjunt_img ocultar">
+                        <input type="file" id="pdf_file2" name="pdf_file" class="input-file ocultar" accept="*">
+                        <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
+                      </div>
+                      <!-- - -->
+                      <div class="adjunt_img">
+                        <input type="file" id="img_file_r" name="file_miImg_r" class="input-file ocultar" accept=".png, .jpg">
+                        <label for="img_file_r" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                      </div>
+                      <!-- - -->
+                      <div class="adjunt_img ocultar">
+                        <label class="custom_button"><img src="{% static 'img/link_ad.png' %}"></label>
+                      </div>
+                    </div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	function close_create_ticket(){
+		document.getElementById("pop_windows_create_ticket").classList.add("ocultar");
+		document.getElementById("pop_windows_create_desarrollo").classList.add("ocultar");
+	}
+</script>
+{% endblock %}
+
+{% block content %}
+<style>
+	.mycontent{
+		background: #F0F1F5;
+		width: 100%;
+		min-height: calc(100vh - 60px);
+		max-height: 200vh;
+	}
+	.cont_observation{
+		width: 70%;
+		margin: 0px auto;
+/*		background: salmon;*/
+		color: black;
+		display: flex;
+		flex-direction: column;
+	}
+	.tittle_description p{
+		font-size: smaller;
+	}
+	.cont_ruta{
+		width: 100%;
+		display: flex;
+		height: 50px;
+/*		background: yellow;*/
+	}
+	.ruta{
+		color: gray;
+		margin: auto 0px;
+		text-decoration: none;
+	}
+	.simbolo{
+		font-size: 25px;
+		margin: auto 4px;
+	}
+	hr{
+		display: flex;
+		height: 1px;
+		width: 100%;
+	}
+	.cont_principal{
+		width: 100%;
+/*		background: blue;*/
+		display: flex;
+	}
+	.cont_nav_ba{
+		width: 20%;
+/*		background: salmon;*/
+	}
+	.cont_base{
+		width: 80%;
+/*		background: #D9D9D9;*/
+		padding: 0px 10px
+	}
+	.item{
+		margin: 5px ;
+		width: calc(100% - 30px);
+		padding: 10px;
+		border-radius: 5px;
+		color: black;
+		display: flex;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.item:hover{
+		opacity: 80%;
+	}
+	.item_active{
+		background: #3177B2;
+		color: white;
+	}
+	.item img{
+		height: 20px;
+		margin: auto 5px auto 0px;
+	}
+</style>
+
+<!-- ESTILOS DE OBSERVATION, TICKET, REPORT -->
+<style>
+	#cont_register a{
+		text-decoration:none;
+		color: black;
+	}
+	.register{
+		width: calc(100% - 20px);
+		background: #DFDFDF;
+		padding: 10px 10px;
+		border: 1px solid black;
+		border-radius: 3px;
+		display: flex;
+		cursor: pointer;
+		margin: 5px 0px;
+	}
+	.register p{
+		padding: 0px;
+		margin: auto 0px;
+/*		background: red;*/
+	}
+	.register img{
+		height: 30px;
+		margin: auto 5px auto 0px;
+	}
+	.empty{
+		opacity: 50%;
+		margin: 0px 10px;
+	}
+	.btn_create_ticket{
+		background: red;
+		border: none;
+		color: white;
+		display: flex;
+		margin: 10px 0px;
+		padding: 5px 10px;
+		border-radius:3px;
+		cursor: pointer;
+  		align-items: center; /*IMPORTANTE*/
+	}
+	.btn_create_ticket:hover{
+		background:#E00000;
+	}
+	.btn_create_ticket img{
+		height: 20px;
+		margin: auto 5px auto 0px;
+	}
+</style>
+<div class="mycontent">
+	<div class="cont_observation">
+		<div id="main_rute" class="cont_ruta">
+			<!-- LA RUTA SE INSERTA POR JS -->
+		</div>
+		<div class="tittle_description">
+			<h1>Observaciones y Tickets</h1>
+			<p>En este apartado se muestran y se gestionan las observaciones, tickets y reposrtes de su tramite, perteneciente al númerod de expediente 64501</p>
+			<p>Solicitud de Carta de presentación pre prof</p>
+		</div>
+		<hr>
+		<div class="cont_principal">
+			<div class="cont_nav_ba">
+				<a id="id_item_1" class="item" href="{% url 'n_init_observations' %}"><img id="id_img_1" src="/static/img/rep_black.png" alt="">Observaciones</a>
+				<a id="id_item_2" class="item" href="{% url 'n_tickets_path' %}"><img id="id_img_2" src="/static/img/pngegg.png" alt="">Tickets</a>
+				<a id="id_item_3" class="item" href="{% url 'n_report_path' %}"><img id="id_img_3" src="/static/img/direction_black.png" alt="">Reportes</a>
+				<hr>
+			</div>
+			<div class="cont_base">
+		
+				<script>
+					console.log("LOCURA AL ENTRAR")
+				</script>
+				{% block content_2 %}
+
+
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	document.getElementById("id_item_1").addEventListener('click', function(){
+		console.log("PAPDA____");
+	})
+</script>
+
+<script src="/static/scripts/view_fut/observations/script.js?" type="module" charset="utf-8" async defer></script>
+{% endblock %}

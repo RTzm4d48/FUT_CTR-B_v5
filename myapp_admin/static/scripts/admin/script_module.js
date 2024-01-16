@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 	var id_process_btn = document.getElementById("id_process_btn");
-<<<<<<< HEAD
+
 	var id_btn_public = document.getElementById("id_btn_public");
 	var id_btn_process_secretary = document.getElementById("id_btn_process_secretary");
 
-=======
->>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
 });
 
 import { process_fut, paint_file, get_file_fron_db } from './script_procesos.js';

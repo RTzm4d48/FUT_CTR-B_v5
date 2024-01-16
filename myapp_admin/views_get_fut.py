@@ -174,15 +174,10 @@ def staff_treasury(request):
 
 def view_fut(request):
     # Validacion de cookies y validacion de usuario (AQUÍ)(ESTO_SE_REPITE)
-<<<<<<< HEAD
+
     login = request.COOKIES.get('log_admin')
     Position = request.COOKIES.get('log_position')
     id_admin = request.COOKIES.get('id_admin')
-=======
-    login = request.COOKIES.get("log_admin")
-    Position = request.COOKIES.get("log_position")
-    id_admin = request.COOKIES.get("id_admin")
->>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
 
     Data_log = log_verifying(Position, id_admin)
 

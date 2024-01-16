@@ -46,8 +46,7 @@ export function paint_tickets(ticket_data, charge){
 			`;
 			document.getElementById("cont_register").innerHTML += register_html;
 		}
-		document.getElementById("cont_low_register").innerHTML = `
-		<button id="btn_create_new_ticket" onclick="createticket()" class="btn_create_ticket"><img src="/static/img/plus_white.png">Crear un nuevo ticket</button>`;
+		document.getElementById("cont_low_register").innerHTML = `<button id="btn_create_new_ticket" onclick="createticket()" class="btn_create_ticket"><img src="/static/img/plus_white.png">Crear un nuevo ticket</button>`;
 	}
 }
 
