@@ -62,6 +62,7 @@
 /*		background: green;*/
 		width: calc(100% - 100px);
 		margin: 0px auto;
+		display: block;
 	}
 	.img_identification{
 		height: 70px;
@@ -82,7 +83,38 @@
 	.respoder:hover{
 		opacity:80%;
 	}
+	.cont_img_desarrollo{
+		background: #F4F4F4;
+		padding: 10px 0px;
+		display: flex;
+		position: relative; /*importante*/
+	}
+	.img_desarrollo{
+		height: 200px;
+		margin: 0px 10px;
+		border-radius: 3px;
+	}
+	.elHoverDeImg{
+		width: 200px;
+		height: 200px;
+		background: black;
+		position: absolute;/*importante*/
+		top: 10px;
+		left: 10px;
+		border-radius: 3px;
+		cursor: pointer;
+		display: flex;
+		opacity: 0%;
+	}
+	.elHoverDeImg:hover{
+		opacity: 20%;
+	}
+	.zoom_icon{
+		width: 25%;
+		margin: auto;
+	}
 </style>
+<!-- ESTA ID SE RELLENA EN static\scripts\view_fut\observations\script_module.js -->
 <div id="cont_register">
 	<!-- AQUI ESTA LA LISTA DE TICKETS -->
 	<h3 class="empty">Esta lista esta bacia...</h3>

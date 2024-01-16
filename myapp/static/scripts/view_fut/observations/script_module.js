@@ -29,6 +29,7 @@ export function paint_tickets(ticket_data, charge){
 		document.getElementById("cont_low_register").innerHTML = `
 		<h3 class="empty">Esta lista esta bacia...</h3>
 		<button id="btn_create_new_ticket" onclick="createticket()" class="btn_create_ticket"><img src="/static/img/plus_white.png">Crear un nuevo ticket</button>`;
+		// LA ID cont_register ESTA EN templates\view_fut\observations\show.html
 		document.getElementById("cont_register").innerHTML = impty_html;
 	}else{
 		document.getElementById("cont_register").innerHTML = "";
@@ -83,6 +84,12 @@ export function paint_messages_tickets(data){
 					</div>
 					<div class="block text_space">
 						<p>${desarrollo}</p>
+						<div class="cont_img_desarrollo">
+							<img class="img_desarrollo" src="/static/img/borrar_esto.png" alt="">
+							<div id="open_img_2" class="elHoverDeImg">
+								<img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
+							</div>
+						</div>
 					</div>
 					<div class="block text_space">
 						<div id="sello_${i}">
