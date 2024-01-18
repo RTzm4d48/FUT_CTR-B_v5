@@ -22,8 +22,8 @@ export async function get_db_ticket(charge, fut_id){
 }
 
 export function paint_tickets(ticket_data, charge){
-	console.log("PAIINTER__3");
-	console.log(ticket_data['data']['length']);
+	console.log("REMEMBER");
+	console.log(ticket_data);
 	if(ticket_data['data']['length'] == 0){
 		// var impty_html = ``;
 		document.getElementById("cont_low_register").innerHTML = `
@@ -37,11 +37,14 @@ export function paint_tickets(ticket_data, charge){
 			//VARIABLES
 			let tittle = ticket_data['data'][i]['tittle'];
 			let code = ticket_data['data'][i]['code'];
+			let charge = ticket_data['data'][i]['charge'];
 			var register_html = `
 				<a href="/my_fut/observation/show_redirect/${code}/${charge}/">
 					<div class="register">
 						<img src="/static/img/rep_black.png" alt="">
-						<p>${tittle}__</p>
+						<p>${tittle}</p>
+						<p style="margin:auto 5px;color:#727272;">(${charge})</p>
+						<P style="margin:auto 10px auto auto;">Code: ${code}</P>
 					</div>
 				</a>
 			`;
@@ -52,41 +55,45 @@ export function paint_tickets(ticket_data, charge){
 }
 
 export function paint_messages_tickets(data){
+	let tittle = data['only_this_ticket']['tittle'];
+	let num_ticket = data['only_this_ticket']['num_ticket'];
+	let charge = data['only_this_ticket']['charge'];
 	var cont_message_html = `
 			<div class="cont_message">
 				<div class="davbbar">
 					<img class="atras" src="/static/img/atras.png">
 					<img src="/static/img/rep_black.png">
-					<p>Se adjunto la foto del baucher icorrectamente _</p>
+					<p>${tittle}</p>
+					<p style="margin:auto 5px;color:#727272;">(${charge})</p>
+					<p style="margin: auto 5px auto auto">Num: ${num_ticket}<p>
 				</div>
 				<div id="cont_main_message" class="cont_main_message">
 				</div>
 				<button onclick="create_desarrollo()" class="respoder"><img src="/static/img/reply_red.png">Responder</button>
 			</div>
 			`;
-			document.getElementById("cont_register").innerHTML = cont_message_html;	
-	console.log("PHONK_2");
-	console.log(data);
-
+			document.getElementById("cont_register").innerHTML = cont_message_html;
 	for (var i = 0; i < data['data']['length']; i++) {
 		console.log(data['data'][i]['charge'])
 		// VARIABLES
 		let tittle = data['data'][i]['name'];
 		let desarrollo = data['data'][i]['desarrollo'];
 		let charge = data['data'][i]['charge'];
-
+		let id = data['data'][i]['id'];
+		let date = calcularTiempoTranscurrido(data['data'][i]['date']);
 		var message_html = `
 					<div class="block">
 						<div id="id_img_space_${i}">
 							<img class="user_img" src="/static/img/admin_icon.png" alt="">
 						</div>
 						<h4>${tittle}</h4>
+						<p style="margin: auto 5px auto 10px;color:gray">${date}</p>
 					</div>
 					<div class="block text_space">
 						<p>${desarrollo}</p>
 						<div class="cont_img_desarrollo">
 							<img class="img_desarrollo" src="/static/img/borrar_esto.png" alt="">
-							<div id="open_img_2" class="elHoverDeImg">
+							<div onclick="show_img(${id})" class="elHoverDeImg">
 								<img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
 							</div>
 						</div>
@@ -103,11 +110,33 @@ export function paint_messages_tickets(data){
 				document.getElementById("sello_"+i).innerHTML = ``;
 				document.getElementById("id_img_space_"+i).innerHTML = `<img class="user_img" src="/static/img/profile_user_test.jpg">`;
 			}else{
-				document.getElementById("sello_"+i).innerHTML = `<img class="img_identification" src="/static/img/tesoreria_identification.jpg">`;
+				let stamp = charge == "Tesorera" ? "stamp_treasury" : (charge == "Secretaria" ? "stamp_secretary" : "stamp_direction");
+				document.getElementById("sello_"+i).innerHTML = `<img class="img_identification" src="/static/img/stamp/${stamp}.png">`;
 			}
 		}
 }
+import moment from 'https://cdn.skypack.dev/moment';
+function calcularTiempoTranscurrido(fecha) { // fecha es un datetime '2023-11-28 14:57:15'
+	//var moment = require('moment');
+	var dateCleaned = fecha.replace('T', ' ').replace('Z', '');
+	const fechaActual = moment();
+	const fechaDada = moment(dateCleaned);
 
+	const minutosTranscurridos = fechaActual.diff(fechaDada, 'minutes');
+	const horasTranscurridas = fechaActual.diff(fechaDada, 'hours');
+	const diasTranscurridos = fechaActual.diff(fechaDada, 'days')
+
+	const fechaActual2 = moment();
+	const formatoPersonalizado = fechaActual2.format('YYYY-MM-DD HH:mm:ss');
+
+	if (minutosTranscurridos < 60) {
+	  return `Hace ${minutosTranscurridos} minutos`;
+	} else if (horasTranscurridas < 24) {
+	  return `Hace ${horasTranscurridas} horas`;
+	} else {
+	  return `Hace ${diasTranscurridos} días`;
+	}
+}
 //ESTO AUN NO SE USA PERO YA VEREMOS
 function obtain_i_url(){
 	// Obtener la URL actual

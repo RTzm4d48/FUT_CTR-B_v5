@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--ESTILOS 1-->
+    <!--ESTILOS 1 como esto-->
     <!-- <link rel="stylesheet" href="{% static '/node_modules/bootstrap/dist/css/bootstrap.css' %}"> -->
 
     <!--ESTILOS 2-->
@@ -438,7 +438,6 @@ body{
             .lado{
 /*              background: yellow;*/
               display: flex;
-              
             }
             .lado p{
               font-size: small;
@@ -521,9 +520,10 @@ body{
           </style>
           {% if request.user.is_authenticated %}
             <div class="content_noti">
+              <!-- LA IP cont_general_msge SE USA EN \static\scripts\base\script.js -->
               <div id="cont_general_msge" class="contdos">
                 <img src="{% static 'img/message.png' %}" alt="">
-                <p class="point_red">1</p>
+                <p class="point_red">2</p>
                 <!-- AQUI VAN LAS NOTIFICACIONES -->
               </div>
               <div id="cont_general_moti" class="contdos">

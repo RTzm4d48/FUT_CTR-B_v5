@@ -19,6 +19,7 @@ from myapp.views_observations_process import insert_desarrollo
 from myapp.views_observations_process import create_my_ticket
 from myapp.views_observations_process import insert_ticket_desarrollo
 from myapp.views_observations_process import activated_ticket
+from myapp.views_observations_process import obtain_data_ticket
 
 def init_observations(request):
 	return render(request, 'view_fut/observations/observation_admin.html')
@@ -70,9 +71,10 @@ def get_db_ticket(request):
 def get_desarrollo_db(request):
 	id_ticket = request.GET.get("id_ticket")
 	# OBTENEMOS LOS DESARROLLOS DEL TICKET
+	data_ticket = obtain_data_ticket(id_ticket)
 	data_desarrollo = obtain_desarrollo_ticket(id_ticket)
 	print(data_desarrollo)
-	return JsonResponse({'data': data_desarrollo})
+	return JsonResponse({'data': data_desarrollo, 'only_this_ticket': data_ticket})
 
 
 def update_desarrollo_ticket(request):

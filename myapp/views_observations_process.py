@@ -27,9 +27,13 @@ def obtain_id_ticket(code):
 	return obj
 
 def obtain_desarrollo_ticket(id_ticket):
-	obj = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('name', 'desarrollo', 'charge')
+	obj = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('id', 'name', 'desarrollo', 'charge', 'date')
 	resultados_json = list(obj)
 	return resultados_json
+
+def obtain_data_ticket(id_ticket):
+	obj = ticket.objects.filter(id=id_ticket).values('tittle', 'num_ticket', 'charge').first()
+	return obj
 
 def obtain_id_admin(fut_id):
 	print("ESTAMOS OBTENIENDO LA ID DEL ADMIN")

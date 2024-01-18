@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
 import { create_pop_notifi, insertNotificaction } from './ticket_notification.js';
 
 cont_general_msge.addEventListener('click', function(){
-	
 	window.miVariable;
 	if(window.miVariable == false){
 		window.miVariable = true;
@@ -26,7 +25,6 @@ cont_general_msge.addEventListener('click', function(){
 });
 
 cont_general_moti.addEventListener('click', function(){
-	
 	window.suitch2;
 	if(window.suitch2 == false){
 		window.suitch2 = true;

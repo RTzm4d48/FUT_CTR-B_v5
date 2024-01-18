@@ -19,6 +19,11 @@ export async function open_observations(charge){
 	paint_tickets(ticket_data, charge);
 }
 
+
+function Gabriela(name){
+	console.log("Hola "+name);
+}
+
 // ESTILOS DEL NAV BAR
 export function style_navbar(direction){
 	if (direction == "observation") {

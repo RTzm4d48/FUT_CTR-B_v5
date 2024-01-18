@@ -128,10 +128,13 @@
 	.ocultar{
 	    display: none;
 	}
+	.close{
+		right: 15px;
+	}
 </style>
 <div id="pop_windows_create_ticket" class="pop_up_window_content ocultar">
   <div id="share_qr" class="pop_up_window">
-    <div onclick="close_create_ticket()" class="close" style="right: 15px;">
+    <div onclick="close_create_ticket()" class="close">
       <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
     </div>
     <div class="cont_form">
@@ -147,24 +150,24 @@
     			<form class="etiqueta_form" method="post" action="{% url 'n_crear_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
     				<input id="id_titulo" class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
-                    <hr>
-                    <textarea id="id_desarrollo" class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
-                    <div id="id_file_add_cont">
-                        <!-- -- -->
-                    </div>
-                    <div class="space_buttons_ticket">
-                    	<!-- 	VARIABLES-->
-                    	<input id="form_id_ticket" type="hidden" name="id_ticket" value="">
-                    	<input id="id_fut" type="hidden" name="fut_id" value="">
-                    	<input id="user_name" type="hidden" name="creator" value="">
-                    	<input id="user_id" type="hidden" name="user_id" value="">
+              <hr>
+              <textarea id="id_desarrollo" class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
+              <div id="id_file_add_cont">
+                  <!-- -- -->
+              </div>
+              <div class="space_buttons_ticket">
+              	<!-- 	VARIABLES-->
+              	<input id="form_id_ticket" type="hidden" name="id_ticket" value="">
+              	<input id="id_fut" type="hidden" name="fut_id" value="">
+              	<input id="user_name" type="hidden" name="creator" value="">
+              	<input id="user_id" type="hidden" name="user_id" value="">
 
-                      <button><strong>Enviar</strong></button>
-                      <div class="adjunt_img">
-                        <input type="file" id="pdf_file" name="file_miImg" class="input-file ocultar" accept=".png, .jpg">
-                        <label for="pdf_file" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
-                      </div>
-                    </div>
+                <button><strong>Enviar</strong></button>
+                <div class="adjunt_img">
+                  <input type="file" id="pdf_file" name="file_miImg" class="input-file ocultar" accept=".png, .jpg">
+                  <label for="pdf_file" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                </div>
+              </div>
     			</form>
     		</div>
     	</div>
@@ -175,7 +178,7 @@
 <!-- OTRO FORMULARIO EXCLUSIVAMENTE PARA CREAR DESARROLLOS -->
 <div id="pop_windows_create_desarrollo" class="pop_up_window_content ocultar">
   <div class="pop_up_window">
-    <div onclick="close_create_ticket()" class="close" style="right: 15px;">
+    <div onclick="close_create_ticket()" class="close">
       <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
     </div>
     <div class="cont_form">
@@ -191,33 +194,51 @@
     			<form class="etiqueta_form" method="post" action="{% url 'n_desarrollo_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
     				<input class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
-                    <hr>
-                    <textarea class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
-                    <div id="id_file_add_cont2">
-                        <!-- -- -->
-                    </div>
-                    <div class="space_buttons_ticket">
-                    	<!-- VARIABLES -->
-                    	<input id="form_id_ticket2" type="hidden" name="id_ticket" value="">
-                    	 <button><strong>Enviar</strong></button>
-                      <!-- - -->
-                      <div class="adjunt_img">
-                        <input type="file" id="img_file_r" name="file_miImg_r" class="input-file ocultar" accept=".png, .jpg">
-                        <label for="img_file_r" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
-                      </div>
-                      <!-- - -->
-                    </div>
+	            <hr>
+	            <textarea class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
+	            <div id="id_file_add_cont2">
+	                <!-- -- -->
+	            </div>
+	            <div class="space_buttons_ticket">
+	            	<!-- VARIABLES -->
+	            	<input id="form_id_ticket2" type="hidden" name="id_ticket" value="">
+	            	 <button><strong>Enviar</strong></button>
+	              <!-- - -->
+	              <div class="adjunt_img">
+	                <input type="file" id="img_file_r" name="file_miImg_r" class="input-file ocultar" accept=".png, .jpg">
+	                <label for="img_file_r" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+	              </div>
+	              <!-- - -->
+	            </div>
     			</form>
     		</div>
     	</div>
     </div>
   </div>
 </div>
+<!-- ----------POP UP DE IMAGEN----------- -->
+<style>
+	.pop_up_cont_img{
+		background: white;
+		padding: 40px 80px;
+		position: relative; /*importante*/
+	}
+	.pop_up_img{
+		height: 60vh;
+		border-radius: 5px;
+	}
+</style>
+
+<div id="pop_windows_general">
+	<!-- AQUI DEBERAN DE ESPAWNEAR TODOS LOS POP_UP -->
+</div>
 
 <script type="text/javascript">
 	function close_create_ticket(){
 		document.getElementById("pop_windows_create_ticket").classList.add("ocultar");
 		document.getElementById("pop_windows_create_desarrollo").classList.add("ocultar");
+
+		document.getElementById("pop_windows_general").innerHTML = "";
 	}
 </script>
 {% endblock %}
