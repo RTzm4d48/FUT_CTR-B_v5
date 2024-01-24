@@ -1,6 +1,7 @@
 from myapp_admin.models import ticket, ticket_desarrollo
 from myapp.models import fut
 from django.shortcuts import render
+import base64
 
 def obtain_tickets(id_fut):
 	obj = ticket.objects.filter(fut_id_id=id_fut).values('tittle', 'charge')
@@ -26,9 +27,23 @@ def obtain_id_ticket(code):
 	obj = ticket.objects.filter(code=code).values('id', 'charge').first()
 	return obj
 
+def get_img_attach(id_ticket):
+	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('id','img_attach')
+
+	for i in desarrollo:
+		print("ITERANDO_IMG")
+		if(i['img_attach'] != b''):
+			# ESCRIBIENDO LA IMGEN
+			img_binary = base64.b64decode(i['img_attach'])
+			ruta_guardar_img = 'myapp/static/tmp/desarrollo_attach_'+str(i['id'])+'.jpg'
+			with open(ruta_guardar_img, 'wb') as output_img:
+				output_img.write(img_binary)
+	return 'successfull'
+
 def obtain_desarrollo_ticket(id_ticket):
 	obj = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('id', 'name', 'desarrollo', 'charge', 'date')
 	resultados_json = list(obj)
+	get_img_attach(id_ticket)
 	return resultados_json
 
 def obtain_data_ticket(id_ticket):

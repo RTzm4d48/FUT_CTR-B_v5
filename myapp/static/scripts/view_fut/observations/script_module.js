@@ -81,6 +81,7 @@ export function paint_messages_tickets(data){
 		let charge = data['data'][i]['charge'];
 		let id = data['data'][i]['id'];
 		let date = calcularTiempoTranscurrido(data['data'][i]['date']);
+		
 		var message_html = `
 					<div class="block">
 						<div id="id_img_space_${i}">
@@ -92,7 +93,7 @@ export function paint_messages_tickets(data){
 					<div class="block text_space">
 						<p>${desarrollo}</p>
 						<div class="cont_img_desarrollo">
-							<img class="img_desarrollo" src="/static/img/borrar_esto.png" alt="">
+							<img class="img_desarrollo" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
 							<div onclick="show_img(${id})" class="elHoverDeImg">
 								<img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
 							</div>
@@ -106,7 +107,7 @@ export function paint_messages_tickets(data){
 			`;
 			document.getElementById("cont_main_message").innerHTML += message_html;
 
-			if(charge == "(alumno)"){
+			if(charge == "alumno"){
 				document.getElementById("sello_"+i).innerHTML = ``;
 				document.getElementById("id_img_space_"+i).innerHTML = `<img class="user_img" src="/static/img/profile_user_test.jpg">`;
 			}else{
