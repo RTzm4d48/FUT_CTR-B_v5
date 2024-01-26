@@ -1,0 +1,14 @@
+dnspython>=1.16.0
+
+[ARC]
+authres
+
+[asyncio]
+aiodns
+
+[ed25519]
+pynacl
+
+[testing]
+authres
+pynacl
