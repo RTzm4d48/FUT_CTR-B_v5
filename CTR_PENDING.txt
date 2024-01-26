@@ -57,14 +57,17 @@
 
 - funcion para que los admins puedan responder los tickets y reportes
 
-- terminar con la funcionalidad en el fromulario de pay
+(DONE)- terminar con la funcionalidad en el fromulario de pay
 
 - solucionar la funcion de redireccionar al procesar el FUT en Tesorería (hay un error no perjudicial)
 
-- Solucionar borones de publicar, descargar entre otros de Dirección (el onclick llega a fallar)
+- Solucionar botones de publicar, descargar entre otros de Dirección (el onclick llega a fallar)
 
-<<<<<<< HEAD
+
 - actualizar el número de ticket cuando la tesorera procesa el fut
-=======
+
 - arrehar el localhost de la redireccion de las notificaiones en la campanita
->>>>>>> f6edc0742060b0c2413c7212ea9832dfa6a7ff3b
+
+- IMplementar barra de carga al subir la imagen desde Responder y Crear ticket en la ventana observaciondes del alumno
+
+- Cuando Respondo desde La ventana observación del alumno me riderecciona mal. eso hay que pulir

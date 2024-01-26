@@ -54,6 +54,24 @@ export function paint_tickets(ticket_data, charge){
 	}
 }
 
+function verificarArchivoExistente(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', url, false);
+    xhr.send();
+    return xhr.status === 200;
+}
+function paint_img(id){
+	let space_img = `
+	    <div class="cont_img_desarrollo">
+			<img class="img_desarrollo" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
+			<div onclick="show_img(${id})" class="elHoverDeImg">
+				<img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
+			</div>
+		</div>	
+	`;
+	return space_img;
+}
+
 export function paint_messages_tickets(data){
 	let tittle = data['only_this_ticket']['tittle'];
 	let num_ticket = data['only_this_ticket']['num_ticket'];
@@ -81,7 +99,10 @@ export function paint_messages_tickets(data){
 		let charge = data['data'][i]['charge'];
 		let id = data['data'][i]['id'];
 		let date = calcularTiempoTranscurrido(data['data'][i]['date']);
-		
+		console.log("ALONE__");
+		let rick = "RYCK_Y_MORTY_SON_LO_MEJOR";
+		let existencia_url = verificarArchivoExistente(`/static/tmp/desarrollo_attach_${id}.jpg`) ? paint_img(id) : '';
+		console.log(existencia_url);
 		var message_html = `
 					<div class="block">
 						<div id="id_img_space_${i}">
@@ -92,12 +113,7 @@ export function paint_messages_tickets(data){
 					</div>
 					<div class="block text_space">
 						<p>${desarrollo}</p>
-						<div class="cont_img_desarrollo">
-							<img class="img_desarrollo" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
-							<div onclick="show_img(${id})" class="elHoverDeImg">
-								<img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
-							</div>
-						</div>
+						${existencia_url}
 					</div>
 					<div class="block text_space">
 						<div id="sello_${i}">

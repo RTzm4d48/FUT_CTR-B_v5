@@ -149,7 +149,7 @@
     			</div>
     			<form class="etiqueta_form" method="post" action="{% url 'n_crear_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
-    				<input id="id_titulo" class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
+    				<input id="id_titulo" class="id_titulo" type="text" value="" placeholder='tittle' name="tittle" required>
               <hr>
               <textarea id="id_desarrollo" class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
               <div id="id_file_add_cont">
@@ -193,7 +193,7 @@
     			</div>
     			<form class="etiqueta_form" method="post" action="{% url 'n_desarrollo_ticket' %}" enctype="multipart/form-data">
     				{% csrf_token %}
-    				<input class="id_titulo" type="text" value="" placeholder='tittle' name="tittle">
+    				<input class="id_titulo" type="text" value="" placeholder='tittle' name="tittle" required>
 	            <hr>
 	            <textarea class="id_desarrollo" placeholder='Desarrollo' name="desarrollo" cols="30" rows="10" required></textarea>
 	            <div id="id_file_add_cont2">
