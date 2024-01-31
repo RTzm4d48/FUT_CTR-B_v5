@@ -238,6 +238,24 @@ pdf_file.addEventListener('change', function(event){
         add_File(name, size);
     }
 });
+//FUNCIONES DE ABRIR UN TICKET------------
+var id_file_add_cont_r = document.getElementById("id_file_add_cont_r");
+var pdf_file_r=  document.getElementById("pdf_file_r");
+pdf_file_r.addEventListener('change', function(event){
+    // Obtener la lista de archivos seleccionados
+    var archivos = event.target.files;
+
+    // Hacer algo con los archivos seleccionados
+    for (var i = 0; i < archivos.length; i++) {
+        console.log('Nombre del archivo:', archivos[i].name);
+        console.log('Tipo de archivo:', archivos[i].type);
+        console.log('Tamaño del archivo:', archivos[i].size, 'bytes');
+        const name = archivos[i].name;
+        const size = Math.floor(archivos[i].size / 1024);// CONVERTIMOS A cantidadKilobytes
+        add_File_r(name, size);
+    }
+});
+
 
 async function add_File(name, size){
     console.log("AQUI ESTAMOS");
@@ -267,6 +285,35 @@ async function add_File(name, size){
         "</div>";
     console.log(id_generate);
 }
+async function add_File_r(name, size){
+    console.log("AQUI ESTAMOS");
+    const id_generate = await generarStringAleatorio();
+    id_file_add_cont_r.innerHTML += "<div id='"+id_generate+"' class='files_adjunts_cont'>"+
+        "<div class='files_adjunts loadd'>"+
+        "<img src='/static/img/adjunt_icon.png' alt=''>"+
+        "<p>"+name+"</p>"+
+        "<p style='color:#BFBFBF;'>("+size+" K)</p>"+
+        "<div class='loader-spinner'></div>"+
+        "</div>"+
+        "</div>";
+
+    //SCROLL HACIA ABAJO
+    const miElemento = document.getElementById('id_contFUT_p');
+    miElemento.scrollTo({
+        // top: 0, //Hace scroll hacia arriba
+        top: miElemento.scrollHeight, // Hace scroll hacia abajo
+        behavior: 'smooth'
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 3000)); // 10000 milisegundos = 10 segundos
+    document.getElementById(id_generate).innerHTML = "<div class='files_adjunts'>"+
+        "<img src='/static/img/adjunt_icon.png' alt=''>"+
+        "<p>"+name+"</p>"+
+        "<p style='color:#BFBFBF;'>("+size+" K)</p>"+
+        "</div>";
+    console.log(id_generate);
+}
+
 async function generarStringAleatorio() {
     const caracteres = 'abcdefghijklmnopqrstuvwxyz';
     let resultado = '';
@@ -276,12 +323,23 @@ async function generarStringAleatorio() {
     }
     return resultado;
 }
+function btn_answer(){
+    document.getElementById("id_cont_ticket_r").classList.remove("ocultar");
+    //SCROLL HACIA ABAJO
+    const miElemento = document.getElementById('id_contFUT_p');
+    miElemento.scrollTo({
+        // top: 0, //Hace scroll hacia arriba
+        top: miElemento.scrollHeight, // Hace scroll hacia abajo
+        behavior: 'smooth'
+    });
+}
 
 // OPEN CONTENT TICKET
 async function ContOpen_Ticket(i, ticket_id){
     document.getElementById("idFront_ticket_"+i).classList.add("ocultar");
     console.log("OPEN: "+i);
     console.log("ID: "+ticket_id);
+    document.getElementById("myTicket_id").value=ticket_id;
     let my_html = (`
         <div id="idBody_ticket_${i}" class="body_ticket open_tick">
             <div class="ticket_navbar" onclick="ContClose_Ticket(${i})">
@@ -295,7 +353,7 @@ async function ContOpen_Ticket(i, ticket_id){
             <div id="space_answer_${i}">
                 <!-- ----space_answer--- -->
             </div>
-            <button id="btn_answer"><img src="/static/img/reply_red.png" alt="">Responder</button>
+            <button id="btn_answer" onclick="btn_answer()"><img src="/static/img/reply_red.png" alt="">Responder_</button>
         </div>
     `);
 
@@ -318,6 +376,19 @@ function verificarArchivoExistente(url) {
 
     return xhr.status === 200;
 }
+function paint_img(id){
+    let space_img = `
+        <div class="cont_img_desarrollo">
+            <div class="cont_myImg">
+                <img class="img_desarrollo" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
+                <div onclick="show_img(${id})" class="elHoverDeImg"><!-- la funcion esta en /templates/admin/staff/view_fut.html -->
+                    <img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
+                </div>
+            </div>
+        </div>
+    `;
+    return space_img;
+}
 
 async function add_answers(num_for, id_ticket){
     console.log("ESTAMOS EN ANSWER_");
@@ -333,7 +404,7 @@ async function add_answers(num_for, id_ticket){
         let charge = data_tickets['more_tickets'][i]['charge'];
         let date = data_tickets['more_tickets'][i]['date'];
 
-        let existencia_url = verificarArchivoExistente(`/static/tmp/desarrollo_attach_${id}.jpg`) ? `<img src="/static/tmp/desarrollo_attach_${id}.jpg">` : '';
+        let existencia_url = verificarArchivoExistente(`/static/tmp/desarrollo_attach_${id}.jpg`) ? paint_img(id) : '';
         console.log(existencia_url);
         let content_answer = (`
             <div class="sapace_user">

@@ -63,11 +63,13 @@ function verificarArchivoExistente(url) {
 function paint_img(id){
 	let space_img = `
 	    <div class="cont_img_desarrollo">
-			<img class="img_desarrollo" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
-			<div onclick="show_img(${id})" class="elHoverDeImg">
-				<img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
-			</div>
-		</div>	
+            <div class="cont_myImg">
+                <img class="img_desarrollo" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
+                <div onclick="show_img(${id})" class="elHoverDeImg"><!-- la funcion esta en /templates/view_fut/observations/show.html -->
+                    <img class="zoom_icon" src="/static/img/zoom_icon.png" alt="">
+                </div>
+            </div>
+        </div>
 	`;
 	return space_img;
 }

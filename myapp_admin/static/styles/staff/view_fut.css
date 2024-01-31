@@ -583,10 +583,10 @@ margin: 0px auto 40px auto;
     white-space: pre-line;
     opacity: 90%;
 }
-.cont_of_ticket img{
+/*.cont_of_ticket img{
     margin: 5px 0px 0px 0px;
     height: 70px;
-}
+}*/
 #btn_answer{
     align-items: center;
     display: flex;

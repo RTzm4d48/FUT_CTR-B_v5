@@ -33,13 +33,13 @@ def update_tickets(fut_id):
 	return 'successfull'
 
 def consult_fut_user(id_user):
-	obj = fut.objects.filter(user_id_id=id_user).values('id', 'order', 'proceeding', 'date', 'finisher_state', 'code')
+	obj = fut.objects.filter(user_id_id=id_user).values('id', 'order', 'proceeding', 'date', 'finisher_state', 'code')[::-1]
 	# Convierte los resultados a una lista de diccionarios
 	resultados_json = list(obj)
 	return resultados_json
 
 def consult_fut_user_2(id_user, finich_state):
-	obj = fut.objects.filter(user_id_id=id_user, finisher_state=finich_state).values('id', 'order', 'proceeding', 'date', 'finisher_state', 'code')
+	obj = fut.objects.filter(user_id_id=id_user, finisher_state=finich_state).values('id', 'order', 'proceeding', 'date', 'finisher_state', 'code')[::-1]
 	# Convierte los resultados a una lista de diccionarios
 	resultados_json = list(obj)
 	return resultados_json

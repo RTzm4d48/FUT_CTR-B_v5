@@ -85,35 +85,36 @@
 		opacity:80%;
 	}
 	.cont_img_desarrollo{
-		background: #F4F4F4;
-		padding: 10px 0px;
-		display: flex;
-		position: relative; /*importante*/
-	}
-	.img_desarrollo{
-		height: 200px;
-		margin: 0px 10px;
-		border-radius: 3px;
-	}
-	.elHoverDeImg{
-		width: 200px;
-		height: 200px;
-		background: black;
-		position: absolute;/*importante*/
-		top: 10px;
-		left: 10px;
-		border-radius: 3px;
-		cursor: pointer;
-		display: flex;
-		opacity: 0%;
-	}
-	.elHoverDeImg:hover{
-		opacity: 20%;
-	}
-	.zoom_icon{
-		width: 25%;
-		margin: auto;
-	}
+        background: #F4F4F4;
+        padding: 10px 10px;
+        display: flex;
+    }
+    .cont_myImg{
+        height: 200px;
+        display: flex;
+        position: relative; /*importante*/
+    }
+    .img_desarrollo{
+        height: 100%;
+        border-radius: 3px;
+    }
+    .elHoverDeImg{
+        height: 100%;
+        width: 100%;
+        background: black;
+        position: absolute;/*importante*/
+        border-radius: 3px;
+        cursor: pointer;
+        display: flex;
+        opacity: 0%;
+    }
+    .elHoverDeImg:hover{
+        opacity: 20%;
+    }
+    .zoom_icon{
+        height: 25%;
+        margin: auto;
+    }
 </style>
 <!-- ESTA ID SE RELLENA EN static\scripts\view_fut\observations\script_module.js -->
 <div id="cont_register">
@@ -134,13 +135,13 @@
 	// PARA VISUALIZAR EN GRANDE LA IMAGEN
 	function show_img(id){
 		console.log("la id de la imagen es: "+id);
-		let pop_up_HTML = `
+		let pop_up_HTML = ` 
 		<div class="pop_up_window_content">
 		  <div class="pop_up_cont_img">
 		    <div onclick="close_create_ticket()" class="close">
 		      <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
 		    </div>
-		    <img class="pop_up_img" src="/static/img/borrar_esto.png" alt="">
+		    <img class="pop_up_img" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
 		  </div>
 		</div>
 		`;

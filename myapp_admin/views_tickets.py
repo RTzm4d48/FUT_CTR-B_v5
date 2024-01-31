@@ -9,6 +9,7 @@ from myapp_admin.views_tickets_process import activated_ticket
 from myapp_admin.views_tickets_process import insert_ticket_notififcation
 from myapp_admin.views_tickets_process import insert_ticket_desarrollo
 from myapp_admin.views_tickets_process import create_my_ticket
+from myapp_admin.views_tickets_process import insert_ticket_desarrollo
 
 #pip install qrcode
 
@@ -97,6 +98,42 @@ def prueba(request):
 	success_url = reverse("n_view_fut") + f'?code={code}&mode={mode}'
 	print(success_url)
 
+	return HttpResponseRedirect(success_url)
+
+def observation_reply(request):
+	# VARIABLES PARA VOLVER A SHOW_FUT
+	code = request.POST.get('code')
+	mode = request.POST.get('mode')
+
+	# DATA
+	tittle = request.POST.get('tittle_r')
+	desarrollo = request.POST.get('desarrollo_r')
+	charge = request.POST.get('charge_r')
+	new_id_ticket = request.POST.get('ticket_id')
+	# DATE
+	date_ = datetime.now()
+	date_format = date_.strftime("%Y-%m-%d %H:%M:%S")
+	# IMG
+	if 'file_miImg_r' in request.FILES:
+		img_file = request.FILES['file_miImg_r']
+		img_binary = img_file.read()
+		img_binary_encoded = base64.b64encode(img_binary)
+	else:
+		img_binary_encoded = b''# bynary bacio
+
+	print("ESTAMOS EMN REPLY")
+	# mi_diccionario = {'tittle': tittle, 'desarrollo': desarrollo, 'new_id_ticket': new_id_ticket, 'charge': charge}
+	# print("LOS DATOS DE DESARROLLO")
+	# print(mi_diccionario)
+	# print(img_binary_encoded)
+	# print("LA IMGEN BYG")
+
+	print("INSERTANDO DESARROLLO")
+	insert_ticket_desarrollo(tittle, desarrollo, charge, date_format, new_id_ticket, img_binary_encoded)
+
+	print("NOS REDIRECCIONAMOS A OTRA VISTA DE SHOW FUT")
+	success_url = reverse("n_view_fut") + f'?code={code}&mode={mode}'
+	print(success_url)
 	return HttpResponseRedirect(success_url)
 
 def loading_ticket(request):

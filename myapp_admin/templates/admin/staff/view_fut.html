@@ -150,6 +150,38 @@
                                 border: 1px solid black;
                                 opacity: 90%;
                             }
+                            /*---------------STILES VIEW FUT IMG--------------------*/
+                            .cont_img_desarrollo{
+                                background: #F4F4F4;
+                                padding: 10px;
+                                display: flex;
+                            }
+                            .cont_myImg{
+                                height: 200px;
+                                display: flex;
+                                position: relative; /*importante*/
+                            }
+                            .img_desarrollo{
+                                height: 100%;
+                                border-radius: 3px;
+                            }
+                            .elHoverDeImg{
+                                height: 100%;
+                                width: 100%;
+                                background: black;
+                                position: absolute;/*importante*/
+                                border-radius: 3px;
+                                cursor: pointer;
+                                display: flex;
+                                opacity: 0%;
+                            }
+                            .elHoverDeImg:hover{
+                                opacity: 20%;
+                            }
+                            .zoom_icon{
+                                height: 25%;
+                                margin: auto;
+                            }
                         </style>
                         <div class="pay_pay_cont">
                             <p><strong>Alumno: </strong>{{objs.name}}</p>
@@ -233,7 +265,7 @@
                             <input type="hidden" name="code" value="{{ code }}">
                             <input type="hidden" name="mode" value="{{ mode }}">
 
-                            <button type="" onclick="sendTicket()"><strong>Enviar</strong></button>
+                            <button type="" onclick="sendTicket()"><strong>Enviar_</strong></button>
                             <div class="adjunt_img ocultar">
                               <input type="file" id="pdf_file__" name="pdf_file" class="input-file" accept="*">
                               <label for="pdf_file" class="custom_button"><img src="{% static 'img/adjuntar.png' %}"></label>
@@ -251,6 +283,52 @@
                     </form>
                 </div>
             </div>
+            <!-- FORMULARIO PARA RESPONDER UNA OBSERVACION O TICKET -->
+            <div id="id_cont_ticket_r" class="ticket_conteiner ocultar">
+                <img class="img_admin" src="{% static 'img/admin_icon.png' %}" alt="">
+                <div class="contticket">
+                    <form id="id_form_create_observation_r" action="{% url 'n_observation_reply' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="head_ticket">
+                            <img src="{% static 'img/pngegg.png' %}" alt="">
+                            <p><strong>De</strong> Área Tesorería <strong>Para</strong> 70165345@ils.edu.pe</p>
+                            <p>|</p>
+                            <p id="id_num_ticket_r" style="opacity: 60%;">...</p>
+                            <img class="deleted" src="{% static 'img/deleted.png' %}" alt="" onclick="DeletedTicket()">
+                        </div>
+                        <input style="margin: 10px 20px;" id="id_titulo_r" type="text" value="" placeholder='Título' name="tittle_r" required>
+                        <hr>
+                        <textarea style="margin: 10px 20px;" id="id_desarrollo_r" placeholder='Desarrollo' name="desarrollo_r" cols="30" rows="10" required></textarea>
+                        <div id="id_file_add_cont_r">
+                            <!-- -- -->
+                        </div>
+                        <div class="space_buttons_ticket">
+                            <!-- VARIABLES QUE TAMBIEN SE DEBERAN DE ENVIAR -->
+                            <input type="hidden" name="creator" value="{{ Data_log.admin_name }}"><!-- -NameAdmin- -->
+                            <!-- name=state -->
+                            <input type="hidden" name="charge_r" value="{{ Data_log.position_admin1 }}"><!-- -ChargeAdmin- -->
+                            <!-- name=numTicket (un numero random) -->
+                            <input type="hidden" name="admin_id" value="{{ Data_log.admin_id }}"><!-- -IdAdmin- -->
+                            <input type="hidden" name="fut_id" value="{{ objs.id }}"><!-- -Fut_id- -->
+                            <input type="hidden" name="user_id" value="{{ objs.user_id_id }}"><!-- -User_id- -->
+                            <input id="myTicket_id" type="hidden" name="ticket_id" value=""><!-- -Ticket_id- -->
+
+                            <!-- VARIABLES PARA VOLVER AL VIEW DEL TICKET -->
+                            <input type="hidden" name="code" value="{{ code }}">
+                            <input type="hidden" name="mode" value="{{ mode }}">
+
+                            <button type="" onclick="sendTicket()"><strong>Enviar_</strong></button>
+                            <!-- - -->
+                            <div class="adjunt_img">
+                              <input type="file" id="pdf_file_r" name="file_miImg_r" class="input-file" accept=".png, .jpg">
+                              <label for="pdf_file_r" class="custom_button"><img src="{% static 'img/img_ad.png' %}"></label>
+                            </div>
+                            <!-- - -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- ---------FIN DE LAS OBSERVACIONES----------- -->
             <div class="fut_cont ocultar">
                 <div class="logoils">
                     <img src="{% static 'img/logoils.png' %}" alt="">
@@ -406,6 +484,23 @@
     </form>
 </div>
 
+<script type="text/javascript">
+    // PARA VISUALIZAR EN GRANDE LA IMAGEN
+    function show_img(id){
+        console.log("la id de la imagen es: "+id);
+        let pop_up_HTML = ` 
+        <div class="cont_pop">
+          <div class="pop_up_window pop_up_cont_img ">
+            <div onclick="close_pop_up()" class="close">
+              <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="false" focusable="false"><path d="M181.088 135.936l1.536 1.44L512 466.741333l329.376-329.365333a32 32 0 0 1 46.688 43.712l-1.44 1.536L557.258667 512l329.365333 329.376a32 32 0 0 1-43.712 46.688l-1.536-1.44L512 557.258667 182.624 886.624a32 32 0 0 1-46.688-43.712l1.44-1.536L466.741333 512 137.376 182.624a32 32 0 0 1 43.712-46.688z"></path></svg>
+            </div>
+            <img class="pop_up_img" src="/static/tmp/desarrollo_attach_${id}.jpg" alt="">
+          </div>
+        </div>
+        `;
+        document.getElementById("pop_windows_general").innerHTML = pop_up_HTML;
+    }    
+</script>
 <script>
     // VARIABLES
     var nameAdmin = "{{Data_log.admin_name}}";
@@ -417,7 +512,6 @@
     //Report
     var report_state = "{{objs.report_state}}";
     //MI DIRECTORIO BASE
-
 </script>
 
 <!-- <script src="/static/scripts/admin/script.js" type="module" charset="utf-8" async defer></script> -->

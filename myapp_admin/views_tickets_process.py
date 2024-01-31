@@ -32,3 +32,8 @@ def create_my_ticket(tittle, creator, charge, admin_id, fut_id, user_id):
 	new_id = my_objet.id
 
 	return new_id
+
+def insert_ticket_desarrollo(titulo, desarrollo, charge, date_format, ticket_id_db, img_binary_encoded):
+	my_objet = ticket_desarrollo(name=titulo, desarrollo=desarrollo, charge=charge, date=date_format, ticket_id_id=ticket_id_db, img_attach=img_binary_encoded)
+	my_objet.save()
+	return 'successfull'
