@@ -181,7 +181,7 @@ function get_and_create_img(){
     });
 }
 
-function paint_img(){
+function paint_img_(){
     document.getElementById("img_pay_cont").innerHTML = `<img onclick="img_big()" class="img_pay" src="/static/tmp/pay_photo_${fut_id}.jpg" alt="">`;
 }
 
@@ -189,7 +189,7 @@ async function process_show_img(){
     // OBTENEMOS LA IMG DE PAGO Y LA ESCRIBIMOS EN LA CARPETA tmp
     await get_and_create_img();
     // AGREGAMOS LA ETIQUTA IMG CON EL CALL CORRESPONDIENTE
-    paint_img();
+    paint_img_();
 }
 
 function img_big(){
