@@ -20,6 +20,24 @@
         font-size: smaller;
         box-shadow: 5px 5px 10px #D8D8D8; /* Sombras */
     }
+    .transladar{
+        padding: 10px 20px;
+        background-color: #3C5BAE;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+    }
+    .transladar:hover{
+        opacity: 80%;
+    }
+    .masabajo{
+        top: 23px;
+        position: relative;
+        text-align: center;
+    }
 </style>
 <div class="bodyf" style="text-align: center;">
     <H1>FUT Creado exitosamente!</H1>
@@ -33,8 +51,8 @@
     <p>Contraseña: {{data.password}} </p>
     <img src="{% static '/tmp/' %}{{data.code}}qrcode.png" alt="" style="width: 200px; padding: 10px 20px;">
     <br>
-    <a href="http://localhost:8000/my_fut/proceedings?code={{data.code}}">ir al tramite</a>
-    <p>Puedes acceder al trámite mediante el código QR y también puedes compartir el trámite mediante dicho código.</p>
+    <a class="transladar" href="http://localhost:8000/my_fut/proceedings?code={{data.code}}">ir al tramite</a>
+    <p class="masabajo">Puedes acceder al trámite mediante el código QR y también puedes compartir el trámite mediante dicho código.</p>
     <!-- PEDIR AYUDA A GPT -->
 </div>
 {% endblock %}
