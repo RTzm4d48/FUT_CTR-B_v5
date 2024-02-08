@@ -39,6 +39,8 @@ MEDIA_ROOT_ADMIN = os.path.join(BASE_DIR, 'myapp_admin\media')
 
 STATIC = os.path.join(BASE_DIR, 'myapp\static')
 
+STATIC_ADMIN = os.path.join(BASE_DIR, 'myapp_admin\static')
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Application definition
 
@@ -187,18 +189,21 @@ client_id = os.getenv("client_id")
 client_secret = os.getenv("client_secret")
 tenant_id = os.getenv("tenant_id")
 
+print('REUNION')
+print(client_id)
+
 AUTH_ADFS = {
-    'AUDIENCE': client_id,
-    'CLIENT_ID': client_id,
-    'CLIENT_SECRET': client_secret,
+    'AUDIENCE': 'microsoft:identityserver:5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
+    'CLIENT_ID': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
+    'CLIENT_SECRET': '_6R8Q~LZQuLowg7xzlPnw7v1gn4.71J~WzwZkbCY',
     'CLAIM_MAPPING': {'first_name': 'given_name',
                       'last_name': 'family_name',
                       'email': 'upn'},
     'GROUPS_CLAIM': 'roles',
     'MIRROR_GROUPS': True,
     'USERNAME_CLAIM': 'upn',
-    'TENANT_ID': tenant_id,
-    'RELYING_PARTY_ID': client_id,
+    'TENANT_ID': '5ce759eb-f346-49c8-a506-f8839107ec38',
+    'RELYING_PARTY_ID': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
 }
 
 # CON LOS PRINTS COMPROBAREMOS SI LAS VARIABLES CONTIENEN ALGO
