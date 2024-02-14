@@ -71,8 +71,8 @@ async def generate_qrcode(code_):
 
 # ESTA FUNCIÓN SE ENCARGA DE ENVIAR GMAILS
 async def generate_email(email, name, exp_, pas_):
-    autor_email = 'whiteman.play69@gmail.com'
-    contraseña = 'hkekvgngsirgtjym'
+    autor_email = 'tugmail@gmail.com'
+    contraseña = 'password_key'
 
     yag = yagmail.SMTP(user=autor_email, password=contraseña)
 

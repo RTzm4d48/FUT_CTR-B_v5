@@ -20,6 +20,8 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+YAPE_NAME = os.getenv('yape_name')
+YAPE_NUM = os.getenv('yape_num')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -31,6 +33,7 @@ SECRET_KEY = 'django-insecure-079w154nc*)i6+#h7rbi03v80^3^b_=_hy!54x$p8$06)b$s#&
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.102']
+# ALLOWED_HOSTS = ['localhost']
 
 # Los archivos de multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp\media')

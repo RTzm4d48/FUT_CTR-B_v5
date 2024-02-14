@@ -128,6 +128,8 @@ def create_fut_pay(request):
             attach_file_name = "false"
 
         return render(request, 'create_fut/pay.html', {
+            'yape_num': settings.YAPE_NUM,
+            'yape_name': settings.YAPE_NAME,
             'Name': name,
             'Full_name': full_name,
             'Email': email,
