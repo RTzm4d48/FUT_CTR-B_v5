@@ -1,0 +1,839 @@
+.ayelash2{
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: #464646;
+    margin: 0px;
+    display: block;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 4px;
+    /* font-weight: bold; */
+}
+.bastools{
+    width: 100%;
+    height: 6%;
+    /*background: salmon;*/
+    display: flex;
+}
+.bastools a{
+/*        background: yellow;*/
+    display: flex;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.principaldiv{
+    width: 90%;
+    height: calc((100% - 6%) - 20px);
+    /*background: red;*/
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+}
+.order{
+    width: 100%;
+    height: 40px;
+    /*background: blue; */
+    display: flex;
+}
+.order p{
+    margin: auto 10px;
+    font-size: larger;
+    font-weight: bold;
+}
+.alumno{
+    width: 100%;
+    height: 30px;
+    /*background: skyblue;*/
+    display: flex;
+}
+.alumno img{
+    height: 60%;
+    margin: auto 5px;
+}
+.p_name{
+    margin: auto 5px;
+    font-size: small;
+}
+.p_mail{
+    margin: auto 5px;
+    font-size: small;
+    opacity: 80%;
+}
+.contFUT{
+    width: 100%;
+    height: calc((100% - 80px) - 10px);
+    background: #F4F4F4;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    border-radius: 5px;
+    transition: scroll-behavior 20s ease-in-out;
+}
+.baricon{
+    cursor: pointer;
+    margin: auto 15px;
+    height: 50%;
+}
+.baricon:hover{
+    opacity: 50%;
+}
+.logoils{
+    width: calc(100% - 10%);
+    height: 70px;
+    /*background: pink;*/
+    display: flex;
+    justify-content: space-between;
+    margin: 0px auto 20px auto;
+}
+.logoils img{
+    height: 40px;
+}
+.celd{
+    height: 30px;
+    /*background: yellow;*/
+    color: black;
+    margin: auto 10px;
+    display: flex;
+    font-size: small;
+}
+.celd label{
+    font-weight: bold;
+    margin: auto 0px auto 0px;
+}
+.celd .text{
+    height: 20px;
+    margin: auto 10px auto 5px ;
+    border: 1px solid black;
+}
+.celd .text p{
+    margin: 3px 2px auto 2px;
+}
+.orderils{
+    width: calc(100% - 160px);
+    margin: 0px auto 10px auto;
+    display: flex;
+    justify-content: flex-end;
+}
+.celd2{
+    height: auto;
+    /*background: yellow;*/
+    color: black;
+    margin: auto 0px;
+    display: flex;
+}
+.celd2 label{
+    font-weight: bold;
+    margin: 2px 0px auto 0px;
+    font-size: small;
+}
+.celd2 .text{
+    height: 45px;
+    border: 1px solid black;
+}
+.celd2 .text p{
+    margin: 3px 2px auto 3px;
+    font-size: small;
+}
+.datails{
+    width: calc(100% - 160px);
+    background: white;
+    margin: 0px auto;
+    padding: 1px 0px;
+    display: block;
+    color: black;
+}
+.datails p{
+    margin: 10px;
+    
+}
+.buttons_view_fut{
+    display: flex;
+    /*background: #B5C224;*/
+    height: 7%;
+    color: black;
+    padding: 0px;
+    margin: auto 20px 20px 20px;
+}
+.send_button{
+    height: calc(100% - 2px);/*RESTAMOS EL BORDER*/
+    text-align: center;
+    border: 1px solid #989898;
+    border-radius: 30px;
+    padding: 0px 10px;
+    display: flex;
+    opacity: 90%;
+    justify-content: center;
+    margin: 0px 5px 0px 0px;
+    opacity: 80%;
+}
+.send_button p{
+    margin: auto 5px;
+    padding: 1px;
+    font-size: small;
+}
+.send_button img{
+    height: 50%;
+    margin: auto;
+} 
+.send_button:hover{
+    cursor: pointer;
+    background: #CECECE;
+}
+/* -------------------- */
+.form_poput {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 500px;
+background-color: white;
+border: 1px solid rgb(211, 211, 211);
+border-radius: 2px;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+text-align: center;
+z-index: 3;
+}
+.window_title{
+width: 100%;
+background: #f34040;
+padding: 10px 0px;
+color: white;
+}
+.window_title h1{
+    font-size: 25px;
+    margin: 10px;
+}
+.window_title button{
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.form_poput hr{       
+    width: 90%;
+    border: 2px solid rgb(145, 144, 144);
+    margin: 0px auto;
+}
+#mypass{
+/* background: #acacac; */
+display: grid;
+width: 50%;
+margin: 20px auto 20px auto;
+color: #464646;
+}
+#mypass .credent{
+    margin: 20px 20px 0px 20px;
+    font-size: small;
+    font-weight: bold;
+}
+#mypass input[type="text"]{
+    margin: 20px auto 0px auto;
+    font-size: small;
+    padding: 5px;
+    border-radius: 5px;
+    background: #cfcece;
+    border: 1px solid #575757;
+    font-size: large;
+}
+#error2{
+    color: red;
+    margin: 0px auto 20px auto;
+    font-size: small;
+    font-weight: normal;
+}
+.mypassoptions{
+/* background: #e79797; */
+display: grid;
+width: 50%;
+margin: 0px auto 40px auto;
+}
+
+.mypassoptions a{
+    background: none;
+    border: none;
+    font-size: small;
+    color: #2984fc;
+    
+}
+.btn_send{
+    background: #e43e3e;
+    width: 50%;
+    height: 40px;
+    margin: 40px auto;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
+.btn_send:hover{
+    background: #ce3030;
+}
+.form_poput hr{       
+    width: 90%;
+    border: 2px solid rgb(145, 144, 144);
+    margin: 0px auto;
+}
+.finishh{
+    font-weight: bold;
+    font-size: small;
+    margin: 0px;
+}
+
+/*----------------------NUEVOS ESTILOS DEL VIEW FUT----------------------*/
+.fut_cont{
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    border:1px solid gray;
+    box-shadow: 2px 2px 10px #DEDDDD; /* Sombras */
+    margin: 0px auto 20px auto;
+    position: relative; /*importante*/
+}
+.delhiden{
+    display: flex;
+    width: calc(100% - 40px);/* -margin */
+    height: 30%;
+    margin: 0px auto;
+    /*background: green;*/
+}
+.fut_cont_A{
+    height: calc(100% - 20px);/*RESTAMOS EL MARGIN VERTICAL*/
+    overflow: hidden;
+}
+.fut_cont_B{
+    height: auto;
+}
+.desplegable{
+    color: red;
+    display: flex;
+    margin: 10px;
+    cursor: pointer;
+}
+.desplegable:hover{
+    color: #CB1414;
+}
+.desplegable svg{
+    margin: 0px;
+}
+.desplegable p{
+    margin: 0px;
+    font-size: small;
+}
+.ocultar{
+    display: none;
+}
+.capa_color{
+    position: absolute;/*importante*/
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    /*COLOR*/
+    background-image: linear-gradient(to bottom, #ffffff00, white); /*gradiente de dos colores*/
+    background-size: 100% 100%; /*para asegurarnos que el fondo gradiente ocuper el 100% del ancho y largo*/
+    /*background-attachment: fixed; /*para que el fondo cupe todo el ancho y largo de la pagina*/
+    background-repeat: no-repeat; /*especifica de que un fondo no se puede repetir o clonar*/
+    border-radius: 5px;
+}
+.capa_color:hover{
+    /*COLOR*/
+    background-image: linear-gradient(to bottom, #adadad36, #cccccc80); /*gradienrgb(206, 206, 206) dos colores*/
+    background-size: 100% 100%; /*para asegurarnos que el fondo gradiente ocuper el 100% del ancho y largo*/
+    /*background-attachment: fixed; /*para que el fondo cupe todo el ancho y largo de la pagina*/
+    background-repeat: no-repeat; /*especifica de que un fondo no se puede repetir o clonar*/
+}
+
+
+/*    --------------------ESTILOS DE LA VENTANA DE REPORT--------------------*/
+.content_report{
+    background: #F8D6DA;
+    color: #9D1426;
+    border: 1px solid #FFBAC2;
+    border-radius: 2px;
+}
+.title_cont{
+    display: flex;
+    justify-content: space-between;
+/*  background: yellow;*/
+}
+.content_report hr{
+    border: none;
+    height: 1px;
+    background: #9D1426;
+    margin: 0px;
+}
+.content_report .report_tittle{
+    margin: 10px;
+    padding: 0px;
+}
+.content_report .report_p{
+    margin: 10px;
+    padding: 0px;
+    font-size: small;
+}
+/*--------------------VIEW PAY-------------------------------------------
+------STYLE PAY CONT-------*/
+.myhr{
+    width: calc(100% - 20px);
+    opacity: 50%;
+}
+.pay_pay{
+    display: flex;
+}
+.pay_pay hr{
+    margin: 0px 5px;
+    opacity: 50%;
+}
+.pay_pay_cont{
+    margin: 0px;
+}
+.pay_pay_cont p{
+    font-size: small;
+    margin: 0px 0px 5px 0px;
+}
+.pay_pay_cont img{
+    width: 25%;
+}
+.pay_pay_cont hr{
+    margin: 10px 5px 10px 0px;
+}
+
+/*---------------CONTENEDOR TICKETS------------------
+---------------CONTENEDOR TICKETS STYLES-----------------*/
+.contMyTickets{
+/*                    background: pink;*/
+    width: calc(100% - 40px);
+    margin: 0px auto 10px auto;
+    display: flex;
+}
+.line_area{
+    width: 20px;
+    height: 100%;
+/*                    background: lightcoral;*/
+    display: flex;
+    flex-direction: column;
+}
+.line_area img{
+    width: 100%;
+}
+.line_area hr{
+    height: calc(100% - 20px);
+    width:  ;
+}
+.contMyTicket{
+    width: calc(100% - 20px);
+    height: 100%;
+/*                    background: green;*/
+}
+.ticket_tittle{
+    width: 100%;
+    height: auto;
+}
+.ticket_tittle p{
+    margin: 0px 5px;
+    padding: 0px;
+    font-size: small;
+    color: black;
+    font-weight: bold;
+}
+.body_ticket{
+    width: calc(100% - 2px);/*restamos el border*/
+    height: 50px;
+    background: #949494;
+    border-radius: 7px;
+    border: 1px solid #BEBEBE;
+    margin: 5px 0px;
+    color: white;
+    padding: 5px 0px;
+    cursor: pointer;
+}
+.body_ticket:hover{
+    border: 1px solid gray;
+    background: gray;
+}
+.nivel{
+    width: calc(100% - 20px);
+    height: 50%;
+    margin: 0px auto;
+/*                    background: blue;*/
+    display: flex;
+    justify-content: space-between;
+}
+.lado{
+    height: 100%;
+    display: flex;
+}
+.lado p{
+    margin: auto 0px;
+    font-size: small;
+    color: white;
+}
+.lado .received{
+    background: #B4B4B4;
+    margin: auto 5px auto 20px;
+    padding: 2px 5px;
+    font-size: calc(15px - 4px);
+    border-radius: 10px;
+}
+.lado img{
+    height: 70%;
+    margin: auto 2px auto 5px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid gray;
+}
+.lado svg{
+    margin: auto 2px auto 0px;
+}
+/*---------------------------------TICKET ABIERTO-------------------*/
+/*---------------------------------STYLES TICKET ABIERTO------------------*/
+.ticket_navbar{
+    background: gray;
+    width: 100%;
+    border-radius: 7px 7px 0px 0px;
+    margin: 0px;
+    display: flex;
+    cursor: pointer;
+}
+.ticket_navbar p{
+    margin: 10px 0px;
+    font-size: smaller;
+    color: white;
+}
+.ticket_navbar svg{
+    margin: auto 5px auto 10px;
+}
+.open_tick{
+    padding: 0px;
+    height: auto;
+    cursor: default;
+    background: white;
+    color: black;
+}
+.open_tick:hover{
+    background: white;
+}
+.sapace_user{
+    width: 100%;
+    display: flex;
+/*    background: yellowgreen;*/
+}
+.ladoB{
+/*background: salmon;*/
+    height: 100%;
+    display: flex;
+}
+.user_img{
+/*background: blue;*/
+    width: auto;
+    height: calc(50px - 1px);
+    display: flex;
+}
+.user_img img{
+    height: 40px;
+    margin: auto 10px;
+    background: white;
+    border-radius: 50%;
+}
+.user_datecontent{
+    width: calc(100% - 60px);
+    height: 100%;
+/*background: yellow;*/
+}
+.user_date{
+    width: calc(100% - 10px);
+    height: calc(50px - 1px);
+/*background: skyblue;*/
+    display: flex;
+    justify-content: space-between;
+}
+.user_datecontent hr{
+    opacity: 70%;
+    margin: 0px;
+    width: calc(100% - 10px);
+}
+.ladoB h4{
+    margin: auto 5px;
+
+}
+.ladoB p{
+    margin: auto 0px;
+    font-size: small;
+    opacity: 80%;
+}
+/*---ticket---*/
+.cont_of_ticket{
+    width: calc(100% - 10px);
+/*                            background: sandybrown;*/
+    margin: 10px auto 10px 0px;
+}
+.cont_of_ticket p {
+    margin: 0px;
+    font-size: small;
+    white-space: pre-line;
+    opacity: 90%;
+}
+/*.cont_of_ticket img{
+    margin: 5px 0px 0px 0px;
+    height: 70px;
+}*/
+#btn_answer{
+    align-items: center;
+    display: flex;
+    justify-content: center; /*IMPORTANTE*/
+    align-items: center; /*IMPORTANTE*/
+    padding: 5px 10px;
+    background: none;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    opacity: 85%;
+    margin: 10px 0px;
+    font-weight: bold;
+    color: red;
+}
+#btn_answer:hover{
+    opacity: 100%;
+}
+#btn_answer img{
+    height: 15px;
+    margin: auto 5px;
+}
+.attach{
+    display: flex;
+    width: 100%;
+    margin: 10px 0px;
+}
+.attach img{
+    height: 15px;
+    margin: auto 5px auto 0px;
+}
+.attach .naranja{
+    background: #E59A10;
+}
+.attach p{
+    background: #165BCE;
+    padding: 5px 10px;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    margin: auto 5px;
+    display: flex;
+    justify-content: center; /*IMPORTANTE*/
+    align-items: center; /*IMPORTANTE*/
+}
+.attach p:hover{
+
+    color: #8AD1FF;
+    text-decoration: underline;
+}
+
+
+/*--------------------------------------------TICKET STYLES---------- --*/
+.ticket_conteiner{
+/*                    background: salmon;*/
+    width: calc(100% - 40px);
+    margin: 0px auto 20px auto;
+    display: flex;
+    color: black;
+}
+.img_admin{
+    background: white;
+    height: 35px;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 5px 0px;
+}
+.contticket{
+    width: calc((100% - 35px) - 15px);
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #A3A3A3;
+    margin: 0px 0px 0px 5px;
+    box-shadow: 0px 0px 5px 1px #C9C9C9; /* Sombras */
+    display: flex;
+    flex-direction: column;
+}
+.head_ticket{
+    display: flex;
+    /* background: gray;*/
+    height: 30px;
+    opacity: 80%;
+}
+.head_ticket img{
+    height: 60%;
+    margin: auto 5px;
+}
+.head_ticket p{
+    font-size: small;
+    margin: auto 5px;
+}
+.head_ticket .deleted{
+    height: 50%;
+    margin: auto 10px auto auto;
+    cursor: pointer;
+}
+.head_ticket .deleted:hover{
+    opacity: 80%;
+}
+.contticket input[type="text"]{
+    margin: 5px auto;
+    width: calc(100% - 20px);
+    padding: 0px;
+    border: none;
+    color: #444444;
+    font-size: smaller;
+    font-weight: bold;
+    font-family: 'myfont_robot_normal';
+}
+.contticket input[type="text"]:focus{
+    outline: none;
+}
+.contticket hr{
+    background: black;
+    width: calc(100% - 20px);
+    margin: 0px auto;
+}
+.contticket textarea{
+    margin: 5px auto;
+    width: calc(100% - 20px);
+    min-height: 20px;
+    max-height: 200px;
+    height: 60px;
+    padding: 0px;
+    border: none;
+    color: #444444;
+    font-family: 'sans_italic';
+    opacity: 80%;
+    overflow-y: none;
+    /*background: #DFDFDF;*/
+}
+.contticket textarea:focus{
+    outline: none;
+}
+.space_buttons_ticket{
+    display: flex;
+    margin: 5px 0px 10px 5px;
+    height: 30px;
+}
+.space_buttons_ticket button{
+    background: red;
+    color: white;
+    border: none;
+    margin: 0px 5px;
+    padding: 5px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    height: 100%;
+}
+..space_buttons_ticket button:hover{
+    background: #CE0D0D;
+}
+.adjunt_img{
+    /*background: salmon;*/
+    height: 100%;
+    margin: 0px 5px;
+}
+.adjunt_img input{
+    display: none;
+}
+.adjunt_img label{
+    height: 100%;
+    display: flex;
+}
+.adjunt_img label img{
+    height: 50%;
+    margin: auto;
+    cursor: pointer;
+    opacity: 80%;
+}
+.adjunt_img label img:hover{
+    opacity: 60%;
+}
+.ocultar{
+    display: none;
+}
+/*------ADJUNT FILES STYLES-----*/
+.files_adjunts_cont{
+    /*background: yellow;*/
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 5px 0px;
+}
+.files_adjunts{
+    background: #165BCE;
+    display: flex;
+    margin: 0px auto 0px 5px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    color: white;
+    height: 20px;
+}
+.files_adjunts p{
+    margin: auto 2px;
+    font-size: small;
+}
+.files_adjunts img{
+    height: 70%;
+    margin: auto 2px auto 0px;
+}
+/* Estilos para la animación de carga */
+.loader-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #3498db;
+    border-top: 3px solid white;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 2s linear infinite;
+    margin: auto 0px auto 5px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loadd{
+    background: #AAC9FB;
+}
+/*------------------------ESTILOS PERDIDOS-----------------------------*/
+.item_inssued{
+    display: block;
+    width: 50%;
+    margin: 20px auto 20px auto;
+    padding: 8px;
+    color: #464646;
+    background: rgb(216, 216, 216);
+    width: 60%;
+    text-align: center;
+    border-radius: 5px;
+}
+.item_inssued p{
+    margin: 1px;
+    font-size: large;
+    font-weight: bold;
+}
+.text_inss p{
+    text-align: left;
+}
+.text_inss input[type="text"]{
+    width: 96%;
+    height: 20px;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+.btn_send{
+    margin: 1px 1px;
+    margin: 10px auto 30px auto;
+}

@@ -44,7 +44,9 @@ STATIC = os.path.join(BASE_DIR, 'myapp\static')
 
 STATIC_ADMIN = os.path.join(BASE_DIR, 'myapp_admin\static')
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Application definition
 
 INSTALLED_APPS = [

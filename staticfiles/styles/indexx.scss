@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section{
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    .content-h{
+        position: relative;
+        width: 100%;
+        height: 300px;
+        color: black;
+        display: flex;
+        .subcontent{
+            
+            width: 70%;
+            margin: 40px auto;
+            .fw-light{
+                color: red;
+                font-size: 50px;
+                
+            }
+        }
+
+    }
+    .mybuttons{
+        margin: 30px auto;
+        a{
+            background: red;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            border-radius: 5px;
+            text-decoration: none;
+            &:hover{
+                transition-duration: 0.4s;
+                opacity: 50%;
+                background: rgb(204,2,2);
+
+            }
+            
+        }
+    }
+    .content2-h{
+        
+        width: 70%;
+        height: 300px;
+        margin: 0px auto;
+        color:black;
+        display: block;
+        .cuestions{
+            
+            margin: 10px auto ;
+            
+            h5{
+                color: red;
+            }
+            p{
+                opacity: 70%;
+                text-align: justify;
+            }
+            .qr{
+                width: 25%;
+                height: auto;
+            }
+            .certi{
+                width: 100%;
+                left: 15px;
+                height: auto;
+                
+                
+                
+            }
+        }
+    }
+}
+@media (max-width:990px){
+    section{
+        padding: 5px;
+        .content-h{
+            text-align: center;
+        }
+        .mybuttons{
+            
+            a{
+                gap: 25px;
+                display: flex;
+                margin-bottom: 10px;
+                
+                
+                
+            }
+            .content2-h{
+                display: inline-block;
+            }
+            .cuestions{
+                position: relative;
+                .qr{
+                    width: 100%;
+                }
+                .certi{
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 100%;
+                    left: 0;
+                    max-height: 200px;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

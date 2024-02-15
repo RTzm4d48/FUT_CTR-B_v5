@@ -1,0 +1,60 @@
+.content-h{
+    width: 100%;
+    height: 300px;
+    background: #ECF2F9;
+    color: black;
+    display: flex;
+}
+
+.subcontent{
+    width: 70%;
+    margin: 40px auto;
+}
+
+.subcontent h1{
+    color: red;
+    font-size: 60px;
+}
+
+.subcontent a{
+    background: red;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.mybuttons{
+    margin: 50px auto;
+}
+.subcontent a:hover{
+    transition-duration: 0.4s;
+    opacity: 50%;
+    background: rgb(204, 2, 2);
+}
+
+.subcontent h1{
+    color: red;
+    font-size: 60px;
+}
+
+.content2-h{
+    width: 70%;
+    height: 300px;
+    margin: 0px auto;
+    color: black;
+    display: block;
+}
+
+.content2-h h5{
+    color: red;
+}
+
+.content2-h p{
+    opacity: 70%;
+}
+
+.cuestions{
+    margin: 30px auto;
+    
+}

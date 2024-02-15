@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+}
+section .content-h {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  color: black;
+  display: flex;
+}
+section .content-h .subcontent {
+  width: 70%;
+  margin: 40px auto;
+}
+section .content-h .subcontent .fw-light {
+  color: red;
+  font-size: 50px;
+}
+section .mybuttons {
+  margin: 30px auto;
+}
+section .mybuttons a {
+  background: red;
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+section .mybuttons a:hover {
+  transition-duration: 0.4s;
+  opacity: 50%;
+  background: rgb(204, 2, 2);
+}
+section .content2-h {
+  width: 70%;
+  height: 300px;
+  margin: 0px auto;
+  color: black;
+  display: block;
+}
+section .content2-h .cuestions {
+  margin: 10px auto;
+}
+section .content2-h .cuestions h5 {
+  color: red;
+}
+section .content2-h .cuestions p {
+  opacity: 70%;
+  text-align: justify;
+}
+section .content2-h .cuestions .qr {
+  width: 25%;
+  height: auto;
+}
+section .content2-h .cuestions .certi {
+  width: 100%;
+  left: 15px;
+  height: auto;
+}
+
+@media (max-width: 990px) {
+  section {
+    padding: 5px;
+  }
+  section .content-h {
+    text-align: center;
+  }
+  section .mybuttons a {
+    gap: 25px;
+    display: flex;
+    margin-bottom: 10px;
+  }
+  section .mybuttons .content2-h {
+    display: inline-block;
+  }
+  section .mybuttons .cuestions {
+    position: relative;
+  }
+  section .mybuttons .cuestions .qr {
+    width: 100%;
+  }
+  section .mybuttons .cuestions .certi {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    left: 0;
+    max-height: 200px;
+    align-items: center;
+    justify-content: center;
+  }
+}/*# sourceMappingURL=indexx.css.map */
