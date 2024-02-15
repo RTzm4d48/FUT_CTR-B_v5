@@ -32,7 +32,7 @@ import os
 def index(request):
     return render(request,'index.html')
 
-@login_required
+# @login_required
 @csrf_exempt
 def my_fut(request):
     my_list_ = list(range(10))
@@ -47,11 +47,11 @@ def exit(request):
     logout(request)
     return redirect('n_home')
 
-@login_required
+# @login_required
 def mylogin(request):
     return redirect('n_home')
 
-@login_required
+# @login_required
 def form_new_fut(request):
     return render(request, 'create_fut/identification.html')
 

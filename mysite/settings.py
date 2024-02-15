@@ -15,13 +15,13 @@ import os
 
 # python-dotenv
 from dotenv import load_dotenv
-load_dotenv()
+# load_dotenv()
+# Establecer permisos para el archivo .env
+# os.chmod(dotenv_path, 0o600)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-YAPE_NAME = os.getenv('yape_name')
-YAPE_NUM = os.getenv('yape_num')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -34,6 +34,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.102']
 # ALLOWED_HOSTS = ['localhost']
+
+
+# Cargar las variables de entorno desde el archivo .env
+dotenv_path = os.path.join(BASE_DIR, '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+
+
+YAPE_NAME = os.environ.get('YAPE_NAME')
+YAPE_NUM = os.getenv('YAPE_NUM')
 
 # Los archivos de multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp\media')

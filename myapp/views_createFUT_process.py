@@ -42,7 +42,7 @@ async def generate_code():
 async def generate_qrcode(code_):
     print('Hay que crear el QR!')
 
-    input = 'http://127.0.0.1:8000/my_fut/proceedings?code='+code_
+    input = 'http://192.168.0.102/my_fut/proceedings?code='+code_
 
     qr = qrcode.QRCode(version=1, box_size=10, border=3)
     qr.add_data(input)
@@ -52,22 +52,24 @@ async def generate_qrcode(code_):
     static_path = 'myapp/static/tmp/'+code_+'qrcode.png'
 
     print(static_path)
-    img.save(static_path)
-    img = cv2.imread(static_path)
-    
-    # Codificar la imagen en formato PNG
-    retval, buffer = cv2.imencode('.png', img)
+    print("aqui se guarda")
+    # img.save(static_path)
+    # img = cv2.imread(static_path)
+    # print("se guaardo?")
+    # # Codificar la imagen en formato PNG
+    # retval, buffer = cv2.imencode('.png', img)
 
-    # Convertir el buffer a bytes
-    img_bytes = buffer.tobytes()
+    # # Convertir el buffer a bytes
+    # img_bytes = buffer.tobytes()
 
-    # Codificar los bytes en base64
-    img_base64 = base64.b64encode(img_bytes)
+    # # Codificar los bytes en base64
+    # img_base64 = base64.b64encode(img_bytes)
 
-    # print(img_base64)
-    print('Se genero la img del qr exitosamente!')
+    # # print(img_base64)
+    # print('Se genero la img del qr exitosamente!')
 
-    return img_base64
+    # return img_base64
+    return b''
 
 # ESTA FUNCIÓN SE ENCARGA DE ENVIAR GMAILS
 async def generate_email(email, name, exp_, pas_):
@@ -119,7 +121,7 @@ async def generate_email(email, name, exp_, pas_):
 # ESTO ES PARA GUARDAR FUT EN LA DB
 @sync_to_async
 def save_my_objet(name, full_name, program, dni, phone, cycle, email, myrequest, order, reason, now_date, attach_byte, exp_, pas_, code_, qrimg_bytes, monto, id_admin_turn, img_pay, pay_type, id_user):
-    my_objet = fut(name=name, full_name=full_name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, pdf_binary=attach_byte, proceeding=exp_, password=pas_, code=code_, user_id_id=id_user, qrimg_binary=qrimg_bytes, monto=monto, id_admin_turn=id_admin_turn, img_pay=img_pay, pay_type=pay_type)
+    my_objet = fut(name=name, full_name=full_name, program=program, dni=dni, phone=phone, cycle=cycle, email=email, myrequest=myrequest, order=order, reason=reason, date=now_date, pdf_binary=attach_byte, proceeding=exp_, password=pas_, code=code_, user_id_id=1, qrimg_binary=qrimg_bytes, monto=monto, id_admin_turn=id_admin_turn, img_pay=img_pay, pay_type=pay_type)
     my_objet.save()
     new_id = my_objet.id
     return new_id
