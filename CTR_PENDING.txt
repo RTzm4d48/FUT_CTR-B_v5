@@ -55,7 +55,7 @@
 (DONE)- colocar un show dentro de observation_admin y otro show, dentro de observation/tickets
 - hacer que el número de las notificaciones en la campanita y en observaciones sea funcional
 
-- funcion para que los admins puedan responder los tickets y reportes
+(DONE)- funcion para que los admins puedan responder los tickets y reportes
 
 (DONE)- terminar con la funcionalidad en el fromulario de pay
 
