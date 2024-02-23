@@ -182,7 +182,7 @@ function get_and_create_img(){
 }
 
 function paint_img_(){
-    document.getElementById("img_pay_cont").innerHTML = `<img onclick="img_big()" class="img_pay" src="/static/tmp/pay_photo_${fut_id}.jpg" alt="">`;
+    document.getElementById("img_pay_cont").innerHTML = `<img onclick="img_big()" class="img_pay" src="${STATIC_tmp}pay_photo_${fut_id}.jpg" alt="">`;
 }
 
 async function process_show_img(){
