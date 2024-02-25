@@ -14,9 +14,8 @@ export function process_fut(route, num_boleta){
           'num_boleta': num_boleta
       },
       success: function(response){
-          const midata = response; //en response esta recibiendo el return de la funcion
-          console.log(midata);
-          //window.location.href = "http://127.0.0.1:8000/ils_admin/staff_treasury";
+          console.log("jelou");
+	  window.location.href = "https://fut.ils.edu.pe/ils_admin/staff_treasury?order=treasury";
       },
       error: function() {
           alert("Ocurrió un error al cargar el contenido.");

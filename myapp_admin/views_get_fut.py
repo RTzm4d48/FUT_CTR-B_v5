@@ -14,6 +14,8 @@ from myapp_admin.views_report import OBTAIN_REPORTS
 # IMPORTAMO DEL ARCHIVO PROCESS
 from myapp_admin.views_get_fut_process import manage_img
 
+from django.conf import settings
+import os
 
 # Create your views here.
 def ilsadmin(request):
@@ -222,6 +224,7 @@ def view_fut(request):
         "admin/staff/view_fut.html",
         {
             "code": code_,
+            "STATIC_ROOT": settings.STATIC_ROOT,
             "objs": objs,
             "mode": mode,
             "position": Position,

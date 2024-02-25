@@ -757,7 +757,7 @@ body{
             },
             success: function(response){
                 const midata = response; //en response esta recibiendo el return de la funcion
-                window.location.href = "http://localhost:8000/my_fut/proceedings?code="+midata['data']['code'];
+                window.location.href = "https://fut.ils.edu.pe/my_fut/proceedings?code="+midata['data']['code'];
             },
             error: function() {
                 alert("Ocurrió un error al cargar el contenido.");
