@@ -44,17 +44,16 @@ async def generate_code():
 
 # PARA GENERAR LA IMAGEN QR
 async def generate_qrcode(code_):
-    print('Hay que_ crear el QR!')
+    print('Hay que crear el_QR!')
 
-    #input = MYAPP_BASE+'/my_fut/proceedings?code='+code_
-    #print(MYAPP_BASE)
     input = reverse('n_proceedings')+ '?code='+code_
     qr = qrcode.QRCode(version=1, box_size=10, border=3)
     qr.add_data(settings.MY_DATA['HOST']+input)
     qr.make(fit=True)
 
     img = qr.make_image(fill_color='black', back_color='white')
-    #static_path = 'myapp/static/tmp/'+code_+'qrcode.png'
+    # static_path = 'myapp/static/tmp/'+code_+'qrcode.png'
+
     static_path = os.path.join(settings.STATIC_ROOT, 'tmp', f'{code_}qrcode.png')
 
     print(static_path)
@@ -151,7 +150,8 @@ def guardar_archivo_enTmp(pdf_file):
 async def obtener_archivo_deTmp(attach_file_name):
     if(attach_file_name != "false"):
         print("LEEMOS EL ARCHIVO "+attach_file_name+" DE tmp")
-        #static_path = 'myapp/static/tmp/'+attach_file_name
+        # static_path = 'myapp/static/tmp/'+attach_file_name
+
         static_path = os.path.join(settings.STATIC_ROOT, 'tmp', attach_file_name)
         # Lee el contenido del archivo en modo binario
         with open(static_path, 'rb') as file:

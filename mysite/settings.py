@@ -21,8 +21,10 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 # MYAPP_BASE = os.path.join(BASE_DIR, 'myapp')
 # MYAPP_ADMIN_BASE = os.path.join(BASE_DIR, 'myapp_admin')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -33,7 +35,8 @@ SECRET_KEY = 'django-insecure-079w154nc*)i6+#h7rbi03v80^3^b_=_hy!54x$p8$06)b$s#&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fut.ils.edu.pe','www.fut.ils.edu.pe']
+ALLOWED_HOSTS = ['192.168.0.102', 'fut.ils.edu.pe', 'localhost', 'www.fut.ils.edu.pe']
+
 # ALLOWED_HOSTS = ['localhost']
 
 
