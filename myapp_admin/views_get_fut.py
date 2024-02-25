@@ -121,7 +121,6 @@ def staff_treasury(request):
         return render(request, "ils_admin.html")
 
     # (/AQUÍ)(ESTO_SE_REPITE)
-    print("LOCUTRAAAAAAAAAAAAAAAAAAAAAAA")
     objs = (
         fut.objects.exclude(stage__exact=3)
         .filter(id_admin_turn=id_admin)
@@ -158,7 +157,7 @@ def staff_treasury(request):
             num_no_view = num_no_view + 1
 
     list_data = staff_view_data(objs, 1)
-    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    print("ILS - Admin - open")
     return render(
         request,
         "admin/staff_treasury.html",

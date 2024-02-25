@@ -214,9 +214,6 @@ client_id = os.getenv("client_id")
 client_secret = os.getenv("client_secret")
 tenant_id = os.getenv("tenant_id")
 
-print('REUNION')
-print(client_id)
-
 AUTH_ADFS = {
     'AUDIENCE': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
     'CLIENT_ID': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
@@ -230,7 +227,3 @@ AUTH_ADFS = {
     'TENANT_ID': '5ce759eb-f346-49c8-a506-f8839107ec38',
     'RELYING_PARTY_ID': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
 }
-
-# CON LOS PRINTS COMPROBAREMOS SI LAS VARIABLES CONTIENEN ALGO
-print("260 IQ")
-print(client_secret)
