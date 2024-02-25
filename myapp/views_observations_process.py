@@ -3,6 +3,9 @@ from myapp.models import fut
 from django.shortcuts import render
 import base64
 
+from django.conf import settings
+import os
+
 def obtain_tickets(id_fut):
 	obj = ticket.objects.filter(fut_id_id=id_fut).values('tittle', 'charge')
 	# Convierte los resultados a una lista de diccionarios
@@ -35,7 +38,8 @@ def get_img_attach(id_ticket):
 		if(i['img_attach'] != b''):
 			# ESCRIBIENDO LA IMGEN
 			img_binary = base64.b64decode(i['img_attach'])
-			ruta_guardar_img = 'myapp/static/tmp/desarrollo_attach_'+str(i['id'])+'.jpg'
+			#ruta_guardar_img = 'myapp/static/tmp/desarrollo_attach_'+str(i['id'])+'.jpg'
+			ruta_guardar_img = os.path.join(settings.STATIC_ROOT, 'tmp', f'desarrollo_attach_{str(i["id"])}.jpg')
 			with open(ruta_guardar_img, 'wb') as output_img:
 				output_img.write(img_binary)
 	return 'successfull'

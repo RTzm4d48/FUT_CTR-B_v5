@@ -87,7 +87,6 @@ from django.core.files.storage import FileSystemStorage
 def guardar_archivo_enTmp(pdf_file):
     #GUARDAREMOS EL PDF
     print("ESTAMOH GUARDANDO LO")
-    # static_path = 'myapp/static/tmp/'
     static_path = os.path.join(settings.STATIC_ROOT, 'tmp')
 
     fs = FileSystemStorage(location=static_path)

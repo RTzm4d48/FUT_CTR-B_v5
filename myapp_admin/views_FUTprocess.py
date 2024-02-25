@@ -24,23 +24,24 @@ def process_fut(request):
 	fut_id = request.GET.get("fut_id")
 	admin_id = request.GET.get("admin_id")
 	user_id = request.GET.get("user_id")
-	route = request.GET.get("route");
-	num_boleta = request.GET.get("num_boleta");
+	route = request.GET.get("route")
+	num_boleta = request.GET.get("num_boleta")
 
 	print('FUTprocess_01')
 	id_next_admin = next_admin(admin_id)
 	print('FUTprocess_02')
 	#ACTUALIZAR EL CAMPO EXIT DE LA RUTA
-	update_route_exit(fut_id);
+	update_route_exit(fut_id)
 	print('FUTprocess_03')
 	update_fut(fut_id, id_next_admin, route, num_boleta)
 	print('FUTprocess_04')
 	insert_tracking(fut_id, admin_id, id_next_admin)
 	print('FUTprocess_05')
 	insert_notification('Procesado', admin_id, fut_id, user_id)
-
+	print('---face--')
 	success_url = reverse("n_staff_treasury")
 	return HttpResponseRedirect(success_url)
+	#return JsonResponse({'message': 'successfull'})
 
 def write_myFile(request):
 	if request.method == 'POST':
@@ -127,7 +128,8 @@ def direct_download(request):
 		fut_id = request.GET.get('fut_id')
 
 		file = 'doc_tramited_fut_'+fut_id+'.pdf'
-		file_path = os.path.join(settings.MEDIA_ROOT_ADMIN, file)
+		#file_path = os.path.join(settings.MEDIA_ROOT_ADMIN, file)
+		file_path = os.path.join(settings.STATIC_ROOT, 'tmp', file)
 
 		try:
 			with open(file_path, 'rb') as f:

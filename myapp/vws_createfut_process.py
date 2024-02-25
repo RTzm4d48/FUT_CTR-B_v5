@@ -237,8 +237,8 @@ def direct_download(request):
     if request.method == 'GET':
         fut_id = request.GET.get('id_fut')
         file = 'doc_finisher_tramited_fut_'+str(fut_id)+'.pdf'
-        file_path = os.path.join(settings.MEDIA_ROOT, file)
-        print(file_path)
+        #file_path = os.path.join(settings.MEDIA_ROOT, file)
+        file_path = os.path.join(settings.STATIC_ROOT, 'tmp', file)
         try:
             with open(file_path, 'rb') as f:
                 print(file_path)

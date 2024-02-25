@@ -21,11 +21,11 @@ def manage_document(fut_id):
 	objs = direction_public_document.objects.filter(fut_id_id=fut_id).values('tittle', 'the_file', 'expediente').first()
 	pdf_binary = base64.b64decode(objs['the_file'])
 	name_file = 'doc_finisher_tramited_fut_'+fut_id+'.pdf'
-	ruta_guardar_pdf = os.path.join(settings.MEDIA_ROOT, name_file)
+	#ruta_guardar_pdf = os.path.join(settings.MEDIA_ROOT, name_file)
+	ruta_guardar_pdf = os.path.join(settings.STATIC_ROOT, 'tmp', name_file)
 
 	with open(ruta_guardar_pdf, 'wb') as output_pdf:
 		output_pdf.write(pdf_binary)
 
 	lista = {'tittle': objs['tittle'], 'expediente': objs['expediente']}
 	return lista
-

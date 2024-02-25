@@ -126,8 +126,8 @@ def manage_document(fut_id):
 
     name_file = 'doc_tramited_fut_'+fut_id+'.pdf'
 
-    ruta_guardar_pdf = os.path.join(settings.MEDIA_ROOT_ADMIN, name_file)
-    
+    #ruta_guardar_pdf = os.path.join(settings.MEDIA_ROOT_ADMIN, name_file)
+    ruta_guardar_pdf = os.path.join(settings.STATIC_ROOT, 'tmp', name_file)
     with open(ruta_guardar_pdf, 'wb') as output_pdf:
         output_pdf.write(pdf_binary)
 

@@ -17,13 +17,13 @@ import yagmail
 from .models import fut, tupa
 from myapp_admin.models import ruta_tramite, Admins, notification
 from asgiref.sync import sync_to_async, async_to_sync
+from django.conf import settings
 
 # VISTA guardar_archivo_enTmp
 from django.core.files.storage import FileSystemStorage
 
 from django.conf import settings
 import os
-# from django.conf import settings
 
 # PARA GENERAR EL PASS Y EL NUM DE EXPEDINETE
 async def generate_proceedings():
@@ -46,17 +46,14 @@ async def generate_code():
 async def generate_qrcode(code_):
     print('Hay que crear el_QR!')
 
-    # input = MYAPP_BASE+'/my_fut/proceedings?code='+code_
-    # print(MYAPP_BASE)
-    # input = MY+'/my_fut/proceedings?code='+code_
     input = reverse('n_proceedings')+ '?code='+code_
-
     qr = qrcode.QRCode(version=1, box_size=10, border=3)
-    qr.add_data(input)
+    qr.add_data(settings.MY_DATA['HOST']+input)
     qr.make(fit=True)
 
     img = qr.make_image(fill_color='black', back_color='white')
     # static_path = 'myapp/static/tmp/'+code_+'qrcode.png'
+
     static_path = os.path.join(settings.STATIC_ROOT, 'tmp', f'{code_}qrcode.png')
 
     print(static_path)
@@ -154,6 +151,7 @@ async def obtener_archivo_deTmp(attach_file_name):
     if(attach_file_name != "false"):
         print("LEEMOS EL ARCHIVO "+attach_file_name+" DE tmp")
         # static_path = 'myapp/static/tmp/'+attach_file_name
+
         static_path = os.path.join(settings.STATIC_ROOT, 'tmp', attach_file_name)
         # Lee el contenido del archivo en modo binario
         with open(static_path, 'rb') as file:

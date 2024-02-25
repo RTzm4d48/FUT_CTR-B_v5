@@ -353,7 +353,7 @@ async function ContOpen_Ticket(i, ticket_id){
             <div id="space_answer_${i}">
                 <!-- ----space_answer--- -->
             </div>
-            <button id="btn_answer" onclick="btn_answer()"><img src="/static/img/reply_red.png" alt="">Responder_</button>
+            <button id="btn_answer" onclick="btn_answer()"><img src="/static/img/reply_red.png" alt="">Responder</button>
         </div>
     `);
 

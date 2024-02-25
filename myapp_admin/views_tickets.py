@@ -11,6 +11,9 @@ from myapp_admin.views_tickets_process import insert_ticket_desarrollo
 from myapp_admin.views_tickets_process import create_my_ticket
 from myapp_admin.views_tickets_process import insert_ticket_desarrollo
 
+from django.conf import settings
+import os
+
 #pip install qrcode
 
 def create_ticket(request):
@@ -163,13 +166,13 @@ def moreloading_ticket(request):
 
 def get_img_attach(id_ticket):
 	desarrollo = ticket_desarrollo.objects.filter(ticket_id_id=id_ticket).values('id','img_attach')
-
 	for i in desarrollo:
 		print("ITERANDO_IMG")
 		if(i['img_attach'] != b''):
-			# ESCRIBIENDO LA IMGEN
+			print("hola")
 			img_binary = base64.b64decode(i['img_attach'])
-			ruta_guardar_img = 'myapp_admin/static/tmp/desarrollo_attach_'+str(i['id'])+'.jpg'
+			#ruta_guardar_img = 'myapp_admin/static/tmp/desarrollo_attach_'+str(i['id'])+'.jpg'
+			ruta_guardar_img = os.path.join(settings.STATIC_ROOT, 'tmp', f'desarrollo_attach_{str(i["id"])}.jpg')
 			with open(ruta_guardar_img, 'wb') as output_img:
 				output_img.write(img_binary)
 	return 'successfull'

@@ -15,7 +15,7 @@ id_process_btn.addEventListener("click", function(){
 	if (num_boleta == '') {
 		alert("Ingrese el número del Baucher")
 	}else{
-		console.log("Se envió el formulario a SECRETARÍA");
+		console.log("Se envió el formulario a SECRETARÍA_comuniónn");
 		process_fut('secretary', num_boleta);// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
 		window.location.href = "https://fut.ils.edu.pe/ils_admin/staff_treasury?order=treasury";
 	}

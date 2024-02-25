@@ -22,8 +22,9 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MYAPP_BASE = os.path.join(BASE_DIR, 'myapp')
-MYAPP_ADMIM_BASE = os.path.join(BASE_DIR, 'myapp_admin')
+# MYAPP_BASE = os.path.join(BASE_DIR, 'myapp')
+# MYAPP_ADMIN_BASE = os.path.join(BASE_DIR, 'myapp_admin')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -34,7 +35,8 @@ SECRET_KEY = 'django-insecure-079w154nc*)i6+#h7rbi03v80^3^b_=_hy!54x$p8$06)b$s#&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.102', 'fut.ils.edu.pe', 'localhost']
+ALLOWED_HOSTS = ['192.168.0.102', 'fut.ils.edu.pe', 'localhost', 'www.fut.ils.edu.pe']
+
 # ALLOWED_HOSTS = ['localhost']
 
 
@@ -57,6 +59,12 @@ STATIC = os.path.join(BASE_DIR, 'myapp\static')
 STATIC_ADMIN = os.path.join(BASE_DIR, 'myapp_admin\static')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MY_DATA = {
+    'HOST': 'fut.ils.edu.pe',
+    'YAPE_NAME':  os.environ.get('YAPE_NAME'),
+    'YAPE_NUM': os.getenv('YAPE_NUM'),
+}
 
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Application definition
@@ -210,7 +218,7 @@ print('REUNION')
 print(client_id)
 
 AUTH_ADFS = {
-    'AUDIENCE': 'microsoft:identityserver:5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
+    'AUDIENCE': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
     'CLIENT_ID': '5bf5c395-87e1-4da0-a1dd-ce9e87f6ee31',
     'CLIENT_SECRET': '_6R8Q~LZQuLowg7xzlPnw7v1gn4.71J~WzwZkbCY',
     'CLAIM_MAPPING': {'first_name': 'given_name',
