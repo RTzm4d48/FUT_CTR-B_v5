@@ -545,10 +545,13 @@
                 for (var i = 0; i < midata['message']['length']; i++) {
 
                     if(i % 2 == 0){
-                        cont_procedures.innerHTML += "<div class='procedure color_procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
-                        "<img src='/static/img/procedure2.png' alt=''>"+
-                        "<p style='margin:auto 0px auto 10px;'>"+midata['message'][i]['id']+"</p><p id='proc"+midata['message'][i]['id']+"_id'>"+midata['message'][i]['tipo_de_servicio']+"</p>"+
-                        "</div>";
+                        cont_procedures.innerHTML +=`
+                            <div class='procedure color_procedure' style='backgroun: blue;' onclick='select_proc(${midata['message'][i]['id']})'>
+                                <img src='/static/img/procedure2.png' alt=''>
+                                <p style='margin:10px 0px 10px 10px;'>${midata['message'][i]['id']}</p>
+                                <p id='proc${midata['message'][i]['id']}_id'>${midata['message'][i]['tipo_de_servicio']}</p>
+                            </div>
+                        `;
                     }else{
                         cont_procedures.innerHTML += "<div class='procedure' onclick='select_proc("+midata['message'][i]['id']+")'>"+
                         "<img src='/static/img/procedure2.png' alt=''>"+
