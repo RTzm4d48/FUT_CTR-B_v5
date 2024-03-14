@@ -31,21 +31,21 @@ def proceedings(request):
         # Extraer en tmp la imagen del qr
         # paint_qr_img(object['id'], object['qrimg_binary']);
 
-        if(email == 'null'):
-            email_code = "- - -"
-        else:
-            print("PUES ES NULL")
-            e = email[0]
-            l = email[-11]
-            nummail = len(email)
-            nummail = nummail-12 # (10 de @gmail.com) (2 de los dos digitos que si se ven)
+        # if(email == 'null'):
+        #     email_code = "- - -"
+        # else:
+        #     print("PUES ES NULL")
+        #     e = email[0]
+        #     l = email[-11]
+        #     nummail = len(email)
+        #     nummail = nummail-12 # (10 de @gmail.com) (2 de los dos digitos que si se ven)
 
-            #generamos los asteriscos
-            asterisk = []
-            for i in range(nummail):
-                asterisk.append('*')
-            asterisk_Str = ''.join(asterisk)
-            email_code = e+asterisk_Str+l+'gmail.com' #quitamos el @
+        #     #generamos los asteriscos
+        #     asterisk = []
+        #     for i in range(nummail):
+        #         asterisk.append('*')
+        #     asterisk_Str = ''.join(asterisk)
+        #     email_code = e+asterisk_Str+l+'gmail.com' #quitamos el @
 
         # My params for css
         progressbar = list(range(9)) # for progress bar lines
@@ -66,7 +66,7 @@ def proceedings(request):
         for i in range(num_registros):
             data = process.objects.filter(stage=i, fut_id_id=object['id']).values('tittle', 'name', 'reception', 'exit', 'num').first()
             loco.append(data)
-
+        email_code = '...'
         left = 20 # css left details picture
         return render(request, 'view_fut/proceedings.html', {
             'fut_id': object['id'],

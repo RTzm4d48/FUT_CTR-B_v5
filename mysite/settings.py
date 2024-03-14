@@ -46,8 +46,11 @@ if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
 
-YAPE_NAME = os.environ.get('YAPE_NAME')
-YAPE_NUM = os.getenv('YAPE_NUM')
+#YAPE_NAME = os.environ.get('YAPE_NAME')
+#YAPE_NUM = os.getenv('YAPE_NUM')
+
+YAPE_NAME = 'Luis Alberto Fernando Velasquez Manrique'
+YAPE_NUM = '958318334'
 
 # Los archivos de multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp\media')

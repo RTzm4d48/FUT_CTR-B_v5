@@ -10,6 +10,8 @@ function making_tracking_details(mydata, route_fut){
 	let left_arrow = 30;
 
 	for (var i = 0; i < mydata['length']; i++) {
+		console.log("LEONA");
+		console.log(mydata);
 		var sello_1 = `
 			<div class="tra_seal" style="display: block;text-align: center;align-items: center;height: 50px;margin: auto 0px;color: #42AF15;"><h6>PROCESADO</h6><img width="30px" src="/static/img/check.png" alt=""></div>
 		`;
@@ -23,7 +25,7 @@ function making_tracking_details(mydata, route_fut){
 			<div id="track_${i}" class="tracking" style="left: ${left}px; width: calc(100% - ${widt}px);margin: 0px;">
 	            <div class="tra_info">
 	                <h4>${mydata[i]["tittle"]}</h4>
-	                <p>${mydata[i]["name"]}</p>
+	                <p>${mydata[i]["name"]}__</p>
 	                <hr>
 	                <p>${mydata[i]["reception"]}</p>
 	                <p>${mydata[i]["exit"]}</p>

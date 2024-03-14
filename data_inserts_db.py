@@ -11,7 +11,7 @@ tupa_data = tupa(areas_incolucradas="Bienestar", tipo_de_servicio="Carta de Pres
 tupa_data.save()
 tupa_data = tupa(areas_incolucradas="Secretaria Académica", tipo_de_servicio="Certificado de estudios (Pagar por cada ciclo)", monto=90, duracion_de_tramite=7, procedimiento="Documento que certifica los promedios por ciclo, (S/. 15 por cada ciclo S/.90).")
 tupa_data.save()
-tupa_data = tupa(areas_incolucradas="Secretaria Académica", tipo_de_servicio="Certificado modular pot año", monto=35, duracion_de_tramite=7, procedimiento="Certificado que valida la culminación satisfactoría del año.")
+tupa_data = tupa(areas_incolucradas="Secretaria Académica", tipo_de_servicio="Certificado modular por año", monto=35, duracion_de_tramite=7, procedimiento="Certificado que valida la culminación satisfactoría del año.")
 tupa_data.save()
 tupa_data = tupa(areas_incolucradas="Secretaria Académica", tipo_de_servicio="Certificado de Formación Continua", monto=35, duracion_de_tramite=7, procedimiento="Certificado que valida la culminación del curso.")
 tupa_data.save()
