@@ -18,6 +18,8 @@ id_process_btn.addEventListener("click", function(){
 		console.log("Se envió el formulario a SECRETARÍA_comuniónn");
 		process_fut('secretary', num_boleta);// LA VARIABLE ES PARA ACTUALIZAR LA ruta de FUT
 		window.location.href = "https://fut.ils.edu.pe/ils_admin/staff_treasury?order=treasury";
+		// window.location.href = "http://localhost/ils_admin/staff_treasury?order=treasury";
+
 	}
 })
 

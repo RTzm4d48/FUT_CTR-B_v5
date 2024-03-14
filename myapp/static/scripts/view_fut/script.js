@@ -21,11 +21,21 @@ function making_tracking_details(mydata, route_fut){
 		`;
 		}
 		// UN TRACKING
+		// console.log(${mydata[i]["tittle"]})
+		var tittle = mydata[i]["tittle"];
+
+		if (mydata[i]["tittle"]== "SECRETARY") {
+			tittle = 'SECRETARIA'
+		}
+		if (mydata[i]["tittle"]== "DIRECTION") {
+			tittle = 'DIRECCIÓN'
+		}
+
 		var ruta = `
 			<div id="track_${i}" class="tracking" style="left: ${left}px; width: calc(100% - ${widt}px);margin: 0px;">
 	            <div class="tra_info">
-	                <h4>${mydata[i]["tittle"]}</h4>
-	                <p>${mydata[i]["name"]}__</p>
+	                <h4>${tittle}</h4>
+	                <p>${mydata[i]["name"]}</p>
 	                <hr>
 	                <p>${mydata[i]["reception"]}</p>
 	                <p>${mydata[i]["exit"]}</p>

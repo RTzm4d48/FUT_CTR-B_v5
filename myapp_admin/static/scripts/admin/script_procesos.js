@@ -14,8 +14,9 @@ export function process_fut(route, num_boleta){
           'num_boleta': num_boleta
       },
       success: function(response){
-          console.log("jelou");
+          console.log("jelou"); 
 	  window.location.href = "https://fut.ils.edu.pe/ils_admin/staff_treasury?order=treasury";
+    // window.location.href = "http://localhost/ils_admin/staff_treasury?order=treasury";
       },
       error: function() {
           alert("Ocurrió un error al cargar el contenido.");
